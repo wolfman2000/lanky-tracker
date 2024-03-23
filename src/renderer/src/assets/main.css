@@ -1,0 +1,164 @@
+@import './base.css';
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-image: url('./wavy-lines.svg');
+  background-size: cover;
+  user-select: none;
+}
+
+code {
+  font-weight: 600;
+  padding: 3px 5px;
+  border-radius: 2px;
+  background-color: var(--color-background-mute);
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    SF Mono,
+    Menlo,
+    Consolas,
+    Liberation Mono,
+    monospace;
+  font-size: 85%;
+}
+
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 80px;
+}
+
+.text {
+  font-size: 28px;
+  color: var(--ev-c-text-1);
+  font-weight: 700;
+  line-height: 32px;
+  text-align: center;
+  margin: 0 10px;
+  padding: 16px 0;
+}
+
+main {
+  display: grid;
+  gap: 1em;
+  grid-template-columns: 1fr 3fr;
+}
+
+main > article:first-child {
+  grid-column: 1;
+}
+
+main > article:last-child {
+  grid-column: 2;
+  & > .react-tabs > ul {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    padding-inline-start: 0;
+    & > li {
+      text-align: center;
+      font-weight: bold;
+      cursor: pointer;
+      border: 1px solid black;
+    }
+  }
+}
+
+.move-table {
+  margin: 0 auto;
+}
+
+.level-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr 112px 1fr);
+}
+.level-list img {
+  height: 24px;
+}
+
+.count-icon, .simple-icon {
+  position: relative;
+  cursor: pointer;
+}
+
+.count-icon > span {
+  position: absolute;
+  left: 0px;
+  color: gold;
+  background-color: black;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.simple-icon > span {
+  position: absolute;
+  left: 0px;
+  color: red;
+  background-color: black;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 1;
+}
+.simple-icon.have > span {
+  color: green;
+}
+
+.foolish-section h3 {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.foolish-drops {
+  overflow-y: scroll;
+  height: 100px;
+}
+
+main .grid {
+  display: grid;
+  grid-template-columns: 4fr 2.5fr 0.5fr;
+  overflow-y: scroll;
+  height: 880px;
+}
+
+.grid > .checked:nth-of-type(3n + 1) > span:first-child,
+.grid > .checked:nth-of-type(3n + 2) {
+  /* display: none; */
+  text-decoration: line-through;
+}
+
+.grid > .checked:nth-of-type(3n + 1)::after {
+  /* content: '  ✓'; */
+  text-decoration: none;
+}
+
+.grid > .checked > span + span {
+  text-decoration: none;
+}
+
+.grid > :not(.checked) > .not-available {
+  color: red;
+}
+
+.grid > :not(.checked) > .logic-break {
+  color: yellow;
+}
+
+.grid > :not(.checked) > .available {
+  color: cyan;
+}
+
+.grid > :not(.checked).foolish {
+  color: red;
+}
+
+@media (max-width: 720px) {
+  .text {
+    font-size: 20px;
+  }
+}
