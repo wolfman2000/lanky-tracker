@@ -247,6 +247,12 @@ export const useBarrel = (): boolean => {
   return move
 }
 
+/**
+ * Determine if Chunky can grab boulders for some fancy tech.
+ *
+ * This is a surprisingly common situation.
+ * @returns true if Chunky can use boulders.
+ */
 export const useBoulderTech = (): boolean => {
   const chunky = useChunky()
   const barrel = useBarrel()

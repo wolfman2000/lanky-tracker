@@ -1,58 +1,212 @@
-type ParseInt<T extends `t${number}`> = T extends unknown
-  ? T extends `t${infer Digit extends number}`
-    ? Digit
-    : never
-  : never
+// https://stackoverflow.com/a/42021203
+type Enumerate<N extends number, Acc extends number[] = []> = Acc['length'] extends N
+  ? Acc[number]
+  : Enumerate<N, [...Acc, Acc['length']]>
+
+type IntRange<F extends number, T extends number> = Exclude<Enumerate<T>, Enumerate<F>>
 
 export interface CoreState {
-  pearls: number
-  crowns: number
+  /**
+   * How many pearls were found?
+   */
+  pearls: IntRange<0, 6>
+  /**
+   * How many crowns were found?
+   */
+  crowns: IntRange<0, 11>
+  /**
+   * Was the Rareware Coin found?
+   */
   rareCoin: boolean
+  /**
+   * Was the Nintendo Coin found?
+   */
   nintendoCoin: boolean
-  fairies: number
-  goldBananas: number
-  bananaMedals: number
-  rainbowCoins: number
+  /**
+   * How many banana fairies were found?
+   */
+  fairies: IntRange<0, 21>
+  /**
+   * How many golden bananas were found?
+   */
+  goldBananas: IntRange<0, 202>
+  /**
+   * How many Banana Medals were found?
+   */
+  bananaMedals: IntRange<0, 41>
+  /**
+   * How many Rainbow Coins were found?
+   */
+  rainbowCoins: IntRange<0, 17>
+  /**
+   * Was Donkey Kong found?
+   */
   dk: boolean
+  /**
+   * Was Diddy Kong found?
+   */
   diddy: boolean
+  /**
+   * Was Lanky Kong found?
+   */
   lanky: boolean
+  /**
+   * Was Tiny Kong found?
+   */
   tiny: boolean
+  /**
+   * Was Chunky Kong found?
+   */
   chunky: boolean
+  /**
+   * Was the Coconut Gun found?
+   */
   coconut: boolean
+  /**
+   * Was the Peanut Popguns found?
+   */
   peanut: boolean
+  /**
+   * Was the Grape Shooter found?
+   */
   grape: boolean
+  /**
+   * Was the Feather Bow found?
+   */
   feather: boolean
+  /**
+   * Was the Pineapple Launcher found?
+   */
   pineapple: boolean
+  /**
+   * Was the Bongo Blast found?
+   */
   bongos: boolean
+  /**
+   * Was the Guitar Gazump found?
+   */
   guitar: boolean
+  /**
+   * Was the Trombone Tremor found?
+   */
   trombone: boolean
+  /**
+   * Was the Saxophone Slam found?
+   */
   sax: boolean
+  /**
+   * Was the Triangle Trample found?
+   */
   triangle: boolean
+  /**
+   * Was the Gorilla Grab found?
+   */
   grab: boolean
+  /**
+   * Was the Chimpy Charge found?
+   */
   charge: boolean
+  /**
+   * Was the Orangstand found?
+   */
   stand: boolean
+  /**
+   * Was Pony Tail Twirl found?
+   */
   twirl: boolean
+  /**
+   * Was the Primate Punch found?
+   */
   punch: boolean
+  /**
+   * Was the Strong Kong found?
+   */
   strong: boolean
+  /**
+   * Was the Rocketbarrel Boost found?
+   */
   rocket: boolean
+  /**
+   * Was Orangstand Sprint found?
+   */
   sprint: boolean
+  /**
+   * Was Mini Monkey found?
+   */
   mini: boolean
+  /**
+   * Was Hunky Chunky found?
+   */
   hunky: boolean
+  /**
+   * Was Baboon Blast found?
+   *
+   * Some call it Barrel Blast.
+   */
   blast: boolean
+  /**
+   * Was Simian Spring found?
+   */
   spring: boolean
+  /**
+   * Was Baboon Balloon found?
+   */
   balloon: boolean
+  /**
+   * Was Monkeyport found?
+   */
   port: boolean
+  /**
+   * Was Gorilla Gone found?
+   */
   gone: boolean
-  slam: number
+  /**
+   * Were any slams found?
+   *
+   * These are progressive: value of 2 covers values of 1, and 3 covers 1 & 2.
+   */
+  slam: IntRange<0, 4>
+  /**
+   * Was the bean found?
+   *
+   * This is a memetic item, but it has its use.
+   */
   bean: boolean
+  /**
+   * Was diving underwater found?
+   */
   dive: boolean
+  /**
+   * Was orange throwing found?
+   */
   orange: boolean
+  /**
+   * Was barrel throwing found?
+   */
   barrel: boolean
+  /**
+   * Was vine swinging found?
+   */
   vine: boolean
+  /**
+   * Was the sniper scope found?
+   */
   sniper: boolean
+  /**
+   * Was homing ammo found?
+   */
   homing: boolean
+  /**
+   * Was the camera found?
+   */
   camera: boolean
+  /**
+   * Was the shockwave found?
+   */
   shockwave: boolean
+  /**
+   * Which checks have been found at this point?
+   */
   checks: Record<number, boolean>
 }
 
@@ -68,22 +222,22 @@ export interface SettingState {
   /**
    * How many colored bananas to get the medal check?
    */
-  cbCount: number
+  cbCount: IntRange<0, 101>
   /**
    * How many banana medals for the jetpac check?
    */
-  jetpacCount: number
+  jetpacCount: IntRange<0, 41>
   /**
    * How many fairies for the banana fairy island check?
    */
-  fairyCount: number
+  fairyCount: IntRange<0, 21>
   /**
    * Which bananaports are open at the start?
    * 0: None
    * 1: Isles
    * 2: All
    */
-  bananaportOpen: ParseInt<'t0' | 't1' | 't2'>
+  bananaportOpen: IntRange<0, 3>
   /**
    * What is the start time for Forest?
    * @todo: Change to multiple options: dawn, night, dusk (combines prev two)
@@ -175,6 +329,9 @@ interface SettingActions {
 export type SettingSlice = SettingState & SettingActions
 
 export interface HintState {
+  /**
+   * The collection of foolish hints identified within the game.
+   */
   foolish: Record<string, SelectableRegionValues>
 }
 

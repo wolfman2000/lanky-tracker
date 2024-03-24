@@ -14,6 +14,9 @@ const initializer: StateCreator<AllSlice, [['zustand/persist', unknown]], []> = 
   ...hintSlice(...d)
 })
 
+/**
+ * Access the Donk store to both view and manage state.
+ */
 const useDonkStore = create<AllSlice>()(
   persist(initializer, {
     name: 'donk-storage' /*,
