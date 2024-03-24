@@ -12,6 +12,10 @@ An Electron application with React and TypeScript.
   - Check the ones that are done to not worry about them.
 - Foolish hint section automatically marks the locations that won't have major items.
 
+## Current Bugs
+
+Not every piece of logic is in place correctly. This is still a work in progress.
+
 ## Future Versions
 
 The tracker is currently compatible with most standard races and KEVIN settings. However, some things need to be added first.

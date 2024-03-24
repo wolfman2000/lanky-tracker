@@ -17,7 +17,12 @@ type LogicBool = {
   out?: boolean
 }
 
-const logicBreak = (check: LogicBool): boolean => check.in || check.out!
+/**
+ * Is this current check available in any fashion, even if out of logic?
+ * @param check The current logical check to analyze.
+ * @returns true if this check can be completed with either in-logic or out-of-logic options.
+ */
+export const logicBreak = (check: LogicBool): boolean => check.in || check.out!
 
 /**
  * Do we have access to the main isle area?
