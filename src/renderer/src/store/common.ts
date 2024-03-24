@@ -11,6 +11,8 @@ export interface CoreState {
   nintendoCoin: boolean
   fairies: number
   goldBananas: number
+  bananaMedals: number
+  rainbowCoins: number
   dk: boolean
   diddy: boolean
   lanky: boolean
@@ -84,8 +86,7 @@ export interface SettingState {
   bananaportOpen: ParseInt<'t0' | 't1' | 't2'>
   /**
    * What is the start time for Forest?
-   *
-   * TODO: Change to multiple options: dawn, night, dusk (combines prev two)
+   * @todo: Change to multiple options: dawn, night, dusk (combines prev two)
    */
   forestDusk: boolean
   /**
@@ -125,7 +126,7 @@ export interface SettingState {
   /**
    * Are the locations of kasplats shuffled?
    *
-   * TODO: See if this should be a range of three instead.
+   * @todo: See if this should be a range of three instead.
    */
   kasplatShuffle: boolean
   /**
@@ -168,6 +169,7 @@ export interface SettingState {
 
 interface SettingActions {
   setCbCount: (to: number) => void
+  setSetting: (id: string, val: boolean | number) => void
 }
 
 export type SettingSlice = SettingState & SettingActions

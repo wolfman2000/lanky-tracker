@@ -3,6 +3,11 @@ import { useShallow } from 'zustand/react/shallow'
 import ForestCheck from './ForestCheck'
 import { useForestBean, usePlayForest } from '@renderer/hooks/world'
 
+/**
+ * Get the list of potential shuffled locations from the shops.
+ * @todo Don't render anything if this is vanilla.
+ * @returns The forest shop shuffled items.
+ */
 const ForestShops: React.FC = () => {
   const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
     useShallow((state) => [state.dk, state.diddy, state.lanky, state.tiny, state.chunky])
@@ -11,7 +16,6 @@ const ForestShops: React.FC = () => {
   const inStage = usePlayForest()
   const beanstalk = useForestBean()
 
-  /* TODO: Don't render if no shop shuffle. */
   return (
     <>
       <ForestCheck

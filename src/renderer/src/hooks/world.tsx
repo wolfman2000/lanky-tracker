@@ -8,13 +8,22 @@ type LogicBool = {
   out?: boolean
 }
 
+/**
+ * Do we have access to the main isle area?
+ * @todo: Account for the bananawarp options. Currently only set to Isles Only.
+ * @returns true if we can access the upper part of Main Isle.
+ */
 export const useIslesUpper = (): boolean => {
-  // TODO: Allow for no instant banana warp option.
-  return true
+  const bananawarp = useDonkStore(useShallow((state) => state.bananaportOpen))
+  return bananawarp != 0
 }
 
+/**
+ * Do we have access to the Rocket barrel in Outer Isles?
+ * @todo Handle Switchsanity (any instrument)
+ * @returns true if we can access the Rocket barrel in Outer Isles.
+ */
 export const useIslesJetpack = (): boolean => {
-  // TODO: Switchsanity
   const islesUpper = useIslesUpper()
   const [chunky, barrel, lanky, trombone, key4] = useDonkStore(
     useShallow((state) => [state.chunky, state.barrel, state.lanky, state.trombone, state.key4])
@@ -349,16 +358,24 @@ export const useGalleonLighthouse = (): boolean => {
 }
 
 export const useGalleonHighTide = (): boolean => {
-  // TODO: Account for starting tide options.
   const lighthouse = useGalleonLighthouse()
-  const dive = useDonkStore(useShallow((state) => state.dive))
+  const [dive, galleonHighTide] = useDonkStore(
+    useShallow((state) => [state.dive, state.galleonHighTide])
+  )
+  if (galleonHighTide) {
+    return true
+  }
   return lighthouse && dive
 }
 
 export const useGalleonLowTide = (): boolean => {
-  // TODO: Account for starting tide options.
-  const dive = useDonkStore(useShallow((state) => state.dive))
+  const [dive, galleonHighTide] = useDonkStore(
+    useShallow((state) => [state.dive, state.galleonHighTide])
+  )
   const inStage = usePlayGalleon()
+  if (!galleonHighTide) {
+    return true
+  }
   return dive && inStage
 }
 
@@ -375,8 +392,12 @@ export const useGalleonOutskirts = (): boolean => {
   return inStage
 }
 
+/**
+ * Do we have access to the treasure room?
+ * @todo Investigate if there's any setting that allows any kong to be Enguarde and not just Lanky.
+ * @returns true if we can access the Treasure Room.
+ */
 export const useGalleonTreasureRoom = (): LogicBool => {
-  // TODO: Is there an option for any kong to Enguarde? Unsure.
   const outskirts = useGalleonOutskirts()
   const highTide = useGalleonHighTide()
   const [lanky, dive] = useDonkStore(useShallow((state) => [state.lanky, state.dive]))
@@ -386,21 +407,42 @@ export const useGalleonTreasureRoom = (): LogicBool => {
   }
 }
 
+/**
+ * Do we have access to Fungi Forest during the daytime?
+ * @todo Account for starting day, dusk, and night. Night remains.
+ * @returns true if we do.
+ */
 export const useForestDay = (): LogicBool => {
-  // TODO: account for day, dusk, night starting
   const inStage = usePlayForest()
+  const forestDusk = useDonkStore(useShallow((state) => state.forestDusk))
+  if (forestDusk) {
+    return {
+      in: inStage,
+      out: inStage
+    }
+  }
   return {
     in: inStage,
     out: inStage
   }
 }
 
+/**
+ * Do we have access to Fungi Forest during the nighttime?
+ * @todo Account for starting day, dusk, and night. Day remains.
+ * @returns true if we do.
+ */
 export const useForestNight = (): LogicBool => {
-  // TODO: account for day, dusk, night starting
   const anyGun = useAnyGun()
   const inStage = usePlayForest()
-  const orange = useDonkStore(useShallow((state) => state.orange))
+  const [orange, forestDusk] = useDonkStore(useShallow((state) => [state.orange, state.forestDusk]))
   const anyKong = useAnyKong()
+  if (forestDusk) {
+    return {
+      in: inStage,
+      out: inStage
+    }
+  }
   return {
     in: anyGun && inStage,
     out: anyKong && orange && inStage

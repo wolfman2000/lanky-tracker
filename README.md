@@ -16,9 +16,12 @@ An Electron application with React and TypeScript.
 
 The tracker is currently compatible with most standard races and KEVIN settings. However, some things need to be added first.
 
-- Tide selection in Galleon.
-- Day selection in Forest.
+- Proper bananaport support.
+- Proper hard shooting challenges support.
+- Day selection in Forest (currently only either or for dusk).
 - Flexible banana counts for presets like Treasure Hurry.
+
+There's more to add, but the above are the most important at this time.
 
 ## Unlikely Features
 

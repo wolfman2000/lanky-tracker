@@ -2,13 +2,16 @@ import useDonkStore from '@renderer/store'
 import IslesCheck from './IslesCheck'
 import { useShallow } from 'zustand/react/shallow'
 
+/**
+ * Gather the list of shuffled shop item locations in Isles.
+ * @todo Don't render anything if all shop items are vanilla.
+ * @returns the shuffled shop locations in Isles.
+ */
 const IslesShops: React.FC = () => {
   const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
     useShallow((state) => [state.dk, state.diddy, state.lanky, state.tiny, state.chunky])
   )
   const anyKong = dk || diddy || lanky || tiny || chunky
-
-  /* TODO: Don't render if shop shuffle is disabled. */
 
   return (
     <>

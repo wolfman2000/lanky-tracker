@@ -1,6 +1,6 @@
 {
   "name": "lanky-tracker",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "An DK 64 Rando Tracker Electron application with React and TypeScript",
   "main": "./out/main/index.js",
   "author": "wolfman2000",
@@ -43,6 +43,7 @@
     "eslint": "^8.56.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
     "prettier": "^3.2.4",
     "react": "^18.2.0",
     "react-devtools": "^4.27.2",

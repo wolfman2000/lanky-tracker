@@ -7,7 +7,9 @@ module.exports = {
     '@electron-toolkit/eslint-config-ts/recommended',
     '@electron-toolkit/eslint-config-prettier'
   ],
+  plugins: ['react-refresh'],
   rules: {
-    'react/prop-types': 'off'
+    'react/prop-types': 'off',
+    'react-refresh/only-export-components': 'warn'
   }
 }

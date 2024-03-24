@@ -120,6 +120,20 @@ main > article:last-child {
   height: 100px;
 }
 
+.runtime-settings > h3 {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.runtime-settings > div {
+  display: grid;
+  grid-template-columns: 15fr 1fr;
+}
+
+.runtime-settings > div > span {
+  cursor: pointer;
+}
+
 main .grid {
   display: grid;
   grid-template-columns: 4fr 2.5fr 0.5fr;
