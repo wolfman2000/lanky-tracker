@@ -81,7 +81,8 @@ main > article:last-child {
   height: 24px;
 }
 
-.count-icon, .simple-icon {
+.count-icon,
+.simple-icon {
   position: relative;
   cursor: pointer;
 }
