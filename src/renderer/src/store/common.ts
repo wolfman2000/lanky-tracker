@@ -322,7 +322,7 @@ export interface SettingState {
 }
 
 interface SettingActions {
-  setCbCount: (to: number) => void
+  setCbCount: (to: IntRange<0, 101>) => void
   setSetting: (id: string, val: boolean | number) => void
 }
 
