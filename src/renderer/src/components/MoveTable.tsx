@@ -54,6 +54,12 @@ import pearlIcon from '../assets/images/pearl.png'
 import SlamSelector from './SlamSelector'
 import CountSelector from './CountSelector'
 
+import goldBananaIcon from '../assets/images/GB.png'
+import bananaMedalIcon from '../assets/images/bananamedal.png'
+import crownIcon from '../assets/images/crown.png'
+import fairyIcon from '../assets/images/fairy.png'
+import rainbowCoinICon from '../assets/images/rainbowcoin.png'
+
 const MoveTable = (): JSX.Element => {
   return (
     <table className="move-table">
@@ -89,6 +95,9 @@ const MoveTable = (): JSX.Element => {
               imgRight={filmWaveRight}
             />
           </td>
+          <td>
+            <CountSelector storeKey="crowns" imgUrl={crownIcon} maxValue={10} />
+          </td>
         </tr>
         <tr>
           <td>
@@ -120,6 +129,9 @@ const MoveTable = (): JSX.Element => {
               imgLeft={homeScopeLeft}
               imgRight={homeScopeRight}
             />
+          </td>
+          <td>
+            <CountSelector storeKey="bananaMedals" imgUrl={bananaMedalIcon} maxValue={40} />
           </td>
         </tr>
         <tr>
@@ -153,6 +165,9 @@ const MoveTable = (): JSX.Element => {
               imgRight={companyCoinRight}
             />
           </td>
+          <td>
+            <CountSelector storeKey="rainbowCoins" imgUrl={rainbowCoinICon} maxValue={16} />
+          </td>
         </tr>
         <tr>
           <td>
@@ -179,6 +194,9 @@ const MoveTable = (): JSX.Element => {
           <td>
             <SimpleIcon storeKey="bean" imgUrl={beanIcon} />
           </td>
+          <td>
+            <CountSelector storeKey="fairies" imgUrl={fairyIcon} maxValue={20} />
+          </td>
         </tr>
         <tr>
           <td>
@@ -204,6 +222,9 @@ const MoveTable = (): JSX.Element => {
           </td>
           <td>
             <CountSelector storeKey="pearls" imgUrl={pearlIcon} maxValue={5} />
+          </td>
+          <td>
+            <CountSelector storeKey="goldBananas" imgUrl={goldBananaIcon} maxValue={201} />
           </td>
         </tr>
       </tbody>

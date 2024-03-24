@@ -3,6 +3,11 @@ import { useShallow } from 'zustand/react/shallow'
 import GalleonCheck from './GalleonCheck'
 import { useGalleonOutskirts, usePlayGalleon } from '@renderer/hooks/world'
 
+/**
+ * Gather the list of shuffled shop item locations in Galleon.
+ * @todo Don't render anything if all shop items are vanilla.
+ * @returns the shuffled shop locations in Galleon.
+ */
 const GalleonShops: React.FC = () => {
   const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
     useShallow((state) => [state.dk, state.diddy, state.lanky, state.tiny, state.chunky])
@@ -10,8 +15,6 @@ const GalleonShops: React.FC = () => {
   const anyKong = dk || diddy || lanky || tiny || chunky
   const inStage = usePlayGalleon()
   const outskirts = useGalleonOutskirts()
-
-  /* TODO: Don't render if no shop shuffle. */
 
   return (
     <>

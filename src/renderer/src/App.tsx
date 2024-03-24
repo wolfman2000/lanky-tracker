@@ -12,6 +12,7 @@ import CavesChecks from './components/caves'
 import CastleChecks from './components/castle'
 import FoolishHints from './components/hints'
 import ResetTracker from './components/ResetComponent'
+import RuntimeSettings from './components/RuntimeSettings'
 
 function App(): JSX.Element {
   /*
@@ -39,6 +40,7 @@ function App(): JSX.Element {
           <MoveTable />
           <LevelTable />
           <FoolishHints />
+          <RuntimeSettings />
           <ResetTracker />
         </article>
         <article>

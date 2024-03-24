@@ -47,7 +47,18 @@ const settingSlice: StateCreator<AllSlice, [], [], SettingSlice> = (set) => {
   donkResetFns.add(() => set(initialSettings))
   return {
     ...initialSettings,
-    setCbCount: (to) => set(() => ({ cbCount: to }))
+    setCbCount: (to) => set(() => ({ cbCount: to })),
+    setSetting: (id, val): void => {
+      set((state) => {
+        const target: Record<string, boolean | number> = {}
+        target[id] = val
+        state = {
+          ...state,
+          ...target
+        }
+        return state
+      })
+    }
   }
 }
 

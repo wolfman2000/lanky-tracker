@@ -3,14 +3,17 @@ import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import JapesCheck from './JapesCheck'
 
+/**
+ * Gather the list of shuffled shop item locations in Japes.
+ * @todo Don't render anything if all shop items are vanilla.
+ * @returns the shuffled shop locations in Japes.
+ */
 const JapesShops: React.FC = () => {
   const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
     useShallow((state) => [state.dk, state.diddy, state.lanky, state.tiny, state.chunky])
   )
   const playJapes = usePlayJapes()
   const anyKong = dk || diddy || lanky || tiny || chunky
-
-  /* TODO: Don't render if shop shuffle is disabled. */
 
   return (
     <>
