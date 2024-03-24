@@ -3,10 +3,21 @@ import { useShallow } from 'zustand/react/shallow'
 import { useAnyGun, useAnyKong } from './kongs'
 import { Level } from '@renderer/store/common'
 
+/**
+ * A type to handle both in-logic and out-of-logic checks in a single function.
+ */
 type LogicBool = {
+  /**
+   * Is this check in logic?
+   */
   in: boolean
+  /**
+   * Is this check out of logic?
+   */
   out?: boolean
 }
+
+const logicBreak = (check: LogicBool): boolean => check.in || check.out!
 
 /**
  * Do we have access to the main isle area?
@@ -31,13 +42,24 @@ export const useIslesJetpack = (): boolean => {
   return islesUpper && key4 && chunky && barrel && lanky && trombone
 }
 
+/**
+ * Do we have access to the Frantic Factory door?
+ * @todo Handle the case where you don't start with isles bananaports.
+ * @returns true if we can access the top portion of Krem Isle where the Frantic Factory lobby resides in vanilla.
+ */
 export const useIslesKremAscent = (): boolean => {
-  // TODO: Allow for no instant banana warp option.
-  return true
+  const [bananaport] = useDonkStore(useShallow((state) => [state.bananaportOpen]))
+  return bananaport != 0
 }
 
+/**
+ * Do we have access to the tip top of Krem Isle?
+ *
+ * In vanilla, there's a banana fairy, sax pad, and Helm access.
+ * @todo Handle Switchsanity (three options: Blast, Balloon, Monkeyport)
+ * @returns true if we can head to the tip top of Krem Isle where Helm awaits.
+ */
 export const useIslesKremTop = (): boolean => {
-  // TODO: Allow switchsanity options.
   const [tiny, port] = useDonkStore(useShallow((state) => [state.tiny, state.port]))
   return tiny && port
 }
@@ -187,35 +209,93 @@ const useSlamLevel = (level: Level): boolean => {
   return false
 }
 
+/**
+ * Can we slam down switches in Jungle Japes?
+ * @todo Handle both options of the progressive slam setting.
+ * @returns true if we can slam switches in Jungle Japes.
+ */
 export const useSlamJapes = (): boolean => useSlamLevel('Japes')
+/**
+ * Can we slam down switches in Angry Aztec?
+ * @todo Handle both options of the progressive slam setting.
+ * @returns true if we can slam switches in Angry Aztec.
+ */
 export const useSlamAztec = (): boolean => useSlamLevel('Aztec')
+/**
+ * Can we slam down switches in Frantic Factory?
+ * @todo Handle both options of the progressive slam setting.
+ * @returns true if we can slam switches in Frantic Factory.
+ */
 export const useSlamFactory = (): boolean => useSlamLevel('Factory')
+/**
+ * Can we slam down switches in Gloomy Galleon?
+ * @todo Handle both options of the progressive slam setting.
+ * @returns true if we can slam switches in Gloomy Galleon.
+ */
 export const useSlamGalleon = (): boolean => useSlamLevel('Galleon')
+/**
+ * Can we slam down switches in Fungi Forest?
+ * @todo Handle both options of the progressive slam setting.
+ * @returns true if we can slam switches in Fungi Forest.
+ */
 export const useSlamForest = (): boolean => useSlamLevel('Forest')
+/**
+ * Can we slam down switches in Crystal Caves?
+ * @todo Handle both options of the progressive slam setting.
+ * @returns true if we can slam switches in Crystal Caves.
+ */
 export const useSlamCaves = (): boolean => useSlamLevel('Caves')
+/**
+ * Can we slam down switches in Creepy Castle?
+ * @todo Handle both options of the progressive slam setting.
+ * @returns true if we can slam switches in Creepy Castle.
+ */
 export const useSlamCastle = (): boolean => useSlamLevel('Castle')
+/**
+ * Can we slam down switches in Hideout Helm?
+ * @todo Handle both options of the progressive slam setting.
+ * @returns true if we can slam switches in Hideout Helm.
+ */
 export const useSlamHelm = (): boolean => useSlamLevel('Helm')
 
+/**
+ * Can we access the Rambi cage in Japes?
+ * @todo Handle Switchsanity (any gun)
+ * @returns true if we can access the Rambi cage in Japes.
+ */
 export const useJapesRambi = (): boolean => {
-  // TODO: Switchsanity can change this kong.
   const [dk, coconut] = useDonkStore(useShallow((state) => [state.dk, state.coconut]))
   const canPlay = usePlayJapes()
   return dk && coconut && canPlay
 }
 
+/**
+ * Can Diddy access the mines?
+ *
+ * There is no switchsanity here: all checks are Diddy exclusive.
+ * @returns true if Diddy can access the mines.
+ */
 export const useJapesMine = (): boolean => {
   const [diddy, peanut] = useDonkStore(useShallow((state) => [state.diddy, state.peanut]))
   const canPlay = usePlayJapes()
   return diddy && peanut && canPlay
 }
 
+/**
+ * Can we access the hive area past the tunnel?
+ * @todo Handle Switchsanity (any gun)
+ * @returns true if we have access to the Hive area past the tunnel.
+ */
 export const useJapesHive = (): boolean => {
-  // TODO: Switchsanity and bananaport chaos.
   const [tiny, feather] = useDonkStore(useShallow((state) => [state.tiny, state.feather]))
   const canPlay = usePlayJapes()
   return canPlay && tiny && feather
 }
 
+/**
+ * Can we get on top of Painting Hill?
+ * @returns true if we can get to the top of the hill.
+ */
 export const useJapesPaintingOutside = (): LogicBool => {
   const inStage = usePlayJapes()
   const [dk, lanky, stand, tiny, twirl, chunky] = useDonkStore(
@@ -234,16 +314,24 @@ export const useJapesPaintingOutside = (): LogicBool => {
   }
 }
 
+/**
+ * Can we enter the painting room on top of the hill?
+ * @todo Handle Switchsanity (any gun)
+ * @returns true if we can enter the painting room on top of the hill.
+ */
 export const useJapesPainting = (): LogicBool => {
-  // TODO: Switchsanity
   const canPlay = useJapesPaintingOutside()
   const [diddy, peanut] = useDonkStore(useShallow((state) => [state.diddy, state.peanut]))
   return {
     in: canPlay.in && diddy && peanut,
-    out: canPlay.out && diddy && peanut
+    out: logicBreak(canPlay) && diddy && peanut
   }
 }
 
+/**
+ * Can we access the underground via the power of Boulder Tech?
+ * @returns true if we can access the underground.
+ */
 export const useJapesUnderground = (): boolean => {
   const [chunky, barrel, slam] = useDonkStore(
     useShallow((state) => [state.chunky, state.barrel, state.slam])
@@ -252,6 +340,12 @@ export const useJapesUnderground = (): boolean => {
   return inStage && chunky && barrel && slam != 0
 }
 
+/**
+ * Can we access just the front part of Aztec without taking damage?
+ *
+ * Fun fact: damage boosts are never required in logic.
+ * @returns true if we can actually get checks logically in Aztec to begin with.
+ */
 export const useAztecFront = (): LogicBool => {
   const aztecPlay = usePlayAztec()
   const [vine, tiny, twirl] = useDonkStore(
@@ -259,22 +353,32 @@ export const useAztecFront = (): LogicBool => {
   )
   return {
     in: aztecPlay && (vine || (tiny && twirl)),
-    out: aztecPlay // Damage boosting isn't expected in logic.
+    out: aztecPlay
   }
 }
 
+/**
+ * Can we enter the back of Aztec via the tunnel beside Tiny Temple?
+ * @todo Handle Switchsanity (any instrument)
+ * @returns true if we can access the tunnel beside Tiny Temple.
+ */
 export const useAztecBack = (): LogicBool => {
-  // TODO: Account for switchsanity.
   const aztecFront = useAztecFront()
   const [vine, diddy, guitar, rocket] = useDonkStore(
     useShallow((state) => [state.vine, state.diddy, state.guitar, state.rocket])
   )
   return {
     in: aztecFront.in && diddy && guitar && (vine || rocket),
-    out: aztecFront.out && diddy && guitar
+    out: logicBreak(aztecFront) && diddy && guitar
   }
 }
 
+/**
+ * Can we enter Tiny Temple?
+ *
+ * Switchsanity does not apply here: each kong (minus Donkey) has one check within.
+ * @returns true if we can enter Tiny Temple.
+ */
 export const useAztecTinyTemple = (): LogicBool => {
   const aztecFront = useAztecFront()
   const [diddy, peanut, lanky, grape, tiny, feather, chunky, pineapple] = useDonkStore(
@@ -293,12 +397,16 @@ export const useAztecTinyTemple = (): LogicBool => {
     (diddy && peanut) || (lanky && grape) || (tiny && feather) || (chunky && pineapple)
   return {
     in: aztecFront.in && properGun,
-    out: aztecFront.out && properGun
+    out: logicBreak(aztecFront) && properGun
   }
 }
 
+/**
+ * Can we enter the Llama temple in Aztec?
+ * @todo Handle Switchsanity (one of three guns)
+ * @returns true if we can enter the Llama Temple.
+ */
 export const useAztecLlamaTemple = (): LogicBool => {
-  // TODO: Watch for Switchsanity: any three.
   const aztecBack = useAztecBack()
   const [dk, coconut, lanky, grape, tiny, feather] = useDonkStore(
     useShallow((state) => [
@@ -313,50 +421,74 @@ export const useAztecLlamaTemple = (): LogicBool => {
   const properGun = (dk && coconut) || (lanky && grape) || (tiny && feather)
   return {
     in: aztecBack.in && properGun,
-    out: aztecBack.out && properGun
+    out: logicBreak(aztecBack) && properGun
   }
 }
 
+/**
+ * Can we access the dead end tunnel in Aztec that contains a bonus barrel?
+ * @todo Handle Switchsanity (any kong)
+ * @returns true if we can access the dead end tunnel in Aztec.
+ */
 export const useAztecBackTunnel = (): LogicBool => {
-  // TODO: Switchsanity here.
   const llama = useAztecLlamaTemple()
   const canSlam = useSlamAztec()
   const [dk] = useDonkStore(useShallow((state) => [state.dk, state.strong]))
   return {
     in: llama.in && dk && canSlam,
-    out: llama.out && dk && canSlam
+    out: logicBreak(llama) && dk && canSlam
   }
 }
 
+/**
+ * Can we enter the 5 Door Temple?
+ * @todo Handle both versions of Fast Checks.
+ * @returns true if we can enter the 5 Door Temple.
+ */
 export const useAztec5DoorTemple = (): LogicBool => {
-  // TODO: Account for toggling the fast option.
   const aztecBack = useAztecBack()
   return {
     in: aztecBack.in,
-    out: aztecBack.out
+    out: logicBreak(aztecBack)
   }
 }
 
+/**
+ * Can we access the Testing Area in Factory?
+ * @todo Prepare for this barrier being opened at the start in the future.
+ * @returns true if we can enter the Testing Area in Factory.
+ */
 export const useFactoryTesting = (): boolean => {
-  // TODO: Account for eventual fast toggle option.
   const slam = useDonkStore(useShallow((state) => state.slam))
   const inStage = usePlayFactory()
   return slam != 0 && inStage
 }
 
+/**
+ * Can we climb the Production Room in Factory?
+ * @todo Handle the case if fast checks are off (dk & grab)
+ * @returns true if we can climb the Production Room in Factory.
+ */
 export const useFactoryProductionUpper = (): boolean => {
-  // TODO: Account for requiring grab for slow days.
   const inStage = usePlayFactory()
   return inStage
 }
 
+/**
+ * Can we enter the Galleon Lighthouse?
+ * @todo Handle Switchsanity (any kong)
+ * @returns true if we can enter the Galleon Lighthouse.
+ */
 export const useGalleonLighthouse = (): boolean => {
-  // TODO: Switchsanity
   const [dk, coconut] = useDonkStore((state) => [state.dk, state.coconut])
   const inStage = usePlayGalleon()
   return inStage && dk && coconut
 }
 
+/**
+ * Do we have access to High Tide in Galleon?
+ * @returns true if we have access to High Tide in Galleon.
+ */
 export const useGalleonHighTide = (): boolean => {
   const lighthouse = useGalleonLighthouse()
   const [dive, galleonHighTide] = useDonkStore(
@@ -368,6 +500,10 @@ export const useGalleonHighTide = (): boolean => {
   return lighthouse && dive
 }
 
+/**
+ * Do we have access to Low Tide in Galleon?
+ * @returns true if we have access to Low Tide in Galleon.
+ */
 export const useGalleonLowTide = (): boolean => {
   const [dive, galleonHighTide] = useDonkStore(
     useShallow((state) => [state.dive, state.galleonHighTide])
@@ -379,15 +515,23 @@ export const useGalleonLowTide = (): boolean => {
   return dive && inStage
 }
 
+/**
+ * Do we have access to the Cannon Game area in Galleon?
+ * @todo Handle Switchsanity (any gun) and auto open barrier.
+ * @returns true if we have access to the Cannon Game area in Galleon.
+ */
 export const useGalleonCannon = (): boolean => {
-  // TODO: Pineapple switch is subject to switchsanity.
   const canPlay = usePlayGalleon()
   const [chunky, pineapple] = useDonkStore(useShallow((state) => [state.chunky, state.pineapple]))
   return canPlay && chunky && pineapple
 }
 
+/**
+ * Do we have access to the Shipyard Outskirts in Galleon?
+ * @todo Handle Switchsanity (any gun) and fast barrier (defaults to peanut).
+ * @returns true if we can access the Shipyard Outskirts in Galleon.
+ */
 export const useGalleonOutskirts = (): boolean => {
-  // TODO: Switchsanity and faster/open checks. Normally peanut.
   const inStage = usePlayGalleon()
   return inStage
 }
@@ -462,19 +606,31 @@ export const useForestBean = (): boolean => {
   return inStage && tiny && feather && chunky && pineapple
 }
 
+/**
+ * Can we access the Owl Tree in Forest?
+ * @todo Handle Switchsanity (any gun)
+ * @returns true if we can access the Owl Tree in Forest.
+ */
 export const useForestOwl = (): boolean => {
-  // TODO: Switchsanity
   const inStage = usePlayForest()
   const [lanky, grape] = useDonkStore(useShallow((state) => [state.lanky, state.grape]))
   return inStage && lanky && grape
 }
 
+/**
+ * Can we enter the Igloo in Caves?
+ * @todo Handle the option for requiring rocketbarrels first.
+ * @returns true if we can enter the Igloo in Caves.
+ */
 export const useCavesIgloo = (): boolean => {
-  // TODO: Allow long option requiring rockets first.
   const inStage = usePlayCaves()
   return inStage
 }
 
+/**
+ * Can we enter the Tree in Castle?
+ * @returns true if we can enter the Tree in Castle.
+ */
 export const useCastleTree = (): boolean => {
   const inStage = usePlayCastle()
   const [dk, blast] = useDonkStore(useShallow((state) => [state.dk, state.blast]))
