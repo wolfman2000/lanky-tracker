@@ -1,10 +1,7 @@
-name: Generate Web Artifacts
-run-name: Create web artifacts to publish manually.
-permissions:
-  contents: write
-  pages: write
+name: Validate Web Build
+run-name: Ensure the website can be built.
 on:
-  push:
+  pull_request:
     branches: [ "main" ]
 
 jobs:
@@ -28,10 +25,3 @@ jobs:
       run: npm ci
     - name: Building the project
       run: npm run build
-    - name: Upload the website
-      uses: actions/upload-artifact@v4
-      with:
-        name: offline-website
-        path: out/renderer/
-        if-no-files-found: error
-        overwrite: true
