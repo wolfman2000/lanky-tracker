@@ -1,5 +1,5 @@
 import {
-  useFactoryProductionUpper,
+  useFactoryProductionEnabled,
   useFactoryTesting,
   usePlayFactory,
   useSlamFactory
@@ -9,10 +9,15 @@ import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import { useAnyKong } from '@renderer/hooks/kongs'
 import FactoryShops from './shops'
+import DkMedal from './DkMedal'
+import DiddyMedal from './DiddyMedal'
+import LankyMedal from './LankyMedal'
+import TinyMedal from './TinyMedal'
+import ChunkyMedal from './ChunkyMedal'
 
 const FactoryChecks: React.FC = () => {
   const testing = useFactoryTesting()
-  const production = useFactoryProductionUpper()
+  const production = useFactoryProductionEnabled()
   const canSlam = useSlamFactory()
   const inStage = usePlayFactory()
   const anyKong = useAnyKong()
@@ -271,36 +276,11 @@ const FactoryChecks: React.FC = () => {
         region="R&D Area"
         canGetLogic={testing && dk && grab}
       />
-      <FactoryCheck
-        id={3100}
-        name="Factory DK Medal"
-        region="Factory Medal Rewards"
-        canGetLogic={inStage && dk && (coconut || blast)}
-      />
-      <FactoryCheck
-        id={3101}
-        name="Factory Diddy Medal"
-        region="Factory Medal Rewards"
-        canGetLogic={inStage && diddy}
-      />
-      <FactoryCheck
-        id={3102}
-        name="Factory Lanky Medal"
-        region="Factory Medal Rewards"
-        canGetLogic={inStage && lanky}
-      />
-      <FactoryCheck
-        id={3103}
-        name="Factory Tiny Medal"
-        region="Factory Medal Rewards"
-        canGetLogic={inStage && tiny}
-      />
-      <FactoryCheck
-        id={3104}
-        name="Factory Chunky Medal"
-        region="Factory Medal Rewards"
-        canGetLogic={inStage && chunky}
-      />
+      <DkMedal />
+      <DiddyMedal />
+      <LankyMedal />
+      <TinyMedal />
+      <ChunkyMedal />
       <FactoryCheck
         id={3105}
         name="Factory Boss"

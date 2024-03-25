@@ -1,7 +1,7 @@
 import {
   useGalleonCannon,
   useGalleonHighTide,
-  useGalleonLighthouse,
+  useGalleonLighthouseArea,
   useGalleonLowTide,
   useGalleonOutskirts,
   useGalleonTreasureRoom,
@@ -13,11 +13,16 @@ import { useShallow } from 'zustand/react/shallow'
 import GalleonCheck from './GalleonCheck'
 import { useBoulderTech } from '@renderer/hooks/kongs'
 import GalleonShops from './shops'
+import DkMedal from './DkMedal'
+import DiddyMedal from './DiddyMedal'
+import LankyMedal from './LankyMedal'
+import TinyMedal from './TinyMedal'
+import ChunkyMedal from './ChunkyMedal'
 
 const GalleonChecks: React.FC = () => {
   const inStage = usePlayGalleon()
   const canSlam = useSlamGalleon()
-  const lighthouse = useGalleonLighthouse()
+  const lighthouseArea = useGalleonLighthouseArea()
   const outskirts = useGalleonOutskirts()
   const treasure = useGalleonTreasureRoom()
   const cannon = useGalleonCannon()
@@ -34,15 +39,12 @@ const GalleonChecks: React.FC = () => {
     rocket,
     spring,
     lanky,
-    grape,
     trombone,
     balloon,
     tiny,
-    feather,
     sax,
     mini,
     chunky,
-    pineapple,
     punch,
     triangle,
     slam,
@@ -61,15 +63,12 @@ const GalleonChecks: React.FC = () => {
       state.rocket,
       state.spring,
       state.lanky,
-      state.grape,
       state.trombone,
       state.balloon,
       state.tiny,
-      state.feather,
       state.sax,
       state.mini,
       state.chunky,
-      state.pineapple,
       state.punch,
       state.triangle,
       state.slam,
@@ -87,22 +86,22 @@ const GalleonChecks: React.FC = () => {
         id={4001 /* TODO: Fast check */}
         name="Galleon DK Lighthouse"
         region="Lighthouse Area"
-        canGetLogic={lighthouse && highTide && canSlam && dk}
-        canGetBreak={lighthouse && canSlam && dk}
+        canGetLogic={lighthouseArea && highTide && canSlam && dk}
+        canGetBreak={lighthouseArea && canSlam && dk}
       />
       <GalleonCheck
         id={4002}
         name="Galleon DK Free the Seal"
         region="Shipyard Outskirts"
-        canGetLogic={lighthouse && highTide && dk && blast && outskirts}
-        canGetBreak={lighthouse && dk && blast && outskirts}
+        canGetLogic={lighthouseArea && highTide && dk && blast && outskirts}
+        canGetBreak={lighthouseArea && dk && blast && outskirts}
       />
       <GalleonCheck
         id={4003}
         name="Galleon DK Seal Race"
         region="Shipyard Outskirts"
-        canGetLogic={lighthouse && highTide && dk && blast && outskirts}
-        canGetBreak={lighthouse && dk && blast && outskirts}
+        canGetLogic={lighthouseArea && highTide && dk && blast && outskirts}
+        canGetBreak={lighthouseArea && dk && blast && outskirts}
       />
       <GalleonCheck
         id={4004}
@@ -114,8 +113,8 @@ const GalleonChecks: React.FC = () => {
         id={4010 /* Remember fast checks here. */}
         name="Galleon Diddy Ship Switch"
         region="Lighthouse Area"
-        canGetLogic={lighthouse && highTide && diddy && canSlam && rocket}
-        canGetBreak={lighthouse && diddy && slam != 0 && rocket}
+        canGetLogic={lighthouseArea && highTide && diddy && canSlam && rocket}
+        canGetBreak={lighthouseArea && diddy && slam != 0 && rocket}
       />
       <GalleonCheck
         id={4011 /* TODO: Bananaport logic. */}
@@ -128,8 +127,8 @@ const GalleonChecks: React.FC = () => {
         id={4012}
         name="Galleon Diddy Mechfish"
         region="Shipyard Outskirts"
-        canGetLogic={lighthouse && outskirts && highTide && diddy && rocket && guitar}
-        canGetBreak={lighthouse && outskirts && dive && diddy && rocket && guitar}
+        canGetLogic={lighthouseArea && outskirts && highTide && diddy && rocket && guitar}
+        canGetBreak={lighthouseArea && outskirts && dive && diddy && rocket && guitar}
       />
       <GalleonCheck
         id={4013}
@@ -141,7 +140,7 @@ const GalleonChecks: React.FC = () => {
         id={4020}
         name="Galleon Lanky Enguarde Chest"
         region="Lighthouse Area"
-        canGetLogic={lighthouse && lanky && dive}
+        canGetLogic={lighthouseArea && lanky && dive}
       />
       <GalleonCheck
         id={4021 /* TODO: Bananaport logic */}
@@ -166,7 +165,7 @@ const GalleonChecks: React.FC = () => {
         id={4030}
         name="Galleon Tiny Pearls"
         region="Lighthouse Area"
-        canGetLogic={lighthouse && tiny && mini && dive && pearls != 0}
+        canGetLogic={lighthouseArea && tiny && mini && dive && pearls != 0}
       />
       <GalleonCheck
         id={4031}
@@ -210,13 +209,13 @@ const GalleonChecks: React.FC = () => {
         id={4042}
         name="Galleon Chunky Seasick"
         region="Lighthouse Area"
-        canGetLogic={lighthouse && chunky && punch && slam != 0}
+        canGetLogic={lighthouseArea && chunky && punch && slam != 0}
       />
       <GalleonCheck
         id={4043}
         name="Galleon Chunky 5 Door Ship"
         region="5 Door Ship"
-        canGetLogic={lighthouse && outskirts && dive && chunky && triangle}
+        canGetLogic={lighthouseArea && outskirts && dive && chunky && triangle}
       />
       <GalleonCheck
         id={4050}
@@ -229,7 +228,7 @@ const GalleonChecks: React.FC = () => {
         id={4051}
         name="Galleon Kasplat Lighthouse Alcove"
         region="Lighthouse Area"
-        canGetLogic={lighthouse && lowTide}
+        canGetLogic={lighthouseArea && lowTide}
       />
       <GalleonCheck
         id={4052}
@@ -260,8 +259,8 @@ const GalleonChecks: React.FC = () => {
         id={4070}
         name="Galleon Dirt Lighthouse"
         region="Lighthouse Area"
-        canGetLogic={lighthouse && highTide && canSlam && dk && shockwave}
-        canGetBreak={lighthouse && canSlam && dk && shockwave}
+        canGetLogic={lighthouseArea && highTide && canSlam && dk && shockwave}
+        canGetBreak={lighthouseArea && canSlam && dk && shockwave}
       />
       <GalleonCheck
         id={4080}
@@ -281,61 +280,16 @@ const GalleonChecks: React.FC = () => {
         region="Galleon Caverns"
         canGetLogic={inStage && chunky && punch}
       />
-      <GalleonCheck
-        id={4100}
-        name="Galleon DK Medal"
-        region="Galleon Medal Rewards"
-        canGetLogic={dk && lighthouse && dive && (lanky || canSlam || bongos || blast)}
-      />
-      <GalleonCheck
-        id={4101}
-        name="Galleon Diddy Medal"
-        region="Galleon Medal Rewards"
-        canGetLogic={diddy && outskirts && dive}
-      />
-      <GalleonCheck
-        id={4102}
-        name="Galleon Lanky Medal"
-        region="Galleon Medal Rewards"
-        canGetLogic={
-          lanky &&
-          (lighthouse || outskirts) &&
-          ((chunky && punch && grape) || (dive && trombone && (canSlam || grape)))
-        }
-      />
-      <GalleonCheck
-        id={4103 /* TODO: Simplify this monstrosity. */}
-        name="Galleon Tiny Medal"
-        region="Galleon Medal Rewards"
-        canGetLogic={
-          tiny &&
-          inStage &&
-          dive &&
-          ((treasure.in && canSlam && vine && feather && outskirts) ||
-            (lighthouse && feather && (treasure.in || vine || canSlam || pineapple)) ||
-            (pineapple && treasure.in && ((outskirts && canSlam) || vine)) ||
-            (outskirts && canSlam && vine) ||
-            (outskirts &&
-              lighthouse &&
-              (vine ||
-                canSlam ||
-                feather ||
-                pineapple ||
-                (vine && (treasure.in || canSlam)) ||
-                (treasure.in && (canSlam || feather)))))
-        }
-      />
-      <GalleonCheck
-        id={4104}
-        name="Galleon Chunky Medal"
-        region="Galleon Medal Rewards"
-        canGetLogic={chunky && dive && (lighthouse || (outskirts && pineapple))}
-      />
+      <DkMedal />
+      <DiddyMedal />
+      <LankyMedal />
+      <TinyMedal />
+      <ChunkyMedal />
       <GalleonCheck
         id={4105}
         name="Galleon Boss"
         region="Troff 'N' Scoff"
-        canGetLogic={(inStage && vine) || (dive && (lighthouse || outskirts))}
+        canGetLogic={(inStage && vine) || (dive && (lighthouseArea || outskirts))}
       />
       <GalleonShops />
     </div>

@@ -17,21 +17,35 @@ export const useSlamFactory = (): boolean => useSlamLevel('Factory')
 
 /**
  * Can we access the Testing Area in Factory?
- * @todo Prepare for this barrier being opened at the start in the future.
  * @returns true if we can enter the Testing Area in Factory.
  */
 export const useFactoryTesting = (): boolean => {
-  const slam = useDonkStore(useShallow((state) => state.slam))
+  const [slam, removeBarriers] = useDonkStore(
+    useShallow((state) => [state.slam, state.removeBarriers])
+  )
   const inStage = usePlayFactory()
-  return slam != 0 && inStage
+  return inStage && (removeBarriers.factoryTesting || slam != 0)
 }
 
 /**
- * Can we climb the Production Room in Factory?
- * @todo Handle the case if fast checks are off (dk & grab)
- * @returns true if we can climb the Production Room in Factory.
+ * Is the Production Room turned on in Factory?
+ * @returns true if the Production Room is on.
  */
-export const useFactoryProductionUpper = (): boolean => {
+export const useFactoryProductionEnabled = (): boolean => {
   const inStage = usePlayFactory()
-  return inStage
+  const [dk, coconut, grab, removeBarriers] = useDonkStore(
+    useShallow((state) => [state.dk, state.coconut, state.grab, state.removeBarriers])
+  )
+  return inStage && (removeBarriers.factoryProduction || (dk && coconut && grab))
+}
+
+/**
+ * Can we reach the upper warp pad in the Production Room in Factory?
+ * @returns true if we can reach the upper warp pad in the Production Room.
+ */
+export const useFactoryProductionTop = (): boolean => {
+  const inStage = usePlayFactory()
+  const factoryOn = useFactoryProductionEnabled()
+  const bananaport = useDonkStore(useShallow((state) => state.bananaportOpen))
+  return factoryOn || (inStage && bananaport == 2)
 }

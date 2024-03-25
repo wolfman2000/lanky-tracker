@@ -275,7 +275,7 @@ const IsleChecks: React.FC = () => {
         id={54}
         name="Isles Kasplat Galleon Lobby"
         region="Japes-Forest Lobbies"
-        canGetLogic={playGalleon}
+        canGetLogic={playGalleon && anyKong}
       />
       <IslesCheck
         id={70}
