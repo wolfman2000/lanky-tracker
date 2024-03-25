@@ -1,6 +1,6 @@
 import useDonkStore from '@renderer/store'
 import CavesCheck from './CavesCheck'
-import { usePlayCaves } from '@renderer/hooks/world'
+import { usePlayCaves } from '@renderer/hooks/caves'
 import { useShallow } from 'zustand/react/shallow'
 
 const CavesShops: React.FC = () => {

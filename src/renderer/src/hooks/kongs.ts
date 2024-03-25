@@ -1,30 +1,55 @@
 import useDonkStore from '@renderer/store'
+import { useShallow } from 'zustand/react/shallow'
 
+/**
+ * Can we use Donkey?
+ * @returns true if we can use Donkey.
+ */
 export const useDk = (): boolean => {
-  const kong = useDonkStore((state) => state.dk)
+  const kong = useDonkStore(useShallow((state) => state.dk))
   return kong
 }
 
+/**
+ * Can we use Diddy?
+ * @returns true if we can use Diddy.
+ */
 export const useDiddy = (): boolean => {
-  const kong = useDonkStore((state) => state.diddy)
+  const kong = useDonkStore(useShallow((state) => state.diddy))
   return kong
 }
 
+/**
+ * Can we use Lanky?
+ * @returns true if we can use Lanky.
+ */
 export const useLanky = (): boolean => {
-  const kong = useDonkStore((state) => state.lanky)
+  const kong = useDonkStore(useShallow((state) => state.lanky))
   return kong
 }
 
+/**
+ * Can we use Tiny?
+ * @returns true if we can use Tiny.
+ */
 export const useTiny = (): boolean => {
-  const kong = useDonkStore((state) => state.tiny)
+  const kong = useDonkStore(useShallow((state) => state.tiny))
   return kong
 }
 
+/**
+ * Can we use Chunky?
+ * @returns true if we can use Chunky.
+ */
 export const useChunky = (): boolean => {
-  const kong = useDonkStore((state) => state.chunky)
+  const kong = useDonkStore(useShallow((state) => state.chunky))
   return kong
 }
 
+/**
+ * Can any Kong be used?
+ * @returns true if any Kong can be used.
+ */
 export const useAnyKong = (): boolean => {
   const dk = useDk()
   const diddy = useDiddy()
@@ -153,13 +178,13 @@ export const usePunch = (): boolean => {
 
 export const useStrong = (): boolean => {
   const kong = useDk()
-  const barrel = useDonkStore((state) => state.strong)
+  const barrel = useDonkStore(useShallow((state) => state.strong))
   return kong && barrel
 }
 
 export const useRocket = (): boolean => {
   const kong = useDiddy()
-  const barrel = useDonkStore((state) => state.rocket)
+  const barrel = useDonkStore(useShallow((state) => state.rocket))
   return kong && barrel
 }
 

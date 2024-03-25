@@ -5,15 +5,26 @@ type Enumerate<N extends number, Acc extends number[] = []> = Acc['length'] exte
 
 type IntRange<F extends number, T extends number> = Exclude<Enumerate<T>, Enumerate<F>>
 
+type PearlRange = IntRange<0, 6>
+type CrownRange = IntRange<0, 11>
+type FairyRange = IntRange<0, 21>
+type ColoredBananaRange = IntRange<0, 101>
+type GoldBananaRange = IntRange<0, 202>
+type BananaMedalRange = IntRange<0, 41>
+type RainbowCoinRange = IntRange<0, 17>
+type SlamRange = IntRange<0, 4>
+type BananaportRange = IntRange<0, 3>
+export type KongRange = IntRange<0, 5>
+
 export interface CoreState {
   /**
    * How many pearls were found?
    */
-  pearls: IntRange<0, 6>
+  pearls: PearlRange
   /**
    * How many crowns were found?
    */
-  crowns: IntRange<0, 11>
+  crowns: CrownRange
   /**
    * Was the Rareware Coin found?
    */
@@ -25,19 +36,19 @@ export interface CoreState {
   /**
    * How many banana fairies were found?
    */
-  fairies: IntRange<0, 21>
+  fairies: FairyRange
   /**
    * How many golden bananas were found?
    */
-  goldBananas: IntRange<0, 202>
+  goldBananas: GoldBananaRange
   /**
    * How many Banana Medals were found?
    */
-  bananaMedals: IntRange<0, 41>
+  bananaMedals: BananaMedalRange
   /**
    * How many Rainbow Coins were found?
    */
-  rainbowCoins: IntRange<0, 17>
+  rainbowCoins: RainbowCoinRange
   /**
    * Was Donkey Kong found?
    */
@@ -165,7 +176,7 @@ export interface CoreState {
    *
    * These are progressive: value of 2 covers values of 1, and 3 covers 1 & 2.
    */
-  slam: IntRange<0, 4>
+  slam: SlamRange
   /**
    * Was the bean found?
    *
@@ -218,26 +229,76 @@ interface CoreActions {
 
 export type CoreSlice = CoreState & CoreActions
 
+interface SwitchsanitySwitches {
+  islesTrombone: KongRange
+  islesAztec: KongRange
+  islesForest: KongRange
+  islesMonkeyport: BananaportRange
+  islesHelm: IntRange<0, 8>
+  japesHive: KongRange
+  japesRambi: KongRange
+  japesPainting: KongRange
+  japesSide: KongRange
+  aztecBlueprint: KongRange
+  aztecLlama1: KongRange
+  aztecLlama2: KongRange
+  aztecLlama3: KongRange
+  aztecDeadEnd: KongRange
+  aztecBackAccess: KongRange
+  galleonLighthouse: KongRange
+  galleonOutskirts: KongRange
+  galleonCannon: KongRange
+  forestOwl: KongRange
+  forestBean1: KongRange
+  forestBean2: KongRange
+}
+
+interface RemoveBarriers {
+  japesCoconutGates: boolean
+  japesHiveGate: boolean
+  aztecBack: boolean
+  aztec5DoorTemple: boolean
+  aztecLlamaTemple: boolean
+  factoryProduction: boolean
+  factoryTesting: boolean
+  galleonLighthouse: boolean
+  galleonOutskirts: boolean
+  galleonSeasick: boolean
+  forestBeanstalk: boolean
+  forestOwlTree: boolean
+  cavesIgloo: boolean
+}
+
 export interface SettingState {
+  /**
+   * Is Switchsanity turned on? Do we have to worry about this complex logic?
+   */
+  isSwitchsanity: BananaportRange
+  /**
+   * The collection of switches that can be randomized.
+   *
+   * These are pre-filled with the normal values to keep the logic sane.
+   */
+  switchsanitySwitches: SwitchsanitySwitches
   /**
    * How many colored bananas to get the medal check?
    */
-  cbCount: IntRange<0, 101>
+  cbCount: ColoredBananaRange
   /**
    * How many banana medals for the jetpac check?
    */
-  jetpacCount: IntRange<0, 41>
+  jetpacCount: BananaMedalRange
   /**
    * How many fairies for the banana fairy island check?
    */
-  fairyCount: IntRange<0, 21>
+  fairyCount: FairyRange
   /**
    * Which bananaports are open at the start?
    * 0: None
    * 1: Isles
    * 2: All
    */
-  bananaportOpen: IntRange<0, 3>
+  bananaportOpen: BananaportRange
   /**
    * What is the start time for Forest?
    * @todo: Change to multiple options: dawn, night, dusk (combines prev two)
@@ -253,6 +314,10 @@ export interface SettingState {
    * Are the shops contents shuffled?
    */
   shopShuffle: boolean
+  /**
+   * Are the colored bananas shuffled?
+   */
+  coloredBananaShuffle: boolean
   /**
    * Are the rainbow coins that come from dirt patches shuffled?
    */
@@ -302,7 +367,7 @@ export interface SettingState {
   /**
    * Are any barriers removed before the seed starts?
    */
-  removeBarriers: boolean | Record<string, boolean>
+  removeBarriers: RemoveBarriers
   /**
    * Are switches progressive with each level?
    *
@@ -319,10 +384,16 @@ export interface SettingState {
    * Are hard shooting checks enabled?
    */
   hardShooting: boolean
+  /**
+   * Are the lobbies already opened without needing to find a key?
+   *
+   * Note that all keys are still required to fight K. Rool.
+   */
+  openLobbies: boolean
 }
 
 interface SettingActions {
-  setCbCount: (to: IntRange<0, 101>) => void
+  setCbCount: (to: ColoredBananaRange) => void
   setSetting: (id: string, val: boolean | number) => void
 }
 

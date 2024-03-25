@@ -1,7 +1,7 @@
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import ForestCheck from './ForestCheck'
-import { useForestBean, usePlayForest } from '@renderer/hooks/world'
+import { useForestBean, usePlayForest } from '@renderer/hooks/forest'
 
 /**
  * Get the list of potential shuffled locations from the shops.

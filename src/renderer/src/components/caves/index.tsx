@@ -1,4 +1,4 @@
-import { useCavesIgloo, usePlayCaves, useSlamCaves } from '@renderer/hooks/world'
+import { useCavesIgloo, usePlayCaves, useSlamCaves } from '@renderer/hooks/caves'
 import CavesCheck from './CavesCheck'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'

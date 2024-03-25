@@ -6,12 +6,17 @@ import {
   useAztecLlamaTemple,
   useAztecTinyTemple,
   useSlamAztec
-} from '@renderer/hooks/world'
+} from '@renderer/hooks/aztec'
 import AztecCheck from './AztecCheck'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import { useAnyGun, useAnyKong, useBoulderTech } from '@renderer/hooks/kongs'
 import AztecShops from './shops'
+import DkMedal from './DkMedal'
+import DiddyMedal from './DiddyMedal'
+import LankyMedal from './LankyMedal'
+import TinyMedal from './TinyMedal'
+import ChunkyMedal from './ChunkyMedal'
 
 const AztecChecks: React.FC = () => {
   const aztecFront = useAztecFront()
@@ -310,41 +315,11 @@ const AztecChecks: React.FC = () => {
         canGetLogic={templeTiny.in && dive && canSlam && lanky && grape}
         canGetBreak={templeTiny.out && dive && canSlam && lanky && anyGun}
       />
-      <AztecCheck
-        id={2100}
-        name="Aztec DK Medal"
-        region="Aztec Medal Rewards"
-        canGetLogic={dk && llama.in}
-        canGetBreak={dk && llama.out}
-      />
-      <AztecCheck
-        id={2101}
-        name="Aztec Diddy Medal"
-        region="Aztec Medal Rewards"
-        canGetLogic={diddy && (aztecBack.in || (templeTiny.in && dive && peanut))}
-        canGetBreak={diddy && (aztecBack.out || (templeTiny.out && dive && peanut))}
-      />
-      <AztecCheck
-        id={2102}
-        name="Aztec Lanky Medal"
-        region="Aztec Medal Rewards"
-        canGetLogic={lanky && aztecBack.in}
-        canGetBreak={lanky && aztecBack.out}
-      />
-      <AztecCheck
-        id={2103}
-        name="Aztec Tiny Medal"
-        region="Aztec Medal Rewards"
-        canGetLogic={tiny && aztecBack.in}
-        canGetBreak={tiny && aztecBack.out}
-      />
-      <AztecCheck
-        id={2104}
-        name="Aztec Chunky Medal"
-        region="Aztec Medal Rewards"
-        canGetLogic={templeTiny.in && chunky && pineapple}
-        canGetBreak={templeTiny.out && chunky && pineapple}
-      />
+      <DkMedal />
+      <DiddyMedal />
+      <LankyMedal />
+      <TinyMedal />
+      <ChunkyMedal />
       <AztecCheck
         id={1105}
         name="Aztec Boss"

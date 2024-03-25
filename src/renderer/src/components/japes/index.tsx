@@ -9,7 +9,6 @@ import {
   useChunky,
   useCoconut,
   useDiddy,
-  useDive,
   useDk,
   useFeather,
   useGrape,
@@ -34,9 +33,14 @@ import {
   useJapesPainting,
   useJapesUnderground,
   useJapesPaintingOutside
-} from '@renderer/hooks/world'
+} from '@renderer/hooks/japes'
 import JapesCheck from './JapesCheck'
 import JapesShops from './shops'
+import DkMedal from './DkMedal'
+import DiddyMedal from './DiddyMedal'
+import LankyMedal from './LankyMedal'
+import TinyMedal from './TinyMedal'
+import ChunkyMedal from './ChunkyMedal'
 const JapesChecks: React.FC = () => {
   const playJapes = usePlayJapes()
   const anyKong = useAnyKong()
@@ -67,7 +71,6 @@ const JapesChecks: React.FC = () => {
   const pineapple = usePineapple()
   const shockwave = useShockwave()
   const camera = useCamera()
-  const dive = useDive()
   const japesPaintingOutside = useJapesPaintingOutside()
   const japesPaintingInside = useJapesPainting()
   const japesUnder = useJapesUnderground()
@@ -267,47 +270,11 @@ const JapesChecks: React.FC = () => {
         region="Japes Hillside"
         canGetLogic={playJapes && anyKong}
       />
-      <JapesCheck
-        id={1100}
-        name="Japes DK Medal"
-        region="Japes Medal Rewards"
-        canGetLogic={playJapes && dk && (coconut || vine)}
-      />
-      <JapesCheck
-        id={1101}
-        name="Japes Diddy Medal"
-        region="Japes Medal Rewards"
-        canGetLogic={playJapes && diddy && (dive || peanut || coconut)}
-      />
-      <JapesCheck
-        id={1102}
-        name="Japes Lanky Medal"
-        region="Japes Medal Rewards"
-        canGetLogic={
-          playJapes &&
-          lanky &&
-          ((coconut && grape) ||
-            (grape && stand) ||
-            (coconut && stand) ||
-            (dive && grape) ||
-            (grape && peanut) ||
-            (stand && peanut))
-        }
-      />
-      <JapesCheck
-        id={1103}
-        name="Japes Tiny Medal"
-        region="Japes Medal Rewards"
-        canGetLogic={playJapes && tiny && feather && (coconut || mini)}
-      />
-      <JapesCheck
-        id={1104}
-        name="Japes Chunky Medal"
-        region="Japes Medal Rewards"
-        canGetLogic={
-          playJapes && chunky && (boulderTech || (coconut && pineapple && feather && hunky))
-        }
-      />
+      <DkMedal />
+      <DiddyMedal />
+      <LankyMedal />
+      <TinyMedal />
+      <ChunkyMedal />
       <JapesCheck
         id={1105}
         name="Japes Boss"
