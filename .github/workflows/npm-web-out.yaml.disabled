@@ -1,0 +1,45 @@
+name: Deploy to Github Pages
+run-name: Create web artifacts to publish automatically.
+permissions:
+  contents: write
+  pages: write
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - name: Check out Repository
+      uses: actions/checkout@v4
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Installing the project dependencies
+      run: npm ci
+    - name: Building the project
+      run: npm run build
+    - name: Upload the website
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-artifact
+        path: out/renderer/
+        if-no-files-found: error
+        overwrite: true
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4.5.0
+      with:
+        folder: out/renderer/
+        ssh-key: ${{ secrets.WEB_DEPLOY_KEY }}
+        repository-name: wolfman2000/wolfman2000.github.io

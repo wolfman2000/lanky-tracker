@@ -1,8 +1,15 @@
-import { useAztecBack, useAztecFront, useAztecLlamaLava, useAztecLlamaTemple, useAztecTinyTemple, useSlamAztec } from "@renderer/hooks/aztec";
-import useDonkStore from "@renderer/store";
-import { useShallow } from "zustand/react/shallow";
-import AztecCheck from "./AztecCheck";
-import { logicBreak } from "@renderer/hooks/world";
+import {
+  useAztecBack,
+  useAztecFront,
+  useAztecLlamaLava,
+  useAztecLlamaTemple,
+  useAztecTinyTemple,
+  useSlamAztec
+} from '@renderer/hooks/aztec'
+import useDonkStore from '@renderer/store'
+import { useShallow } from 'zustand/react/shallow'
+import AztecCheck from './AztecCheck'
+import { logicBreak } from '@renderer/hooks/world'
 
 const TinyMedal: React.FC = () => {
   const inStage = useAztecFront()

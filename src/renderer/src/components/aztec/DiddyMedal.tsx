@@ -1,8 +1,15 @@
-import { useAztec5DoorTemple, useAztecBackTunnel, useAztecTinyTemple, useSlamAztec } from "@renderer/hooks/aztec";
-import useDonkStore from "@renderer/store";
-import AztecCheck from "./AztecCheck";
-import { useShallow } from "zustand/react/shallow";
-import { logicBreak } from "@renderer/hooks/world";
+import {
+  useAztec5DoorTemple,
+  useAztecBack,
+  useAztecBackTunnel,
+  useAztecFront,
+  useAztecTinyTemple,
+  useSlamAztec
+} from '@renderer/hooks/aztec'
+import useDonkStore from '@renderer/store'
+import AztecCheck from './AztecCheck'
+import { useShallow } from 'zustand/react/shallow'
+import { logicBreak } from '@renderer/hooks/world'
 
 const DiddyMedal: React.FC = () => {
   const inStage = useAztecFront()
@@ -55,31 +62,31 @@ const DiddyMedal: React.FC = () => {
 
   let currBreak = 0
   if (logicBreak(inStage)) {
-    currLogic += 5
+    currBreak += 5
     if (peanut) {
-      currLogic += 10
+      currBreak += 10
     }
     if (logicBreak(tinyTemple)) {
       if (canSlam) {
-        currLogic += 8
+        currBreak += 8
         if (peanut) {
-          currLogic += 10
+          currBreak += 10
         }
       }
       if (dive) {
-        currLogic += 7
+        currBreak += 7
       }
     }
     if (logicBreak(aztecBack)) {
-      currLogic += 30
+      currBreak += 30
       if (rocket) {
-        currLogic += 10
+        currBreak += 10
       }
       if (logicBreak(doorTemple) && peanut) {
-        currLogic += 10
+        currBreak += 10
       }
       if (logicBreak(backTunnel) && peanut) {
-        currLogic += 10
+        currBreak += 10
       }
     }
   }

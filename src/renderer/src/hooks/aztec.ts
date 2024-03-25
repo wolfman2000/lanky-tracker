@@ -1,6 +1,12 @@
 import useDonkStore from '@renderer/store'
 import { usePlayLevel, useSlamLevel } from './isles'
-import { LogicBool, logicBreak, useSwitchsanityGun, useSwitchsanityKong, useSwitchsanityMusicPad } from './world'
+import {
+  LogicBool,
+  logicBreak,
+  useSwitchsanityGun,
+  useSwitchsanityKong,
+  useSwitchsanityMusicPad
+} from './world'
 import { useShallow } from 'zustand/react/shallow'
 
 /**
