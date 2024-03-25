@@ -1,5 +1,7 @@
 # lanky-tracker
 
+Use [lanky-tracker](https://wolfman2000.github.io/) now!
+
 This is a [Donkey Kong 64 Randomizer](https://dk64randomizer.com/) tracker written with an [electron-vite](https://electron-vite.org/) setup in addition to [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlang.org/).
 An Electron application with React and TypeScript.
 
