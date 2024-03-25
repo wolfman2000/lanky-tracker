@@ -1,7 +1,8 @@
 name: Deploy to Github Pages
 run-name: Create web artifacts to publish automatically.
 permissions:
-  contents: write
+  contents: read
+  pages: write
 on:
   push:
     branches: [ "main" ]
