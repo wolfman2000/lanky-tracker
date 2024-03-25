@@ -3,8 +3,7 @@ import {
   useAztecBackTunnel,
   useAztecFront,
   useAztecFrontKasplat,
-  useAztecLlamaTemple,
-  useSlamAztec
+  useAztecLlamaTemple
 } from '@renderer/hooks/aztec'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
