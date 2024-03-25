@@ -41,4 +41,5 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@v4.5.0
       with:
         folder: out/renderer/
+        ssh-key: ${{ secrets.WEB_DEPLOY_KEY }}
         repository-name: wolfman2000/wolfman2000.github.io
