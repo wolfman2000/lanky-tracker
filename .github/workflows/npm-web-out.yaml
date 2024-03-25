@@ -1,5 +1,7 @@
-name: NodeJS Ubuntu
-run-name: Creating direct web artifacts.
+name: Deploy to Github Pages
+run-name: Create web artifacts to publish automatically.
+permissions:
+  contents: write
 on:
   push:
     branches: [ "main" ]
@@ -34,3 +36,7 @@ jobs:
         path: out/renderer/
         if-no-files-found: error
         overwrite: true
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.5.0
+        with:
+          folder: out/renderer/
