@@ -1,4 +1,4 @@
-import { usePlayJapes } from '@renderer/hooks/world'
+import { usePlayJapes } from '@renderer/hooks/japes'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import JapesCheck from './JapesCheck'

@@ -5,7 +5,7 @@ import {
   useForestOwl,
   usePlayForest,
   useSlamForest
-} from '@renderer/hooks/world'
+} from '@renderer/hooks/forest'
 import ForestCheck from './ForestCheck'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'

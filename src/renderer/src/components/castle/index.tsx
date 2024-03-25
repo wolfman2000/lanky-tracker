@@ -1,4 +1,4 @@
-import { useCastleTree, usePlayCastle, useSlamCastle } from '@renderer/hooks/world'
+import { useCastleTree, usePlayCastle, useSlamCastle } from '@renderer/hooks/castle'
 import CastleCheck from './CastleCheck'
 import { useAnyGun, useAnyKong, useAnyMusic } from '@renderer/hooks/kongs'
 import useDonkStore from '@renderer/store'

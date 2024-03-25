@@ -1,4 +1,4 @@
-import { useFactoryTesting, usePlayFactory } from '@renderer/hooks/world'
+import { useFactoryTesting, usePlayFactory } from '@renderer/hooks/factory'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import FactoryCheck from './FactoryCheck'

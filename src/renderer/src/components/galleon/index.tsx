@@ -7,7 +7,7 @@ import {
   useGalleonTreasureRoom,
   usePlayGalleon,
   useSlamGalleon
-} from '@renderer/hooks/world'
+} from '@renderer/hooks/galleon'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import GalleonCheck from './GalleonCheck'

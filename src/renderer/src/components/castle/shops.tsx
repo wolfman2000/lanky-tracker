@@ -1,7 +1,7 @@
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import CastleCheck from './CastleCheck'
-import { usePlayCastle } from '@renderer/hooks/world'
+import { usePlayCastle } from '@renderer/hooks/castle'
 
 /**
  * Show the shop checks within Creepy Castle.

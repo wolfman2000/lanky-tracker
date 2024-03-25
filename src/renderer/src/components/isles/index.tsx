@@ -28,22 +28,22 @@ import {
 import IslesCheck from './IslesCheck'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
+import { usePlayHelm } from '@renderer/hooks/helm'
+import IslesShops from './shops'
+import DirtAztec from './DirtAztec'
 import {
-  useIslesJetpack,
   useIslesKremAscent,
   useIslesKremTop,
-  useIslesUpper,
-  usePlayAztec,
-  usePlayCastle,
-  usePlayCaves,
-  usePlayFactory,
-  usePlayForest,
-  usePlayGalleon,
-  usePlayHelm,
-  usePlayJapes,
-  useSlamGalleon
-} from '@renderer/hooks/world'
-import IslesShops from './shops'
+  useIslesRocket,
+  useIslesUpper
+} from '@renderer/hooks/isles'
+import { usePlayJapes } from '@renderer/hooks/japes'
+import { usePlayAztec } from '@renderer/hooks/aztec'
+import { usePlayFactory } from '@renderer/hooks/factory'
+import { usePlayGalleon, useSlamGalleon } from '@renderer/hooks/galleon'
+import { usePlayForest } from '@renderer/hooks/forest'
+import { usePlayCaves } from '@renderer/hooks/caves'
+import { usePlayCastle } from '@renderer/hooks/castle'
 
 const IsleChecks: React.FC = () => {
   const [
@@ -107,7 +107,7 @@ const IsleChecks: React.FC = () => {
   const islesUpper = useIslesUpper()
   const feather = useFeather()
   const islesKremTop = useIslesKremTop()
-  const islesJetpack = useIslesJetpack()
+  const islesJetpack = useIslesRocket()
   const sax = useSax()
   const mini = useMini()
   const triangle = useTriangle()
@@ -301,15 +301,7 @@ const IsleChecks: React.FC = () => {
         region="Main Isle"
         canGetLogic={anyKong && shockwave}
       />
-      <IslesCheck
-        id={74}
-        name="Isles Dirt Aztec Roof"
-        region="Main Isle"
-        canGetLogic={islesJetpack && diddy && rocket && shockwave}
-        canGetBreak={
-          (islesUpper && boulderTech && (diddy || tiny)) || (key4 && (dk || (tiny && twirl)))
-        }
-      />
+      <DirtAztec />
       <IslesCheck
         id={75}
         name="Isles Dirt Cabin Isle"
@@ -336,10 +328,10 @@ const IsleChecks: React.FC = () => {
         canGetLogic={playFactory && punch && camera}
       />
       <IslesCheck
-        id={82}
+        id={82 /* TODO: Switchsanity */}
         name="Isles Forest Fairy"
         region="Japes-Forest Lobbies"
-        canGetLogic={playForest && tiny && feather && camera /* Switchsanity? */}
+        canGetLogic={playForest && tiny && feather && camera}
       />
       <IslesCheck
         id={83}

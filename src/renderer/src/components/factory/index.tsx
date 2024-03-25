@@ -3,7 +3,7 @@ import {
   useFactoryTesting,
   usePlayFactory,
   useSlamFactory
-} from '@renderer/hooks/world'
+} from '@renderer/hooks/factory'
 import FactoryCheck from './FactoryCheck'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'

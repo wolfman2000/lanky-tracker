@@ -1,7 +1,7 @@
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import GalleonCheck from './GalleonCheck'
-import { useGalleonOutskirts, usePlayGalleon } from '@renderer/hooks/world'
+import { useGalleonOutskirts, usePlayGalleon } from '@renderer/hooks/galleon'
 
 /**
  * Gather the list of shuffled shop item locations in Galleon.

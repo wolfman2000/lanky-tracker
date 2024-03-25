@@ -1,4 +1,4 @@
-import { useAztecBack, useAztecFront } from '@renderer/hooks/world'
+import { useAztecBack, useAztecFront } from '@renderer/hooks/aztec'
 import useDonkStore from '@renderer/store'
 import AztecCheck from './AztecCheck'
 import { useShallow } from 'zustand/react/shallow'
