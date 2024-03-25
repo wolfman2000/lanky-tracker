@@ -59,6 +59,20 @@ export const useAnyKong = (): boolean => {
   return dk || diddy || lanky || tiny || chunky
 }
 
+/**
+ * Can you grab higher ledges than the game expects via using Tag Anywhere?
+ *
+ * This assumes that Tag Anywhere is enabled. For 99% of randomizer seeds, it should be.
+ * @returns true if you can grab higher ledges than expected.
+ */
+export const useHighGrab = (): boolean => {
+  const diddy = useDiddy()
+  const lanky = useLanky()
+  const tiny = useTiny()
+  const chunky = useChunky()
+  return (diddy || tiny) && (lanky || chunky)
+}
+
 export const useCoconut = (): boolean => {
   const kong = useDk()
   const gun = useDonkStore((state) => state.coconut)
