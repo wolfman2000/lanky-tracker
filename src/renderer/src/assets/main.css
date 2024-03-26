@@ -138,7 +138,7 @@ main .grid {
   display: grid;
   grid-template-columns: 4fr 2.5fr 0.5fr;
   overflow-y: scroll;
-  height: 880px;
+  height: calc(100vh - 7ex);
 }
 
 .grid > .checked:nth-of-type(3n + 1) > span:first-child,
