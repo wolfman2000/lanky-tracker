@@ -13,7 +13,7 @@ const DkMedal: React.FC = (): JSX.Element => {
   const [cbCount, coloredBananaShuffle, dk, coconut, blast, vine] = useDonkStore(
     useShallow((state) => [
       state.cbCount,
-      state.coloredBananaShuffle,
+      state.shuffleColoredBananas,
       state.dk,
       state.coconut,
       state.blast,

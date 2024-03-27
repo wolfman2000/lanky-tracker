@@ -5,7 +5,7 @@ import { useShallow } from 'zustand/react/shallow'
 export type LevelCheckProps = {
   id: number
   name: string
-  region: SelectableRegionValues
+  region?: SelectableRegionValues
   canGetLogic: boolean
   canGetBreak?: boolean
 }

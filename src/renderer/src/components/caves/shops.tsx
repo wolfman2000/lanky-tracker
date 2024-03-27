@@ -4,11 +4,21 @@ import { usePlayCaves } from '@renderer/hooks/caves'
 import { useShallow } from 'zustand/react/shallow'
 
 const CavesShops: React.FC = () => {
-  const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
-    useShallow((state) => [state.dk, state.diddy, state.lanky, state.tiny, state.chunky])
+  const [dk, diddy, lanky, tiny, chunky, poolShops] = useDonkStore(
+    useShallow((state) => [
+      state.dk,
+      state.diddy,
+      state.lanky,
+      state.tiny,
+      state.chunky,
+      state.poolShops
+    ])
   )
   const anyKong = dk || diddy || lanky || tiny || chunky
   const inStage = usePlayCaves()
+  if (!poolShops) {
+    return null
+  }
 
   return (
     <>

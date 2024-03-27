@@ -27,8 +27,8 @@ const DirtAztec: React.FC = () => {
       state.tiny,
       state.twirl,
       state.shockwave,
-      state.dirtShuffle,
-      state.rainbowCoinShuffle
+      state.shuffleDirt,
+      state.poolRainbowCoins
     ])
   )
 

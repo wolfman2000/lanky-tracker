@@ -21,7 +21,7 @@ const LankyMedal: React.FC = () => {
   const [cbCount, coloredBananaShuffle, lanky, grape, vine, dive] = useDonkStore(
     useShallow((state) => [
       state.cbCount,
-      state.coloredBananaShuffle,
+      state.shuffleColoredBananas,
       state.lanky,
       state.grape,
       state.vine,

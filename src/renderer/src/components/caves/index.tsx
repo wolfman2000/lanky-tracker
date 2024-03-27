@@ -9,6 +9,14 @@ import DiddyMedal from './DiddyMedal'
 import LankyMedal from './LankyMedal'
 import TinyMedal from './TinyMedal'
 import ChunkyMedal from './ChunkyMedal'
+import ArenaPool from '../pools/Arenas'
+import BananaMedalPool from '../pools/BananaMedals'
+import ToughGoldenBanana from '../pools/ToughGoldenBanana'
+import DirtLocations from './Dirt'
+import KasplatLocations from './Kasplats'
+import BossPool from '../pools/Bosses'
+import FairyLocations from './Fairies'
+import CrateLocations from './Crates'
 
 const CavesChecks: React.FC = () => {
   const inStage = usePlayCaves()
@@ -42,9 +50,7 @@ const CavesChecks: React.FC = () => {
     slam,
     barrel,
     orange,
-    homing,
-    shockwave,
-    camera
+    homing
   ] = useDonkStore(
     useShallow((state) => [
       state.dk,
@@ -72,20 +78,20 @@ const CavesChecks: React.FC = () => {
       state.slam,
       state.barrel,
       state.orange,
-      state.homing,
-      state.shockwave,
-      state.camera
+      state.homing
     ])
   )
 
   return (
     <div className="grid">
-      <CavesCheck
-        id={6001}
-        name="Caves DK Baboon Blast"
-        region="Main Caves Area"
-        canGetLogic={inStage && dk && blast}
-      />
+      <ToughGoldenBanana>
+        <CavesCheck
+          id={6001}
+          name="Caves DK Baboon Blast"
+          region="Main Caves Area"
+          canGetLogic={inStage && dk && blast}
+        />
+      </ToughGoldenBanana>
       <CavesCheck
         id={6002}
         name="Caves DK 5 Door Igloo"
@@ -133,13 +139,15 @@ const CavesChecks: React.FC = () => {
         canGetLogic={inStage && diddy && guitar && rocket && spring}
         canGetBreak={inStage && diddy && guitar && rocket}
       />
-      <CavesCheck
-        id={6020}
-        name="Caves Lanky Beetle Race"
-        region="Main Caves Area"
-        canGetLogic={canSlam && lanky && balloon && sprint}
-        canGetBreak={canSlam && lanky && (diddy || tiny) && sprint}
-      />
+      <ToughGoldenBanana>
+        <CavesCheck
+          id={6020}
+          name="Caves Lanky Beetle Race"
+          region="Main Caves Area"
+          canGetLogic={canSlam && lanky && balloon && sprint}
+          canGetBreak={canSlam && lanky && (diddy || tiny) && sprint}
+        />
+      </ToughGoldenBanana>
       <CavesCheck
         id={6021}
         name="Caves Lanky Castle"
@@ -209,75 +217,33 @@ const CavesChecks: React.FC = () => {
         region="Cabins Area"
         canGetLogic={inStage && chunky && triangle && gone}
       />
-      <CavesCheck
-        id={6050}
-        name="Caves Kasplat Near Ice Castle"
-        region="Main Caves Area"
-        canGetLogic={inStage && anyKong}
-      />
-      <CavesCheck
-        id={6051 /* TODO: Bananaport Logic */}
-        name="Caves Kasplat Mini Room by Funky"
-        region="Main Caves Area"
-        canGetLogic={inStage && tiny && mini && twirl}
-        canGetBreak={inStage && tiny && mini}
-      />
-      <CavesCheck
-        id={6052 /* TODO: Bananaport logic. */}
-        name="Caves Kasplat On the Pillar"
-        region="Main Caves Area"
-        canGetLogic={inStage && diddy && rocket}
-        canGetBreak={inStage && lanky && balloon}
-      />
-      <CavesCheck
-        id={6053}
-        name="Caves Kasplat Cabins"
-        region="Cabins Area"
-        canGetLogic={inStage && anyKong}
-      />
-      <CavesCheck
-        id={6054}
-        name="Caves Kasplat Igloo"
-        region="Igloo Area"
-        canGetLogic={inStage && anyKong}
-      />
-      <CavesCheck
-        id={6070}
-        name="Caves Dirt Giant Kosha"
-        region="Igloo Area"
-        canGetLogic={inStage && shockwave && tiny && port && chunky && punch && barrel && hunky}
-        canGetBreak={inStage && shockwave && tiny && port && chunky && punch && barrel}
-      />
-      <CavesCheck
-        id={6080}
-        name="Caves Fairy Igloo"
-        region="Igloo Area"
-        canGetLogic={inStage && tiny && sax && slam != 0 && camera}
-      />
-      <CavesCheck
-        id={6081}
-        name="Caves Fairy Cabin"
-        region="Cabins Area"
-        canGetLogic={inStage && camera && diddy && guitar && rocket && spring}
-        canGetBreak={inStage && camera && diddy && guitar && rocket}
-      />
-      <CavesCheck
-        id={6090}
-        name="Caves Arena"
-        region="Cabins Area"
-        canGetLogic={inStage && dk && bongos && slam != 0}
-      />
-      <DkMedal />
-      <DiddyMedal />
-      <LankyMedal />
-      <TinyMedal />
-      <ChunkyMedal />
-      <CavesCheck
-        id={6105}
-        name="Caves Boss"
-        region="Troff 'N' Scoff"
-        canGetLogic={inStage && anyKong}
-      />
+      <KasplatLocations />
+      <CrateLocations />
+      <DirtLocations />
+      <FairyLocations />
+      <ArenaPool>
+        <CavesCheck
+          id={6090}
+          name="Caves Arena"
+          region="Cabins Area"
+          canGetLogic={inStage && dk && bongos && slam != 0}
+        />
+      </ArenaPool>
+      <BananaMedalPool>
+        <DkMedal />
+        <DiddyMedal />
+        <LankyMedal />
+        <TinyMedal />
+        <ChunkyMedal />
+      </BananaMedalPool>
+      <BossPool>
+        <CavesCheck
+          id={6105}
+          name="Caves Boss"
+          region="Troff 'N' Scoff"
+          canGetLogic={inStage && anyKong}
+        />
+      </BossPool>
       <CavesShops />
     </div>
   )

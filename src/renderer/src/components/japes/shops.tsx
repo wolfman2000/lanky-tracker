@@ -5,14 +5,23 @@ import JapesCheck from './JapesCheck'
 
 /**
  * Gather the list of shuffled shop item locations in Japes.
- * @todo Don't render anything if all shop items are vanilla.
  * @returns the shuffled shop locations in Japes.
  */
 const JapesShops: React.FC = () => {
-  const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
-    useShallow((state) => [state.dk, state.diddy, state.lanky, state.tiny, state.chunky])
+  const [dk, diddy, lanky, tiny, chunky, poolShops] = useDonkStore(
+    useShallow((state) => [
+      state.dk,
+      state.diddy,
+      state.lanky,
+      state.tiny,
+      state.chunky,
+      state.poolShops
+    ])
   )
   const playJapes = usePlayJapes()
+  if (!poolShops) {
+    return null
+  }
   const anyKong = dk || diddy || lanky || tiny || chunky
 
   return (

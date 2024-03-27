@@ -1,6 +1,7 @@
 import useDonkStore from '@renderer/store'
 import { BananaportRange } from '@renderer/store/common'
 import { useShallow } from 'zustand/react/shallow'
+import GeneratorSettings from './GeneratorSettings'
 
 const timeToString = (time: BananaportRange): string => {
   switch (time) {
@@ -58,8 +59,9 @@ const RuntimeSettings: React.FC = () => {
 
   return (
     <section className="runtime-settings">
-      <h3>Runtime Settings</h3>
       <div>
+        <h4>Settings</h4>
+        <GeneratorSettings />
         <p>Galleon Starting Tide</p>
         <span onClick={() => setSetting('galleonHighTide', !galleonHighTide)}>
           {galleonHighTide ? '🠱' : '🠳'}

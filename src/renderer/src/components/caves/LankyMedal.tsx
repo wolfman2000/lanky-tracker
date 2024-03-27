@@ -1,39 +1,24 @@
-import { useCavesIgloo, usePlayCaves, useSlamCaves } from '@renderer/hooks/caves'
+import { useCavesIgloo, useCavesPillar, usePlayCaves, useSlamCaves } from '@renderer/hooks/caves'
 import CavesCheck from './CavesCheck'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import { useHighGrab } from '@renderer/hooks/kongs'
+import { logicBreak } from '@renderer/hooks/world'
 
 const LankyMedal: React.FC = () => {
   const inStage = usePlayCaves()
   const canSlam = useSlamCaves()
   const igloo = useCavesIgloo()
+  const pillar = useCavesPillar()
   const highGrab = useHighGrab()
-  const [
-    cbCount,
-    coloredBananaShuffle,
-    kong,
-    gun,
-    music,
-    pad,
-    diddy,
-    rocket,
-    tiny,
-    twirl,
-    bananaport
-  ] = useDonkStore(
+  const [cbCount, coloredBananaShuffle, kong, gun, music, pad] = useDonkStore(
     useShallow((state) => [
       state.cbCount,
-      state.coloredBananaShuffle,
+      state.shuffleColoredBananas,
       state.lanky,
       state.grape,
       state.trombone,
-      state.balloon,
-      state.diddy,
-      state.rocket,
-      state.tiny,
-      state.twirl,
-      state.bananaportOpen
+      state.balloon
     ])
   )
 
@@ -60,10 +45,10 @@ const LankyMedal: React.FC = () => {
       currLogic += 5
     }
   }
-  if (bananaport || (diddy && rocket)) {
+  if (pillar.in) {
     currLogic += 20
   }
-  if (pad || (tiny && twirl)) {
+  if (logicBreak(pillar)) {
     currBreak += 20
   }
 

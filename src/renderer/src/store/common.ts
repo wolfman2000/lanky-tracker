@@ -230,26 +230,100 @@ interface CoreActions {
 export type CoreSlice = CoreState & CoreActions
 
 interface SwitchsanitySwitches {
+  /**
+   * What instrument is needed to reveal the Rocket barrel in Isles?
+   */
   islesTrombone: KongRange
+  /**
+   * What instrument is needed to open the hint room in the Aztec Lobby?
+   *
+   * This is only relevant in kasplat or hint shuffle I think.
+   */
   islesAztec: KongRange
+  /**
+   * What gun is needed to reveal the banana fairy in the Forest lobby?
+   */
   islesForest: KongRange
+  /**
+   * What pad move is needed to get to the very top of Krem Isle?
+   * 0: Monkeyport
+   * 1: Baboon Blast
+   * 2: Baboon Balloon
+   */
   islesMonkeyport: BananaportRange
+  /**
+   * What move or instrument is needed to reveal the vines to access Helm?
+   */
   islesHelm: IntRange<0, 8>
+  /**
+   * What gun is needed to access the hive area?
+   *
+   * If all bananaports are pre-activated, this check is superfluous.
+   */
   japesHive: KongRange
+  /**
+   * What gun is needed to access the Rambi cage?
+   */
   japesRambi: KongRange
+  /**
+   * What gun is needed to access the Painting Room?
+   */
   japesPainting: KongRange
+  /**
+   * What gun is needed to access the side room in the Tunnel?
+   */
   japesSide: KongRange
+  /**
+   * What gun is needed to access the early Kasplat?
+   */
   aztecBlueprint: KongRange
+  /**
+   * What is the 1st possible gun to access the Llama Temple?
+   */
   aztecLlama1: KongRange
+  /**
+   * What is the 2nd possible gun to access the Llama Temple?
+   */
   aztecLlama2: KongRange
+  /**
+   * What is the 3rd possible gun to access the Llama Temple?
+   */
   aztecLlama3: KongRange
+  /**
+   * Which Kong is necessary to access the Dead End tunnel in the back of Aztec?
+   */
   aztecDeadEnd: KongRange
+  /**
+   * Which instrument is needed to access the back half of Aztec?
+   */
   aztecBackAccess: KongRange
+  /**
+   * Which gun is needed to access the lighthouse area in Galleon?
+   */
   galleonLighthouse: KongRange
+  /**
+   * Which gun is needed to access the outskirts area in Galleon?
+   */
   galleonOutskirts: KongRange
+  /**
+   * Which gun is needed to access the cannon game in Galleon?
+   */
   galleonCannon: KongRange
+  /**
+   * Which gun is needed to access the Owl Tree area in Forest?
+   */
   forestOwlTree: KongRange
+  /**
+   * What is the first gun needed to access the Beanstalk area in Forest?
+   *
+   * If all bananawarps are pre-activated, this check is pointless.
+   */
   forestBean1: KongRange
+  /**
+   * What is the second gun needed to access the Beanstalk area in Forest?
+   *
+   * If all bananawarps are pre-activated, this check is pointless.
+   */
   forestBean2: KongRange
 }
 
@@ -315,57 +389,83 @@ export interface SettingState {
   /**
    * Are the shops contents shuffled?
    */
-  shopShuffle: boolean
+  poolShops: boolean
   /**
    * Are the colored bananas shuffled?
    */
-  coloredBananaShuffle: boolean
+  shuffleColoredBananas: boolean
   /**
    * Are the rainbow coins that come from dirt patches shuffled?
    */
-  rainbowCoinShuffle: boolean
+  poolRainbowCoins: boolean
+  /**
+   * Are the banana medal rewards for collecting enough colored bananas shuffled?
+   */
+  poolBananaMedals: boolean
   /**
    * Are the dirt patches shuffled elsewhere in the levels?
    */
-  dirtShuffle: boolean
+  shuffleDirt: boolean
   /**
    * Are the crowns won from the arenas shuffled?
    */
-  crownShuffle: boolean
+  poolCrowns: boolean
+  /**
+   * Are the misc items (pearls nad beans) shuffled?
+   */
+  poolMisc: boolean
+  /**
+   * Are the melon crate contents shuffled?
+   */
+  poolCrates: boolean
+  /**
+   * Are the physical melon crates themselves shuffled?
+   */
+  shuffleCrates: boolean
   /**
    * Are the arena pads shuffled elsewhere in the level?
    */
-  arenaShuffle: boolean
+  shuffleArenas: boolean
   /**
-   * Are the gold bananas shuffled?
+   * Are the golden bananas shuffled?
+   *
+   * This does not include the tough golden bananas.
    */
-  goldBananaShuffle: boolean
+  poolGoldBananas: boolean
+  /**
+   * Are the golden bananas considered to be tougher than normal shuffled?
+   */
+  poolToughBananas: boolean
   /**
    * Are the blueprints held by kasplats shuffled?
    */
-  blueprintShuffle: boolean
+  poolBlueprints: boolean
   /**
    * Are the locations of kasplats shuffled?
    *
    * @todo: See if this should be a range of three instead.
    */
-  kasplatShuffle: boolean
+  shuffleKasplats: boolean
   /**
    * Are the items on fairies shuffled?
    */
-  fairyShuffle: boolean
+  poolFairies: boolean
   /**
    * Are the locations of fairies shuffled?
    */
-  fairyLocationShuffle: boolean
+  shuffleFairies: boolean
   /**
    * Are bonus barrels automatically completed?
    */
   autoBonus: boolean
   /**
-   * Are the Nintendo Coin and Rareware Coin in the pool?
+   * Are the Nintendo Coin and Rareware Coin in the shuffle?
    */
-  companyCoinShuffle: boolean
+  poolCompanyCoins: boolean
+  /**
+   * Are the boss keys shuffled?
+   */
+  poolKeys: boolean
   /**
    * Are any barriers removed before the seed starts?
    */
@@ -397,6 +497,7 @@ export interface SettingState {
 interface SettingActions {
   setCbCount: (to: ColoredBananaRange) => void
   setSetting: (id: string, val: boolean | number) => void
+  setSwitchsanity: (id: string, val: number) => void
 }
 
 export type SettingSlice = SettingState & SettingActions

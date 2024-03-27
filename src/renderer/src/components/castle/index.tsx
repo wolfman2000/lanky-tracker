@@ -9,6 +9,14 @@ import DiddyMedal from './DiddyMedal'
 import LankyMedal from './LankyMedal'
 import TinyMedal from './TinyMedal'
 import ChunkyMedal from './ChunkyMedal'
+import ArenaPool from '../pools/Arenas'
+import BananaMedalPool from '../pools/BananaMedals'
+import ToughGoldenBanana from '../pools/ToughGoldenBanana'
+import DirtLocations from './Dirt'
+import KasplatLocations from './Kasplats'
+import BossPool from '../pools/Bosses'
+import FairyLocations from './Fairies'
+import CrateLocations from './Crates'
 
 const CastleChecks: React.FC = () => {
   const inStage = usePlayCastle()
@@ -45,9 +53,7 @@ const CastleChecks: React.FC = () => {
     barrel,
     homing,
     sniper,
-    vine,
-    shockwave,
-    camera
+    vine
   ] = useDonkStore(
     useShallow((state) => [
       state.dk,
@@ -77,20 +83,20 @@ const CastleChecks: React.FC = () => {
       state.barrel,
       state.homing,
       state.sniper,
-      state.vine,
-      state.shockwave,
-      state.camera
+      state.vine
     ])
   )
 
   return (
     <div className="grid">
-      <CastleCheck
-        id={7001}
-        name="Castle DK Tree"
-        region="Castle Surroundings"
-        canGetLogic={tree && coconut && sniper}
-      />
+      <ToughGoldenBanana>
+        <CastleCheck
+          id={7001}
+          name="Castle DK Tree"
+          region="Castle Surroundings"
+          canGetLogic={tree && coconut && sniper}
+        />
+      </ToughGoldenBanana>
       <CastleCheck
         id={7002}
         name="Castle DK Library"
@@ -215,78 +221,33 @@ const CastleChecks: React.FC = () => {
         region="Castle Underground"
         canGetLogic={inStage && chunky && pineapple && punch}
       />
-      <CastleCheck
-        id={7050}
-        name="Castle Kasplat Inside the Tree"
-        region="Castle Surroundings"
-        canGetLogic={tree && coconut}
-      />
-      <CastleCheck
-        id={7051}
-        name="Castle Kasplat Lower Cave Center"
-        region="Castle Underground"
-        canGetLogic={inStage && anyKong}
-      />
-      <CastleCheck
-        id={7052}
-        name="Castle Kasplat Near Upper Warp 2"
-        region="Castle Surroundings"
-        canGetLogic={inStage && anyKong}
-      />
-      <CastleCheck
-        id={7053}
-        name="Castle Kasplat On a Lone Platform"
-        region="Castle Surroundings"
-        canGetLogic={inStage && anyKong}
-      />
-      <CastleCheck
-        id={7054}
-        name="Castle Kasplat Near Candy's"
-        region="Castle Underground"
-        canGetLogic={inStage && anyKong}
-      />
-      <CastleCheck
-        id={7060}
-        name="Castle Crate Mausoleum"
-        region="Castle Underground"
-        canGetLogic={inStage && anyKong}
-      />
-      <CastleCheck
-        id={7070}
-        name="Castle Dirt Top Floor"
-        region="Castle Surroundings"
-        canGetLogic={inStage && anyKong && shockwave}
-      />
-      <CastleCheck
-        id={7080}
-        name="Castle Fairy Tree"
-        region="Castle Surroundings"
-        canGetLogic={tree && coconut && coconut && sniper && camera}
-      />
-      <CastleCheck
-        id={7081}
-        name="Castle Fairy Rooms"
-        region="Castle Rooms"
-        canGetLogic={inStage && diddy && canSlam && tiny && port && camera}
-        canGetBreak={inStage && chunky && canSlam && camera}
-      />
-      <CastleCheck
-        id={7090}
-        name="Castle Arena"
-        region="Castle Surroundings"
-        canGetLogic={inStage && lanky && canSlam}
-      />
-      <DkMedal />
-      <DiddyMedal />
-      <LankyMedal />
-      <TinyMedal />
-      <ChunkyMedal />
-      <CastleCheck
-        id={7105}
-        name="Castle Boss"
-        region="Troff 'N' Scoff"
-        canGetLogic={inStage && anyKong}
-      />
+      <KasplatLocations />
+      <CrateLocations />
+      <DirtLocations />
+      <FairyLocations />
+      <ArenaPool>
+        <CastleCheck
+          id={7090}
+          name="Castle Arena"
+          region="Castle Surroundings"
+          canGetLogic={inStage && lanky && canSlam}
+        />
+      </ArenaPool>
+      <BananaMedalPool>
+        <DkMedal />
+        <DiddyMedal />
+        <LankyMedal />
+        <TinyMedal />
+        <ChunkyMedal />
+      </BananaMedalPool>
+      <BossPool>
+        <CastleCheck
+          id={7105}
+          name="Castle Boss"
+          region="Troff 'N' Scoff"
+          canGetLogic={inStage && anyKong}
+        />
+      </BossPool>
       <CastleShops />
     </div>
   )

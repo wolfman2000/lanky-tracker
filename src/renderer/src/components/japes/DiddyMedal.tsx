@@ -11,7 +11,7 @@ const DiddyMedal: React.FC = (): JSX.Element => {
   const [cbCount, coloredBananaShuffle, diddy, peanut, dive, charge] = useDonkStore(
     useShallow((state) => [
       state.cbCount,
-      state.coloredBananaShuffle,
+      state.shuffleColoredBananas,
       state.diddy,
       state.peanut,
       state.dive,

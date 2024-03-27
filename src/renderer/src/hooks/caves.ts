@@ -1,6 +1,7 @@
 import useDonkStore from '@renderer/store'
 import { usePlayLevel, useSlamLevel } from './isles'
 import { useShallow } from 'zustand/react/shallow'
+import { LogicBool } from './world'
 
 /**
  * Can we play in Crystal Caves?
@@ -26,4 +27,44 @@ export const useCavesIgloo = (): boolean => {
   )
   const iglooBarrier = barriers.cavesIgloo
   return inStage && (!iglooBarrier || (diddy && rocket))
+}
+
+/**
+ * Can we access the mini cavern by Funky in Caves?
+ * @returns true if we can access the mini cavern by Funky.
+ */
+export const useCavesMiniFunky = (): LogicBool => {
+  const inStage = usePlayCaves()
+  const [tiny, twirl, mini, bananaport] = useDonkStore(
+    useShallow((state) => [state.tiny, state.twirl, state.mini, state.bananaportOpen])
+  )
+
+  return {
+    in: inStage && (bananaport == 2 || (tiny && twirl && mini)),
+    out: inStage && tiny && mini
+  }
+}
+
+/**
+ * Can we access the tall pillar in Caves?
+ * @returns true if we can access the pillar.
+ */
+export const useCavesPillar = (): LogicBool => {
+  const inStage = usePlayCaves()
+  const [dk, diddy, rocket, lanky, balloon, tiny, twirl, bananaport] = useDonkStore(
+    useShallow((state) => [
+      state.dk,
+      state.diddy,
+      state.rocket,
+      state.lanky,
+      state.balloon,
+      state.tiny,
+      state.twirl,
+      state.bananaportOpen
+    ])
+  )
+  return {
+    in: inStage && (bananaport == 2 || (diddy && rocket)),
+    out: inStage && (dk || (tiny && twirl) || (lanky && balloon))
+  }
 }

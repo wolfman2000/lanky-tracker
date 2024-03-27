@@ -5,15 +5,24 @@ import { usePlayCastle } from '@renderer/hooks/castle'
 
 /**
  * Show the shop checks within Creepy Castle.
- * @todo Don't render this if shop items aren't shuffled.
  * @returns the list of shop checks if shuffled.
  */
 const CastleShops: React.FC = () => {
-  const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
-    useShallow((state) => [state.dk, state.diddy, state.lanky, state.tiny, state.chunky])
+  const [dk, diddy, lanky, tiny, chunky, poolShops] = useDonkStore(
+    useShallow((state) => [
+      state.dk,
+      state.diddy,
+      state.lanky,
+      state.tiny,
+      state.chunky,
+      state.poolShops
+    ])
   )
   const anyKong = dk || diddy || lanky || tiny || chunky
   const inStage = usePlayCastle()
+  if (!poolShops) {
+    return null
+  }
 
   return (
     <>

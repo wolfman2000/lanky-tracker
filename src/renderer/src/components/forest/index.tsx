@@ -16,6 +16,15 @@ import DiddyMedal from './DiddyMedal'
 import LankyMedal from './LankyMedal'
 import TinyMedal from './TinyMedal'
 import ChunkyMedal from './ChunkyMedal'
+import ArenaPool from '../pools/Arenas'
+import BananaMedalPool from '../pools/BananaMedals'
+import ToughGoldenBanana from '../pools/ToughGoldenBanana'
+import DirtLocations from './Dirt'
+import MiscPool from '../pools/Misc'
+import KasplatLocations from './Kasplats'
+import BossPool from '../pools/Bosses'
+import FairyLocations from './Fairies'
+import CrateLocations from './Crates'
 
 const ForestChecks: React.FC = () => {
   const inStage = usePlayForest()
@@ -53,8 +62,6 @@ const ForestChecks: React.FC = () => {
     hunky,
     vine,
     homing,
-    shockwave,
-    camera,
     slam,
     bean
   ] = useDonkStore(
@@ -83,8 +90,6 @@ const ForestChecks: React.FC = () => {
       state.hunky,
       state.vine,
       state.homing,
-      state.shockwave,
-      state.camera,
       state.slam,
       state.bean
     ])
@@ -92,12 +97,14 @@ const ForestChecks: React.FC = () => {
 
   return (
     <div className="grid">
-      <ForestCheck
-        id={5001}
-        name="Forest DK Baboon Blast"
-        region="Giant Mushroom Exterior"
-        canGetLogic={inStage && dk && blast}
-      />
+      <ToughGoldenBanana>
+        <ForestCheck
+          id={5001}
+          name="Forest DK Baboon Blast"
+          region="Giant Mushroom Exterior"
+          canGetLogic={inStage && dk && blast}
+        />
+      </ToughGoldenBanana>
       <ForestCheck
         id={5002}
         name="Forest DK Mushroom Cannons"
@@ -124,13 +131,15 @@ const ForestChecks: React.FC = () => {
         region="Giant Mushroom Exterior"
         canGetLogic={inStage && diddy && rocket}
       />
-      <ForestCheck
-        id={5011}
-        name="Forest Diddy Owl Race"
-        region="Owl Tree"
-        canGetLogic={owlTree && night.in && diddy && guitar && rocket}
-        canGetBreak={owlTree && (night.in || night.out) && diddy && guitar && rocket}
-      />
+      <ToughGoldenBanana>
+        <ForestCheck
+          id={5011}
+          name="Forest Diddy Owl Race"
+          region="Owl Tree"
+          canGetLogic={owlTree && night.in && diddy && guitar && rocket}
+          canGetBreak={owlTree && (night.in || night.out) && diddy && guitar && rocket}
+        />
+      </ToughGoldenBanana>
       <ForestCheck
         id={5012}
         name="Forest Diddy Caged Banana"
@@ -158,12 +167,14 @@ const ForestChecks: React.FC = () => {
         canGetLogic={inStage && lanky && stand && canSlam}
         canGetBreak={inStage && lanky && canSlam && ((diddy && rocket) || tiny)}
       />
-      <ForestCheck
-        id={5022}
-        name="Forest Lanky Rabbit Race"
-        region="Owl Tree"
-        canGetLogic={owlTree && lanky && trombone && sprint}
-      />
+      <ToughGoldenBanana>
+        <ForestCheck
+          id={5022}
+          name="Forest Lanky Rabbit Race"
+          region="Owl Tree"
+          canGetLogic={owlTree && lanky && trombone && sprint}
+        />
+      </ToughGoldenBanana>
       <ForestCheck
         id={5023}
         name="Forest Lanky Mushroom Attic"
@@ -179,10 +190,18 @@ const ForestChecks: React.FC = () => {
       />
       <ForestCheck
         id={5031}
-        name="Forest Tiny Anthill x2"
+        name="Forest Tiny Anthill"
         region="Owl Tree"
         canGetLogic={owlTree && tiny && mini && sax}
       />
+      <MiscPool>
+        <ForestCheck
+          id={5034}
+          name="Forest Tiny Bean"
+          region="Owl Tree"
+          canGetLogic={owlTree && tiny && mini && sax}
+        />
+      </MiscPool>
       <ForestCheck
         id={5032 /* TODO: Dusk Setting */}
         name="Forest Tiny Spider Boss"
@@ -196,12 +215,14 @@ const ForestChecks: React.FC = () => {
         region="Forest Center And Beanstalk"
         canGetLogic={beanstalk && bean && tiny && mini && sax}
       />
-      <ForestCheck
-        id={5040}
-        name="Forest Chunky Minecarts"
-        region="Forest Center And Beanstalk"
-        canGetLogic={inStage && chunky && slam != 0}
-      />
+      <ToughGoldenBanana>
+        <ForestCheck
+          id={5040}
+          name="Forest Chunky Minecarts"
+          region="Forest Center And Beanstalk"
+          canGetLogic={inStage && chunky && slam != 0}
+        />
+      </ToughGoldenBanana>
       <ForestCheck
         id={5041}
         name="Forest Chunky Face Puzzle"
@@ -221,108 +242,33 @@ const ForestChecks: React.FC = () => {
         region="Forest Center And Beanstalk"
         canGetLogic={beanstalk && boulderTech && hunky}
       />
-      <ForestCheck
-        id={5050}
-        name="Forest Kasplat Behind DK's Barn"
-        region="Forest Mills"
-        canGetLogic={inStage && night.in && anyGun}
-        canGetBreak={inStage && (night.in || night.out)}
-      />
-      <ForestCheck
-        id={5051}
-        name="Forest Kasplat Inside Giant Mushroom"
-        region="Giant Mushroom Insides"
-        canGetLogic={inStage && anyKong}
-      />
-      <ForestCheck
-        id={5052}
-        name="Forest Kasplat Under Owl Tree"
-        region="Owl Tree"
-        canGetLogic={owlTree && anyKong}
-      />
-      <ForestCheck
-        id={5053}
-        name="Forest Kasplat Low Mushroom Exterior"
-        region="Giant Mushroom Exterior"
-        canGetLogic={inStage && anyKong}
-      />
-      <ForestCheck
-        id={5054}
-        name="Forest Kasplat Mushroom Night Door"
-        region="Giant Mushroom Exterior"
-        canGetLogic={inStage && anyKong}
-      />
-      <ForestCheck
-        id={5060}
-        name="Forest Crate Rafters"
-        region="Forest Mills"
-        canGetLogic={inStage && anyKong}
-      />
-      <ForestCheck
-        id={5061}
-        name="Forest Crate Owl Tree"
-        region="Owl Tree"
-        canGetLogic={owlTree && anyKong}
-      />
-      <ForestCheck
-        id={5062}
-        name="Forest Crate Barn Outside"
-        region="Forest Mills"
-        canGetLogic={inStage && night.in}
-        canGetBreak={inStage && night.out}
-      />
-      <ForestCheck
-        id={5063}
-        name="Forest Crate Barn Inside"
-        region="Forest Mills"
-        canGetLogic={inStage && night.in && dk && canSlam && strong}
-        canGetBreak={inStage && (night.in || night.out) && dk && canSlam}
-      />
-      <ForestCheck
-        id={5070}
-        name="Forest Dirt Beanstalk"
-        region="Forest Center And Beanstalk"
-        canGetLogic={beanstalk && shockwave}
-      />
-      <ForestCheck
-        id={5071}
-        name="Forest Dirt Mills Grass"
-        region="Forest Mills"
-        canGetLogic={inStage && shockwave}
-      />
-      <ForestCheck
-        id={5080}
-        name="Forest Fairy Rafters"
-        region="Forest Mills"
-        canGetLogic={inStage && camera && night.in && diddy && spring && guitar}
-        canGetBreak={
-          inStage && camera && (night.in || night.out) && diddy && (spring || lanky || chunky)
-        }
-      />
-      <ForestCheck
-        id={5081}
-        name="Forest Fairy Barn"
-        region="Forest Mills"
-        canGetLogic={inStage && camera && night.in && dk && canSlam && strong}
-        canGetBreak={inStage && camera && (night.in || night.out) && dk && canSlam}
-      />
-      <ForestCheck
-        id={5090}
-        name="Forest Arena"
-        region="Giant Mushroom Exterior"
-        canGetLogic={inStage && anyKong}
-      />
-      <DkMedal />
-      <DiddyMedal />
-      <LankyMedal />
-      <TinyMedal />
-      <ChunkyMedal />
-      <ForestCheck
-        id={5105}
-        name="Forest Boss"
-        region="Troff 'N' Scoff"
-        canGetLogic={inStage && anyKong}
-      />
+      <KasplatLocations />
+      <CrateLocations />
+      <DirtLocations />
+      <FairyLocations />
+      <ArenaPool>
+        <ForestCheck
+          id={5090}
+          name="Forest Arena"
+          region="Giant Mushroom Exterior"
+          canGetLogic={inStage && anyKong}
+        />
+      </ArenaPool>
+      <BananaMedalPool>
+        <DkMedal />
+        <DiddyMedal />
+        <LankyMedal />
+        <TinyMedal />
+        <ChunkyMedal />
+      </BananaMedalPool>
+      <BossPool>
+        <ForestCheck
+          id={5105}
+          name="Forest Boss"
+          region="Troff 'N' Scoff"
+          canGetLogic={inStage && anyKong}
+        />
+      </BossPool>
       <ForestShops />
     </div>
   )

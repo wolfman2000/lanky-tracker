@@ -14,6 +14,13 @@ import DiddyMedal from './DiddyMedal'
 import LankyMedal from './LankyMedal'
 import TinyMedal from './TinyMedal'
 import ChunkyMedal from './ChunkyMedal'
+import ArenaPool from '../pools/Arenas'
+import BananaMedalPool from '../pools/BananaMedals'
+import DirtLocations from './Dirt'
+import KasplatLocations from './Kasplats'
+import BossPool from '../pools/Bosses'
+import CompanyPool from '../pools/Company'
+import FairyLocations from './Fairies'
 
 const FactoryChecks: React.FC = () => {
   const testing = useFactoryTesting()
@@ -43,9 +50,7 @@ const FactoryChecks: React.FC = () => {
     triangle,
     punch,
     hunky,
-    vine,
-    shockwave,
-    camera
+    vine
   ] = useDonkStore(
     useShallow((state) => [
       state.dk,
@@ -69,9 +74,7 @@ const FactoryChecks: React.FC = () => {
       state.triangle,
       state.punch,
       state.hunky,
-      state.vine,
-      state.shockwave,
-      state.camera
+      state.vine
     ])
   )
 
@@ -102,12 +105,14 @@ const FactoryChecks: React.FC = () => {
         canGetLogic={inStage && dk && strong}
         canGetBreak={inStage && (dk || diddy)}
       />
-      <FactoryCheck
-        id={3005 /* TODO: Hide if coins aren't shuffled. */}
-        name="Factory DK Nintendo Coin"
-        region="Storage And Arcade"
-        canGetLogic={inStage && dk && blast && grab}
-      />
+      <CompanyPool>
+        <FactoryCheck
+          id={3005}
+          name="Factory DK Nintendo Coin"
+          region="Storage And Arcade"
+          canGetLogic={inStage && dk && blast && grab}
+        />
+      </CompanyPool>
       <FactoryCheck
         id={3010}
         name="Factory Diddy Block Tower"
@@ -210,36 +215,7 @@ const FactoryChecks: React.FC = () => {
         region="Production Room"
         canGetLogic={production && chunky && canSlam}
       />
-      <FactoryCheck
-        id={3050}
-        name="Factory Kasplat Upper Production Pipe"
-        region="Production Room"
-        canGetLogic={production && anyKong}
-      />
-      <FactoryCheck
-        id={3051}
-        name="Factory Kasplat Production Floor"
-        region="Production Room"
-        canGetLogic={inStage && anyKong}
-      />
-      <FactoryCheck
-        id={3052}
-        name="Factory Kasplat R&D"
-        region="Testing Area"
-        canGetLogic={testing && anyKong}
-      />
-      <FactoryCheck
-        id={3053}
-        name="Factory Kasplat Pole to Arcade"
-        region="Storage And Arcade"
-        canGetLogic={inStage && anyKong}
-      />
-      <FactoryCheck
-        id={3054}
-        name="Factory Kasplat Block Tower"
-        region="Testing Area"
-        canGetLogic={testing && anyKong}
-      />
+      <KasplatLocations />
       <FactoryCheck
         id={3060}
         name="Factory Crate Candy"
@@ -252,41 +228,31 @@ const FactoryChecks: React.FC = () => {
         region="Testing Area"
         canGetLogic={testing && anyKong}
       />
-      <FactoryCheck
-        id={3070}
-        name="Factory Dirt Dark Room"
-        region="Storage And Arcade"
-        canGetLogic={inStage && chunky && punch && shockwave}
-      />
-      <FactoryCheck
-        id={3080}
-        name="Factory Fairy Counting"
-        region="Testing Area"
-        canGetLogic={testing && camera && anyKong}
-      />
-      <FactoryCheck
-        id={3081}
-        name="Factory Fairy Dartboard"
-        region="Testing Area"
-        canGetLogic={testing && camera && tiny && mini && canSlam && feather}
-      />
-      <FactoryCheck
-        id={3090}
-        name="Factory Arena"
-        region="R&D Area"
-        canGetLogic={testing && dk && grab}
-      />
-      <DkMedal />
-      <DiddyMedal />
-      <LankyMedal />
-      <TinyMedal />
-      <ChunkyMedal />
-      <FactoryCheck
-        id={3105}
-        name="Factory Boss"
-        region="Troff 'N' Scoff"
-        canGetLogic={inStage && anyKong}
-      />
+      <DirtLocations />
+      <FairyLocations />
+      <ArenaPool>
+        <FactoryCheck
+          id={3090}
+          name="Factory Arena"
+          region="R&D Area"
+          canGetLogic={testing && dk && grab}
+        />
+      </ArenaPool>
+      <BananaMedalPool>
+        <DkMedal />
+        <DiddyMedal />
+        <LankyMedal />
+        <TinyMedal />
+        <ChunkyMedal />
+      </BananaMedalPool>
+      <BossPool>
+        <FactoryCheck
+          id={3105}
+          name="Factory Boss"
+          region="Troff 'N' Scoff"
+          canGetLogic={inStage && anyKong}
+        />
+      </BossPool>
       <FactoryShops />
     </div>
   )

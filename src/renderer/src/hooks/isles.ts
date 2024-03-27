@@ -1,5 +1,5 @@
 import useDonkStore from '@renderer/store'
-import { LogicBool, useSwitchsanityMusicPad } from './world'
+import { LogicBool, useSwitchsanityGun, useSwitchsanityMusicPad } from './world'
 import { useShallow } from 'zustand/react/shallow'
 import { useBoulderTech, useRocket } from './kongs'
 import { Level } from '@renderer/store/common'
@@ -9,6 +9,12 @@ import { Level } from '@renderer/store/common'
  * @returns the requirements needed to activate the rocket barrel in Isles.
  */
 const useIslesRocketSwitch = (): boolean => useSwitchsanityMusicPad('islesTrombone', 2)
+
+/**
+ * What is needed to reveal the fairy hiding in the Forest Lobby?
+ * @returns the requirements needed to reveal the fairy in the Forest Lobby.
+ */
+export const useIslesFairySwitch = (): boolean => useSwitchsanityGun('islesForest', 3)
 
 /**
  * Can we reach the outer Fungi island?
