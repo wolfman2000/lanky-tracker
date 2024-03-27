@@ -11,6 +11,11 @@ import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import { useAllGun, useAnyGun, useAnyKong, useBoulderTech } from '@renderer/hooks/kongs'
 import ForestShops from './shops'
+import DkMedal from './DkMedal'
+import DiddyMedal from './DiddyMedal'
+import LankyMedal from './LankyMedal'
+import TinyMedal from './TinyMedal'
+import ChunkyMedal from './ChunkyMedal'
 
 const ForestChecks: React.FC = () => {
   const inStage = usePlayForest()
@@ -34,7 +39,6 @@ const ForestChecks: React.FC = () => {
     rocket,
     spring,
     lanky,
-    grape,
     trombone,
     stand,
     sprint,
@@ -48,7 +52,6 @@ const ForestChecks: React.FC = () => {
     punch,
     hunky,
     vine,
-    dive,
     homing,
     shockwave,
     camera,
@@ -66,7 +69,6 @@ const ForestChecks: React.FC = () => {
       state.rocket,
       state.spring,
       state.lanky,
-      state.grape,
       state.trombone,
       state.stand,
       state.sprint,
@@ -80,7 +82,6 @@ const ForestChecks: React.FC = () => {
       state.punch,
       state.hunky,
       state.vine,
-      state.dive,
       state.homing,
       state.shockwave,
       state.camera,
@@ -311,41 +312,11 @@ const ForestChecks: React.FC = () => {
         region="Giant Mushroom Exterior"
         canGetLogic={inStage && anyKong}
       />
-      <ForestCheck
-        id={5100}
-        name="Forest DK Medal"
-        region="Forest Medal Rewards"
-        canGetLogic={inStage && dk}
-      />
-      <ForestCheck
-        id={5101}
-        name="Forest Diddy Medal"
-        region="Forest Medal Rewards"
-        canGetLogic={inStage && diddy}
-      />
-      <ForestCheck
-        id={5102}
-        name="Forest Lanky Medal"
-        region="Forest Medal Rewards"
-        canGetLogic={inStage && lanky && (anyGun || (stand && canSlam))}
-      />
-      <ForestCheck
-        id={5103}
-        name="Forest Tiny Medal"
-        region="Forest Medal Rewards"
-        canGetLogic={
-          inStage &&
-          tiny &&
-          ((feather && ((chunky && pineapple) || dive || mini || (lanky && grape))) ||
-            (dive && mini && ((chunky && punch) || (lanky && grape))))
-        }
-      />
-      <ForestCheck
-        id={5104}
-        name="Forest Chunky Medal"
-        region="Forest Medal Rewards"
-        canGetLogic={inStage && chunky}
-      />
+      <DkMedal />
+      <DiddyMedal />
+      <LankyMedal />
+      <TinyMedal />
+      <ChunkyMedal />
       <ForestCheck
         id={5105}
         name="Forest Boss"

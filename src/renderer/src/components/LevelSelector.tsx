@@ -91,18 +91,20 @@ const LevelSelector: React.FC<LevelSelectorProps> = ({ storeKey }) => {
   const lvlNum = Number.parseInt(storeKey.slice(5), 10)
 
   const handleNextLevel = (): void => {
-    setLevel(lvlNum, nextLevel(level))
+    if (storeKey !== 'level8') setLevel(lvlNum, nextLevel(level))
   }
 
   const handlePrevLevel = (): void => {
-    setLevel(lvlNum, prevLevel(level))
+    if (storeKey !== 'level8') setLevel(lvlNum, prevLevel(level))
   }
 
   const handleWheel = (e: WheelEvent<HTMLImageElement>): void => {
-    if (e.deltaY >= 0) {
-      setLevel(lvlNum, nextLevel(level))
-    } else {
-      setLevel(lvlNum, prevLevel(level))
+    if (storeKey !== 'level8') {
+      if (e.deltaY >= 0) {
+        setLevel(lvlNum, nextLevel(level))
+      } else {
+        setLevel(lvlNum, prevLevel(level))
+      }
     }
   }
 

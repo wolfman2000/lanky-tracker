@@ -13,7 +13,7 @@ type GoldBananaRange = IntRange<0, 202>
 type BananaMedalRange = IntRange<0, 41>
 type RainbowCoinRange = IntRange<0, 17>
 type SlamRange = IntRange<0, 4>
-type BananaportRange = IntRange<0, 3>
+export type BananaportRange = IntRange<0, 3>
 export type KongRange = IntRange<0, 5>
 
 export interface CoreState {
@@ -248,7 +248,7 @@ interface SwitchsanitySwitches {
   galleonLighthouse: KongRange
   galleonOutskirts: KongRange
   galleonCannon: KongRange
-  forestOwl: KongRange
+  forestOwlTree: KongRange
   forestBean1: KongRange
   forestBean2: KongRange
 }
@@ -300,10 +300,12 @@ export interface SettingState {
    */
   bananaportOpen: BananaportRange
   /**
-   * What is the start time for Forest?
-   * @todo: Change to multiple options: dawn, night, dusk (combines prev two)
+   * What time do we start in forest?
+   * 0: Day
+   * 1: Night
+   * 2: Dusk (power of both Day and Night)
    */
-  forestDusk: boolean
+  forestTime: BananaportRange
   /**
    * What is the starting tide in Galleon?
    *
