@@ -24,14 +24,14 @@ export const initialSettings: SettingState = {
     galleonOutskirts: 1,
     forestBean1: 3,
     forestBean2: 4,
-    forestOwl: 2
+    forestOwlTree: 2
   },
   cbCount: 40,
   coloredBananaShuffle: false,
   jetpacCount: 15,
   fairyCount: 5,
   bananaportOpen: 1,
-  forestDusk: false,
+  forestTime: 0,
   galleonHighTide: false,
   shopShuffle: true,
   dirtShuffle: false,

@@ -4,6 +4,11 @@ import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import { useAnyGun, useAnyKong } from '@renderer/hooks/kongs'
 import CavesShops from './shops'
+import DkMedal from './DkMedal'
+import DiddyMedal from './DiddyMedal'
+import LankyMedal from './LankyMedal'
+import TinyMedal from './TinyMedal'
+import ChunkyMedal from './ChunkyMedal'
 
 const CavesChecks: React.FC = () => {
   const inStage = usePlayCaves()
@@ -13,28 +18,23 @@ const CavesChecks: React.FC = () => {
   const anyKong = useAnyKong()
   const [
     dk,
-    coconut,
     bongos,
     strong,
     blast,
     diddy,
-    peanut,
     guitar,
     rocket,
     spring,
     lanky,
-    grape,
     trombone,
     sprint,
     balloon,
     tiny,
-    feather,
     sax,
     twirl,
     mini,
     port,
     chunky,
-    pineapple,
     triangle,
     punch,
     hunky,
@@ -48,28 +48,23 @@ const CavesChecks: React.FC = () => {
   ] = useDonkStore(
     useShallow((state) => [
       state.dk,
-      state.coconut,
       state.bongos,
       state.strong,
       state.blast,
       state.diddy,
-      state.peanut,
       state.guitar,
       state.rocket,
       state.spring,
       state.lanky,
-      state.grape,
       state.trombone,
       state.sprint,
       state.balloon,
       state.tiny,
-      state.feather,
       state.sax,
       state.twirl,
       state.mini,
       state.port,
       state.chunky,
-      state.pineapple,
       state.triangle,
       state.punch,
       state.hunky,
@@ -272,62 +267,11 @@ const CavesChecks: React.FC = () => {
         region="Cabins Area"
         canGetLogic={inStage && dk && bongos && slam != 0}
       />
-      <CavesCheck
-        id={6100}
-        name="Caves DK Medal"
-        region="Caves Medal Rewards"
-        canGetLogic={inStage && dk && (blast || bongos || (chunky && punch && coconut))}
-      />
-      <CavesCheck
-        id={6101}
-        name="Caves Diddy Medal"
-        region="Caves Medal Rewards"
-        canGetLogic={
-          inStage &&
-          diddy &&
-          ((peanut && guitar) || (rocket && (peanut || guitar || (tiny && mini && twirl))))
-        }
-        canGetBreak={
-          inStage &&
-          diddy &&
-          ((peanut && guitar) || (rocket && (peanut || guitar || (tiny && mini))))
-        }
-      />
-      <CavesCheck
-        id={6102}
-        name="Caves Lanky Medal"
-        region="Caves Medal Rewards"
-        canGetLogic={
-          inStage &&
-          lanky &&
-          ((balloon && ((diddy && rocket) || trombone || grape || canSlam)) ||
-            (grape && ((diddy && rocket) || (trombone && canSlam))))
-        }
-      />
-      <CavesCheck
-        id={6103}
-        name="Caves Tiny Medal"
-        region="Caves Medal Rewards"
-        canGetLogic={
-          inStage &&
-          tiny &&
-          ((feather && (sax || mini || (barrel && chunky && punch && hunky && port))) ||
-            (port && ((twirl && mini && sax) || (chunky && punch && hunky && (sax || mini)))))
-        }
-      />
-      <CavesCheck
-        id={6104}
-        name="Caves Chunky Medal"
-        region="Caves Medal Rewards"
-        canGetLogic={
-          inStage &&
-          chunky &&
-          ((punch &&
-            (barrel || (triangle && gone) || (pineapple && (triangle || (tiny && mini))))) ||
-            (triangle &&
-              ((pineapple && tiny && mini && barrel) || (gone && (pineapple || barrel)))))
-        }
-      />
+      <DkMedal />
+      <DiddyMedal />
+      <LankyMedal />
+      <TinyMedal />
+      <ChunkyMedal />
       <CavesCheck
         id={6105}
         name="Caves Boss"

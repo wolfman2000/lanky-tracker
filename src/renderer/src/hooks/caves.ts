@@ -17,7 +17,6 @@ export const useSlamCaves = (): boolean => useSlamLevel('Caves')
 
 /**
  * Can we enter the Igloo in Caves?
- * @todo Handle the option for requiring rocketbarrels first.
  * @returns true if we can enter the Igloo in Caves.
  */
 export const useCavesIgloo = (): boolean => {

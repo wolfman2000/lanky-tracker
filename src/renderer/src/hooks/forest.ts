@@ -2,7 +2,7 @@ import useDonkStore from '@renderer/store'
 import { usePlayLevel, useSlamLevel } from './isles'
 import { useShallow } from 'zustand/react/shallow'
 import { useAnyGun, useAnyKong } from './kongs'
-import { LogicBool } from './world'
+import { LogicBool, useSwitchsanityGun } from './world'
 
 /**
  * Can we play in Fungi Forest?
@@ -19,35 +19,34 @@ export const useSlamForest = (): boolean => useSlamLevel('Forest')
 
 /**
  * Do we have access to Fungi Forest during the daytime?
- * @todo Account for starting day, dusk, and night. Night remains.
  * @returns true if we do.
  */
 export const useForestDay = (): LogicBool => {
   const inStage = usePlayForest()
-  const forestDusk = useDonkStore(useShallow((state) => state.forestDusk))
-  if (forestDusk) {
+  const anyGun = useAnyGun()
+  const [orange, forestTime] = useDonkStore(useShallow((state) => [state.orange, state.forestTime]))
+  if (forestTime != 1) {
     return {
       in: inStage,
       out: inStage
     }
   }
   return {
-    in: inStage,
-    out: inStage
+    in: inStage && anyGun,
+    out: inStage && orange
   }
 }
 
 /**
  * Do we have access to Fungi Forest during the nighttime?
- * @todo Account for starting day, dusk, and night. Day remains.
  * @returns true if we do.
  */
 export const useForestNight = (): LogicBool => {
   const anyGun = useAnyGun()
   const inStage = usePlayForest()
-  const [orange, forestDusk] = useDonkStore(useShallow((state) => [state.orange, state.forestDusk]))
+  const [orange, forestTime] = useDonkStore(useShallow((state) => [state.orange, state.forestTime]))
   const anyKong = useAnyKong()
-  if (forestDusk) {
+  if (forestTime != 0) {
     return {
       in: inStage,
       out: inStage
@@ -60,25 +59,46 @@ export const useForestNight = (): LogicBool => {
 }
 
 /**
+ * Do we have access to the top of the mushroom in Forest?
+ *
+ * Due to recent logic changes, this is always possible.
+ * However, the future may put restrictions on again.
+ * @returns true. This is always possible.
+ */
+export const useForestMushroomTop = (): boolean => {
+  return true
+}
+
+export const useForestBeanHalf = (): boolean => {
+  const inStage = usePlayForest()
+  const door1 = useSwitchsanityGun('forestBean1', 3)
+  const removeBarriers = useDonkStore(useShallow((state) => state.removeBarriers))
+  return inStage && (door1 || removeBarriers.forestBeanstalk)
+}
+
+/**
  * Do we have access to the beanstalk area?
- * @todo Support switch sanity.
  * @returns true if we can access the beanstalk area.
  */
 export const useForestBean = (): boolean => {
   const inStage = usePlayForest()
-  const [tiny, feather, chunky, pineapple] = useDonkStore(
-    useShallow((state) => [state.tiny, state.feather, state.chunky, state.pineapple])
+  const door1 = useSwitchsanityGun('forestBean1', 3)
+  const door2 = useSwitchsanityGun('forestBean2', 4)
+  const [bananaport, removeBarriers] = useDonkStore(
+    useShallow((state) => [state.bananaportOpen, state.removeBarriers])
   )
-  return inStage && tiny && feather && chunky && pineapple
+  return inStage && (bananaport == 2 || removeBarriers.forestBeanstalk || (door1 && door2))
 }
 
 /**
  * Can we access the Owl Tree in Forest?
- * @todo Handle Switchsanity (any gun)
  * @returns true if we can access the Owl Tree in Forest.
  */
 export const useForestOwl = (): boolean => {
   const inStage = usePlayForest()
-  const [lanky, grape] = useDonkStore(useShallow((state) => [state.lanky, state.grape]))
-  return inStage && lanky && grape
+  const door = useSwitchsanityGun('forestOwlTree', 2)
+  const [bananaport, removeBarriers] = useDonkStore(
+    useShallow((state) => [state.bananaportOpen, state.removeBarriers])
+  )
+  return inStage && (bananaport == 2 || removeBarriers.forestOwlTree || door)
 }

@@ -4,6 +4,11 @@ import { useAnyGun, useAnyKong, useAnyMusic } from '@renderer/hooks/kongs'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import CastleShops from './shops'
+import DkMedal from './DkMedal'
+import DiddyMedal from './DiddyMedal'
+import LankyMedal from './LankyMedal'
+import TinyMedal from './TinyMedal'
+import ChunkyMedal from './ChunkyMedal'
 
 const CastleChecks: React.FC = () => {
   const inStage = usePlayCastle()
@@ -147,7 +152,7 @@ const CastleChecks: React.FC = () => {
         name="Castle Lanky Mausoleum"
         region="Castle Underground"
         canGetLogic={inStage && lanky && grape && sprint && vine}
-        canGetBreak={inStage && lanky && grape && (sprint || dk)}
+        canGetBreak={inStage && lanky && grape && (sprint || dk || diddy)}
       />
       <CastleCheck
         id={7023}
@@ -271,46 +276,11 @@ const CastleChecks: React.FC = () => {
         region="Castle Surroundings"
         canGetLogic={inStage && lanky && canSlam}
       />
-      <CastleCheck
-        id={7100}
-        name="Castle DK Medal"
-        region="Castle Medal Rewards"
-        canGetLogic={inStage && dk}
-      />
-      <CastleCheck
-        id={7101}
-        name="Castle Diddy Medal"
-        region="Castle Medal Rewards"
-        canGetLogic={
-          inStage &&
-          diddy &&
-          ((chunky && punch && canSlam && rocket) ||
-            (peanut && (canSlam || (charge && rocket) || (chunky && punch))))
-        }
-      />
-      <CastleCheck
-        id={7102}
-        name="Castle Lanky Medal"
-        region="Castle Medal Rewards"
-        canGetLogic={inStage && lanky && (canSlam || (grape && sprint))}
-        canGetBreak={inStage && lanky && (canSlam || (grape && dk))}
-      />
-      <CastleCheck
-        id={7103}
-        name="Castle Tiny Medal"
-        region="Castle Medal Rewards"
-        canGetLogic={inStage && tiny}
-      />
-      <CastleCheck
-        id={7104}
-        name="Castle Chunky Medal"
-        region="Castle Medal Rewards"
-        canGetLogic={
-          inStage &&
-          chunky &&
-          ((tree && canSlam && punch && barrel) || (pineapple && (punch || canSlam)))
-        }
-      />
+      <DkMedal />
+      <DiddyMedal />
+      <LankyMedal />
+      <TinyMedal />
+      <ChunkyMedal />
       <CastleCheck
         id={7105}
         name="Castle Boss"

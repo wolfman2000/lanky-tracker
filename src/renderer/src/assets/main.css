@@ -60,6 +60,7 @@ main > article:last-child {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     padding-inline-start: 0;
+    font-size: smaller;
     & > li {
       text-align: center;
       font-weight: bold;
@@ -132,13 +133,14 @@ main > article:last-child {
 
 .runtime-settings > div > span {
   cursor: pointer;
+  text-align: right;
 }
 
 main .grid {
   display: grid;
   grid-template-columns: 4fr 2.5fr 0.5fr;
   overflow-y: scroll;
-  height: calc(100vh - 7ex);
+  height: calc(100vh - 3ex);
 }
 
 .grid > .checked:nth-of-type(3n + 1) > span:first-child,
