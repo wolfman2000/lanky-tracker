@@ -24,7 +24,7 @@ const nextSlam = (num: number): number => clamp(num + 1)
 
 const prevSlam = (num: number): number => clamp(num - 1)
 
-const MathSelector: React.FC = () => {
+const SlamSelector: React.FC = () => {
   const [slam, setCount] = useDonkStore(useShallow((state) => [state.slam, state.setCount]))
 
   const handleNextLevel = (): void => {
@@ -58,4 +58,4 @@ const MathSelector: React.FC = () => {
   )
 }
 
-export default MathSelector
+export default SlamSelector

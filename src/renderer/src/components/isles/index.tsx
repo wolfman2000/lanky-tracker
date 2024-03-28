@@ -30,7 +30,6 @@ import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import { usePlayHelm } from '@renderer/hooks/helm'
 import IslesShops from './shops'
-import DirtAztec from './DirtAztec'
 import {
   useIslesKremAscent,
   useIslesKremTop,
@@ -40,10 +39,16 @@ import {
 import { usePlayJapes } from '@renderer/hooks/japes'
 import { usePlayAztec } from '@renderer/hooks/aztec'
 import { usePlayFactory } from '@renderer/hooks/factory'
-import { usePlayGalleon, useSlamGalleon } from '@renderer/hooks/galleon'
-import { usePlayForest } from '@renderer/hooks/forest'
+import { useSlamGalleon } from '@renderer/hooks/galleon'
 import { usePlayCaves } from '@renderer/hooks/caves'
 import { usePlayCastle } from '@renderer/hooks/castle'
+import ArenaPool from '../pools/Arenas'
+import ToughGoldenBanana from '../pools/ToughGoldenBanana'
+import DirtLocations from './Dirt'
+import KasplatLocations from './Kasplats'
+import CompanyPool from '../pools/Company'
+import FairyLocations from './Fairies'
+import CrateLocations from './Crates'
 
 const IsleChecks: React.FC = () => {
   const [
@@ -56,11 +61,10 @@ const IsleChecks: React.FC = () => {
     slam,
     vine,
     orange,
-    sniper,
-    camera,
-    shockwave,
     key4,
-    fairies
+    fairies,
+    medals,
+    jetpacCount
   ] = useDonkStore(
     useShallow((state) => [
       state.dk,
@@ -72,11 +76,10 @@ const IsleChecks: React.FC = () => {
       state.slam,
       state.vine,
       state.orange,
-      state.sniper,
-      state.camera,
-      state.shockwave,
       state.key4,
-      state.fairies
+      state.fairies,
+      state.bananaMedals,
+      state.jetpacCount
     ])
   )
   const anyKong = useAnyKong()
@@ -103,7 +106,6 @@ const IsleChecks: React.FC = () => {
   const playFactory = usePlayFactory()
   const playCaves = usePlayCaves()
   const playCastle = usePlayCastle()
-  const playGalleon = usePlayGalleon()
   const islesUpper = useIslesUpper()
   const feather = useFeather()
   const islesKremTop = useIslesKremTop()
@@ -113,7 +115,6 @@ const IsleChecks: React.FC = () => {
   const triangle = useTriangle()
   const charge = useCharge()
   const playJapes = usePlayJapes()
-  const playForest = usePlayForest()
   const playAztec = usePlayAztec()
   const playHelm = usePlayHelm()
   const slamGalleon = useSlamGalleon()
@@ -240,117 +241,39 @@ const IsleChecks: React.FC = () => {
         canGetLogic={playHelm && gone && vine}
         canGetBreak={playHelm && gone && tiny && twirl}
       />
-      <IslesCheck
-        id={47}
-        name="Isles Rareware Banana"
-        region="Outer Isles"
-        canGetLogic={fairies >= 5 && mini}
-      />
-      <IslesCheck
-        id={50}
-        name="Isles Kasplat Helm Lobby"
-        region="Caves-Helm Lobbies"
-        canGetLogic={playHelm && sniper && coconut}
-        canGetBreak={playHelm && twirl}
-      />
-      <IslesCheck
-        id={51}
-        name="Isles Kasplat Castle Lobby"
-        region="Caves-Helm Lobbies"
-        canGetLogic={playCastle && coconut}
-      />
-      <IslesCheck
-        id={52}
-        name="Isles Kasplat Caves Lobby Punch"
-        region="Caves-Helm Lobbies"
-        canGetLogic={playCaves && punch}
-      />
-      <IslesCheck
-        id={53}
-        name="Isles Kasplat Factory Lobby Box"
-        region="Japes-Forest Lobbies"
-        canGetLogic={playFactory && punch}
-      />
-      <IslesCheck
-        id={54}
-        name="Isles Kasplat Galleon Lobby"
-        region="Japes-Forest Lobbies"
-        canGetLogic={playGalleon && anyKong}
-      />
-      <IslesCheck
-        id={70}
-        name="Isles Dirt Training Grounds Back"
-        region="Main Isle"
-        canGetLogic={anyKong && shockwave}
-      />
-      <IslesCheck
-        id={71}
-        name="Isles Dirt Banana Hoard"
-        region="Main Isle"
-        canGetLogic={anyKong && vine && shockwave}
-      />
-      <IslesCheck
-        id={72}
-        name="Isles Dirt Back of Prison"
-        region="Krem Isle"
-        canGetLogic={anyKong && shockwave}
-      />
-      <IslesCheck
-        id={73}
-        name="Isles Dirt Under Caves Lobby"
-        region="Main Isle"
-        canGetLogic={anyKong && shockwave}
-      />
-      <DirtAztec />
-      <IslesCheck
-        id={75}
-        name="Isles Dirt Cabin Isle"
-        region="Outer Isles"
-        canGetLogic={key4 && anyKong && shockwave}
-      />
-      <IslesCheck
-        id={76}
-        name="Isles Dirt Castle Lobby"
-        region="Caves-Helm Lobbies"
-        canGetLogic={playCastle && boulderTech && balloon && shockwave}
-        canGetBreak={playCastle && twirl && shockwave}
-      />
-      <IslesCheck
-        id={80}
-        name="Isles Outer Fairy"
-        region="Outer Isles"
-        canGetLogic={anyKong && camera}
-      />
-      <IslesCheck
-        id={81}
-        name="Isles Factory Fairy"
-        region="Japes-Forest Lobbies"
-        canGetLogic={playFactory && punch && camera}
-      />
-      <IslesCheck
-        id={82 /* TODO: Switchsanity */}
-        name="Isles Forest Fairy"
-        region="Japes-Forest Lobbies"
-        canGetLogic={playForest && tiny && feather && camera}
-      />
-      <IslesCheck
-        id={83}
-        name="Isles Krem Fairy"
-        region="Krem Isle"
-        canGetLogic={islesKremTop && camera}
-      />
-      <IslesCheck
-        id={90}
-        name="Isles Snide Arena"
-        region="Krem Isle"
-        canGetLogic={islesKremAscent && boulderTech}
-      />
-      <IslesCheck
-        id={91}
-        name="Isles Forest Arena"
-        region="Outer Isles"
-        canGetLogic={key4 && allGun && gone}
-      />
+      <ToughGoldenBanana>
+        <IslesCheck
+          id={47}
+          name="Isles Rareware Banana"
+          region="Outer Isles"
+          canGetLogic={fairies >= 5 && mini}
+        />
+      </ToughGoldenBanana>
+      <KasplatLocations />
+      <CrateLocations />
+      <DirtLocations />
+      <FairyLocations />
+      <ArenaPool>
+        <IslesCheck
+          id={90}
+          name="Isles Snide Arena"
+          region="Krem Isle"
+          canGetLogic={islesKremAscent && boulderTech}
+        />
+        <IslesCheck
+          id={91}
+          name="Isles Forest Arena"
+          region="Outer Isles"
+          canGetLogic={key4 && allGun && gone}
+        />
+      </ArenaPool>
+      <CompanyPool>
+        <IslesCheck
+          id={105}
+          name="Cranky Jetpac Game"
+          canGetLogic={anyKong && medals >= jetpacCount}
+        />
+      </CompanyPool>
       <IslesShops />
     </div>
   )

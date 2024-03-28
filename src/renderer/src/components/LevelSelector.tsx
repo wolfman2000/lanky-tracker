@@ -55,8 +55,6 @@ const nextLevel = (level: Level): Level => {
     case 'Caves':
       return 'Castle'
     case 'Castle':
-      return 'Helm'
-    case 'Helm':
       return ''
     default:
       return 'Japes'
@@ -79,15 +77,15 @@ const prevLevel = (level: Level): Level => {
       return 'Forest'
     case 'Castle':
       return 'Caves'
-    case 'Helm':
-      return 'Castle'
     default:
-      return 'Helm'
+      return 'Castle'
   }
 }
 
 const LevelSelector: React.FC<LevelSelectorProps> = ({ storeKey }) => {
-  const [level, setLevel] = useDonkStore(useShallow((state) => [state[storeKey], state.setLevel]))
+  const [level, setLevel] = useDonkStore(
+    useShallow((state) => [state[storeKey] as Level, state.setLevel])
+  )
   const lvlNum = Number.parseInt(storeKey.slice(5), 10)
 
   const handleNextLevel = (): void => {
@@ -108,16 +106,19 @@ const LevelSelector: React.FC<LevelSelectorProps> = ({ storeKey }) => {
     }
   }
 
+  const levelTitle = level !== '' ? level : 'Unknown'
+
   return (
-    <div>
+    <>
       <img
+        title={levelTitle}
         height={24}
         src={levelToIcon(level)}
         onClick={handleNextLevel}
         onAuxClick={handlePrevLevel}
         onWheel={handleWheel}
       />
-    </div>
+    </>
   )
 }
 

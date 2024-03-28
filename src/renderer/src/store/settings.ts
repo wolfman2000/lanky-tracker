@@ -27,24 +27,30 @@ export const initialSettings: SettingState = {
     forestOwlTree: 2
   },
   cbCount: 40,
-  coloredBananaShuffle: false,
+  shuffleColoredBananas: false,
   jetpacCount: 15,
   fairyCount: 5,
   bananaportOpen: 1,
   forestTime: 0,
   galleonHighTide: false,
-  shopShuffle: true,
-  dirtShuffle: false,
-  rainbowCoinShuffle: true,
-  crownShuffle: true,
-  arenaShuffle: false,
-  goldBananaShuffle: true,
-  blueprintShuffle: true,
-  kasplatShuffle: false,
-  fairyShuffle: false,
-  fairyLocationShuffle: false,
+  poolShops: true,
+  poolMisc: true,
+  poolKeys: true,
+  shuffleDirt: false,
+  poolRainbowCoins: true,
+  poolCrowns: true,
+  poolBananaMedals: true,
+  shuffleArenas: false,
+  poolGoldBananas: true,
+  poolToughBananas: true,
+  poolBlueprints: true,
+  shuffleKasplats: false,
+  poolFairies: false,
+  poolCrates: false,
+  shuffleCrates: false,
+  shuffleFairies: false,
   autoBonus: false,
-  companyCoinShuffle: true,
+  poolCompanyCoins: true,
   removeBarriers: {
     japesCoconutGates: false,
     japesHiveGate: false,
@@ -81,6 +87,20 @@ const settingSlice: StateCreator<AllSlice, [], [], SettingSlice> = (set) => {
         state = {
           ...state,
           ...target
+        }
+        return state
+      })
+    },
+    setSwitchsanity: (id, val): void => {
+      set((state) => {
+        const target: Record<string, number> = {}
+        target[id] = val
+        state = {
+          ...state,
+          switchsanitySwitches: {
+            ...state.switchsanitySwitches,
+            ...target
+          }
         }
         return state
       })

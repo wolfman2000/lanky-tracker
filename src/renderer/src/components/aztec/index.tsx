@@ -17,6 +17,14 @@ import DiddyMedal from './DiddyMedal'
 import LankyMedal from './LankyMedal'
 import TinyMedal from './TinyMedal'
 import ChunkyMedal from './ChunkyMedal'
+import ArenaPool from '../pools/Arenas'
+import BananaMedalPool from '../pools/BananaMedals'
+import ToughGoldenBanana from '../pools/ToughGoldenBanana'
+import DirtLocations from './Dirt'
+import KasplatLocations from './Kasplats'
+import BossPool from '../pools/Bosses'
+import FairyLocations from './Fairies'
+import CrateLocations from './Crates'
 
 const AztecChecks: React.FC = () => {
   const aztecFront = useAztecFront()
@@ -51,9 +59,7 @@ const AztecChecks: React.FC = () => {
     pineapple,
     triangle,
     hunky,
-    dive,
-    shockwave,
-    camera
+    dive
   ] = useDonkStore(
     useShallow((state) => [
       state.dk,
@@ -77,9 +83,7 @@ const AztecChecks: React.FC = () => {
       state.pineapple,
       state.triangle,
       state.hunky,
-      state.dive,
-      state.shockwave,
-      state.camera
+      state.dive
     ])
   )
   return (
@@ -126,13 +130,15 @@ const AztecChecks: React.FC = () => {
         canGetLogic={aztecBack.in && diddy && charge && rocket}
         canGetBreak={aztecBack.out && diddy && charge && rocket}
       />
-      <AztecCheck
-        id={2012}
-        name="Aztec Diddy Vulture Race"
-        region="Aztec Oasis And Totem Area"
-        canGetLogic={aztecBack.in && diddy && rocket}
-        canGetBreak={aztecBack.out && diddy && rocket}
-      />
+      <ToughGoldenBanana>
+        <AztecCheck
+          id={2012}
+          name="Aztec Diddy Vulture Race"
+          region="Aztec Oasis And Totem Area"
+          canGetLogic={aztecBack.in && diddy && rocket}
+          canGetBreak={aztecBack.out && diddy && rocket}
+        />
+      </ToughGoldenBanana>
       <AztecCheck
         id={2013}
         name="Aztec Diddy 5 Door Temple"
@@ -182,13 +188,15 @@ const AztecChecks: React.FC = () => {
         canGetLogic={aztec5Door.in && tiny && feather}
         canGetBreak={aztec5Door.out && tiny && feather}
       />
-      <AztecCheck
-        id={2032}
-        name="Aztec Tiny Beetle Race"
-        region="Aztec Oasis And Totem Area"
-        canGetLogic={aztecBack.in && diddy && charge && rocket && tiny && mini && sax}
-        canGetBreak={aztecBack.out && diddy && charge && rocket && tiny && mini && sax}
-      />
+      <ToughGoldenBanana>
+        <AztecCheck
+          id={2032}
+          name="Aztec Tiny Beetle Race"
+          region="Aztec Oasis And Totem Area"
+          canGetLogic={aztecBack.in && diddy && charge && rocket && tiny && mini && sax}
+          canGetBreak={aztecBack.out && diddy && charge && rocket && tiny && mini && sax}
+        />
+      </ToughGoldenBanana>
       <AztecCheck
         id={2033 /* TODO: Bananaport Logic */}
         name="Aztec Tiny Llama Temple"
@@ -224,109 +232,35 @@ const AztecChecks: React.FC = () => {
         canGetLogic={aztec5Door.in && chunky && pineapple}
         canGetBreak={aztec5Door.out && chunky && pineapple}
       />
-      <AztecCheck
-        id={2050}
-        name="Aztec Kasplat Behind DK Stone Door"
-        region="Various Aztec Tunnels"
-        canGetLogic={aztecFront.in && dk && coconut && (strong || (tiny && twirl))}
-        canGetBreak={aztecFront.out && dk && coconut}
-      />
-      <AztecCheck
-        id={2051}
-        name="Aztec Kasplat On Tiny Temple"
-        region="Aztec Oasis And Totem Area"
-        canGetLogic={aztecFront.in && diddy && rocket}
-        canGetBreak={aztecFront.out && diddy && rocket}
-      />
-      <AztecCheck
-        id={2052 /* TODO: Bananaport Logic */}
-        name="Aztec Kasplat Llama Temple Lava"
-        region="Llama Temple"
-        canGetLogic={llama.in && tiny && mini}
-        canGetBreak={llama.out && tiny && mini}
-      />
-      <AztecCheck
-        id={2053}
-        name="Aztec Kasplat Hunky Chunky Barrel"
-        region="Various Aztec Tunnels"
-        canGetLogic={aztecBack.in}
-        canGetBreak={aztecBack.out}
-      />
-      <AztecCheck
-        id={2054}
-        name="Aztec Kasplat Chunky 5-Door Temple"
-        region="5 Door Temple"
-        canGetLogic={aztec5Door.in && chunky && pineapple}
-        canGetBreak={aztec5Door.out && chunky && pineapple}
-      />
-      <AztecCheck
-        id={2060}
-        name="Aztec Crate Llama Interior"
-        region="Llama Temple"
-        canGetLogic={llama.in}
-        canGetBreak={llama.out}
-      />
-      <AztecCheck
-        id={2061}
-        name="Aztec Crate Llama Exterior"
-        region="Aztec Oasis And Totem Area"
-        canGetLogic={aztecBack.in && diddy && rocket}
-        canGetBreak={aztecBack.out && diddy && rocket}
-      />
-      <AztecCheck
-        id={2062}
-        name="Aztec Crate Gongs"
-        region="Aztec Oasis And Totem Area"
-        canGetLogic={aztecBack.in}
-        canGetBreak={aztecBack.out}
-      />
-      <AztecCheck
-        id={2070}
-        name="Aztec Dirt Oasis"
-        region="Aztec Oasis And Totem Area"
-        canGetLogic={aztecFront.in && shockwave}
-        canGetBreak={aztecFront.out && shockwave}
-      />
-      <AztecCheck
-        id={2071}
-        name="Aztec Dirt Chunky Temple"
-        region="5 Door Temple"
-        canGetLogic={aztec5Door.in && chunky && pineapple && shockwave}
-        canGetBreak={aztec5Door.out && chunky && pineapple && shockwave}
-      />
-      <AztecCheck
-        id={2080}
-        name="Aztec Fairy Llama Temple"
-        region="Llama Temple"
-        canGetLogic={llama.in && camera}
-        canGetBreak={llama.out && camera}
-      />
-      <AztecCheck
-        id={2081}
-        name="Aztec Fairy 5 Door Temple"
-        region="5 Door Temple"
-        canGetLogic={aztec5Door.in && tiny && feather && mini && camera}
-        canGetBreak={aztec5Door.out && tiny && feather && mini && camera}
-      />
-      <AztecCheck
-        id={2090}
-        name="Aztec Arena"
-        region="Tiny Temple"
-        canGetLogic={templeTiny.in && dive && canSlam && lanky && grape}
-        canGetBreak={templeTiny.out && dive && canSlam && lanky && anyGun}
-      />
-      <DkMedal />
-      <DiddyMedal />
-      <LankyMedal />
-      <TinyMedal />
-      <ChunkyMedal />
-      <AztecCheck
-        id={1105}
-        name="Aztec Boss"
-        region="Troff 'N' Scoff"
-        canGetLogic={aztecFront.in && anyKong}
-        canGetBreak={aztecFront.out && anyKong}
-      />
+      <KasplatLocations />
+      <CrateLocations />
+      <DirtLocations />
+      <FairyLocations />
+      <ArenaPool>
+        <AztecCheck
+          id={2090}
+          name="Aztec Arena"
+          region="Tiny Temple"
+          canGetLogic={templeTiny.in && dive && canSlam && lanky && grape}
+          canGetBreak={templeTiny.out && dive && canSlam && lanky && anyGun}
+        />
+      </ArenaPool>
+      <BananaMedalPool>
+        <DkMedal />
+        <DiddyMedal />
+        <LankyMedal />
+        <TinyMedal />
+        <ChunkyMedal />
+      </BananaMedalPool>
+      <BossPool>
+        <AztecCheck
+          id={1105}
+          name="Aztec Boss"
+          region="Troff 'N' Scoff"
+          canGetLogic={aztecFront.in && anyKong}
+          canGetBreak={aztecFront.out && anyKong}
+        />
+      </BossPool>
       <AztecShops />
     </div>
   )

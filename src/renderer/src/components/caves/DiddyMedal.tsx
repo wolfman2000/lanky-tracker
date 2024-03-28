@@ -1,37 +1,23 @@
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import CavesCheck from './CavesCheck'
-import { useCavesIgloo, usePlayCaves } from '@renderer/hooks/caves'
+import { useCavesIgloo, useCavesMiniFunky, usePlayCaves } from '@renderer/hooks/caves'
+import { logicBreak } from '@renderer/hooks/world'
 
 const DiddyMedal: React.FC = () => {
   const inStage = usePlayCaves()
   const igloo = useCavesIgloo()
+  const miniFunky = useCavesMiniFunky()
 
-  const [
-    cbCount,
-    coloredBananaShuffle,
-    kong,
-    gun,
-    music,
-    crystal,
-    pad,
-    bananaport,
-    tiny,
-    twirl,
-    mini
-  ] = useDonkStore(
+  const [cbCount, coloredBananaShuffle, kong, gun, music, crystal, pad] = useDonkStore(
     useShallow((state) => [
       state.cbCount,
-      state.coloredBananaShuffle,
+      state.shuffleColoredBananas,
       state.diddy,
       state.peanut,
       state.guitar,
       state.rocket,
-      state.spring,
-      state.bananaportOpen,
-      state.tiny,
-      state.twirl,
-      state.mini
+      state.spring
     ])
   )
 
@@ -51,7 +37,7 @@ const DiddyMedal: React.FC = () => {
     currLogic += 10 // two bunches that rocket expects.
   }
 
-  if (crystal && (bananaport == 2 || (tiny && twirl && mini))) {
+  if (miniFunky.in && crystal) {
     currLogic += 10
   }
   if (music) {
@@ -64,7 +50,7 @@ const DiddyMedal: React.FC = () => {
     }
   }
 
-  if (bananaport == 2 || (tiny && mini)) {
+  if (logicBreak(miniFunky)) {
     currBreak += 10
   }
   if (music) {

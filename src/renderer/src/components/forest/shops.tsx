@@ -5,16 +5,25 @@ import { useForestBean, usePlayForest } from '@renderer/hooks/forest'
 
 /**
  * Get the list of potential shuffled locations from the shops.
- * @todo Don't render anything if this is vanilla.
  * @returns The forest shop shuffled items.
  */
 const ForestShops: React.FC = () => {
-  const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
-    useShallow((state) => [state.dk, state.diddy, state.lanky, state.tiny, state.chunky])
+  const [dk, diddy, lanky, tiny, chunky, poolShops] = useDonkStore(
+    useShallow((state) => [
+      state.dk,
+      state.diddy,
+      state.lanky,
+      state.tiny,
+      state.chunky,
+      state.poolShops
+    ])
   )
   const anyKong = dk || diddy || lanky || tiny || chunky
   const inStage = usePlayForest()
   const beanstalk = useForestBean()
+  if (!poolShops) {
+    return null
+  }
 
   return (
     <>

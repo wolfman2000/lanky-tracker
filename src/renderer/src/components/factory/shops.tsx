@@ -4,12 +4,22 @@ import { useShallow } from 'zustand/react/shallow'
 import FactoryCheck from './FactoryCheck'
 
 const FactoryShops: React.FC = () => {
-  const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
-    useShallow((state) => [state.dk, state.diddy, state.lanky, state.tiny, state.chunky])
+  const [dk, diddy, lanky, tiny, chunky, poolShops] = useDonkStore(
+    useShallow((state) => [
+      state.dk,
+      state.diddy,
+      state.lanky,
+      state.tiny,
+      state.chunky,
+      state.poolShops
+    ])
   )
   const anyKong = dk || diddy || lanky || tiny || chunky
   const inStage = usePlayFactory()
   const testing = useFactoryTesting()
+  if (!poolShops) {
+    return null
+  }
 
   return (
     <>

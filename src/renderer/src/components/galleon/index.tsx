@@ -2,7 +2,6 @@ import {
   useGalleonCannon,
   useGalleonHighTide,
   useGalleonLighthouseArea,
-  useGalleonLowTide,
   useGalleonOutskirts,
   useGalleonTreasureRoom,
   usePlayGalleon,
@@ -18,6 +17,15 @@ import DiddyMedal from './DiddyMedal'
 import LankyMedal from './LankyMedal'
 import TinyMedal from './TinyMedal'
 import ChunkyMedal from './ChunkyMedal'
+import ArenaPool from '../pools/Arenas'
+import BananaMedalPool from '../pools/BananaMedals'
+import ToughGoldenBanana from '../pools/ToughGoldenBanana'
+import DirtLocations from './Dirt'
+import MiscPool from '../pools/Misc'
+import KasplatLocations from './Kasplats'
+import BossPool from '../pools/Bosses'
+import FairyLocations from './Fairies'
+import CrateLocations from './Crates'
 
 const GalleonChecks: React.FC = () => {
   const inStage = usePlayGalleon()
@@ -28,7 +36,6 @@ const GalleonChecks: React.FC = () => {
   const cannon = useGalleonCannon()
   const boulderTech = useBoulderTech()
   const highTide = useGalleonHighTide()
-  const lowTide = useGalleonLowTide()
 
   const [
     dk,
@@ -50,9 +57,7 @@ const GalleonChecks: React.FC = () => {
     slam,
     pearls,
     vine,
-    dive,
-    shockwave,
-    camera
+    dive
   ] = useDonkStore(
     useShallow((state) => [
       state.dk,
@@ -74,9 +79,7 @@ const GalleonChecks: React.FC = () => {
       state.slam,
       state.pearls,
       state.vine,
-      state.dive,
-      state.shockwave,
-      state.camera
+      state.dive
     ])
   )
 
@@ -96,13 +99,15 @@ const GalleonChecks: React.FC = () => {
         canGetLogic={lighthouseArea && highTide && dk && blast && outskirts}
         canGetBreak={lighthouseArea && dk && blast && outskirts}
       />
-      <GalleonCheck
-        id={4003}
-        name="Galleon DK Seal Race"
-        region="Shipyard Outskirts"
-        canGetLogic={lighthouseArea && highTide && dk && blast && outskirts}
-        canGetBreak={lighthouseArea && dk && blast && outskirts}
-      />
+      <ToughGoldenBanana>
+        <GalleonCheck
+          id={4003}
+          name="Galleon DK Seal Race"
+          region="Shipyard Outskirts"
+          canGetLogic={lighthouseArea && highTide && dk && blast && outskirts}
+          canGetBreak={lighthouseArea && dk && blast && outskirts}
+        />
+      </ToughGoldenBanana>
       <GalleonCheck
         id={4004}
         name="Galleon DK 5 Door Ship"
@@ -185,13 +190,15 @@ const GalleonChecks: React.FC = () => {
         region="5 Door Ship"
         canGetLogic={outskirts && tiny && sax && dive}
       />
-      <GalleonCheck
-        id={4034}
-        name="Galleon Tiny Treasure Chest Clams x5"
-        region="Treasure Room"
-        canGetLogic={treasure.in && tiny && mini}
-        canGetBreak={treasure.out && tiny && mini}
-      />
+      <MiscPool>
+        <GalleonCheck
+          id={4034}
+          name="Galleon Tiny Treasure Chest Clams x5"
+          region="Treasure Room"
+          canGetLogic={treasure.in && tiny && mini}
+          canGetBreak={treasure.out && tiny && mini}
+        />
+      </MiscPool>
       <GalleonCheck
         id={4040}
         name="Galleon Chunky Chest"
@@ -217,80 +224,33 @@ const GalleonChecks: React.FC = () => {
         region="5 Door Ship"
         canGetLogic={lighthouseArea && outskirts && dive && chunky && triangle}
       />
-      <GalleonCheck
-        id={4050}
-        name="Galleon Kasplat Diddy Gold Tower"
-        region="Treasure Room"
-        canGetLogic={treasure.in && diddy && spring}
-        canGetBreak={treasure.out && (diddy || tiny) && (lanky || chunky)}
-      />
-      <GalleonCheck
-        id={4051}
-        name="Galleon Kasplat Lighthouse Alcove"
-        region="Lighthouse Area"
-        canGetLogic={lighthouseArea && lowTide}
-      />
-      <GalleonCheck
-        id={4052}
-        name="Galleon Kasplat Cannon Game Room"
-        region="Galleon Caverns"
-        canGetLogic={cannon && highTide}
-        canGetBreak={cannon}
-      />
-      <GalleonCheck
-        id={4053 /* TODO: Tide and bananaport logic. */}
-        name="Galleon Kasplat Past Vines"
-        region="Galleon Caverns"
-        canGetLogic={inStage && vine}
-      />
-      <GalleonCheck
-        id={4054}
-        name="Galleon Kasplat Musical Cactus"
-        region="Shipyard Outskirts"
-        canGetLogic={outskirts}
-      />
-      <GalleonCheck
-        id={4060}
-        name="Galleon Crate Cactus"
-        region="Shipyard Outskirts"
-        canGetLogic={outskirts}
-      />
-      <GalleonCheck
-        id={4070}
-        name="Galleon Dirt Lighthouse"
-        region="Lighthouse Area"
-        canGetLogic={lighthouseArea && highTide && canSlam && dk && shockwave}
-        canGetBreak={lighthouseArea && canSlam && dk && shockwave}
-      />
-      <GalleonCheck
-        id={4080}
-        name="Galleon Fairy Chest"
-        region="Galleon Caverns"
-        canGetLogic={inStage && chunky && punch && camera}
-      />
-      <GalleonCheck
-        id={4081}
-        name="Galleon Fairy 5 Door Ship"
-        region="5 Door Ship"
-        canGetLogic={outskirts && tiny && sax && dive}
-      />
-      <GalleonCheck
-        id={4090}
-        name="Galleon Arena"
-        region="Galleon Caverns"
-        canGetLogic={inStage && chunky && punch}
-      />
-      <DkMedal />
-      <DiddyMedal />
-      <LankyMedal />
-      <TinyMedal />
-      <ChunkyMedal />
-      <GalleonCheck
-        id={4105}
-        name="Galleon Boss"
-        region="Troff 'N' Scoff"
-        canGetLogic={(inStage && vine) || (dive && (lighthouseArea || outskirts))}
-      />
+      <KasplatLocations />
+      <CrateLocations />
+      <DirtLocations />
+      <FairyLocations />
+      <ArenaPool>
+        <GalleonCheck
+          id={4090}
+          name="Galleon Arena"
+          region="Galleon Caverns"
+          canGetLogic={inStage && chunky && punch}
+        />
+      </ArenaPool>
+      <BananaMedalPool>
+        <DkMedal />
+        <DiddyMedal />
+        <LankyMedal />
+        <TinyMedal />
+        <ChunkyMedal />
+      </BananaMedalPool>
+      <BossPool>
+        <GalleonCheck
+          id={4105}
+          name="Galleon Boss"
+          region="Troff 'N' Scoff"
+          canGetLogic={(inStage && vine) || (dive && (lighthouseArea || outskirts))}
+        />
+      </BossPool>
       <GalleonShops />
     </div>
   )

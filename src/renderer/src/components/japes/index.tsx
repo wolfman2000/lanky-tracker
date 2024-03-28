@@ -4,7 +4,6 @@ import {
   useAnyMusic,
   useBlast,
   useBoulderTech,
-  useCamera,
   useCharge,
   useChunky,
   useCoconut,
@@ -18,7 +17,6 @@ import {
   useOrange,
   usePeanut,
   usePineapple,
-  useShockwave,
   useStand,
   useTiny,
   useTwirl,
@@ -31,8 +29,7 @@ import {
   usePlayJapes,
   useSlamJapes,
   useJapesPainting,
-  useJapesUnderground,
-  useJapesPaintingOutside
+  useJapesUnderground
 } from '@renderer/hooks/japes'
 import JapesCheck from './JapesCheck'
 import JapesShops from './shops'
@@ -41,6 +38,14 @@ import DiddyMedal from './DiddyMedal'
 import LankyMedal from './LankyMedal'
 import TinyMedal from './TinyMedal'
 import ChunkyMedal from './ChunkyMedal'
+import ArenaPool from '../pools/Arenas'
+import BananaMedalPool from '../pools/BananaMedals'
+import ToughGoldenBanana from '../pools/ToughGoldenBanana'
+import DirtLocations from './Dirt'
+import KasplatLocations from './Kasplats'
+import BossPool from '../pools/Bosses'
+import FairyLocations from './Fairies'
+import CrateLocations from './Crates'
 const JapesChecks: React.FC = () => {
   const playJapes = usePlayJapes()
   const anyKong = useAnyKong()
@@ -69,9 +74,6 @@ const JapesChecks: React.FC = () => {
   const boulderTech = useBoulderTech()
   const hunky = useHunky()
   const pineapple = usePineapple()
-  const shockwave = useShockwave()
-  const camera = useCamera()
-  const japesPaintingOutside = useJapesPaintingOutside()
   const japesPaintingInside = useJapesPainting()
   const japesUnder = useJapesUnderground()
   return (
@@ -118,13 +120,15 @@ const JapesChecks: React.FC = () => {
         region="Japes Lowlands"
         canGetLogic={playJapes && diddy && peanut}
       />
-      <JapesCheck
-        id={1013}
-        name="Japes Diddy Minecarts"
-        region="Japes Caves And Mines"
-        canGetLogic={japesMine && charge}
-        canGetBreak={japesMine && (lanky || chunky)}
-      />
+      <ToughGoldenBanana>
+        <JapesCheck
+          id={1013}
+          name="Japes Diddy Minecarts"
+          region="Japes Caves And Mines"
+          canGetLogic={japesMine && charge}
+          canGetBreak={japesMine && (lanky || chunky)}
+        />
+      </ToughGoldenBanana>
       <JapesCheck
         id={1020}
         name="Japes Lanky Caged Banana"
@@ -201,87 +205,34 @@ const JapesChecks: React.FC = () => {
         canGetLogic={japesUnder && pineapple && vine}
         canGetBreak={japesUnder && (dk || (tiny && twirl) || ((tiny || diddy) && vine))}
       />
-      <JapesCheck
-        id={1050}
-        name="Japes Kasplat Hive Tunnel Lower"
-        region="Hive Tunnel Area"
-        canGetLogic={playJapes && anyKong}
-      />
-      <JapesCheck
-        id={1051}
-        name="Japes Kasplat Near Painting Room"
-        region="Stormy Tunnel Area"
-        canGetLogic={playJapes && anyKong}
-      />
-      <JapesCheck
-        id={1052}
-        name="Japes Kasplat By Lanky Slope Bonus"
-        region="Stormy Tunnel Area"
-        canGetLogic={playJapes && anyKong}
-      />
-      <JapesCheck
-        id={1053}
-        name="Japes Kasplat Hive Tunnel Upper"
-        region="Hive Tunnel Area"
-        canGetLogic={playJapes && anyKong}
-      />
-      <JapesCheck
-        id={1054}
-        name="Japes Kasplat Underground"
-        region="Japes Caves And Mines"
-        canGetLogic={japesUnder && pineapple && vine}
-        canGetBreak={japesUnder && (dk || (tiny && twirl) || ((tiny || diddy) && vine))}
-      />
-      <JapesCheck
-        id={1060}
-        name="Japes Crate Mountain"
-        region="Japes Hillside"
-        canGetLogic={playJapes && anyKong}
-      />
-      <JapesCheck
-        id={1061}
-        name="Japes Crate Rambi"
-        region="Stormy Tunnel Area"
-        canGetLogic={japesRambi && anyKong}
-      />
-      <JapesCheck
-        id={1070}
-        name="Japes Dirt Painting Hill"
-        region="Japes Hillside"
-        canGetLogic={japesPaintingOutside.in && shockwave}
-        canGetBreak={japesPaintingOutside.out && shockwave}
-      />
-      <JapesCheck
-        id={1080}
-        name="Japes Fairy Rambi"
-        region="Stormy Tunnel Area"
-        canGetLogic={japesRambi && camera}
-      />
-      <JapesCheck
-        id={1081}
-        name="Japes Fairy Painting Room"
-        region="Japes Caves And Mines"
-        canGetLogic={japesSlam && japesPaintingInside.in && (anyGun || anyMusic) && camera}
-        canGetBreak={japesSlam && japesPaintingInside.out && (anyGun || anyMusic) && camera}
-      />
-      <JapesCheck
-        id={1090}
-        name="Japes Arena"
-        region="Japes Hillside"
-        canGetLogic={playJapes && anyKong}
-      />
-      <DkMedal />
-      <DiddyMedal />
-      <LankyMedal />
-      <TinyMedal />
-      <ChunkyMedal />
-      <JapesCheck
-        id={1105}
-        name="Japes Boss"
-        region="Troff 'N' Scoff"
-        canGetLogic={playJapes && anyKong && (vine || peanut || coconut)}
-        canGetBreak={playJapes && anyKong}
-      />
+      <KasplatLocations />
+      <CrateLocations />
+      <DirtLocations />
+      <FairyLocations />
+      <ArenaPool>
+        <JapesCheck
+          id={1090}
+          name="Japes Arena"
+          region="Japes Hillside"
+          canGetLogic={playJapes && anyKong}
+        />
+      </ArenaPool>
+      <BananaMedalPool>
+        <DkMedal />
+        <DiddyMedal />
+        <LankyMedal />
+        <TinyMedal />
+        <ChunkyMedal />
+      </BananaMedalPool>
+      <BossPool>
+        <JapesCheck
+          id={1105}
+          name="Japes Boss"
+          region="Troff 'N' Scoff"
+          canGetLogic={playJapes && anyKong && (vine || peanut || coconut)}
+          canGetBreak={playJapes && anyKong}
+        />
+      </BossPool>
       <JapesShops />
     </div>
   )

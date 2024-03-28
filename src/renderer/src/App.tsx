@@ -13,6 +13,7 @@ import CastleChecks from './components/castle'
 import FoolishHints from './components/hints'
 import ResetTracker from './components/ResetComponent'
 import RuntimeSettings from './components/RuntimeSettings'
+import SwitchsanitySelector from './components/Switchsanity'
 
 function App(): JSX.Element {
   /*
@@ -41,6 +42,7 @@ function App(): JSX.Element {
           <LevelTable />
           <FoolishHints />
           <RuntimeSettings />
+          <SwitchsanitySelector />
           <ResetTracker />
         </article>
         <article>
