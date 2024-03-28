@@ -66,7 +66,7 @@ const Shuffled: React.FC = () => {
 }
 
 const FairyLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.shuffleFairies))
+  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleFairies))
   const locations = shuffle ? <Shuffled /> : <Vanilla />
   return <FairyPool>{locations}</FairyPool>
 }

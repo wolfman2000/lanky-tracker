@@ -2,16 +2,24 @@ import { create, StateCreator } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 import { AllSlice } from './common'
-import levelSlice from './level'
+import coreSlice from './checks'
 import hintSlice from './hints'
+import levelSlice from './level'
 import settingSlice from './settings'
-import coreSlice from './core'
+import moveSlice from './moves'
+import consumablesSlice from './consumables'
+import switchSlice from './switchsanities'
+import barrierSlice from './barriers'
 
 const initializer: StateCreator<AllSlice, [['zustand/persist', unknown]], []> = (...d) => ({
   ...coreSlice(...d),
   ...settingSlice(...d),
   ...levelSlice(...d),
-  ...hintSlice(...d)
+  ...hintSlice(...d),
+  ...moveSlice(...d),
+  ...consumablesSlice(...d),
+  ...switchSlice(...d),
+  ...barrierSlice(...d)
 })
 
 /**

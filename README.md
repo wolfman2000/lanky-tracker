@@ -73,5 +73,6 @@ $ npm run build:linux
 - 2dos and Ballaam for creating and maintaining the randomizer.
 - Brian0255 for creating [Track-O-Matic](https://github.com/Brian0255/Track-O-Matic), a great tracker for KEVIN settings.
 - ElectricFortune for providing a map tracker to the community.
+- Spike_ssbu for blowing our minds and showing new sequence breaks.
 
 Keep on donkin' everyone.

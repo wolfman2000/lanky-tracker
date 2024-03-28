@@ -1,6 +1,7 @@
+import { useShallow } from 'zustand/react/shallow'
+
 import useDonkStore from '@renderer/store'
 import IslesCheck from './IslesCheck'
-import { useShallow } from 'zustand/react/shallow'
 
 /**
  * Gather the list of shuffled shop item locations in Isles.
@@ -9,12 +10,12 @@ import { useShallow } from 'zustand/react/shallow'
 const IslesShops: React.FC = () => {
   const [dk, diddy, lanky, tiny, chunky, poolShops] = useDonkStore(
     useShallow((state) => [
-      state.dk,
-      state.diddy,
-      state.lanky,
-      state.tiny,
-      state.chunky,
-      state.poolShops
+      state.moves.dk,
+      state.moves.diddy,
+      state.moves.lanky,
+      state.moves.tiny,
+      state.moves.chunky,
+      state.settings.poolShops
     ])
   )
   if (!poolShops) {

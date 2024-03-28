@@ -6,12 +6,12 @@ import { useShallow } from 'zustand/react/shallow'
 const CavesShops: React.FC = () => {
   const [dk, diddy, lanky, tiny, chunky, poolShops] = useDonkStore(
     useShallow((state) => [
-      state.dk,
-      state.diddy,
-      state.lanky,
-      state.tiny,
-      state.chunky,
-      state.poolShops
+      state.moves.dk,
+      state.moves.diddy,
+      state.moves.lanky,
+      state.moves.tiny,
+      state.moves.chunky,
+      state.settings.poolShops
     ])
   )
   const anyKong = dk || diddy || lanky || tiny || chunky

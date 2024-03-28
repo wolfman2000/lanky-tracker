@@ -1,23 +1,23 @@
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 
-import IsleChecks from './components/isles'
-import JapesChecks from './components/japes'
 import LevelTable from './components/LevelTable'
 import MoveTable from './components/MoveTable'
-import AztecChecks from './components/aztec'
-import FactoryChecks from './components/factory'
-import GalleonChecks from './components/galleon'
-import ForestChecks from './components/forest'
-import CavesChecks from './components/caves'
-import CastleChecks from './components/castle'
-import FoolishHints from './components/hints'
 import ResetTracker from './components/ResetComponent'
 import RuntimeSettings from './components/RuntimeSettings'
 import SwitchsanitySelector from './components/Switchsanity'
+import AztecChecks from './components/aztec'
+import CastleChecks from './components/castle'
+import CavesChecks from './components/caves'
+import FactoryChecks from './components/factory'
+import ForestChecks from './components/forest'
+import GalleonChecks from './components/galleon'
+import FoolishHints from './components/hints'
+import IsleChecks from './components/isles'
+import JapesChecks from './components/japes'
 
 function App(): JSX.Element {
   /*
-  const cbCount = useDonkStore((state) => state.cbCount)
+  const cbCount = useDonkStore((state) => state.settings.cbCount)
   const setCbCount = useDonkStore((state) => state.setCbCount)
 
   const handleCbCount = (evt: ChangeEvent<HTMLInputElement>): void => {

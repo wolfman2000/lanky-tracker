@@ -3,7 +3,7 @@ import { PropsWithChildren } from 'react'
 import { useShallow } from 'zustand/react/shallow'
 
 const ToughGoldenBanana: React.FC<PropsWithChildren> = ({ children }) => {
-  const pool = useDonkStore(useShallow((state) => state.poolToughBananas))
+  const pool = useDonkStore(useShallow((state) => state.settings.poolToughBananas))
   return pool ? <>{children}</> : null
 }
 

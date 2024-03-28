@@ -1,9 +1,10 @@
+import { useShallow } from 'zustand/react/shallow'
+
 import { useJapesPaintingOutside, usePlayJapes } from '@renderer/hooks/japes'
 import { useAnyKong, useShockwave } from '@renderer/hooks/kongs'
-import JapesCheck from './JapesCheck'
-import RainbowCoinPool from '../pools/RainbowCoins'
-import { useShallow } from 'zustand/react/shallow'
 import useDonkStore from '@renderer/store'
+import RainbowCoinPool from '../pools/RainbowCoins'
+import JapesCheck from './JapesCheck'
 
 const VanillaDirtLocations: React.FC = () => {
   const japesPaintingOutside = useJapesPaintingOutside()
@@ -42,7 +43,7 @@ const ShuffledDirtLocations: React.FC = () => {
 }
 
 const DirtLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.shuffleDirt))
+  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleDirt))
   const locations = shuffle ? <ShuffledDirtLocations /> : <VanillaDirtLocations />
   return <RainbowCoinPool>{locations}</RainbowCoinPool>
 }

@@ -9,46 +9,15 @@ type PearlRange = IntRange<0, 6>
 type CrownRange = IntRange<0, 11>
 type FairyRange = IntRange<0, 21>
 type ColoredBananaRange = IntRange<0, 101>
-type GoldBananaRange = IntRange<0, 202>
+export type GoldBananaRange = IntRange<0, 202>
 type BananaMedalRange = IntRange<0, 41>
 type RainbowCoinRange = IntRange<0, 17>
 type SlamRange = IntRange<0, 4>
 export type BananaportRange = IntRange<0, 3>
 export type KongRange = IntRange<0, 5>
 
-export interface CoreState {
-  /**
-   * How many pearls were found?
-   */
-  pearls: PearlRange
-  /**
-   * How many crowns were found?
-   */
-  crowns: CrownRange
-  /**
-   * Was the Rareware Coin found?
-   */
-  rareCoin: boolean
-  /**
-   * Was the Nintendo Coin found?
-   */
-  nintendoCoin: boolean
-  /**
-   * How many banana fairies were found?
-   */
-  fairies: FairyRange
-  /**
-   * How many golden bananas were found?
-   */
-  goldBananas: GoldBananaRange
-  /**
-   * How many Banana Medals were found?
-   */
-  bananaMedals: BananaMedalRange
-  /**
-   * How many Rainbow Coins were found?
-   */
-  rainbowCoins: RainbowCoinRange
+//#region Moves
+interface MoveCollection {
   /**
    * Was Donkey Kong found?
    */
@@ -172,18 +141,6 @@ export interface CoreState {
    */
   gone: boolean
   /**
-   * Were any slams found?
-   *
-   * These are progressive: value of 2 covers values of 1, and 3 covers 1 & 2.
-   */
-  slam: SlamRange
-  /**
-   * Was the bean found?
-   *
-   * This is a memetic item, but it has its use.
-   */
-  bean: boolean
-  /**
    * Was diving underwater found?
    */
   dive: boolean
@@ -216,19 +173,94 @@ export interface CoreState {
    */
   shockwave: boolean
   /**
+   * Were any slams found?
+   *
+   * These are progressive: value of 2 covers values of 1, and 3 covers 1 & 2.
+   */
+  slam: SlamRange
+}
+
+export interface MoveState {
+  moves: MoveCollection
+}
+
+interface MoveActions {
+  setMove: (item: string, val: boolean) => void
+  setSlam: (item: string, val: number) => void
+}
+
+export type MoveSlice = MoveState & MoveActions
+//#endregion
+
+//#region Consumables
+interface ConsumablesCollection {
+  /**
+   * How many pearls were found?
+   */
+  pearls: PearlRange
+  /**
+   * How many crowns were found?
+   */
+  crowns: CrownRange
+  /**
+   * Was the Rareware Coin found?
+   */
+  rareCoin: boolean
+  /**
+   * Was the Nintendo Coin found?
+   */
+  nintendoCoin: boolean
+  /**
+   * How many banana fairies were found?
+   */
+  fairies: FairyRange
+  /**
+   * How many golden bananas were found?
+   */
+  goldBananas: GoldBananaRange
+  /**
+   * How many Banana Medals were found?
+   */
+  bananaMedals: BananaMedalRange
+  /**
+   * How many Rainbow Coins were found?
+   */
+  rainbowCoins: RainbowCoinRange
+  /**
+   * Was the bean found?
+   *
+   * This is a memetic item, but it has its use.
+   */
+  bean: boolean
+}
+
+export interface ConsumablesState {
+  consumables: ConsumablesCollection
+}
+
+interface ConsumablesActions {
+  setConsumable: (item: string, val: boolean | number) => void
+}
+
+export type ConsumablesSlice = ConsumablesState & ConsumablesActions
+//#endregion
+
+//#region Checks
+export interface CheckState {
+  /**
    * Which checks have been found at this point?
    */
   checks: Record<number, boolean>
 }
 
-interface CoreActions {
-  setItem: (item: string, val: boolean) => void
-  setCount: (item: string, val: number) => void
+interface CheckActions {
   setCheck: (id: number, val: boolean) => void
 }
 
-export type CoreSlice = CoreState & CoreActions
+export type CheckSlice = CheckState & CheckActions
+//#endregion
 
+//#region Switchsanity
 interface SwitchsanitySwitches {
   /**
    * What instrument is needed to reveal the Rocket barrel in Isles?
@@ -327,33 +359,100 @@ interface SwitchsanitySwitches {
   forestBean2: KongRange
 }
 
-interface RemoveBarriers {
-  japesCoconutGates: boolean
-  japesHiveGate: boolean
-  aztecBack: boolean
-  aztec5DoorTemple: boolean
-  aztecLlamaTemple: boolean
-  factoryProduction: boolean
-  factoryTesting: boolean
-  galleonLighthouse: boolean
-  galleonOutskirts: boolean
-  galleonSeasick: boolean
-  forestBeanstalk: boolean
-  forestOwlTree: boolean
-  cavesIgloo: boolean
-}
-
-export interface SettingState {
-  /**
-   * Is Switchsanity turned on? Do we have to worry about this complex logic?
-   */
-  isSwitchsanity: BananaportRange
+export interface SwitchState {
   /**
    * The collection of switches that can be randomized.
    *
    * These are pre-filled with the normal values to keep the logic sane.
    */
   switchsanitySwitches: SwitchsanitySwitches
+}
+
+interface SwitchActions {
+  setSwitchsanity: (id: string, val: number) => void
+}
+
+export type SwitchSlice = SwitchState & SwitchActions
+//#endregion
+
+//#region Barriers to Remove
+interface RemoveBarriers {
+  /**
+   * Are the gates leading to the hillside tunnels already opened?
+   */
+  japesCoconutGates: boolean
+  /**
+   * Is the gate leading to the hive opened?
+   */
+  japesHiveGate: boolean
+  /**
+   * Is the back of Aztec available without needing an instrument?
+   */
+  aztecBack: boolean
+  /**
+   * Is the 5 door temple already opened without feeding a totem?
+   */
+  aztec5DoorTemple: boolean
+  /**
+   * Is the Llama temple available for the three chosen Kongs?
+   */
+  aztecLlamaTemple: boolean
+  /**
+   * Is the Production room already turned on?
+   */
+  factoryProduction: boolean
+  /**
+   * Can you immediately go into Testing?
+   */
+  factoryTesting: boolean
+  /**
+   * Is accessing the Lighthouse already possible?
+   */
+  galleonLighthouse: boolean
+  /**
+   * Are the Galleon Outskirts already opened?
+   */
+  galleonOutskirts: boolean
+  /**
+   * Is the Galleon Seasick ship already out?
+   */
+  galleonSeasick: boolean
+  /**
+   * Is planting the bean immediately possible?
+   */
+  forestBeanstalk: boolean
+  /**
+   * Is the owl tree gate opened immediately?
+   */
+  forestOwlTree: boolean
+  /**
+   * Is the igloo open for music instruments right away?
+   *
+   * If not, Rocket is required.
+   */
+  cavesIgloo: boolean
+}
+
+export interface BarrierState {
+  /**
+   * Are any barriers removed before the seed starts?
+   */
+  removeBarriers: RemoveBarriers
+}
+
+interface BarrierActions {
+  setBarrier: (id: string, val: boolean) => void
+}
+
+export type BarrierSlice = BarrierState & BarrierActions
+//#endregion
+
+//#region General Settings
+interface SettingCollection {
+  /**
+   * Is Switchsanity turned on? Do we have to worry about this complex logic?
+   */
+  isSwitchsanity: boolean
   /**
    * How many colored bananas to get the medal check?
    */
@@ -386,6 +485,17 @@ export interface SettingState {
    * Note that this can be a random check.
    */
   galleonHighTide: boolean
+  /**
+   * How far do we start in Helm?
+   * 0: Very Beginning
+   * 1: Machine Area
+   * 2: Doors at Top
+   */
+  helmAccess: BananaportRange
+  /**
+   * Are the slam switch strengths progressive based on the shuffled lobby location?
+   */
+  progressiveSlams: boolean
   /**
    * Are the shops contents shuffled?
    */
@@ -467,10 +577,6 @@ export interface SettingState {
    */
   poolKeys: boolean
   /**
-   * Are any barriers removed before the seed starts?
-   */
-  removeBarriers: RemoveBarriers
-  /**
    * Are switches progressive with each level?
    *
    * This depends on level shuffle.
@@ -481,7 +587,7 @@ export interface SettingState {
    *
    * Only the ones that affect logic should be placed in here.
    */
-  fastChecks: boolean | Record<string, boolean>
+  fastChecks: Record<string, boolean>
   /**
    * Are hard shooting checks enabled?
    */
@@ -494,14 +600,18 @@ export interface SettingState {
   openLobbies: boolean
 }
 
+export interface SettingState {
+  settings: SettingCollection
+}
+
 interface SettingActions {
-  setCbCount: (to: ColoredBananaRange) => void
   setSetting: (id: string, val: boolean | number) => void
-  setSwitchsanity: (id: string, val: number) => void
 }
 
 export type SettingSlice = SettingState & SettingActions
+//#endregion
 
+//#region Hints
 export interface HintState {
   /**
    * The collection of foolish hints identified within the game.
@@ -514,6 +624,7 @@ interface HintActions {
 }
 
 export type HintSlice = HintState & HintActions
+//#endregion
 
 export type Level =
   | ''
@@ -614,7 +725,14 @@ interface LevelActions {
 
 export type LevelSlice = LevelState & LevelActions
 
-export type AllSlice = CoreSlice & SettingSlice & LevelSlice & HintSlice
+export type AllSlice = CheckSlice &
+  MoveSlice &
+  ConsumablesSlice &
+  SwitchSlice &
+  BarrierSlice &
+  SettingSlice &
+  LevelSlice &
+  HintSlice
 
 export const donkResetFns = new Set<() => void>()
 

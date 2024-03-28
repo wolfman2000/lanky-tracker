@@ -2,31 +2,31 @@ import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import SwitchsanitySwitch from './SwitchsanitySwitch'
 
-import dkGunIcon from '../assets/images/dk_gun.png'
+import chunkyGunIcon from '../assets/images/chunky_gun.png'
 import diddyGunIcon from '../assets/images/diddy_gun.png'
+import dkGunIcon from '../assets/images/dk_gun.png'
 import lankyGunIcon from '../assets/images/lanky_gun.png'
 import tinyGunIcon from '../assets/images/tiny_gun.png'
-import chunkyGunIcon from '../assets/images/chunky_gun.png'
 
-import dkMusicIcon from '../assets/images/dk_inst.png'
+import chunkyMusicIcon from '../assets/images/chunky_inst.png'
 import diddyMusicIcon from '../assets/images/diddy_inst.png'
+import dkMusicIcon from '../assets/images/dk_inst.png'
 import lankyMusicIcon from '../assets/images/lanky_inst.png'
 import tinyMusicIcon from '../assets/images/tiny_inst.png'
-import chunkyMusicIcon from '../assets/images/chunky_inst.png'
 
-import dkKongIcon from '../assets/images/dk.png'
+import chunkyKongIcon from '../assets/images/chunky.png'
 import diddyKongIcon from '../assets/images/diddy.png'
+import dkKongIcon from '../assets/images/dk.png'
 import lankyKongIcon from '../assets/images/lanky.png'
 import tinyKongIcon from '../assets/images/tiny.png'
-import chunkyKongIcon from '../assets/images/chunky.png'
 
+import chunkyPadIcon from '../assets/images/chunkypad.png'
 import dkPadIcon from '../assets/images/dkpad.png'
 import lankyPadIcon from '../assets/images/lankypad.png'
 import tinyPadIcon from '../assets/images/tinypad.png'
-import chunkyPadIcon from '../assets/images/chunkypad.png'
 
-import dkMoveIcon from '../assets/images/dk_move.png'
 import diddyMoveIcon from '../assets/images/diddy_move.png'
+import dkMoveIcon from '../assets/images/dk_move.png'
 
 const allKong = [dkKongIcon, diddyKongIcon, lankyKongIcon, tinyKongIcon, chunkyKongIcon]
 const allGun = [dkGunIcon, diddyGunIcon, lankyGunIcon, tinyGunIcon, chunkyGunIcon]
@@ -34,7 +34,7 @@ const allMusic = [dkMusicIcon, diddyMusicIcon, lankyMusicIcon, tinyMusicIcon, ch
 
 const SwitchsanitySelector: React.FC = () => {
   const [isSwitchsanity, switches] = useDonkStore(
-    useShallow((state) => [state.isSwitchsanity, state.switchsanitySwitches])
+    useShallow((state) => [state.settings.isSwitchsanity, state.switchsanitySwitches])
   )
   if (!isSwitchsanity) {
     return null

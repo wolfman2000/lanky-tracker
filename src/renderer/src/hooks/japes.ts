@@ -1,6 +1,16 @@
 import useDonkStore from '@renderer/store'
-import { usePlayLevel, useSlamLevel } from './isles'
 import { useShallow } from 'zustand/react/shallow'
+import { usePlayLevel, useSlamLevel } from './isles'
+import {
+  useBoulderTech,
+  useChunky,
+  useDk,
+  usePeanut,
+  useSlam,
+  useStand,
+  useTiny,
+  useTwirl
+} from './kongs'
 import { LogicBool, logicBreak, useSwitchsanityGun } from './world'
 
 /**
@@ -66,9 +76,9 @@ export const useJapesRambi = (): boolean => {
  * @returns true if Diddy can access the mines.
  */
 export const useJapesMine = (): boolean => {
-  const [diddy, peanut] = useDonkStore(useShallow((state) => [state.diddy, state.peanut]))
+  const peanut = usePeanut()
   const canPlay = usePlayJapes()
-  return diddy && peanut && canPlay
+  return peanut && canPlay
 }
 
 /**
@@ -78,10 +88,11 @@ export const useJapesMine = (): boolean => {
 export const useJapesHive = (): boolean => {
   const hiveSwitch = useJapesHiveSwitch()
   const canPlay = usePlayJapes()
-  const [bananaport, diddy, peanut] = useDonkStore(
-    useShallow((state) => [state.bananaportOpen, state.diddy, state.peanut])
+  const japesMine = useJapesMine()
+  const [bananaport, hiveGateOpen] = useDonkStore(
+    useShallow((state) => [state.settings.bananaportOpen, state.removeBarriers.japesHiveGate])
   )
-  return canPlay && (hiveSwitch || (bananaport == 2 && diddy && peanut))
+  return canPlay && (hiveGateOpen || hiveSwitch || (bananaport == 2 && japesMine))
 }
 
 /**
@@ -90,18 +101,13 @@ export const useJapesHive = (): boolean => {
  */
 export const useJapesPaintingOutside = (): LogicBool => {
   const inStage = usePlayJapes()
-  const [dk, lanky, stand, tiny, twirl, chunky] = useDonkStore(
-    useShallow((state) => [
-      state.dk,
-      state.lanky,
-      state.stand,
-      state.tiny,
-      state.twirl,
-      state.chunky
-    ])
-  )
+  const stand = useStand()
+  const twirl = useTwirl()
+  const dk = useDk()
+  const tiny = useTiny()
+  const chunky = useChunky()
   return {
-    in: inStage && ((lanky && stand) || (tiny && twirl)),
+    in: inStage && (stand || twirl),
     out: inStage && (dk || tiny || chunky)
   }
 }
@@ -124,9 +130,8 @@ export const useJapesPainting = (): LogicBool => {
  * @returns true if we can access the underground.
  */
 export const useJapesUnderground = (): boolean => {
-  const [chunky, barrel, slam] = useDonkStore(
-    useShallow((state) => [state.chunky, state.barrel, state.slam])
-  )
+  const slam = useSlam()
+  const boulderTech = useBoulderTech()
   const inStage = usePlayJapes()
-  return inStage && chunky && barrel && slam != 0
+  return inStage && boulderTech && slam
 }

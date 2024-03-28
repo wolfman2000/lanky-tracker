@@ -38,7 +38,11 @@ const prevTime = (time: BananaportRange): BananaportRange => {
 
 const RuntimeSettings: React.FC = () => {
   const [forestTime, galleonHighTide, setSetting] = useDonkStore(
-    useShallow((state) => [state.forestTime, state.galleonHighTide, state.setSetting])
+    useShallow((state) => [
+      state.settings.forestTime,
+      state.settings.galleonHighTide,
+      state.setSetting
+    ])
   )
 
   const handleClick = (): void => {

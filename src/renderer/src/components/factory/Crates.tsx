@@ -48,7 +48,7 @@ const Shuffled: React.FC = () => {
 }
 
 const CrateLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.shuffleCrates))
+  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleCrates))
   const locations = shuffle ? <Shuffled /> : <Vanilla />
   return <CratePool>{locations}</CratePool>
 }

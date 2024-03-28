@@ -1,9 +1,10 @@
+import { useShallow } from 'zustand/react/shallow'
+
 import { useJapesUnderground, usePlayJapes } from '@renderer/hooks/japes'
 import { useAnyKong } from '@renderer/hooks/kongs'
-import JapesCheck from './JapesCheck'
 import useDonkStore from '@renderer/store'
-import { useShallow } from 'zustand/react/shallow'
 import KasplatPool from '../pools/Kasplats'
+import JapesCheck from './JapesCheck'
 
 const Vanilla: React.FC = () => {
   const inStage = usePlayJapes()
@@ -11,12 +12,12 @@ const Vanilla: React.FC = () => {
   const under = useJapesUnderground()
   const [dk, diddy, tiny, twirl, pineapple, vine] = useDonkStore(
     useShallow((state) => [
-      state.dk,
-      state.diddy,
-      state.tiny,
-      state.twirl,
-      state.pineapple,
-      state.vine
+      state.moves.dk,
+      state.moves.diddy,
+      state.moves.tiny,
+      state.moves.twirl,
+      state.moves.pineapple,
+      state.moves.vine
     ])
   )
 
@@ -73,7 +74,7 @@ const Shuffled: React.FC = () => {
 }
 
 const KasplatLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.shuffleKasplats))
+  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleKasplats))
   const locations = shuffle ? <Shuffled /> : <Vanilla />
   return <KasplatPool>{locations}</KasplatPool>
 }

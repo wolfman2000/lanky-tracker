@@ -1,6 +1,6 @@
 import useDonkStore from '@renderer/store'
-import { useShallow } from 'zustand/react/shallow'
 import { MouseEvent, WheelEvent } from 'react'
+import { useShallow } from 'zustand/react/shallow'
 
 type SwitchsanityProps = {
   storeKey: string

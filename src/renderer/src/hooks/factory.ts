@@ -1,6 +1,7 @@
 import useDonkStore from '@renderer/store'
-import { usePlayLevel, useSlamLevel } from './isles'
 import { useShallow } from 'zustand/react/shallow'
+import { usePlayLevel, useSlamLevel } from './isles'
+import { useCoconut, useGrab, useSlam } from './kongs'
 
 /**
  * Can we play in Frantic Factory?
@@ -20,11 +21,10 @@ export const useSlamFactory = (): boolean => useSlamLevel('Factory')
  * @returns true if we can enter the Testing Area in Factory.
  */
 export const useFactoryTesting = (): boolean => {
-  const [slam, removeBarriers] = useDonkStore(
-    useShallow((state) => [state.slam, state.removeBarriers])
-  )
   const inStage = usePlayFactory()
-  return inStage && (removeBarriers.factoryTesting || slam != 0)
+  const slam = useSlam()
+  const [removeBarriers] = useDonkStore(useShallow((state) => [state.removeBarriers]))
+  return inStage && (removeBarriers.factoryTesting || slam)
 }
 
 /**
@@ -33,10 +33,11 @@ export const useFactoryTesting = (): boolean => {
  */
 export const useFactoryProductionEnabled = (): boolean => {
   const inStage = usePlayFactory()
-  const [dk, coconut, grab, removeBarriers] = useDonkStore(
-    useShallow((state) => [state.dk, state.coconut, state.grab, state.removeBarriers])
-  )
-  return inStage && (removeBarriers.factoryProduction || (dk && coconut && grab))
+  const testing = useFactoryTesting()
+  const coconut = useCoconut()
+  const grab = useGrab()
+  const [removeBarriers] = useDonkStore(useShallow((state) => [state.removeBarriers]))
+  return inStage && (removeBarriers.factoryProduction || (coconut && grab && testing))
 }
 
 /**
@@ -46,6 +47,6 @@ export const useFactoryProductionEnabled = (): boolean => {
 export const useFactoryProductionTop = (): boolean => {
   const inStage = usePlayFactory()
   const factoryOn = useFactoryProductionEnabled()
-  const bananaport = useDonkStore(useShallow((state) => state.bananaportOpen))
+  const bananaport = useDonkStore(useShallow((state) => state.settings.bananaportOpen))
   return factoryOn || (inStage && bananaport == 2)
 }

@@ -1,17 +1,19 @@
-import useDonkStore from '@renderer/store'
+import { MouseEvent, WheelEvent } from 'react'
 import { useShallow } from 'zustand/react/shallow'
 
-import { MouseEvent, WheelEvent } from 'react'
+import useDonkStore from '@renderer/store'
 
 type CountSelectorProps = {
   imgUrl: string
   storeKey: string
+  prefix: string
+  setCount: (item: string, val: number) => void
   maxValue: number
 }
 
 const CountSelector: React.FC<CountSelectorProps> = (props) => {
   const { storeKey, imgUrl, maxValue } = props
-  const [num, setCount] = useDonkStore(useShallow((state) => [state[storeKey], state.setCount]))
+  const [num] = useDonkStore(useShallow((state) => [state[props.prefix][storeKey]]))
 
   const clamp = (num: number): number => Math.min(Math.max(num, 0), maxValue)
 
@@ -20,25 +22,25 @@ const CountSelector: React.FC<CountSelectorProps> = (props) => {
   const prevCount = (num: number): number => clamp(num - 1)
 
   const handleNextLevel = (): void => {
-    setCount(storeKey, nextCount(num))
+    props.setCount(storeKey, nextCount(num))
   }
 
   const handlePrevLevel = (e: MouseEvent<HTMLImageElement>): void => {
     e.preventDefault()
-    setCount(storeKey, prevCount(num))
+    props.setCount(storeKey, prevCount(num))
   }
 
   const handleWheel = (e: WheelEvent<HTMLImageElement>): void => {
     if (e.deltaY >= 0) {
-      setCount(storeKey, nextCount(num))
+      props.setCount(storeKey, nextCount(num))
     } else {
-      setCount(storeKey, prevCount(num))
+      props.setCount(storeKey, prevCount(num))
     }
   }
 
   return (
     <div
-      className="count-icon"
+      className={`count-icon ${props.prefix}-${props.storeKey}`}
       onClick={handleNextLevel}
       onAuxClick={handlePrevLevel}
       onWheel={handleWheel}

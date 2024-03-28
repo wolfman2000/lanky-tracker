@@ -1,17 +1,17 @@
 import useDonkStore from '@renderer/store'
+import { Level } from '@renderer/store/common'
+import { WheelEvent } from 'react'
 import { useShallow } from 'zustand/react/shallow'
 
-import japesIcon from '../assets/images/japes.png'
 import aztecIcon from '../assets/images/aztec.png'
-import factoryIcon from '../assets/images/factory.png'
-import galleonIcon from '../assets/images/galleon.png'
-import forestIcon from '../assets/images/forest.png'
-import cavesIcon from '../assets/images/caves.png'
 import castleIcon from '../assets/images/castle.png'
+import cavesIcon from '../assets/images/caves.png'
+import factoryIcon from '../assets/images/factory.png'
+import forestIcon from '../assets/images/forest.png'
+import galleonIcon from '../assets/images/galleon.png'
 import helmIcon from '../assets/images/helm.png'
+import japesIcon from '../assets/images/japes.png'
 import unknownIcon from '../assets/images/unknown.png'
-import { WheelEvent } from 'react'
-import { Level } from '@renderer/store/common'
 
 type LevelSelectorProps = {
   storeKey: string

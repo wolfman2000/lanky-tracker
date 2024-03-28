@@ -1,9 +1,10 @@
-import { useJapesPainting, useJapesRambi, usePlayJapes } from '@renderer/hooks/japes'
-import { useAnyGun, useAnyKong, useAnyMusic, useCamera } from '@renderer/hooks/kongs'
-import JapesCheck from './JapesCheck'
-import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
+
+import { useJapesPainting, useJapesRambi, usePlayJapes } from '@renderer/hooks/japes'
+import { useAnyGun, useAnyKong, useAnyMusic, useCamera, useSlam } from '@renderer/hooks/kongs'
+import useDonkStore from '@renderer/store'
 import FairyPool from '../pools/Fairies'
+import JapesCheck from './JapesCheck'
 
 const Vanilla: React.FC = () => {
   const camera = useCamera()
@@ -11,7 +12,8 @@ const Vanilla: React.FC = () => {
   const japesPaintingInside = useJapesPainting()
   const anyGun = useAnyGun()
   const anyMusic = useAnyMusic()
-  const [lanky, slam] = useDonkStore(useShallow((state) => [state.lanky, state.slam]))
+  const slam = useSlam()
+  const [lanky] = useDonkStore(useShallow((state) => [state.moves.lanky]))
   return (
     <>
       <JapesCheck
@@ -24,10 +26,8 @@ const Vanilla: React.FC = () => {
         id={1081}
         name="Japes Fairy Painting Room"
         region="Japes Caves And Mines"
-        canGetLogic={lanky && slam != 0 && japesPaintingInside.in && (anyGun || anyMusic) && camera}
-        canGetBreak={
-          lanky && slam != 0 && japesPaintingInside.out && (anyGun || anyMusic) && camera
-        }
+        canGetLogic={lanky && slam && japesPaintingInside.in && (anyGun || anyMusic) && camera}
+        canGetBreak={lanky && slam && japesPaintingInside.out && (anyGun || anyMusic) && camera}
       />
     </>
   )
@@ -55,7 +55,7 @@ const Shuffled: React.FC = () => {
 }
 
 const FairyLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.shuffleFairies))
+  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleFairies))
   const locations = shuffle ? <Shuffled /> : <Vanilla />
   return <FairyPool>{locations}</FairyPool>
 }

@@ -2,27 +2,28 @@ import { usePlayJapes } from '@renderer/hooks/japes'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import JapesCheck from './JapesCheck'
+import { useAnyKong } from '@renderer/hooks/kongs'
 
 /**
  * Gather the list of shuffled shop item locations in Japes.
  * @returns the shuffled shop locations in Japes.
  */
 const JapesShops: React.FC = () => {
+  const anyKong = useAnyKong()
   const [dk, diddy, lanky, tiny, chunky, poolShops] = useDonkStore(
     useShallow((state) => [
-      state.dk,
-      state.diddy,
-      state.lanky,
-      state.tiny,
-      state.chunky,
-      state.poolShops
+      state.moves.dk,
+      state.moves.diddy,
+      state.moves.lanky,
+      state.moves.tiny,
+      state.moves.chunky,
+      state.settings.poolShops
     ])
   )
   const playJapes = usePlayJapes()
   if (!poolShops) {
     return null
   }
-  const anyKong = dk || diddy || lanky || tiny || chunky
 
   return (
     <>

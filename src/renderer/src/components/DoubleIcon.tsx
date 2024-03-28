@@ -7,11 +7,16 @@ type DoubleIconProps = {
   imgLeft: string
   imgRight: string
   imgBoth: string
+  prefix: string
+  setItem: (item: string, val: boolean) => void
 }
 
 const DoubleIcon: React.FC<DoubleIconProps> = (props) => {
-  const [left, right, setItem] = useDonkStore(
-    useShallow((state) => [state[props.storeLeft], state[props.storeRight], state.setItem])
+  const [left, right] = useDonkStore(
+    useShallow((state) => [
+      state[props.prefix][props.storeLeft],
+      state[props.prefix][props.storeRight]
+    ])
   )
   let url = props.imgBoth
   if (left && !right) {
@@ -20,18 +25,17 @@ const DoubleIcon: React.FC<DoubleIconProps> = (props) => {
     url = props.imgRight
   }
   return (
-    <div className="double-icon">
+    <div className={`double-icon ${props.prefix}-${props.storeLeft}`}>
       <img
         width={24}
         height={24}
         src={url}
         style={{ filter: `grayscale(${left || right ? '0' : '1'})` }}
-        onClick={() => setItem(props.storeLeft, !left)}
-        onAuxClick={(e) => {
+        onClick={() => props.setItem(props.storeLeft, !left)}
+        onContextMenu={(e) => {
           e.preventDefault()
-          setItem(props.storeRight, !right)
+          props.setItem(props.storeRight, !right)
         }}
-        onContextMenu={(e) => e.preventDefault()}
       />{' '}
     </div>
   )
