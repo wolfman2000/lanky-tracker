@@ -25,22 +25,22 @@ const nextSlam = (num: number): number => clamp(num + 1)
 const prevSlam = (num: number): number => clamp(num - 1)
 
 const SlamSelector: React.FC = () => {
-  const [slam, setCount] = useDonkStore(useShallow((state) => [state.moves.slam, state.setSlam]))
+  const [slam, setSlam] = useDonkStore(useShallow((state) => [state.moves.slam, state.setSlam]))
 
   const handleNextLevel = (): void => {
-    setCount('slam', nextSlam(slam))
+    setSlam(nextSlam(slam))
   }
 
   const handlePrevLevel = (e: MouseEvent<HTMLImageElement>): void => {
     e.preventDefault()
-    setCount('slam', prevSlam(slam))
+    setSlam(prevSlam(slam))
   }
 
   const handleWheel = (e: WheelEvent<HTMLImageElement>): void => {
     if (e.deltaY >= 0) {
-      setCount('slam', nextSlam(slam))
+      setSlam(nextSlam(slam))
     } else {
-      setCount('slam', prevSlam(slam))
+      setSlam(prevSlam(slam))
     }
   }
 
