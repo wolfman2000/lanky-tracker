@@ -49,10 +49,10 @@ const moveSlice: StateCreator<AllSlice, [], [], MoveSlice> = (set) => {
   donkResetFns.add(() => set(initialMoves))
   return {
     ...initialMoves,
-    setSlam: (item, val) =>
+    setSlam: (val) =>
       set((state) => {
         const newKey: Record<string, number> = {}
-        newKey[item] = val
+        newKey['slam'] = val
         state = {
           ...state,
           moves: {

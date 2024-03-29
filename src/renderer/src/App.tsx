@@ -16,24 +16,6 @@ import CavesChecks from './components/levels/6-caves'
 import CastleChecks from './components/levels/7-castle'
 
 function App(): JSX.Element {
-  /*
-  const cbCount = useDonkStore((state) => state.settings.cbCount)
-  const setCbCount = useDonkStore((state) => state.setCbCount)
-
-  const handleCbCount = (evt: ChangeEvent<HTMLInputElement>): void => {
-    let target = parseInt(evt.target.value)
-    if (isNaN(target)) {
-      target = 40
-    }
-    setCbCount(target)
-  }
-
-  const inputBananas = (
-    <p>
-      Set CB Count: <input type="text" onChange={handleCbCount} value={cbCount} />
-    </p>
-  )
-  */
   return (
     <>
       <main>

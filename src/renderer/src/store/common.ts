@@ -16,6 +16,8 @@ type SlamRange = IntRange<0, 4>
 export type BananaportRange = IntRange<0, 3>
 export type KongRange = IntRange<0, 5>
 
+export const nameof = <T>(name: Extract<keyof T, string>): string => name
+
 //#region Moves
 interface MoveCollection {
   /**
@@ -186,7 +188,7 @@ export interface MoveState {
 
 interface MoveActions {
   setMove: (item: string, val: boolean) => void
-  setSlam: (item: string, val: number) => void
+  setSlam: (val: number) => void
 }
 
 export type MoveSlice = MoveState & MoveActions
@@ -719,7 +721,7 @@ export interface LevelState {
 }
 
 interface LevelActions {
-  setLevel: (index: number, name: string) => void
+  setLevel: (index: number, name: Level) => void
   setKey: (index: number, isSet: boolean) => void
 }
 

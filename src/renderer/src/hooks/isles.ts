@@ -1,28 +1,54 @@
+import { useShallow } from 'zustand/react/shallow'
+
 import useDonkStore from '@renderer/store'
 import { Level } from '@renderer/store/common'
-import { useShallow } from 'zustand/react/shallow'
+import { usePlayAztec } from './aztec'
+import { usePlayCaves } from './caves'
+import { usePlayFactory } from './factory'
+import { usePlayGalleon, useSlamGalleon } from './galleon'
 import {
+  useAnyKong,
   useBalloon,
   useBlast,
   useBongos,
   useBoulderTech,
   useCharge,
   useChunky,
+  useCoconut,
   useDiddy,
   useDive,
   useDk,
+  useFeather,
   useGone,
   useGrab,
+  useGrape,
   useGuitar,
+  useHighGrab,
+  useHunky,
+  useMini,
   useMonkeyport,
+  useOrange,
+  usePeanut,
+  usePineapple,
+  usePunch,
   useRocket,
   useSax,
+  useSlam,
+  useSpring,
+  useSprint,
+  useStrong,
+  useSuperSlam,
+  useTiny,
   useTriangle,
   useTrombone,
   useTwirl,
   useVine
 } from './kongs'
-import { LogicBool, useSwitchsanityGun, useSwitchsanityMusicPad } from './world'
+import { useAutoBonus } from './settings'
+import { LogicBool, logicBreak, useSwitchsanityGun, useSwitchsanityMusicPad } from './world'
+import { usePlayJapes } from './japes'
+import { usePlayCastle } from './castle'
+import { usePlayHelm } from './helm'
 
 /**
  * What is needed to turn on the rocket barrel in Isles?
@@ -293,4 +319,219 @@ export const useSlamLevel = (level: Level): boolean => {
   }
 
   return false
+}
+
+/**
+ * Can we control someone to get the first check in the game?
+ * @returns true if we can get the first check in the game.
+ */
+export const useCheckDkJapesRock = (): boolean => useAnyKong()
+
+/**
+ * Can we access the cage on Krem Isle and open it with the Coconut Gun?
+ * @returns true if we can access the cage.
+ */
+export const useCheckDkCoconutCage = (): boolean => {
+  const coconut = useCoconut()
+  const kremAscent = useIslesKremAscent()
+  return coconut && kremAscent
+}
+
+/**
+ * Can we access the Factory Lobby and play the Bongos to release a check?
+ * @returns truthy if we can play the Bongos in the Factory Lobby.
+ */
+export const useCheckDkMusicPad = (): LogicBool => {
+  const playFactory = usePlayFactory()
+  const bongos = useBongos()
+  const grab = useGrab()
+  const diddy = useDiddy()
+  const tiny = useTiny()
+  return {
+    in: playFactory && bongos && grab,
+    out: playFactory && bongos && (diddy || tiny)
+  }
+}
+
+/**
+ * Can we grab the banana above the boiling lava in Caves Lobby?
+ * @returns truthy if we can grab the banana in Caves Lobby.
+ */
+export const useCheckDkCavesLobby = (): LogicBool => {
+  const playCaves = usePlayCaves()
+  const punch = usePunch()
+  const strong = useStrong()
+  const twirl = useTwirl()
+  const orange = useOrange()
+  return {
+    in: playCaves && punch && strong,
+    out: playCaves && punch && (twirl || orange)
+  }
+}
+
+export const useCheckDiddySnide = (): LogicBool => {
+  const kremAscent = useIslesKremAscent()
+  const spring = useSpring()
+  const autoBonus = useAutoBonus()
+  const anyKong = useAnyKong()
+  const boulderTech = useBoulderTech()
+  const highGrab = useHighGrab()
+  const twirl = useTwirl()
+  return {
+    in: kremAscent && ((autoBonus && anyKong) || spring),
+    out: kremAscent && ((boulderTech && highGrab) || twirl)
+  }
+}
+
+export const useCheckDiddyCage = (): LogicBool => {
+  const crossFungi = useIslesCrossFungi()
+  const peanut = usePeanut()
+  return {
+    in: crossFungi.in && peanut,
+    out: logicBreak(crossFungi) && peanut
+  }
+}
+
+export const useCheckDiddySummit = (): LogicBool => {
+  const crossFungi = useIslesCrossFungi()
+  const rocket = useRocket()
+  const twirl = useTwirl()
+  return {
+    in: crossFungi.in && rocket,
+    out: logicBreak(crossFungi) && twirl
+  }
+}
+
+export const useCheckDiddyCaves = (): LogicBool => {
+  const playCaves = usePlayCaves()
+  const rocket = useRocket()
+  const guitar = useGuitar()
+  const boulderTech = useBoulderTech()
+  const twirl = useTwirl()
+  return {
+    in: playCaves && rocket && guitar,
+    out: playCaves && boulderTech && twirl && guitar
+  }
+}
+
+export const useCheckLankyCage = (): boolean => useGrape()
+
+export const useCheckLankyPrison = (): LogicBool => {
+  const sprint = useSprint()
+  const dk = useDk()
+  return {
+    in: sprint,
+    out: dk
+  }
+}
+
+export const useCheckLankyMusicPad = (): boolean => {
+  const playJapes = usePlayJapes()
+  const boulderTech = useBoulderTech()
+  const trombone = useTrombone()
+  return playJapes && boulderTech && trombone
+}
+
+export const useCheckLankyCastle = (): LogicBool => {
+  const playCastle = usePlayCastle()
+  const boulderTech = useBoulderTech()
+  const balloon = useBalloon()
+  const tiny = useTiny()
+  return {
+    in: playCastle && boulderTech && balloon,
+    out: playCastle && tiny
+  }
+}
+
+/**
+ * Can we open the feather cage on Banana Fairy Island and claim its check?
+ * @returns true if we have access to the feather cage check.
+ */
+export const useCheckTinyFeatherCage = (): boolean => useFeather()
+
+/**
+ * Can we get to the top of Krem Isle, then play on the music pad?
+ * @returns true if we can play the music pad on the top of Krem Isle.
+ */
+export const useCheckTinyMusicPad = (): boolean => {
+  const kremTop = useIslesKremTop()
+  const sax = useSax()
+  return kremTop && sax
+}
+
+/**
+ * Can we bang the gongs in Aztec Lobby for Tiny to get a check?
+ * @returns truthy if we can get the item in Aztec Lobby.
+ */
+export const useCheckTinyAztecLobby = (): LogicBool => {
+  const playAztec = usePlayAztec()
+  const twirl = useTwirl()
+  const charge = useCharge()
+  return {
+    in: playAztec && charge && twirl,
+    out: playAztec && charge
+  }
+}
+
+const useGalleonLobbySlam = (): boolean => {
+  const progSlam = useSlamGalleon()
+  const normSlam = useSuperSlam()
+  const progressiveSlams = useDonkStore(useShallow((state) => state.settings.progressiveSlams))
+  return progressiveSlams ? progSlam : normSlam
+}
+
+/**
+ * Can we slam a switch to open a mini tunnel, then sneak in with Tiny?
+ * @returns truthy if we can access the hidden tunnel in Galleon Lobby.
+ */
+export const useCheckTinyGalleonLobby = (): LogicBool => {
+  const playGalleon = usePlayGalleon()
+  const slam = useGalleonLobbySlam()
+  const chunky = useChunky()
+  const twirl = useTwirl()
+  const mini = useMini()
+  const dive = useDive()
+  return {
+    in: playGalleon && slam && chunky && dive && mini && twirl,
+    out: playGalleon && slam && chunky && dive && mini
+  }
+}
+
+/**
+ * Can we access the Banana Fairy Island (BFI) check?
+ * @returns true if we can access the BFI check.
+ */
+export const useCheckBananaFairyIsle = (): boolean => {
+  const [fairies, fairyCount] = useDonkStore(
+    useShallow((state) => [state.consumables.fairies, state.settings.fairyCount])
+  )
+  const mini = useMini()
+  return fairies >= fairyCount && mini
+}
+
+export const useCheckChunkyCage = (): boolean => usePineapple()
+
+export const useCheckChunkyMusicPad = (): boolean => {
+  const upper = useIslesUpper()
+  const boulderTech = useBoulderTech()
+  const triangle = useTriangle()
+  return upper && boulderTech && triangle
+}
+
+export const useCheckChunkyPound = (): boolean => {
+  const tinySax = useCheckTinyMusicPad()
+  const hunky = useHunky()
+  const slam = useSlam()
+  return tinySax && hunky && slam
+}
+
+export const useCheckChunkyHelm = (): LogicBool => {
+  const playHelm = usePlayHelm()
+  const helmEntry = useIslesHelmEntry()
+  const vine = useVine()
+  const twirl = useTwirl()
+  return {
+    in: playHelm && helmEntry && vine,
+    out: playHelm && helmEntry && twirl
+  }
 }

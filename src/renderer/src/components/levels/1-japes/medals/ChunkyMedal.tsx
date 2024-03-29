@@ -6,6 +6,7 @@ import {
   useJapesUnderground,
   usePlayJapes
 } from '@renderer/hooks/japes'
+import { useCbCount } from '@renderer/hooks/settings'
 import useDonkStore from '@renderer/store'
 import JapesCheck from '../JapesCheck'
 
@@ -14,9 +15,9 @@ const ChunkyMedal: React.FC = () => {
   const hiveGate = useJapesHive()
   const haveRambiCage = useJapesRambi()
   const underground = useJapesUnderground()
-  const [cbCount, coloredBananaShuffle, chunky, barrel, hunky, pineapple] = useDonkStore(
+  const cbCount = useCbCount()
+  const [coloredBananaShuffle, chunky, barrel, hunky, pineapple] = useDonkStore(
     useShallow((state) => [
-      state.settings.cbCount,
       state.settings.shuffleColoredBananas,
       state.moves.chunky,
       state.moves.barrel,
