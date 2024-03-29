@@ -1,4 +1,5 @@
 import useDonkStore from '@renderer/store'
+import { useShallow } from 'zustand/react/shallow'
 import { usePlayLevel, useSlamLevel } from './isles'
 import {
   LogicBool,
@@ -7,7 +8,16 @@ import {
   useSwitchsanityKong,
   useSwitchsanityMusicPad
 } from './world'
-import { useShallow } from 'zustand/react/shallow'
+import {
+  useFeather,
+  useGrape,
+  useMini,
+  usePeanut,
+  usePineapple,
+  useRocket,
+  useTwirl,
+  useVine
+} from './kongs'
 
 /**
  * Can we play in Angry Aztec?
@@ -39,11 +49,10 @@ const useAztecLlamaTunnelSwitch = (): boolean => useSwitchsanityKong('aztecDeadE
  */
 export const useAztecFront = (): LogicBool => {
   const aztecPlay = usePlayAztec()
-  const [vine, tiny, twirl] = useDonkStore(
-    useShallow((state) => [state.vine, state.tiny, state.twirl])
-  )
+  const vine = useVine()
+  const twirl = useTwirl()
   return {
-    in: aztecPlay && (vine || (tiny && twirl)),
+    in: aztecPlay && (vine || twirl),
     out: aztecPlay
   }
 }
@@ -68,12 +77,21 @@ export const useAztecFrontKasplat = (): LogicBool => {
 export const useAztecBack = (): LogicBool => {
   const aztecFront = useAztecFront()
   const musicSwitch = useAztecGuitarSwitch()
-  const [vine, diddy, tiny, rocket, bananaport] = useDonkStore(
-    useShallow((state) => [state.vine, state.diddy, state.guitar, state.tiny, state.bananaportOpen])
+  const vine = useVine()
+  const rocket = useRocket()
+  const [diddy, tiny, bananaport, backGateOpen] = useDonkStore(
+    useShallow((state) => [
+      state.moves.diddy,
+      state.moves.tiny,
+      state.settings.bananaportOpen,
+      state.removeBarriers.aztecBack
+    ])
   )
   return {
-    in: aztecFront.in && (bananaport == 2 || ((vine || (diddy && rocket)) && musicSwitch)),
-    out: logicBreak(aztecFront) && (bananaport == 2 || (musicSwitch && (diddy || tiny)))
+    in: aztecFront.in && (backGateOpen || bananaport == 2 || ((vine || rocket) && musicSwitch)),
+    out:
+      logicBreak(aztecFront) &&
+      (backGateOpen || bananaport == 2 || (musicSwitch && (diddy || tiny)))
   }
 }
 
@@ -85,20 +103,12 @@ export const useAztecBack = (): LogicBool => {
  */
 export const useAztecTinyTemple = (): LogicBool => {
   const aztecFront = useAztecFront()
-  const [diddy, peanut, lanky, grape, tiny, feather, chunky, pineapple] = useDonkStore(
-    useShallow((state) => [
-      state.diddy,
-      state.peanut,
-      state.lanky,
-      state.grape,
-      state.tiny,
-      state.feather,
-      state.chunky,
-      state.pineapple
-    ])
-  )
-  const properGun =
-    (diddy && peanut) || (lanky && grape) || (tiny && feather) || (chunky && pineapple)
+  const peanut = usePeanut()
+  const grape = useGrape()
+  const feather = useFeather()
+  const pineapple = usePineapple()
+
+  const properGun = peanut || grape || feather || pineapple
   return {
     in: aztecFront.in && properGun,
     out: logicBreak(aztecFront) && properGun
@@ -127,12 +137,11 @@ export const useAztecLlamaTemple = (): LogicBool => {
  */
 export const useAztecLlamaLava = (): LogicBool => {
   const llamaTemple = useAztecLlamaTemple()
-  const [tiny, mini, bananaport] = useDonkStore(
-    useShallow((state) => [state.tiny, state.mini, state.bananaportOpen])
-  )
+  const mini = useMini()
+  const [bananaport] = useDonkStore(useShallow((state) => [state.settings.bananaportOpen]))
   return {
-    in: llamaTemple.in && (bananaport == 2 || (tiny && mini)),
-    out: logicBreak(llamaTemple) && (bananaport == 2 || (tiny && mini))
+    in: llamaTemple.in && (bananaport == 2 || mini),
+    out: logicBreak(llamaTemple) && (bananaport == 2 || mini)
   }
 }
 
@@ -145,7 +154,7 @@ export const useAztecBackTunnel = (): LogicBool => {
   const canSlam = useSlamAztec()
   const slamSwitch = useAztecLlamaTunnelSwitch()
   const front = useAztecFront()
-  const bananaport = useDonkStore(useShallow((state) => state.bananaportOpen))
+  const bananaport = useDonkStore(useShallow((state) => state.settings.bananaportOpen))
   return {
     in: (front.in && bananaport == 2) || (llama.in && slamSwitch && canSlam),
     out: (logicBreak(front) && bananaport == 2) || (logicBreak(llama) && slamSwitch && canSlam)
@@ -159,8 +168,13 @@ export const useAztecBackTunnel = (): LogicBool => {
  */
 export const useAztec5DoorTemple = (): LogicBool => {
   const aztecBack = useAztecBack()
+  const rocket = useRocket()
+  const canSlam = useSlamAztec()
+  const peanut = usePeanut()
+  const fiveDoor = useDonkStore(useShallow((state) => state.removeBarriers.aztec5DoorTemple))
+
   return {
-    in: aztecBack.in,
-    out: logicBreak(aztecBack)
+    in: aztecBack.in && (fiveDoor || (rocket && canSlam && peanut)),
+    out: logicBreak(aztecBack) && (fiveDoor || (canSlam && peanut))
   }
 }

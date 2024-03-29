@@ -1,8 +1,8 @@
 import { MouseEvent, WheelEvent } from 'react'
+import { useShallow } from 'zustand/react/shallow'
 
 import useDonkStore from '@renderer/store'
 import { BananaportRange } from '@renderer/store/common'
-import { useShallow } from 'zustand/react/shallow'
 
 import portFullIcon from '../assets/images/settings/bananaport.png'
 import portHalfIcon from '../assets/images/settings/bananaport_isles.png'
@@ -19,7 +19,7 @@ const prevPort = (num: number): number => clamp(num - 1)
 
 const BananaportSelector: React.FC = () => {
   const [bananaportOpen, setSetting] = useDonkStore(
-    useShallow((state) => [state.bananaportOpen, state.setSetting])
+    useShallow((state) => [state.settings.bananaportOpen, state.setSetting])
   )
 
   const handleNextLevel = (): void => {

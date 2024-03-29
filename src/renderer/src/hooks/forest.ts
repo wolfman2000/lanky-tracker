@@ -1,7 +1,7 @@
 import useDonkStore from '@renderer/store'
-import { usePlayLevel, useSlamLevel } from './isles'
 import { useShallow } from 'zustand/react/shallow'
-import { useAnyGun, useAnyKong } from './kongs'
+import { usePlayLevel, useSlamLevel } from './isles'
+import { useAnyGun, useAnyKong, useOrange } from './kongs'
 import { LogicBool, useSwitchsanityGun } from './world'
 
 /**
@@ -24,7 +24,8 @@ export const useSlamForest = (): boolean => useSlamLevel('Forest')
 export const useForestDay = (): LogicBool => {
   const inStage = usePlayForest()
   const anyGun = useAnyGun()
-  const [orange, forestTime] = useDonkStore(useShallow((state) => [state.orange, state.forestTime]))
+  const orange = useOrange()
+  const [forestTime] = useDonkStore(useShallow((state) => [state.settings.forestTime]))
   if (forestTime != 1) {
     return {
       in: inStage,
@@ -44,7 +45,8 @@ export const useForestDay = (): LogicBool => {
 export const useForestNight = (): LogicBool => {
   const anyGun = useAnyGun()
   const inStage = usePlayForest()
-  const [orange, forestTime] = useDonkStore(useShallow((state) => [state.orange, state.forestTime]))
+  const orange = useOrange()
+  const [forestTime] = useDonkStore(useShallow((state) => [state.settings.forestTime]))
   const anyKong = useAnyKong()
   if (forestTime != 0) {
     return {
@@ -85,7 +87,7 @@ export const useForestBean = (): boolean => {
   const door1 = useSwitchsanityGun('forestBean1', 3)
   const door2 = useSwitchsanityGun('forestBean2', 4)
   const [bananaport, removeBarriers] = useDonkStore(
-    useShallow((state) => [state.bananaportOpen, state.removeBarriers])
+    useShallow((state) => [state.settings.bananaportOpen, state.removeBarriers])
   )
   return inStage && (bananaport == 2 || removeBarriers.forestBeanstalk || (door1 && door2))
 }
@@ -98,7 +100,7 @@ export const useForestOwl = (): boolean => {
   const inStage = usePlayForest()
   const door = useSwitchsanityGun('forestOwlTree', 2)
   const [bananaport, removeBarriers] = useDonkStore(
-    useShallow((state) => [state.bananaportOpen, state.removeBarriers])
+    useShallow((state) => [state.settings.bananaportOpen, state.removeBarriers])
   )
   return inStage && (bananaport == 2 || removeBarriers.forestOwlTree || door)
 }

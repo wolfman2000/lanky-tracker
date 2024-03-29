@@ -1,26 +1,27 @@
+import { useShallow } from 'zustand/react/shallow'
+
+import { usePlayCastle } from '@renderer/hooks/castle'
 import {
   useAnyKong,
   useBalloon,
   useBoulderTech,
   useShockwave,
-  useTwirl
+  useTiny
 } from '@renderer/hooks/kongs'
-import IslesCheck from './IslesCheck'
 import useDonkStore from '@renderer/store'
-import { useShallow } from 'zustand/react/shallow'
-import DirtAztec from './DirtAztec'
-import { usePlayCastle } from '@renderer/hooks/castle'
 import RainbowCoinPool from '../pools/RainbowCoins'
+import DirtAztec from './DirtAztec'
+import IslesCheck from './IslesCheck'
 
 const VanillaDirtLocations: React.FC = () => {
   const anyKong = useAnyKong()
   const shockwave = useShockwave()
   const boulderTech = useBoulderTech()
-  const twirl = useTwirl()
+  const tiny = useTiny()
   const balloon = useBalloon()
   const playCastle = usePlayCastle()
   const [vine, key4, openLobbies] = useDonkStore(
-    useShallow((state) => [state.vine, state.key4, state.openLobbies])
+    useShallow((state) => [state.moves.vine, state.key4, state.settings.openLobbies])
   )
 
   return (
@@ -61,7 +62,7 @@ const VanillaDirtLocations: React.FC = () => {
         name="Isles Dirt Castle Lobby"
         region="Caves-Helm Lobbies"
         canGetLogic={playCastle && boulderTech && balloon && shockwave}
-        canGetBreak={playCastle && twirl && shockwave}
+        canGetBreak={playCastle && tiny && shockwave}
       />
     </>
   )
@@ -81,7 +82,7 @@ const ShuffledDirtLocations: React.FC = () => {
 }
 
 const DirtLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.shuffleDirt))
+  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleDirt))
   const locations = shuffle ? <ShuffledDirtLocations /> : <VanillaDirtLocations />
   return <RainbowCoinPool>{locations}</RainbowCoinPool>
 }

@@ -1,8 +1,8 @@
-import { useShallow } from 'zustand/react/shallow'
-import { LogicBool, logicBreak, useSwitchsanityGun } from './world'
 import useDonkStore from '@renderer/store'
+import { useShallow } from 'zustand/react/shallow'
 import { usePlayLevel, useSlamLevel } from './isles'
-import { useRocket } from './kongs'
+import { useDive, useGrab, useLanky, useRocket, useTwirl, useVine } from './kongs'
+import { LogicBool, logicBreak, useSwitchsanityGun } from './world'
 
 /**
  * Can we play in Gloomy Galleon?
@@ -34,9 +34,8 @@ export const useGalleonLighthouseArea = (): boolean => {
  */
 export const useGalleonHighTide = (): boolean => {
   const lighthouse = useGalleonLighthouseArea()
-  const [dive, galleonHighTide] = useDonkStore(
-    useShallow((state) => [state.dive, state.galleonHighTide])
-  )
+  const dive = useDive()
+  const [galleonHighTide] = useDonkStore(useShallow((state) => [state.settings.galleonHighTide]))
   if (galleonHighTide) {
     return true
   }
@@ -48,9 +47,8 @@ export const useGalleonHighTide = (): boolean => {
  * @returns true if we have access to Low Tide in Galleon.
  */
 export const useGalleonLowTide = (): boolean => {
-  const [dive, galleonHighTide] = useDonkStore(
-    useShallow((state) => [state.dive, state.galleonHighTide])
-  )
+  const dive = useDive()
+  const [galleonHighTide] = useDonkStore(useShallow((state) => [state.settings.galleonHighTide]))
   const inStage = usePlayGalleon()
   if (!galleonHighTide) {
     return true
@@ -68,15 +66,14 @@ export const useGalleonLowTide = (): boolean => {
 export const useGalleonLighthousePlatform = (): LogicBool => {
   const lighthouseArea = useGalleonLighthouseArea()
   const highTide = useGalleonHighTide()
-  const [bananaport, tiny, twirl, removeBarriers] = useDonkStore(
-    useShallow((state) => [state.bananaportOpen, state.tiny, state.twirl, state.removeBarriers])
+  const twirl = useTwirl()
+  const [bananaport, galleonSeasick] = useDonkStore(
+    useShallow((state) => [state.settings.bananaportOpen, state.removeBarriers.galleonSeasick])
   )
 
   return {
-    in:
-      bananaport == 2 ||
-      (lighthouseArea && (highTide || (removeBarriers.galleonSeasick && tiny && twirl))),
-    out: lighthouseArea && removeBarriers.galleonSeasick
+    in: bananaport == 2 || (lighthouseArea && (highTide || (galleonSeasick && twirl))),
+    out: lighthouseArea && galleonSeasick
   }
 }
 
@@ -88,14 +85,13 @@ export const useGalleonSeasickShip = (): LogicBool => {
   const lighthousePlatform = useGalleonLighthousePlatform()
   const lighthouseArea = useGalleonLighthouseArea()
   const canSlam = useSlamGalleon()
-  const [removeBarriers, dk, grab] = useDonkStore(
-    useShallow((state) => [state.removeBarriers, state.dk, state.grab])
+  const grab = useGrab()
+  const [galleonSeasick] = useDonkStore(
+    useShallow((state) => [state.removeBarriers.galleonSeasick])
   )
   return {
-    in:
-      (lighthouseArea && removeBarriers.galleonSeasick) ||
-      (lighthousePlatform.in && canSlam && dk && grab),
-    out: logicBreak(lighthousePlatform) && canSlam && dk && grab
+    in: (lighthouseArea && galleonSeasick) || (lighthousePlatform.in && canSlam && grab),
+    out: logicBreak(lighthousePlatform) && canSlam && grab
   }
 }
 
@@ -109,9 +105,9 @@ export const useGalleonCavernTop = (): LogicBool => {
   const inStage = usePlayGalleon()
   const seasick = useGalleonSeasickShip()
   const rocket = useRocket()
-  const [bananaport, vine, dive] = useDonkStore(
-    useShallow((state) => [state.bananaportOpen, state.vine, state.dive])
-  )
+  const dive = useDive()
+  const vine = useVine()
+  const [bananaport] = useDonkStore(useShallow((state) => [state.settings.bananaportOpen]))
   return {
     in: inStage && (vine || (bananaport == 2 && (dive || rocket))),
     out: inStage && logicBreak(seasick)
@@ -147,9 +143,9 @@ export const useGalleonTreasureRoom = (): LogicBool => {
   const outskirts = useGalleonOutskirts()
   const highTide = useGalleonHighTide()
   const inStage = usePlayGalleon()
-  const [lanky, dive, bananaport] = useDonkStore(
-    useShallow((state) => [state.lanky, state.dive, state.bananaportOpen])
-  )
+  const lanky = useLanky()
+  const dive = useDive()
+  const [bananaport] = useDonkStore(useShallow((state) => [state.settings.bananaportOpen]))
   return {
     in: (inStage && bananaport == 2) || (outskirts && lanky && dive && highTide),
     out: outskirts && lanky && dive

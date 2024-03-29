@@ -25,7 +25,7 @@ const nextSlam = (num: number): number => clamp(num + 1)
 const prevSlam = (num: number): number => clamp(num - 1)
 
 const SlamSelector: React.FC = () => {
-  const [slam, setCount] = useDonkStore(useShallow((state) => [state.slam, state.setCount]))
+  const [slam, setCount] = useDonkStore(useShallow((state) => [state.moves.slam, state.setSlam]))
 
   const handleNextLevel = (): void => {
     setCount('slam', nextSlam(slam))
@@ -45,7 +45,7 @@ const SlamSelector: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className="slam-icon moves-slam">
       <img
         height={24}
         src={slamToIcon(slam)}

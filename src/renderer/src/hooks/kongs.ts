@@ -6,7 +6,7 @@ import { useShallow } from 'zustand/react/shallow'
  * @returns true if we can use Donkey.
  */
 export const useDk = (): boolean => {
-  const kong = useDonkStore(useShallow((state) => state.dk))
+  const kong = useDonkStore(useShallow((state) => state.moves.dk))
   return kong
 }
 
@@ -15,7 +15,7 @@ export const useDk = (): boolean => {
  * @returns true if we can use Diddy.
  */
 export const useDiddy = (): boolean => {
-  const kong = useDonkStore(useShallow((state) => state.diddy))
+  const kong = useDonkStore(useShallow((state) => state.moves.diddy))
   return kong
 }
 
@@ -24,7 +24,7 @@ export const useDiddy = (): boolean => {
  * @returns true if we can use Lanky.
  */
 export const useLanky = (): boolean => {
-  const kong = useDonkStore(useShallow((state) => state.lanky))
+  const kong = useDonkStore(useShallow((state) => state.moves.lanky))
   return kong
 }
 
@@ -33,7 +33,7 @@ export const useLanky = (): boolean => {
  * @returns true if we can use Tiny.
  */
 export const useTiny = (): boolean => {
-  const kong = useDonkStore(useShallow((state) => state.tiny))
+  const kong = useDonkStore(useShallow((state) => state.moves.tiny))
   return kong
 }
 
@@ -42,7 +42,7 @@ export const useTiny = (): boolean => {
  * @returns true if we can use Chunky.
  */
 export const useChunky = (): boolean => {
-  const kong = useDonkStore(useShallow((state) => state.chunky))
+  const kong = useDonkStore(useShallow((state) => state.moves.chunky))
   return kong
 }
 
@@ -75,31 +75,31 @@ export const useHighGrab = (): boolean => {
 
 export const useCoconut = (): boolean => {
   const kong = useDk()
-  const gun = useDonkStore((state) => state.coconut)
+  const gun = useDonkStore((state) => state.moves.coconut)
   return kong && gun
 }
 
 export const usePeanut = (): boolean => {
   const kong = useDiddy()
-  const gun = useDonkStore((state) => state.peanut)
+  const gun = useDonkStore((state) => state.moves.peanut)
   return kong && gun
 }
 
 export const useGrape = (): boolean => {
   const kong = useLanky()
-  const gun = useDonkStore((state) => state.grape)
+  const gun = useDonkStore((state) => state.moves.grape)
   return kong && gun
 }
 
 export const useFeather = (): boolean => {
   const kong = useTiny()
-  const gun = useDonkStore((state) => state.feather)
+  const gun = useDonkStore((state) => state.moves.feather)
   return kong && gun
 }
 
 export const usePineapple = (): boolean => {
   const kong = useChunky()
-  const gun = useDonkStore((state) => state.pineapple)
+  const gun = useDonkStore((state) => state.moves.pineapple)
   return kong && gun
 }
 
@@ -123,31 +123,31 @@ export const useAllGun = (): boolean => {
 
 export const useBongos = (): boolean => {
   const kong = useDk()
-  const music = useDonkStore((state) => state.bongos)
+  const music = useDonkStore((state) => state.moves.bongos)
   return kong && music
 }
 
 export const useGuitar = (): boolean => {
   const kong = useDiddy()
-  const music = useDonkStore((state) => state.guitar)
+  const music = useDonkStore((state) => state.moves.guitar)
   return kong && music
 }
 
 export const useTrombone = (): boolean => {
   const kong = useLanky()
-  const music = useDonkStore((state) => state.trombone)
+  const music = useDonkStore((state) => state.moves.trombone)
   return kong && music
 }
 
 export const useSax = (): boolean => {
   const kong = useTiny()
-  const music = useDonkStore((state) => state.sax)
+  const music = useDonkStore((state) => state.moves.sax)
   return kong && music
 }
 
 export const useTriangle = (): boolean => {
   const kong = useChunky()
-  const music = useDonkStore((state) => state.triangle)
+  const music = useDonkStore((state) => state.moves.triangle)
   return kong && music
 }
 
@@ -162,127 +162,127 @@ export const useAnyMusic = (): boolean => {
 
 export const useGrab = (): boolean => {
   const kong = useDk()
-  const move = useDonkStore((state) => state.grab)
+  const move = useDonkStore((state) => state.moves.grab)
   return kong && move
 }
 
 export const useCharge = (): boolean => {
   const kong = useDiddy()
-  const move = useDonkStore((state) => state.charge)
+  const move = useDonkStore((state) => state.moves.charge)
   return kong && move
 }
 
 export const useStand = (): boolean => {
   const kong = useLanky()
-  const move = useDonkStore((state) => state.stand)
+  const move = useDonkStore((state) => state.moves.stand)
   return kong && move
 }
 
 export const useTwirl = (): boolean => {
   const kong = useTiny()
-  const move = useDonkStore((state) => state.twirl)
+  const move = useDonkStore((state) => state.moves.twirl)
   return kong && move
 }
 
 export const usePunch = (): boolean => {
   const kong = useChunky()
-  const move = useDonkStore((state) => state.punch)
+  const move = useDonkStore((state) => state.moves.punch)
   return kong && move
 }
 
 export const useStrong = (): boolean => {
   const kong = useDk()
-  const barrel = useDonkStore(useShallow((state) => state.strong))
+  const barrel = useDonkStore(useShallow((state) => state.moves.strong))
   return kong && barrel
 }
 
 export const useRocket = (): boolean => {
   const kong = useDiddy()
-  const barrel = useDonkStore(useShallow((state) => state.rocket))
+  const barrel = useDonkStore(useShallow((state) => state.moves.rocket))
   return kong && barrel
 }
 
 export const useSprint = (): boolean => {
   const kong = useLanky()
-  const barrel = useDonkStore((state) => state.sprint)
+  const barrel = useDonkStore((state) => state.moves.sprint)
   return kong && barrel
 }
 
 export const useMini = (): boolean => {
   const kong = useTiny()
-  const barrel = useDonkStore((state) => state.mini)
+  const barrel = useDonkStore((state) => state.moves.mini)
   return kong && barrel
 }
 
 export const useHunky = (): boolean => {
   const kong = useChunky()
-  const barrel = useDonkStore((state) => state.hunky)
+  const barrel = useDonkStore((state) => state.moves.hunky)
   return kong && barrel
 }
 
 export const useBlast = (): boolean => {
   const kong = useDk()
-  const pad = useDonkStore((state) => state.blast)
+  const pad = useDonkStore((state) => state.moves.blast)
   return kong && pad
 }
 
 export const useSpring = (): boolean => {
   const kong = useDiddy()
-  const pad = useDonkStore((state) => state.spring)
+  const pad = useDonkStore((state) => state.moves.spring)
   return kong && pad
 }
 
 export const useBalloon = (): boolean => {
   const kong = useLanky()
-  const pad = useDonkStore((state) => state.balloon)
+  const pad = useDonkStore((state) => state.moves.balloon)
   return kong && pad
 }
 
 export const useMonkeyport = (): boolean => {
   const kong = useTiny()
-  const pad = useDonkStore((state) => state.port)
+  const pad = useDonkStore((state) => state.moves.port)
   return kong && pad
 }
 
 export const useGone = (): boolean => {
   const kong = useChunky()
-  const pad = useDonkStore((state) => state.gone)
+  const pad = useDonkStore((state) => state.moves.gone)
   return kong && pad
 }
 
 // Global moves
 export const useSlam = (): boolean => {
-  const slam = useDonkStore((state) => state.slam)
+  const slam = useDonkStore((state) => state.moves.slam)
   return slam != 0
 }
 
 export const useSuperSlam = (): boolean => {
-  const slam = useDonkStore((state) => state.slam)
+  const slam = useDonkStore((state) => state.moves.slam)
   return slam > 1
 }
 
 export const useSuperDuperSlam = (): boolean => {
-  const slam = useDonkStore((state) => state.slam)
+  const slam = useDonkStore((state) => state.moves.slam)
   return slam > 2
 }
 
 export const useVine = (): boolean => {
-  const move = useDonkStore((state) => state.vine)
+  const move = useDonkStore((state) => state.moves.vine)
   return move
 }
 
 export const useDive = (): boolean => {
-  const move = useDonkStore((state) => state.dive)
+  const move = useDonkStore((state) => state.moves.dive)
   return move
 }
 
 export const useOrange = (): boolean => {
-  const move = useDonkStore((state) => state.orange)
+  const move = useDonkStore((state) => state.moves.orange)
   return move
 }
 
 export const useBarrel = (): boolean => {
-  const move = useDonkStore((state) => state.barrel)
+  const move = useDonkStore((state) => state.moves.barrel)
   return move
 }
 
@@ -299,23 +299,23 @@ export const useBoulderTech = (): boolean => {
 }
 
 export const useSniper = (): boolean => {
-  const move = useDonkStore((state) => state.sniper)
+  const move = useDonkStore((state) => state.moves.sniper)
   return move
 }
 
 export const useHoming = (): boolean => {
-  const move = useDonkStore((state) => state.homing)
+  const move = useDonkStore((state) => state.moves.homing)
   return move
 }
 
 export const useCamera = (): boolean => {
   const anyKong = useAnyKong()
-  const move = useDonkStore((state) => state.camera)
+  const move = useDonkStore((state) => state.moves.camera)
   return anyKong && move
 }
 
 export const useShockwave = (): boolean => {
   const anyKong = useAnyKong()
-  const move = useDonkStore((state) => state.shockwave)
+  const move = useDonkStore((state) => state.moves.shockwave)
   return anyKong && move
 }

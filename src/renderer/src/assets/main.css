@@ -72,11 +72,29 @@ main > article:last-child {
 
 .move-table {
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  justify-items: center;
 }
 
 .level-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr 112px 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+}
+.level-list > section {
+  display: grid;
+  grid-template-columns: 1fr 14ex 1fr;
+  justify-items: center;
+}
+.level-list > .level2 {
+  grid-row: 2;
+}
+.level-list > .level3 {
+  grid-row: 3;
+}
+.level-list > .level4 {
+  grid-row: 4;
 }
 .level-list img {
   height: 24px;

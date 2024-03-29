@@ -1,13 +1,14 @@
 import { useShallow } from 'zustand/react/shallow'
-import { useBoulderTech } from '@renderer/hooks/kongs'
-import useDonkStore from '@renderer/store'
-import IslesCheck from './IslesCheck'
+
 import {
   useIslesCrossFungi,
   useIslesFungiIsland,
   useIslesRocket,
   useIslesUpper
 } from '@renderer/hooks/isles'
+import { useBoulderTech, useShockwave } from '@renderer/hooks/kongs'
+import useDonkStore from '@renderer/store'
+import IslesCheck from './IslesCheck'
 
 /**
  * The standard dirt location on top of the Aztec roof.
@@ -19,16 +20,16 @@ const DirtAztec: React.FC = () => {
   const islesRocket = useIslesRocket()
   const islesUpper = useIslesUpper()
   const boulderTech = useBoulderTech()
-  const [dk, diddy, rocket, tiny, twirl, shockwave, dirtShuffle, rainbowCoinShuffle] = useDonkStore(
+  const shockwave = useShockwave()
+  const [dk, diddy, rocket, tiny, twirl, dirtShuffle, rainbowCoinShuffle] = useDonkStore(
     useShallow((state) => [
-      state.dk,
-      state.diddy,
-      state.rocket,
-      state.tiny,
-      state.twirl,
-      state.shockwave,
-      state.shuffleDirt,
-      state.poolRainbowCoins
+      state.moves.dk,
+      state.moves.diddy,
+      state.moves.rocket,
+      state.moves.tiny,
+      state.moves.twirl,
+      state.settings.shuffleDirt,
+      state.settings.poolRainbowCoins
     ])
   )
 

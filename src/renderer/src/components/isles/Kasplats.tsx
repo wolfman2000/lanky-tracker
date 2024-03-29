@@ -1,13 +1,13 @@
-import useDonkStore from '@renderer/store'
-import { useShallow } from 'zustand/react/shallow'
-import KasplatPool from '../pools/Kasplats'
-import { useAnyKong, useCoconut, usePunch, useSniper, useTwirl } from '@renderer/hooks/kongs'
-import IslesCheck from './IslesCheck'
-import { usePlayHelm } from '@renderer/hooks/helm'
 import { usePlayCastle } from '@renderer/hooks/castle'
 import { usePlayCaves } from '@renderer/hooks/caves'
 import { usePlayFactory } from '@renderer/hooks/factory'
 import { usePlayGalleon } from '@renderer/hooks/galleon'
+import { usePlayHelm } from '@renderer/hooks/helm'
+import { useAnyKong, useCoconut, usePunch, useSniper, useTwirl } from '@renderer/hooks/kongs'
+import useDonkStore from '@renderer/store'
+import { useShallow } from 'zustand/react/shallow'
+import KasplatPool from '../pools/Kasplats'
+import IslesCheck from './IslesCheck'
 
 const Vanilla: React.FC = () => {
   const playHelm = usePlayHelm()
@@ -72,7 +72,7 @@ const Shuffled: React.FC = () => {
 }
 
 const KasplatLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.shuffleKasplats))
+  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleKasplats))
   const locations = shuffle ? <Shuffled /> : <Vanilla />
   return <KasplatPool>{locations}</KasplatPool>
 }

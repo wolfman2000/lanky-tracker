@@ -1,6 +1,5 @@
-import useDonkStore from '@renderer/store'
-import { useShallow } from 'zustand/react/shallow'
 import { usePlayLevel, useSlamLevel } from './isles'
+import { useBlast } from './kongs'
 
 /**
  * Can we play in Creepy Castle?
@@ -21,6 +20,6 @@ export const useSlamCastle = (): boolean => useSlamLevel('Castle')
  */
 export const useCastleTree = (): boolean => {
   const inStage = usePlayCastle()
-  const [dk, blast] = useDonkStore(useShallow((state) => [state.dk, state.blast]))
-  return inStage && dk && blast
+  const blast = useBlast()
+  return inStage && blast
 }

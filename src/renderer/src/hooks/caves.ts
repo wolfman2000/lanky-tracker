@@ -1,7 +1,8 @@
 import useDonkStore from '@renderer/store'
-import { usePlayLevel, useSlamLevel } from './isles'
 import { useShallow } from 'zustand/react/shallow'
+import { usePlayLevel, useSlamLevel } from './isles'
 import { LogicBool } from './world'
+import { useBalloon, useDk, useMini, useRocket, useTwirl } from './kongs'
 
 /**
  * Can we play in Crystal Caves?
@@ -22,11 +23,10 @@ export const useSlamCaves = (): boolean => useSlamLevel('Caves')
  */
 export const useCavesIgloo = (): boolean => {
   const inStage = usePlayCaves()
-  const [barriers, diddy, rocket] = useDonkStore(
-    useShallow((state) => [state.removeBarriers, state.diddy, state.rocket])
-  )
+  const rocket = useRocket()
+  const [barriers] = useDonkStore(useShallow((state) => [state.removeBarriers]))
   const iglooBarrier = barriers.cavesIgloo
-  return inStage && (!iglooBarrier || (diddy && rocket))
+  return inStage && (!iglooBarrier || rocket)
 }
 
 /**
@@ -35,13 +35,13 @@ export const useCavesIgloo = (): boolean => {
  */
 export const useCavesMiniFunky = (): LogicBool => {
   const inStage = usePlayCaves()
-  const [tiny, twirl, mini, bananaport] = useDonkStore(
-    useShallow((state) => [state.tiny, state.twirl, state.mini, state.bananaportOpen])
-  )
+  const twirl = useTwirl()
+  const mini = useMini()
+  const [bananaport] = useDonkStore(useShallow((state) => [state.settings.bananaportOpen]))
 
   return {
-    in: inStage && (bananaport == 2 || (tiny && twirl && mini)),
-    out: inStage && tiny && mini
+    in: inStage && (bananaport == 2 || (twirl && mini)),
+    out: inStage && mini
   }
 }
 
@@ -51,20 +51,13 @@ export const useCavesMiniFunky = (): LogicBool => {
  */
 export const useCavesPillar = (): LogicBool => {
   const inStage = usePlayCaves()
-  const [dk, diddy, rocket, lanky, balloon, tiny, twirl, bananaport] = useDonkStore(
-    useShallow((state) => [
-      state.dk,
-      state.diddy,
-      state.rocket,
-      state.lanky,
-      state.balloon,
-      state.tiny,
-      state.twirl,
-      state.bananaportOpen
-    ])
-  )
+  const rocket = useRocket()
+  const twirl = useTwirl()
+  const balloon = useBalloon()
+  const dk = useDk()
+  const [bananaport] = useDonkStore(useShallow((state) => [state.settings.bananaportOpen]))
   return {
-    in: inStage && (bananaport == 2 || (diddy && rocket)),
-    out: inStage && (dk || (tiny && twirl) || (lanky && balloon))
+    in: inStage && (bananaport == 2 || rocket),
+    out: inStage && (dk || twirl || balloon)
   }
 }

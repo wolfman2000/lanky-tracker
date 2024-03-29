@@ -1,5 +1,5 @@
 import { StateCreator } from 'zustand'
-import { AllSlice, HintState, HintSlice, SelectableRegionValues, donkResetFns } from './common'
+import { AllSlice, HintSlice, HintState, SelectableRegionValues, donkResetFns } from './common'
 
 export const initialHint: HintState = {
   foolish: {}

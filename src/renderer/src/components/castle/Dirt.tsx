@@ -42,7 +42,7 @@ const ShuffledDirtLocations: React.FC = () => {
 }
 
 const DirtLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.shuffleDirt))
+  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleDirt))
   const locations = shuffle ? <ShuffledDirtLocations /> : <VanillaDirtLocations />
   return <RainbowCoinPool>{locations}</RainbowCoinPool>
 }

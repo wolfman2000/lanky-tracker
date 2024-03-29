@@ -5,6 +5,7 @@ import {
   useGuitar,
   useRocket,
   useSax,
+  useSlam,
   useSpring
 } from '@renderer/hooks/kongs'
 import useDonkStore from '@renderer/store'
@@ -16,7 +17,7 @@ const Vanilla: React.FC = () => {
   const inStage = usePlayCaves()
   const camera = useCamera()
   const sax = useSax()
-  const slam = useDonkStore(useShallow((state) => state.slam))
+  const slam = useSlam()
   const rocket = useRocket()
   const guitar = useGuitar()
   const spring = useSpring()
@@ -26,7 +27,7 @@ const Vanilla: React.FC = () => {
         id={6080}
         name="Caves Fairy Igloo"
         region="Igloo Area"
-        canGetLogic={inStage && sax && slam != 0 && camera}
+        canGetLogic={inStage && sax && slam && camera}
       />
       <CavesCheck
         id={6081}
@@ -61,7 +62,7 @@ const Shuffled: React.FC = () => {
 }
 
 const FairyLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.shuffleFairies))
+  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleFairies))
   const locations = shuffle ? <Shuffled /> : <Vanilla />
   return <FairyPool>{locations}</FairyPool>
 }

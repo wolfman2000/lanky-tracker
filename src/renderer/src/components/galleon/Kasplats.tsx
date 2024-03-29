@@ -25,7 +25,7 @@ const Vanilla: React.FC = () => {
   const highTide = useGalleonHighTide()
   const cannon = useGalleonCannon()
   const [diddy, spring, tiny, lanky, chunky] = useDonkStore(
-    useShallow((state) => [state.diddy, state.spring, state.tiny, state.lanky, state.chunky])
+    useShallow((state) => [state.moves.diddy, state.moves.spring, state.moves.tiny, state.moves.lanky, state.moves.chunky])
   )
 
   return (
@@ -83,7 +83,7 @@ const Shuffled: React.FC = () => {
 }
 
 const KasplatLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.shuffleKasplats))
+  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleKasplats))
   const locations = shuffle ? <Shuffled /> : <Vanilla />
   return <KasplatPool>{locations}</KasplatPool>
 }

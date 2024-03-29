@@ -1,6 +1,7 @@
+import { useShallow } from 'zustand/react/shallow'
+
 import useDonkStore from '@renderer/store'
 import { SelectableRegionValues, SelectableRegions } from '@renderer/store/common'
-import { useShallow } from 'zustand/react/shallow'
 
 type FoolishLocation = {
   id: string
@@ -19,7 +20,7 @@ const FoolishDropDown: React.FC<FoolishLocation> = (props) => {
   return (
     <>
       <select
-        id={`fool-{check}`}
+        id={props.id}
         value={check}
         onChange={(e) => setFool(props.id, e.target.value as SelectableRegionValues)}
       >

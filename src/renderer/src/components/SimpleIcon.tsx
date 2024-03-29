@@ -3,15 +3,16 @@ import useDonkStore from '../store'
 type SimpleIconProps = {
   storeKey: string
   imgUrl: string
+  prefix: string
+  updateItem: (item: string, val: boolean) => void
 }
 
 const SimpleIcon: React.FC<SimpleIconProps> = (props) => {
-  const value: boolean = useDonkStore((state) => state[props.storeKey])
-  const setItem = useDonkStore((state) => state.setItem)
+  const value: boolean = useDonkStore((state) => state[props.prefix][props.storeKey])
   return (
     <div
-      className={`simple-icon ${value ? 'have' : 'have-not'}`}
-      onClick={() => setItem(props.storeKey, !value)}
+      className={`simple-icon ${props.prefix}-${props.storeKey} ${value ? 'have' : 'have-not'}`}
+      onClick={() => props.updateItem(props.storeKey, !value)}
     >
       <img
         width={24}

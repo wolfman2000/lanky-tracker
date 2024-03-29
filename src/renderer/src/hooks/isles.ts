@@ -1,8 +1,28 @@
 import useDonkStore from '@renderer/store'
-import { LogicBool, useSwitchsanityGun, useSwitchsanityMusicPad } from './world'
-import { useShallow } from 'zustand/react/shallow'
-import { useBoulderTech, useRocket } from './kongs'
 import { Level } from '@renderer/store/common'
+import { useShallow } from 'zustand/react/shallow'
+import {
+  useBalloon,
+  useBlast,
+  useBongos,
+  useBoulderTech,
+  useCharge,
+  useChunky,
+  useDiddy,
+  useDive,
+  useDk,
+  useGone,
+  useGrab,
+  useGuitar,
+  useMonkeyport,
+  useRocket,
+  useSax,
+  useTriangle,
+  useTrombone,
+  useTwirl,
+  useVine
+} from './kongs'
+import { LogicBool, useSwitchsanityGun, useSwitchsanityMusicPad } from './world'
 
 /**
  * What is needed to turn on the rocket barrel in Isles?
@@ -21,7 +41,9 @@ export const useIslesFairySwitch = (): boolean => useSwitchsanityGun('islesFores
  * @returns true if we can reach the outer Fungi island.
  */
 export const useIslesFungiIsland = (): boolean => {
-  const [key4, openLobbies] = useDonkStore(useShallow((state) => [state.key4, state.openLobbies]))
+  const [key4, openLobbies] = useDonkStore(
+    useShallow((state) => [state.key4, state.settings.openLobbies])
+  )
   return key4 || openLobbies
 }
 
@@ -33,18 +55,13 @@ export const useIslesCrossFungi = (): LogicBool => {
   const fungiIsland = useIslesFungiIsland()
   const boulderTech = useBoulderTech()
   const rocketEnabled = useIslesRocketSwitch()
-  const [dk, diddy, rocket, tiny, twirl, chunky] = useDonkStore(
-    useShallow((state) => [
-      state.dk,
-      state.diddy,
-      state.rocket,
-      state.tiny,
-      state.twirl,
-      state.chunky
-    ])
-  )
+  const twirl = useTwirl()
+  const rocket = useRocket()
+  const dk = useDk()
+  const diddy = useDiddy()
+  const chunky = useChunky()
   return {
-    in: fungiIsland && ((tiny && twirl) || (boulderTech && rocketEnabled && diddy && rocket)),
+    in: fungiIsland && (twirl || (boulderTech && rocketEnabled && rocket)),
     out: fungiIsland && (dk || chunky || diddy)
   }
 }
@@ -54,7 +71,8 @@ export const useIslesCrossFungi = (): LogicBool => {
  * @returns true if we can access the upper part of Main Isle.
  */
 export const useIslesUpper = (): LogicBool => {
-  const [vine, bananawarp] = useDonkStore(useShallow((state) => [state.vine, state.bananaportOpen]))
+  const vine = useVine()
+  const [bananawarp] = useDonkStore(useShallow((state) => [state.settings.bananaportOpen]))
   const crossFungi = useIslesCrossFungi()
   return {
     in: crossFungi.in || vine || bananawarp != 0,
@@ -82,7 +100,7 @@ export const useIslesKremAscent = (): boolean => {
   const fungiIsland = useIslesFungiIsland()
   const rocket = useRocket()
   const [bananaport, openLobbies, key2] = useDonkStore(
-    useShallow((state) => [state.bananaportOpen, state.openLobbies, state.key2])
+    useShallow((state) => [state.settings.bananaportOpen, state.settings.openLobbies, state.key2])
   )
   return openLobbies || key2 || bananaport != 0 || (canRocket && fungiIsland && rocket)
 }
@@ -94,26 +112,23 @@ export const useIslesKremAscent = (): boolean => {
  * @returns true if we can head to the tip top of Krem Isle where Helm awaits.
  */
 export const useIslesKremTop = (): boolean => {
-  const [tiny, port, dk, blast, lanky, balloon, isSwitchsanity, switches] = useDonkStore(
+  const port = useMonkeyport()
+  const blast = useBlast()
+  const balloon = useBalloon()
+  const [isSwitchsanity, padPort] = useDonkStore(
     useShallow((state) => [
-      state.tiny,
-      state.port,
-      state.dk,
-      state.blast,
-      state.lanky,
-      state.balloon,
-      state.isSwitchsanity,
-      state.switchsanitySwitches
+      state.settings.isSwitchsanity,
+      state.switchsanitySwitches.islesMonkeyport
     ])
   )
-  const target = isSwitchsanity ? switches.islesMonkeyport : 0
+  const target = isSwitchsanity ? padPort : 0
   switch (target) {
     case 0:
-      return tiny && port
+      return port
     case 1:
-      return dk && blast
+      return blast
     default:
-      return lanky && balloon
+      return balloon
   }
 }
 
@@ -124,63 +139,40 @@ export const useIslesKremTop = (): boolean => {
  * @returns true if we can activate the vines in the Helm Lobby.
  */
 export const useIslesHelmEntry = (): boolean => {
-  const [
-    dk,
-    bongos,
-    diddy,
-    guitar,
-    lanky,
-    trombone,
-    tiny,
-    sax,
-    chunky,
-    triangle,
-    gone,
-    grab,
-    charge,
-    isSwitchsanity,
-    switches
-  ] = useDonkStore(
-    useShallow((state) => [
-      state.dk,
-      state.bongos,
-      state.diddy,
-      state.guitar,
-      state.lanky,
-      state.trombone,
-      state.tiny,
-      state.sax,
-      state.chunky,
-      state.triangle,
-      state.gone,
-      state.grab,
-      state.charge,
-      state.isSwitchsanity,
-      state.switchsanitySwitches
-    ])
+  const bongos = useBongos()
+  const guitar = useGuitar()
+  const trombone = useTrombone()
+  const sax = useSax()
+  const triangle = useTriangle()
+  const charge = useCharge()
+  const grab = useGrab()
+  const gone = useGone()
+  const [isSwitchsanity, islesHelm] = useDonkStore(
+    useShallow((state) => [state.settings.isSwitchsanity, state.switchsanitySwitches.islesHelm])
   )
-  const target = isSwitchsanity ? switches.islesHelm : 0
+  const target = isSwitchsanity ? islesHelm : 0
   switch (target) {
     case 0:
-      return chunky && gone
+      return gone
     case 1:
-      return dk && grab
+      return grab
     case 2:
-      return diddy && charge
+      return charge
     case 3:
-      return dk && bongos
+      return bongos
     case 4:
-      return diddy && guitar
+      return guitar
     case 5:
-      return lanky && trombone
+      return trombone
     case 6:
-      return tiny && sax
+      return sax
     case 7:
-      return chunky && triangle
+      return triangle
   }
 }
 
 export const usePlayLevel = (level: Level): boolean => {
+  const dive = useDive()
   const [
     level1,
     level2,
@@ -196,7 +188,6 @@ export const usePlayLevel = (level: Level): boolean => {
     key5,
     key6,
     key7,
-    dive,
     openLobbies
   ] = useDonkStore(
     useShallow((state) => [
@@ -214,8 +205,7 @@ export const usePlayLevel = (level: Level): boolean => {
       state.key5,
       state.key6,
       state.key7,
-      state.dive,
-      state.openLobbies
+      state.settings.openLobbies
     ])
   )
   const islesUpper = useIslesUpper()
@@ -251,25 +241,44 @@ export const usePlayLevel = (level: Level): boolean => {
 }
 
 export const useSlamLevel = (level: Level): boolean => {
-  const [level1, level2, level3, level4, level5, level6, level7, level8, slam] = useDonkStore(
-    useShallow((state) => [
-      state.level1,
-      state.level2,
-      state.level3,
-      state.level4,
-      state.level5,
-      state.level6,
-      state.level7,
-      state.level8,
-      state.slam
-    ])
-  )
+  const canPlay = usePlayLevel(level)
+  const [level1, level2, level3, level4, level5, level6, level7, level8, slam, progressiveSlams] =
+    useDonkStore(
+      useShallow((state) => [
+        state.level1,
+        state.level2,
+        state.level3,
+        state.level4,
+        state.level5,
+        state.level6,
+        state.level7,
+        state.level8,
+        state.moves.slam,
+        state.settings.progressiveSlams
+      ])
+    )
 
-  const predicate = (e: Level): boolean => e === level
-
-  if (!usePlayLevel(level)) {
+  if (!canPlay) {
     return false
   }
+
+  if (!progressiveSlams) {
+    switch (level) {
+      case 'Japes':
+      case 'Aztec':
+      case 'Factory':
+      case 'Galleon':
+        return slam != 0
+      case 'Isles':
+      case 'Forest':
+      case 'Caves':
+        return slam > 1
+      default:
+        return slam == 3
+    }
+  }
+
+  const predicate = (e: Level): boolean => e === level
 
   if ([level1, level2, level3, level4].some(predicate)) {
     return slam >= 1

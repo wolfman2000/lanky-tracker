@@ -1,11 +1,12 @@
-import { useAnyKong, useCamera, usePunch } from '@renderer/hooks/kongs'
-import IslesCheck from './IslesCheck'
-import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
+
 import { usePlayFactory } from '@renderer/hooks/factory'
 import { usePlayForest } from '@renderer/hooks/forest'
 import { useIslesFairySwitch, useIslesKremTop } from '@renderer/hooks/isles'
+import { useAnyKong, useCamera, usePunch } from '@renderer/hooks/kongs'
+import useDonkStore from '@renderer/store'
 import FairyPool from '../pools/Fairies'
+import IslesCheck from './IslesCheck'
 
 const Vanilla: React.FC = () => {
   const camera = useCamera()
@@ -60,7 +61,7 @@ const Shuffled: React.FC = () => {
 }
 
 const FairyLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.shuffleFairies))
+  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleFairies))
   const locations = shuffle ? <Shuffled /> : <Vanilla />
   return <FairyPool>{locations}</FairyPool>
 }

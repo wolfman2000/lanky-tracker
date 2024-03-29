@@ -110,7 +110,7 @@ const Shuffled: React.FC = () => {
 }
 
 const KasplatLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.shuffleKasplats))
+  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleKasplats))
   const locations = shuffle ? <Shuffled /> : <Vanilla />
   return <KasplatPool>{locations}</KasplatPool>
 }
