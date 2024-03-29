@@ -93,7 +93,7 @@ export const useGrape = (): boolean => {
 
 export const useFeather = (): boolean => {
   const kong = useTiny()
-  const gun = useDonkStore((state) => state.moves.feather)
+  const gun = useDonkStore(useShallow((state) => state.moves.feather))
   return kong && gun
 }
 

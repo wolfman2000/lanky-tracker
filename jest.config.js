@@ -6,5 +6,6 @@ module.exports = {
   },
   transform: {
     '^.+\\.(ts|tsx)$': [`ts-jest`, { tsconfig: 'tsconfig.web.json' }]
-  }
+  },
+  coverageReporters: ['json', 'lcov', ['text', { skipFull: true }]]
 }

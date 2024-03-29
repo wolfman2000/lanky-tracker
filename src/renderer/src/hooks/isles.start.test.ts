@@ -1,14 +1,14 @@
 import { act, renderHook } from '@testing-library/react'
 
-import { resetAllSlices } from '@renderer/store/common'
-import { usePlayJapes } from './japes'
-import { usePlayAztec } from './aztec'
-import { usePlayFactory } from './factory'
-import { usePlayGalleon } from './galleon'
-import { usePlayForest } from './forest'
-import { usePlayCaves } from './caves'
-import { usePlayCastle } from './castle'
 import useDonkStore from '@renderer/store'
+import { resetAllSlices } from '@renderer/store/common'
+import { usePlayAztec } from './aztec'
+import { usePlayCastle } from './castle'
+import { usePlayCaves } from './caves'
+import { usePlayFactory } from './factory'
+import { usePlayForest } from './forest'
+import { usePlayGalleon } from './galleon'
+import { usePlayJapes } from './japes'
 
 beforeEach(() => {
   act(() => resetAllSlices())
