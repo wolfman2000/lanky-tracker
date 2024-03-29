@@ -4,8 +4,8 @@ import { useShallow } from 'zustand/react/shallow'
 import useDonkStore from '@renderer/store'
 import { BananaportRange } from '@renderer/store/common'
 
-import helmFullIcon from '../assets/images/settings/krem_isle.png'
-import helmHalfIcon from '../assets/images/settings/krem_isle_half.png'
+import helmFullIcon from '../../assets/images/settings/krem_isle.png'
+import helmHalfIcon from '../../assets/images/settings/krem_isle_half.png'
 
 const portToIcon = (num: BananaportRange): string => {
   return num == 1 ? helmHalfIcon : helmFullIcon

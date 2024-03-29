@@ -1,6 +1,6 @@
 import useDonkStore from '../../store'
 
-import keyIcon from '../assets/images/key.png'
+import keyIcon from '../../assets/images/key.png'
 
 type SimpleIconProps = {
   keyNum: number

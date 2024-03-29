@@ -2,14 +2,14 @@ import SimpleKey from '@renderer/components/settings/SimpleKey'
 
 import LevelSelector from './LevelSelector'
 
-import l1 from '../assets/images/1.png'
-import l2 from '../assets/images/2.png'
-import l3 from '../assets/images/3.png'
-import l4 from '../assets/images/4.png'
-import l5 from '../assets/images/5.png'
-import l6 from '../assets/images/6.png'
-import l7 from '../assets/images/7.png'
-import l8 from '../assets/images/8.png'
+import l1 from '../../assets/images/1.png'
+import l2 from '../../assets/images/2.png'
+import l3 from '../../assets/images/3.png'
+import l4 from '../../assets/images/4.png'
+import l5 from '../../assets/images/5.png'
+import l6 from '../../assets/images/6.png'
+import l7 from '../../assets/images/7.png'
+import l8 from '../../assets/images/8.png'
 
 const LevelTable = (): JSX.Element => {
   return (

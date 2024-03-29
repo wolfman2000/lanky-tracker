@@ -1,9 +1,9 @@
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 
-import slamIcon from '../assets/images/slam1.png'
-import superIcon from '../assets/images/slam2.png'
-import duperIcon from '../assets/images/slam3.png'
+import slamIcon from '../../assets/images/slam1.png'
+import superIcon from '../../assets/images/slam2.png'
+import duperIcon from '../../assets/images/slam3.png'
 
 import { MouseEvent, WheelEvent } from 'react'
 
