@@ -1,6 +1,7 @@
 import ArenaPool from '@renderer/components/pools/Arenas'
 import BananaMedalPool from '@renderer/components/pools/BananaMedals'
 import BossPool from '@renderer/components/pools/Bosses'
+import ShopPool from '@renderer/components/pools/Shops'
 import { usePlayForest } from '@renderer/hooks/forest'
 import { useAnyKong } from '@renderer/hooks/kongs'
 import CrateLocations from './Crates'
@@ -58,7 +59,9 @@ const ForestChecks: React.FC = () => {
           canGetLogic={inStage && anyKong}
         />
       </BossPool>
-      <ForestShops />
+      <ShopPool>
+        <ForestShops />
+      </ShopPool>
     </div>
   )
 }

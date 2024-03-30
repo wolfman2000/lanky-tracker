@@ -1,6 +1,7 @@
 import ArenaPool from '@renderer/components/pools/Arenas'
 import BananaMedalPool from '@renderer/components/pools/BananaMedals'
 import BossPool from '@renderer/components/pools/Bosses'
+import ShopPool from '@renderer/components/pools/Shops'
 import { usePlayCaves } from '@renderer/hooks/caves'
 import { useAnyKong, useBongos, useSlam } from '@renderer/hooks/kongs'
 import CavesCheck from './CavesCheck'
@@ -60,7 +61,9 @@ const CavesChecks: React.FC = () => {
           canGetLogic={inStage && anyKong}
         />
       </BossPool>
-      <CavesShops />
+      <ShopPool>
+        <CavesShops />
+      </ShopPool>
     </div>
   )
 }

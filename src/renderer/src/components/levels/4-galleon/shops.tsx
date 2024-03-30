@@ -8,22 +8,18 @@ import { useGalleonOutskirts, usePlayGalleon } from '@renderer/hooks/galleon'
  * @returns the shuffled shop locations in Galleon.
  */
 const GalleonShops: React.FC = () => {
-  const [dk, diddy, lanky, tiny, chunky, poolShops] = useDonkStore(
+  const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
     useShallow((state) => [
       state.moves.dk,
       state.moves.diddy,
       state.moves.lanky,
       state.moves.tiny,
-      state.moves.chunky,
-      state.settings.poolShops
+      state.moves.chunky
     ])
   )
   const anyKong = dk || diddy || lanky || tiny || chunky
   const inStage = usePlayGalleon()
   const outskirts = useGalleonOutskirts()
-  if (!poolShops) {
-    return null
-  }
 
   return (
     <>

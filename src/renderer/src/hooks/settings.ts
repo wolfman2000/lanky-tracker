@@ -29,3 +29,10 @@ export const useBananaportAll = (): boolean =>
  */
 export const useShuffleCrates = (): boolean =>
   useDonkStore(useShallow((state) => state.settings.shuffleCrates))
+
+/**
+ * Are the shop items in the rando pool?
+ * @returns true if the shops are in the pool.
+ */
+export const usePoolShops = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.poolShops))

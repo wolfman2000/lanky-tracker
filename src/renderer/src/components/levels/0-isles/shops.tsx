@@ -8,19 +8,15 @@ import IslesCheck from './IslesCheck'
  * @returns the shuffled shop locations in Isles.
  */
 const IslesShops: React.FC = () => {
-  const [dk, diddy, lanky, tiny, chunky, poolShops] = useDonkStore(
+  const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
     useShallow((state) => [
       state.moves.dk,
       state.moves.diddy,
       state.moves.lanky,
       state.moves.tiny,
-      state.moves.chunky,
-      state.settings.poolShops
+      state.moves.chunky
     ])
   )
-  if (!poolShops) {
-    return null
-  }
   const anyKong = dk || diddy || lanky || tiny || chunky
 
   return (

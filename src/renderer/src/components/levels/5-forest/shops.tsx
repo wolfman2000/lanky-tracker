@@ -8,22 +8,18 @@ import { useForestBean, usePlayForest } from '@renderer/hooks/forest'
  * @returns The forest shop shuffled items.
  */
 const ForestShops: React.FC = () => {
-  const [dk, diddy, lanky, tiny, chunky, poolShops] = useDonkStore(
+  const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
     useShallow((state) => [
       state.moves.dk,
       state.moves.diddy,
       state.moves.lanky,
       state.moves.tiny,
-      state.moves.chunky,
-      state.settings.poolShops
+      state.moves.chunky
     ])
   )
   const anyKong = dk || diddy || lanky || tiny || chunky
   const inStage = usePlayForest()
   const beanstalk = useForestBean()
-  if (!poolShops) {
-    return null
-  }
 
   return (
     <>
