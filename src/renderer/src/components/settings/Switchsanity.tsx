@@ -93,11 +93,7 @@ const SwitchsanitySelector: React.FC = () => {
           images={allGun}
         />
         <p>Aztec Back Access</p>
-        <SwitchsanitySwitch
-          currValue={switches.aztecBackAccess}
-          storeKey="aztecBackAccess"
-          images={allMusic}
-        />
+        <SwitchsanitySwitch currValue={switches.aztecBack} storeKey="aztecBack" images={allMusic} />
         <p>Aztec Llama Temple 1</p>
         <SwitchsanitySwitch
           currValue={switches.aztecLlama1}

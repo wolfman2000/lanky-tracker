@@ -34,7 +34,7 @@ export const useSlamAztec = (): boolean => useSlamLevel('Aztec')
 
 const useAztecCoconutSwitch = (): boolean => useSwitchsanityGun('aztecBlueprint', 0)
 
-const useAztecGuitarSwitch = (): boolean => useSwitchsanityMusicPad('aztecGuitar', 1)
+const useAztecGuitarSwitch = (): boolean => useSwitchsanityMusicPad('aztecBack', 1)
 
 const useAztecLlamaCoconutSwitch = (): boolean => useSwitchsanityGun('aztecLlama1', 0)
 const useAztecLlamaGrapeSwitch = (): boolean => useSwitchsanityGun('aztecLlama2', 2)

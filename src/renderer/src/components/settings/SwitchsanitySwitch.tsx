@@ -2,9 +2,10 @@ import { MouseEvent, WheelEvent } from 'react'
 import { useShallow } from 'zustand/react/shallow'
 
 import useDonkStore from '@renderer/store'
+import { SwitchsanitySwitches } from '@renderer/store/common'
 
 type SwitchsanityProps = {
-  storeKey: string
+  storeKey: keyof SwitchsanitySwitches
   currValue: number
   images: string[]
 }
