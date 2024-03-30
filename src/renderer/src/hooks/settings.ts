@@ -64,3 +64,10 @@ export const useShuffleDirt = (): boolean =>
  */
 export const useShuffleFairies = (): boolean =>
   useDonkStore(useShallow((state) => state.settings.shuffleFairies))
+
+/**
+ * Are the Kasplat locations shuffled around in this seed?
+ * @returns true if the Kasplat locations are shuffled this seed.
+ */
+export const useShuffleKasplats = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.shuffleKasplats))

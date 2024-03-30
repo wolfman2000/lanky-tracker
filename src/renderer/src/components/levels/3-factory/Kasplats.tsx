@@ -1,9 +1,7 @@
-import { useShallow } from 'zustand/react/shallow'
-
 import KasplatPool from '@renderer/components/pools/Kasplats'
 import { useFactoryProductionTop, useFactoryTesting, usePlayFactory } from '@renderer/hooks/factory'
 import { useAnyKong } from '@renderer/hooks/kongs'
-import useDonkStore from '@renderer/store'
+import { useShuffleKasplats } from '@renderer/hooks/settings'
 import FactoryCheck from './FactoryCheck'
 
 const Vanilla: React.FC = () => {
@@ -64,8 +62,7 @@ const Shuffled: React.FC = () => {
 }
 
 const KasplatLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleKasplats))
-  const locations = shuffle ? <Shuffled /> : <Vanilla />
+  const locations = useShuffleKasplats() ? <Shuffled /> : <Vanilla />
   return <KasplatPool>{locations}</KasplatPool>
 }
 
