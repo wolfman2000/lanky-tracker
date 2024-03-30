@@ -1,8 +1,9 @@
 import { useCastleTree, usePlayCastle, useSlamCastle } from '@renderer/hooks/castle'
-import { usePeanut, usePineapple } from '@renderer/hooks/kongs'
+import { useCoconut, useDk, usePeanut, usePineapple, useStrong } from '@renderer/hooks/kongs'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import CastleCheck from '../CastleCheck'
+import { useCbCount } from '@renderer/hooks/settings'
 
 const DkMedal: React.FC = () => {
   const inStage = usePlayCastle()
@@ -10,14 +11,12 @@ const DkMedal: React.FC = () => {
   const tree = useCastleTree()
   const peanut = usePeanut()
   const pineapple = usePineapple()
-  const [cbCount, coloredBananaShuffle, kong, gun, crystal] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.dk,
-      state.moves.coconut,
-      state.moves.strong
-    ])
+  const cbCount = useCbCount()
+  const kong = useDk()
+  const gun = useCoconut()
+  const crystal = useStrong()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 50

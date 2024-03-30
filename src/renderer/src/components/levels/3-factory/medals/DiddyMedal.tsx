@@ -6,36 +6,37 @@ import {
   useFactoryTesting,
   usePlayFactory
 } from '@renderer/hooks/factory'
+import { useCbCount } from '@renderer/hooks/settings'
+import { useCharge as useSpring, useDiddy, useGuitar, usePeanut } from '@renderer/hooks/kongs'
 
 const DiddyMedal: React.FC = () => {
   const inStage = usePlayFactory()
   const testing = useFactoryTesting()
   const production = useFactoryProductionEnabled()
-  const [cbCount, coloredBananaShuffle, kong, gun, music, move] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.diddy,
-      state.moves.peanut,
-      state.moves.guitar,
-      state.moves.charge
-    ])
+  const cbCount = useCbCount()
+  const kong = useDiddy()
+  const gun = usePeanut()
+  const music = useGuitar()
+  const pad = useSpring()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
-  let currLogic = 22
+  let currLogic = 22 // 12 on prod floor, 5 by game, 5 on warp 5
   if (production) {
     currLogic += 15
   }
   if (testing) {
-    currLogic += 8
+    currLogic += 8 // 8 by Funky
     if (music && gun) {
-      currLogic += 30
+      currLogic += 30 // enemy code room balloons
     }
   }
   let currBreak = currLogic
   if (testing) {
+    // 5 bunches on block tower.
     currBreak += 25
-    if (move) {
+    if (pad) {
       currLogic += 25
     }
   }

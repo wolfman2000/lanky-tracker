@@ -1,14 +1,16 @@
 import {
-  usePlayForest,
-  useSlamForest,
-  useForestNight,
   useForestMushroomTop,
-  useForestOwl
+  useForestNight,
+  useForestOwl,
+  usePlayForest,
+  useSlamForest
 } from '@renderer/hooks/forest'
+import { useDiddy, useGrape, useLanky, useRocket, useStand, useTiny } from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
+import { logicBreak } from '@renderer/hooks/world'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import ForestCheck from '../ForestCheck'
-import { logicBreak } from '@renderer/hooks/world'
 
 const LankyMedal: React.FC = () => {
   const inStage = usePlayForest()
@@ -16,17 +18,15 @@ const LankyMedal: React.FC = () => {
   const night = useForestNight()
   const top = useForestMushroomTop()
   const owl = useForestOwl()
-  const [cbCount, coloredBananaShuffle, kong, gun, move, diddy, rocket, tiny] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.lanky,
-      state.moves.grape,
-      state.moves.stand,
-      state.moves.diddy,
-      state.moves.rocket,
-      state.moves.tiny
-    ])
+  const cbCount = useCbCount()
+  const kong = useLanky()
+  const gun = useGrape()
+  const move = useStand()
+  const diddy = useDiddy()
+  const rocket = useRocket()
+  const tiny = useTiny()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 32

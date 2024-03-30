@@ -41,6 +41,7 @@ import {
   useSpring,
   useSprint,
   useStrong,
+  useSuperDuperSlam,
   useSuperSlam,
   useTiny,
   useTriangle,
@@ -48,7 +49,14 @@ import {
   useTwirl,
   useVine
 } from './kongs'
-import { useAutoBonus, useBananaport, useFairyCount, useIsSwitchsanity } from './settings'
+import {
+  useAutoBonus,
+  useBananaport,
+  useFairyCount,
+  useIsSwitchsanity,
+  useOpenLobbies,
+  useProgressiveSlams
+} from './settings'
 import { LogicBool, logicBreak, useSwitchsanityGun, useSwitchsanityMusicPad } from './world'
 
 /**
@@ -65,12 +73,13 @@ export const useIslesFairySwitch = (): boolean => useSwitchsanityGun('islesFores
 
 /**
  * Can we reach the outer Fungi island?
+ *
+ * Logically, we need either Key 4 or Open Lobbies for this one.
  * @returns true if we can reach the outer Fungi island.
  */
 export const useIslesFungiIsland = (): boolean => {
-  const [key4, openLobbies] = useDonkStore(
-    useShallow((state) => [state.key4, state.settings.openLobbies])
-  )
+  const [key4] = useDonkStore(useShallow((state) => [state.key4]))
+  const openLobbies = useOpenLobbies()
   return key4 || openLobbies
 }
 
@@ -127,9 +136,8 @@ export const useIslesKremAscent = (): boolean => {
   const fungiIsland = useIslesFungiIsland()
   const rocket = useRocket()
   const bananaport = useBananaport()
-  const [openLobbies, key2] = useDonkStore(
-    useShallow((state) => [state.settings.openLobbies, state.key2])
-  )
+  const openLobbies = useOpenLobbies()
+  const [key2] = useDonkStore(useShallow((state) => [state.key2]))
   return openLobbies || key2 || bananaport != 0 || (canRocket && fungiIsland && rocket)
 }
 
@@ -198,6 +206,7 @@ export const useIslesHelmEntry = (): boolean => {
 
 export const usePlayLevel = (level: Level): boolean => {
   const dive = useDive()
+  const openLobbies = useOpenLobbies()
   const [
     level1,
     level2,
@@ -209,11 +218,9 @@ export const usePlayLevel = (level: Level): boolean => {
     level8,
     key1,
     key2,
-    key4,
     key5,
     key6,
-    key7,
-    openLobbies
+    key7
   ] = useDonkStore(
     useShallow((state) => [
       state.level1,
@@ -226,16 +233,15 @@ export const usePlayLevel = (level: Level): boolean => {
       state.level8,
       state.key1,
       state.key2,
-      state.key4,
       state.key5,
       state.key6,
-      state.key7,
-      state.settings.openLobbies
+      state.key7
     ])
   )
   const islesUpper = useIslesUpper()
   const islesKremTop = useIslesKremTop()
   const islesKremAscent = useIslesKremAscent()
+  const islesFungiIsland = useIslesFungiIsland()
 
   if (level1 === level) {
     return true
@@ -250,7 +256,7 @@ export const usePlayLevel = (level: Level): boolean => {
     return (openLobbies || key2) && dive
   }
   if (level5 === level) {
-    return openLobbies || key4
+    return islesFungiIsland
   }
   if (level6 === level) {
     return islesUpper && (openLobbies || key5)
@@ -267,21 +273,22 @@ export const usePlayLevel = (level: Level): boolean => {
 
 export const useSlamLevel = (level: Level): boolean => {
   const canPlay = usePlayLevel(level)
-  const [level1, level2, level3, level4, level5, level6, level7, level8, slam, progressiveSlams] =
-    useDonkStore(
-      useShallow((state) => [
-        state.level1,
-        state.level2,
-        state.level3,
-        state.level4,
-        state.level5,
-        state.level6,
-        state.level7,
-        state.level8,
-        state.moves.slam,
-        state.settings.progressiveSlams
-      ])
-    )
+  const slam = useSlam()
+  const superSlam = useSuperSlam()
+  const duperSlam = useSuperDuperSlam()
+  const progressiveSlams = useProgressiveSlams()
+  const [level1, level2, level3, level4, level5, level6, level7, level8] = useDonkStore(
+    useShallow((state) => [
+      state.level1,
+      state.level2,
+      state.level3,
+      state.level4,
+      state.level5,
+      state.level6,
+      state.level7,
+      state.level8
+    ])
+  )
 
   if (!canPlay) {
     return false
@@ -293,28 +300,28 @@ export const useSlamLevel = (level: Level): boolean => {
       case 'Aztec':
       case 'Factory':
       case 'Galleon':
-        return slam != 0
+        return slam
       case 'Isles':
       case 'Forest':
       case 'Caves':
-        return slam > 1
+        return superSlam
       default:
-        return slam == 3
+        return duperSlam
     }
   }
 
   const predicate = (e: Level): boolean => e === level
 
   if ([level1, level2, level3, level4].some(predicate)) {
-    return slam >= 1
+    return slam
   }
 
   if ([level5, level6].some(predicate)) {
-    return slam >= 2
+    return superSlam
   }
 
   if ([level7, level8].some(predicate)) {
-    return slam == 3
+    return duperSlam
   }
 
   return false
@@ -475,8 +482,7 @@ export const useCheckTinyAztecLobby = (): LogicBool => {
 const useGalleonLobbySlam = (): boolean => {
   const progSlam = useSlamGalleon()
   const normSlam = useSuperSlam()
-  const progressiveSlams = useDonkStore(useShallow((state) => state.settings.progressiveSlams))
-  return progressiveSlams ? progSlam : normSlam
+  return useProgressiveSlams() ? progSlam : normSlam
 }
 
 /**

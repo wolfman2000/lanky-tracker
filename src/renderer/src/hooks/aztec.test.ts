@@ -2,7 +2,7 @@ import { act, renderHook } from '@testing-library/react'
 
 import useDonkStore from '@renderer/store'
 import { resetAllSlices } from '@renderer/store/common'
-import { useAztecBack, useAztecFront } from './aztec'
+import { useAztecBack, useAztecFront, useAztecShuffledFairyLogic } from './aztec'
 import { logicBreak } from './world'
 
 beforeEach(() => {
@@ -76,6 +76,40 @@ describe('From the Aztec Oasis,', () => {
       act(() => store.current.setMove('tiny', true))
       act(() => store.current.setMove('sax', true))
       expect(check.current.in).toBeFalsy()
+      expect(check.current.out).toBeTruthy()
+    })
+  })
+})
+
+describe('The fairies in Aztec', () => {
+  beforeEach(() => {
+    const { result: store } = renderHook(() => useDonkStore())
+    act(() => store.current.setLevel(1, 'Aztec'))
+    act(() => store.current.setMove('chunky', true))
+  })
+  describe('(when location shuffled)', () => {
+    beforeEach(() => {
+      const { result: store } = renderHook(() => useDonkStore())
+      act(() => store.current.setSetting('shuffleFairies', true))
+    })
+    it('require the camera no matter what.', () => {
+      const { result: check } = renderHook(() => useAztecShuffledFairyLogic())
+      expect(check.current.in).toBeFalsy()
+      expect(check.current.out).toBeFalsy()
+    })
+    it('can be captured out of logic with a camera.', () => {
+      const { result: store } = renderHook(() => useDonkStore())
+      act(() => store.current.setMove('camera', true))
+      const { result: check } = renderHook(() => useAztecShuffledFairyLogic())
+      expect(check.current.in).toBeFalsy()
+      expect(check.current.out).toBeTruthy()
+    })
+    it('can be captured in logic with a camera and vine swinging.', () => {
+      const { result: store } = renderHook(() => useDonkStore())
+      act(() => store.current.setMove('camera', true))
+      act(() => store.current.setMove('vine', true))
+      const { result: check } = renderHook(() => useAztecShuffledFairyLogic())
+      expect(check.current.in).toBeTruthy()
       expect(check.current.out).toBeTruthy()
     })
   })

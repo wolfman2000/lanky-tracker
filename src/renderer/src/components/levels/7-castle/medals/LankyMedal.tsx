@@ -1,4 +1,17 @@
 import { usePlayCastle, useSlamCastle } from '@renderer/hooks/castle'
+import {
+  useBalloon,
+  useDiddy,
+  useDk,
+  useGrape,
+  useLanky,
+  useSniper,
+  useSprint,
+  useTiny,
+  useTrombone,
+  useTwirl
+} from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import CastleCheck from '../CastleCheck'
@@ -6,34 +19,19 @@ import CastleCheck from '../CastleCheck'
 const LankyMedal: React.FC = () => {
   const inStage = usePlayCastle()
   const canSlam = useSlamCastle()
-  const [
-    cbCount,
-    coloredBananaShuffle,
-    kong,
-    gun,
-    music,
-    crystal,
-    pad,
-    dk,
-    diddy,
-    tiny,
-    twirl,
-    sniper
-  ] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.lanky,
-      state.moves.grape,
-      state.moves.trombone,
-      state.moves.sprint,
-      state.moves.balloon,
-      state.moves.dk,
-      state.moves.diddy,
-      state.moves.tiny,
-      state.moves.twirl,
-      state.moves.sniper
-    ])
+  const cbCount = useCbCount()
+  const kong = useLanky()
+  const gun = useGrape()
+  const music = useTrombone()
+  const crystal = useSprint()
+  const pad = useBalloon()
+  const dk = useDk()
+  const diddy = useDiddy()
+  const tiny = useTiny()
+  const twirl = useTwirl()
+  const sniper = useSniper()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 30

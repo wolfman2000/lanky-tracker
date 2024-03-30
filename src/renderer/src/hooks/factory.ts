@@ -1,8 +1,9 @@
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import { usePlayLevel, useSlamLevel } from './isles'
-import { useCoconut, useGrab, useSlam } from './kongs'
+import { useCoconut, useDiddy, useGrab, useSlam, useTiny } from './kongs'
 import { useBananaportAll } from './settings'
+import { LogicBool } from './world'
 
 /**
  * Can we play in Frantic Factory?
@@ -26,6 +27,21 @@ export const useFactoryTesting = (): boolean => {
   const slam = useSlam()
   const [removeBarriers] = useDonkStore(useShallow((state) => [state.removeBarriers]))
   return inStage && (removeBarriers.factoryTesting || slam)
+}
+
+/**
+ * Can we get on the top platform where the power hut resides in Factory?
+ * @returns true if we can get on the platform with the power hut.
+ */
+export const useFactoryHut = (): LogicBool => {
+  const inStage = usePlayFactory()
+  const testing = useFactoryTesting()
+  const diddy = useDiddy()
+  const tiny = useTiny()
+  return {
+    in: testing,
+    out: inStage && (diddy || tiny)
+  }
 }
 
 /**

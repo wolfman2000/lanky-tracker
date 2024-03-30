@@ -2,6 +2,7 @@ import { useShallow } from 'zustand/react/shallow'
 
 import RainbowCoinPool from '@renderer/components/pools/RainbowCoins'
 import { usePlayCastle } from '@renderer/hooks/castle'
+import { useIslesFungiIsland } from '@renderer/hooks/isles'
 import {
   useAnyKong,
   useBalloon,
@@ -21,9 +22,8 @@ const VanillaDirtLocations: React.FC = () => {
   const tiny = useTiny()
   const balloon = useBalloon()
   const playCastle = usePlayCastle()
-  const [vine, key4, openLobbies] = useDonkStore(
-    useShallow((state) => [state.moves.vine, state.key4, state.settings.openLobbies])
-  )
+  const fungiIsland = useIslesFungiIsland()
+  const [vine] = useDonkStore(useShallow((state) => [state.moves.vine]))
 
   return (
     <>
@@ -56,7 +56,7 @@ const VanillaDirtLocations: React.FC = () => {
         id={75}
         name="Isles Dirt Cabin Isle"
         region="Outer Isles"
-        canGetLogic={(key4 || openLobbies) && anyKong && shockwave}
+        canGetLogic={fungiIsland && anyKong && shockwave}
       />
       <IslesCheck
         id={76}

@@ -1,6 +1,8 @@
 import { useShallow } from 'zustand/react/shallow'
 
 import { useJapesRambi, usePlayJapes } from '@renderer/hooks/japes'
+import { useBlast, useCoconut, useDk, useVine } from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
 import useDonkStore from '@renderer/store'
 import JapesCheck from '../JapesCheck'
 
@@ -11,15 +13,13 @@ import JapesCheck from '../JapesCheck'
 const DkMedal: React.FC = (): JSX.Element => {
   const inStage = usePlayJapes()
   const haveRambiCage = useJapesRambi()
-  const [cbCount, coloredBananaShuffle, dk, coconut, blast, vine] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.dk,
-      state.moves.coconut,
-      state.moves.blast,
-      state.moves.vine
-    ])
+  const cbCount = useCbCount()
+  const dk = useDk()
+  const coconut = useCoconut()
+  const blast = useBlast()
+  const vine = useVine()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
   let currLogic = 36
   if (vine) {

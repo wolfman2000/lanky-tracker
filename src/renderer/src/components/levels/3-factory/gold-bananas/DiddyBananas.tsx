@@ -1,7 +1,7 @@
 import {
+  useFactoryHut,
   useFactoryProductionEnabled,
   useFactoryTesting,
-  usePlayFactory,
   useSlamFactory
 } from '@renderer/hooks/factory'
 import {
@@ -14,14 +14,13 @@ import {
   useTwirl,
   useVine
 } from '@renderer/hooks/kongs'
-import useDonkStore from '@renderer/store'
-import { useShallow } from 'zustand/react/shallow'
+import { useAutoBonus } from '@renderer/hooks/settings'
+import { logicBreak } from '@renderer/hooks/world'
 import FactoryCheck from '../FactoryCheck'
 
 const DiddyBananas: React.FC = () => {
   const testing = useFactoryTesting()
   const production = useFactoryProductionEnabled()
-  const inStage = usePlayFactory()
   const canSlam = useSlamFactory()
   const dk = useDk()
   const diddy = useDiddy()
@@ -31,7 +30,8 @@ const DiddyBananas: React.FC = () => {
   const highGrab = useHighGrab()
   const vine = useVine()
   const twirl = useTwirl()
-  const [autoBonus] = useDonkStore(useShallow((state) => [state.settings.autoBonus]))
+  const autoBonus = useAutoBonus()
+  const hut = useFactoryHut()
   return (
     <>
       <FactoryCheck
@@ -51,8 +51,8 @@ const DiddyBananas: React.FC = () => {
         id={3012}
         name="Factory Diddy Chunky Room Barrel"
         region="Storage And Arcade"
-        canGetLogic={testing && canSlam && diddy && (autoBonus || vine)}
-        canGetBreak={inStage && canSlam && diddy && (autoBonus || vine || dk)}
+        canGetLogic={hut.in && canSlam && diddy && (autoBonus || vine)}
+        canGetBreak={logicBreak(hut) && canSlam && diddy && (autoBonus || vine || dk)}
       />
       <FactoryCheck
         id={3013}

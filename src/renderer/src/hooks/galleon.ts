@@ -2,7 +2,7 @@ import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import { usePlayLevel, useSlamLevel } from './isles'
 import { useDive, useGrab, useLanky, useRocket, useTwirl, useVine } from './kongs'
-import { useBananaportAll } from './settings'
+import { useBananaportAll, useGalleonTideStartHigh } from './settings'
 import { LogicBool, logicBreak, useSwitchsanityGun } from './world'
 
 /**
@@ -36,8 +36,7 @@ export const useGalleonLighthouseArea = (): boolean => {
 export const useGalleonHighTide = (): boolean => {
   const lighthouse = useGalleonLighthouseArea()
   const dive = useDive()
-  const [galleonHighTide] = useDonkStore(useShallow((state) => [state.settings.galleonHighTide]))
-  if (galleonHighTide) {
+  if (useGalleonTideStartHigh()) {
     return true
   }
   return lighthouse && dive
@@ -49,9 +48,8 @@ export const useGalleonHighTide = (): boolean => {
  */
 export const useGalleonLowTide = (): boolean => {
   const dive = useDive()
-  const [galleonHighTide] = useDonkStore(useShallow((state) => [state.settings.galleonHighTide]))
   const inStage = usePlayGalleon()
-  if (!galleonHighTide) {
+  if (!useGalleonTideStartHigh()) {
     return true
   }
   return dive && inStage

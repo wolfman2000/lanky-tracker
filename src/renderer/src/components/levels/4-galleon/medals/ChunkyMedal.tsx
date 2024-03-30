@@ -11,7 +11,8 @@ import {
 } from '@renderer/hooks/galleon'
 import { useShallow } from 'zustand/react/shallow'
 import { logicBreak } from '@renderer/hooks/world'
-import { useSlam } from '@renderer/hooks/kongs'
+import { useChunky, useDive, usePineapple, usePunch, useSlam } from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
 
 const ChunkyMedal: React.FC = () => {
   const inStage = usePlayGalleon()
@@ -22,15 +23,13 @@ const ChunkyMedal: React.FC = () => {
   const seasick = useGalleonSeasickShip()
   const cavernTop = useGalleonCavernTop()
   const slam = useSlam()
-  const [cbCount, coloredBananaShuffle, kong, gun, move, dive] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.chunky,
-      state.moves.pineapple,
-      state.moves.punch,
-      state.moves.dive
-    ])
+  const cbCount = useCbCount()
+  const kong = useChunky()
+  const gun = usePineapple()
+  const move = usePunch()
+  const dive = useDive()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 12

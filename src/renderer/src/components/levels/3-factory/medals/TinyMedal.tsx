@@ -4,6 +4,8 @@ import {
   useFactoryTesting,
   usePlayFactory
 } from '@renderer/hooks/factory'
+import { useDk, useFeather, useMini, useTiny, useTwirl } from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import FactoryCheck from '../FactoryCheck'
@@ -13,16 +15,14 @@ const TinyMedal: React.FC = () => {
   const testing = useFactoryTesting()
   const production = useFactoryProductionEnabled()
   const prodTop = useFactoryProductionTop()
-  const [cbCount, coloredBananaShuffle, kong, gun, move, crystal, dk] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.tiny,
-      state.moves.feather,
-      state.moves.twirl,
-      state.moves.mini,
-      state.moves.dk
-    ])
+  const cbCount = useCbCount()
+  const kong = useTiny()
+  const gun = useFeather()
+  const move = useTwirl()
+  const crystal = useMini()
+  const dk = useDk()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 15

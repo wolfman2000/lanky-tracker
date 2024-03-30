@@ -1,5 +1,3 @@
-import { useShallow } from 'zustand/react/shallow'
-
 import ToughGoldenBanana from '@renderer/components/pools/ToughGoldenBanana'
 import { useCavesIgloo, usePlayCaves } from '@renderer/hooks/caves'
 import {
@@ -11,7 +9,7 @@ import {
   useSlam,
   useStrong
 } from '@renderer/hooks/kongs'
-import useDonkStore from '@renderer/store'
+import { useHardShooting } from '@renderer/hooks/settings'
 import CavesCheck from '../CavesCheck'
 
 const DkBananas: React.FC = () => {
@@ -24,7 +22,7 @@ const DkBananas: React.FC = () => {
   const homing = useHoming()
   const anyGun = useAnyGun()
   const slam = useSlam()
-  const hardShooting = useDonkStore(useShallow((state) => state.settings.hardShooting))
+  const hardShooting = useHardShooting()
   return (
     <>
       <ToughGoldenBanana>

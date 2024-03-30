@@ -7,21 +7,21 @@ import {
 } from '@renderer/hooks/factory'
 import { useShallow } from 'zustand/react/shallow'
 import FactoryCheck from '../FactoryCheck'
+import { useCbCount } from '@renderer/hooks/settings'
+import { useGrape, useLanky, useStand, useTrombone } from '@renderer/hooks/kongs'
 
 const LankyMedal: React.FC = () => {
   const inStage = usePlayFactory()
   const testing = useFactoryTesting()
   const production = useFactoryProductionEnabled()
   const prodTop = useFactoryProductionTop()
-  const [cbCount, coloredBananaShuffle, kong, gun, music, move] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.lanky,
-      state.moves.grape,
-      state.moves.trombone,
-      state.moves.stand
-    ])
+  const cbCount = useCbCount()
+  const kong = useLanky()
+  const gun = useGrape()
+  const music = useTrombone()
+  const move = useStand()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 10

@@ -3,6 +3,8 @@ import {
   useFactoryTesting,
   usePlayFactory
 } from '@renderer/hooks/factory'
+import { useBlast, useCoconut, useDk, useStrong } from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import FactoryCheck from '../FactoryCheck'
@@ -11,15 +13,13 @@ const DkMedal: React.FC = () => {
   const inStage = usePlayFactory()
   const testing = useFactoryTesting()
   const production = useFactoryProductionEnabled()
-  const [cbCount, coloredBananaShuffle, dk, coconut, strong, blast] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.dk,
-      state.moves.coconut,
-      state.moves.strong,
-      state.moves.blast
-    ])
+  const cbCount = useCbCount()
+  const dk = useDk()
+  const coconut = useCoconut()
+  const strong = useStrong()
+  const blast = useBlast()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 15

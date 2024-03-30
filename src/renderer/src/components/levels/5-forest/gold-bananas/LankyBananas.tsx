@@ -1,5 +1,3 @@
-import { useShallow } from 'zustand/react/shallow'
-
 import ToughGoldenBanana from '@renderer/components/pools/ToughGoldenBanana'
 import { useForestNight, useForestOwl, usePlayForest, useSlamForest } from '@renderer/hooks/forest'
 import {
@@ -14,8 +12,8 @@ import {
   useTiny,
   useTrombone
 } from '@renderer/hooks/kongs'
+import { useHardShooting } from '@renderer/hooks/settings'
 import { logicBreak } from '@renderer/hooks/world'
-import useDonkStore from '@renderer/store'
 import ForestCheck from '../ForestCheck'
 
 const LankyBananas: React.FC = () => {
@@ -33,7 +31,7 @@ const LankyBananas: React.FC = () => {
   const lanky = useLanky()
   const tiny = useTiny()
   const boulderTech = useBoulderTech()
-  const hardShooting = useDonkStore(useShallow((state) => state.settings.hardShooting))
+  const hardShooting = useHardShooting()
   return (
     <>
       <ForestCheck

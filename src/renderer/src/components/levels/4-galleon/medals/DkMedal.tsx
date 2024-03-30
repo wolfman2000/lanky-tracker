@@ -1,5 +1,3 @@
-import useDonkStore from '@renderer/store'
-import GalleonCheck from '../GalleonCheck'
 import {
   useGalleonLighthouseArea,
   useGalleonLighthousePlatform,
@@ -7,8 +5,12 @@ import {
   usePlayGalleon,
   useSlamGalleon
 } from '@renderer/hooks/galleon'
-import { useShallow } from 'zustand/react/shallow'
+import { useBlast, useBongos, useCoconut, useDive, useDk, useLanky } from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
 import { logicBreak } from '@renderer/hooks/world'
+import useDonkStore from '@renderer/store'
+import { useShallow } from 'zustand/react/shallow'
+import GalleonCheck from '../GalleonCheck'
 
 const DkMedal: React.FC = () => {
   const inStage = usePlayGalleon()
@@ -16,17 +18,15 @@ const DkMedal: React.FC = () => {
   const outskirts = useGalleonOutskirts()
   const lighthouseArea = useGalleonLighthouseArea()
   const lighthousePlatform = useGalleonLighthousePlatform()
-  const [cbCount, coloredBananaShuffle, kong, gun, music, pad, dive, lanky] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.dk,
-      state.moves.coconut,
-      state.moves.bongos,
-      state.moves.blast,
-      state.moves.dive,
-      state.moves.lanky
-    ])
+  const cbCount = useCbCount()
+  const kong = useDk()
+  const gun = useCoconut()
+  const music = useBongos()
+  const pad = useBlast()
+  const dive = useDive()
+  const lanky = useLanky()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 0

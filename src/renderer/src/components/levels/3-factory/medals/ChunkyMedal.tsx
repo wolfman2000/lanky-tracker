@@ -1,5 +1,7 @@
-import useDonkStore from '@renderer/store'
 import { useFactoryProductionTop, useFactoryTesting, usePlayFactory } from '@renderer/hooks/factory'
+import { useChunky, usePineapple, usePunch, useTriangle } from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
+import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import FactoryCheck from '../FactoryCheck'
 
@@ -7,15 +9,13 @@ const ChunkyMedal: React.FC = () => {
   const inStage = usePlayFactory()
   const testing = useFactoryTesting()
   const prodTop = useFactoryProductionTop()
-  const [cbCount, coloredBananaShuffle, kong, gun, music, move] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.chunky,
-      state.moves.pineapple,
-      state.moves.triangle,
-      state.moves.punch
-    ])
+  const cbCount = useCbCount()
+  const kong = useChunky()
+  const gun = usePineapple()
+  const music = useTriangle()
+  const move = usePunch()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 20

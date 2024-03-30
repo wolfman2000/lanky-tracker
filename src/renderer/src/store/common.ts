@@ -579,12 +579,6 @@ interface SettingCollection {
    */
   poolKeys: boolean
   /**
-   * Are switches progressive with each level?
-   *
-   * This depends on level shuffle.
-   */
-  progressiveSwitchStrength: boolean
-  /**
    * Which fast checks are enabled?
    *
    * Only the ones that affect logic should be placed in here.

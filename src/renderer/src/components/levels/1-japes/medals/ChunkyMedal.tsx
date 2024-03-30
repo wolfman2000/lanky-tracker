@@ -6,6 +6,7 @@ import {
   useJapesUnderground,
   usePlayJapes
 } from '@renderer/hooks/japes'
+import { useBarrel, useChunky, useHunky, usePineapple } from '@renderer/hooks/kongs'
 import { useCbCount } from '@renderer/hooks/settings'
 import useDonkStore from '@renderer/store'
 import JapesCheck from '../JapesCheck'
@@ -16,14 +17,12 @@ const ChunkyMedal: React.FC = () => {
   const haveRambiCage = useJapesRambi()
   const underground = useJapesUnderground()
   const cbCount = useCbCount()
-  const [coloredBananaShuffle, chunky, barrel, hunky, pineapple] = useDonkStore(
-    useShallow((state) => [
-      state.settings.shuffleColoredBananas,
-      state.moves.chunky,
-      state.moves.barrel,
-      state.moves.hunky,
-      state.moves.pineapple
-    ])
+  const chunky = useChunky()
+  const barrel = useBarrel()
+  const hunky = useHunky()
+  const pineapple = usePineapple()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 15

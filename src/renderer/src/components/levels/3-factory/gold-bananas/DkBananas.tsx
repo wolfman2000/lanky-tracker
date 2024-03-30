@@ -2,6 +2,7 @@ import { useShallow } from 'zustand/react/shallow'
 
 import CompanyPool from '@renderer/components/pools/Company'
 import {
+  useFactoryHut,
   useFactoryProductionEnabled,
   useFactoryTesting,
   usePlayFactory,
@@ -22,6 +23,7 @@ const DkBananas: React.FC = () => {
   const strong = useStrong()
   const blast = useBlast()
   const diddy = useDiddy()
+  const hut = useFactoryHut()
   const [productionPower, blastArcade] = useDonkStore(
     useShallow((state) => [
       state.removeBarriers.factoryProduction,
@@ -40,7 +42,8 @@ const DkBananas: React.FC = () => {
         id={3002}
         name="Factory DK Power Hut"
         region="Storage And Arcade"
-        canGetLogic={testing && coconut && (productionPower || grab)}
+        canGetLogic={hut.in && coconut && (productionPower || grab)}
+        canGetBreak={hut.out && coconut && (productionPower || grab)}
       />
       <FactoryCheck
         id={3003}

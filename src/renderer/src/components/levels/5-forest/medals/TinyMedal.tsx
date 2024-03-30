@@ -1,16 +1,17 @@
 import {
-  usePlayForest,
-  useForestNight,
-  useForestOwl,
   useForestBean,
   useForestBeanHalf,
-  useForestDay
+  useForestDay,
+  useForestNight,
+  useForestOwl,
+  usePlayForest
 } from '@renderer/hooks/forest'
+import { useDive, useFeather, useMini, usePunch, useSax, useTiny } from '@renderer/hooks/kongs'
+import { useCbCount, useForestTime } from '@renderer/hooks/settings'
+import { logicBreak } from '@renderer/hooks/world'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import ForestCheck from '../ForestCheck'
-import { usePunch } from '@renderer/hooks/kongs'
-import { logicBreak } from '@renderer/hooks/world'
 
 const TinyMedal: React.FC = () => {
   const inStage = usePlayForest()
@@ -20,17 +21,15 @@ const TinyMedal: React.FC = () => {
   const bean = useForestBean()
   const half = useForestBeanHalf()
   const punch = usePunch()
-  const [cbCount, coloredBananaShuffle, kong, gun, music, crystal, dive, forestTime] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.tiny,
-      state.moves.feather,
-      state.moves.sax,
-      state.moves.mini,
-      state.moves.dive,
-      state.settings.forestTime
-    ])
+  const cbCount = useCbCount()
+  const kong = useTiny()
+  const gun = useFeather()
+  const music = useSax()
+  const crystal = useMini()
+  const dive = useDive()
+  const forestTime = useForestTime()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 10 // two bunches at start

@@ -5,10 +5,12 @@ import {
   useAztecFrontKasplat,
   useAztecLlamaTemple
 } from '@renderer/hooks/aztec'
+import { useCoconut, useDk, useStrong } from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
+import { logicBreak } from '@renderer/hooks/world'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import AztecCheck from '../AztecCheck'
-import { logicBreak } from '@renderer/hooks/world'
 
 const DkMedal: React.FC = () => {
   const inStage = useAztecFront()
@@ -16,14 +18,12 @@ const DkMedal: React.FC = () => {
   const aztecBack = useAztecBack()
   const llamaTemple = useAztecLlamaTemple()
   const backTunnel = useAztecBackTunnel()
-  const [cbCount, coloredBananaShuffle, dk, coconut, strong] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.dk,
-      state.moves.coconut,
-      state.moves.strong
-    ])
+  const cbCount = useCbCount()
+  const dk = useDk()
+  const coconut = useCoconut()
+  const strong = useStrong()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 0 // Every banana has opposition.

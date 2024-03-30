@@ -1,6 +1,3 @@
-import { logicBreak } from '@renderer/hooks/world'
-import useDonkStore from '@renderer/store'
-import AztecCheck from '../AztecCheck'
 import {
   useAztec5DoorTemple,
   useAztecBack,
@@ -8,8 +5,12 @@ import {
   useAztecLlamaTemple,
   useAztecTinyTemple
 } from '@renderer/hooks/aztec'
+import { useAnyMusic, useDive, useGrape, useLanky, useVine } from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
+import { logicBreak } from '@renderer/hooks/world'
+import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
-import { useAnyMusic } from '@renderer/hooks/kongs'
+import AztecCheck from '../AztecCheck'
 
 const LankyMedal: React.FC = () => {
   const inStage = useAztecFront()
@@ -18,15 +19,13 @@ const LankyMedal: React.FC = () => {
   const llamaTemple = useAztecLlamaTemple()
   const doorTemple = useAztec5DoorTemple()
   const anyMusic = useAnyMusic()
-  const [cbCount, coloredBananaShuffle, lanky, grape, vine, dive] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.lanky,
-      state.moves.grape,
-      state.moves.vine,
-      state.moves.dive
-    ])
+  const cbCount = useCbCount()
+  const lanky = useLanky()
+  const grape = useGrape()
+  const vine = useVine()
+  const dive = useDive()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 0

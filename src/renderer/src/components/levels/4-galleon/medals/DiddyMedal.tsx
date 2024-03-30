@@ -1,30 +1,30 @@
-import useDonkStore from '@renderer/store'
-import GalleonCheck from '../GalleonCheck'
 import {
   useGalleonLighthousePlatform,
   useGalleonOutskirts,
   useGalleonTreasureRoom,
   usePlayGalleon
 } from '@renderer/hooks/galleon'
-import { useShallow } from 'zustand/react/shallow'
+import { useDiddy, useDive, useGuitar, usePeanut, useRocket } from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
 import { logicBreak } from '@renderer/hooks/world'
+import useDonkStore from '@renderer/store'
+import { useShallow } from 'zustand/react/shallow'
+import GalleonCheck from '../GalleonCheck'
 
 const DiddyMedal: React.FC = () => {
   const inStage = usePlayGalleon()
   const outskirts = useGalleonOutskirts()
   const lighthousePlatform = useGalleonLighthousePlatform()
   const treasureRoom = useGalleonTreasureRoom()
+  const cbCount = useCbCount()
+  const kong = useDiddy()
+  const gun = usePeanut()
+  const music = useGuitar()
+  const crystal = useRocket()
+  const dive = useDive()
 
-  const [cbCount, coloredBananaShuffle, kong, gun, music, crystal, dive] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.diddy,
-      state.moves.peanut,
-      state.moves.guitar,
-      state.moves.rocket,
-      state.moves.dive
-    ])
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 10

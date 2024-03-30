@@ -3,22 +3,21 @@ import { useShallow } from 'zustand/react/shallow'
 import CavesCheck from '../CavesCheck'
 import { useCavesIgloo, useCavesMiniFunky, usePlayCaves } from '@renderer/hooks/caves'
 import { logicBreak } from '@renderer/hooks/world'
+import { useCbCount } from '@renderer/hooks/settings'
+import { useDiddy, useGuitar, usePeanut, useRocket, useSpring } from '@renderer/hooks/kongs'
 
 const DiddyMedal: React.FC = () => {
   const inStage = usePlayCaves()
   const igloo = useCavesIgloo()
   const miniFunky = useCavesMiniFunky()
-
-  const [cbCount, coloredBananaShuffle, kong, gun, music, crystal, pad] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.diddy,
-      state.moves.peanut,
-      state.moves.guitar,
-      state.moves.rocket,
-      state.moves.spring
-    ])
+  const cbCount = useCbCount()
+  const kong = useDiddy()
+  const gun = usePeanut()
+  const music = useGuitar()
+  const crystal = useRocket()
+  const pad = useSpring()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 5 // Funky

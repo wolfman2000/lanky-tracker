@@ -10,6 +10,8 @@ import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import AztecCheck from '../AztecCheck'
 import { logicBreak } from '@renderer/hooks/world'
+import { useCbCount } from '@renderer/hooks/settings'
+import { useDive, useFeather, useMini, useTiny, useTwirl } from '@renderer/hooks/kongs'
 
 const TinyMedal: React.FC = () => {
   const inStage = useAztecFront()
@@ -18,16 +20,14 @@ const TinyMedal: React.FC = () => {
   const llamaTemple = useAztecLlamaTemple()
   const lava = useAztecLlamaLava()
   const canSlam = useSlamAztec()
-  const [cbCount, coloredBananaShuffle, tiny, feather, mini, twirl, dive] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.tiny,
-      state.moves.feather,
-      state.moves.mini,
-      state.moves.twirl,
-      state.moves.dive
-    ])
+  const cbCount = useCbCount()
+  const tiny = useTiny()
+  const feather = useFeather()
+  const mini = useMini()
+  const twirl = useTwirl()
+  const dive = useDive()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 0

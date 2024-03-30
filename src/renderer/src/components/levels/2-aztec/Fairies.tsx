@@ -1,8 +1,11 @@
 import FairyPool from '@renderer/components/pools/Fairies'
-import { useAztec5DoorTemple, useAztecFront, useAztecLlamaTemple } from '@renderer/hooks/aztec'
-import { useAnyKong, useCamera, useFeather, useMini } from '@renderer/hooks/kongs'
+import {
+  useAztec5DoorTemple,
+  useAztecLlamaTemple,
+  useAztecShuffledFairyLogic
+} from '@renderer/hooks/aztec'
+import { useCamera, useFeather, useMini } from '@renderer/hooks/kongs'
 import { useShuffleFairies } from '@renderer/hooks/settings'
-import { logicBreak } from '@renderer/hooks/world'
 import AztecCheck from './AztecCheck'
 
 const Vanilla: React.FC = () => {
@@ -32,23 +35,21 @@ const Vanilla: React.FC = () => {
 }
 
 const Shuffled: React.FC = () => {
-  const anyKong = useAnyKong()
-  const inStage = useAztecFront()
-  const camera = useCamera()
+  const fairyLogic = useAztecShuffledFairyLogic()
 
   return (
     <>
       <AztecCheck
         id={2280}
         name="Aztec Fairy Location #1"
-        canGetLogic={inStage.in && anyKong && camera}
-        canGetBreak={logicBreak(inStage) && anyKong && camera}
+        canGetLogic={fairyLogic.in}
+        canGetBreak={fairyLogic.out}
       />
       <AztecCheck
         id={2281}
         name="Aztec Fairy Location #2"
-        canGetLogic={inStage && anyKong && camera}
-        canGetBreak={logicBreak(inStage) && anyKong && camera}
+        canGetLogic={fairyLogic.in}
+        canGetBreak={fairyLogic.out}
       />
     </>
   )
