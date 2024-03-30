@@ -15,3 +15,10 @@ export const useCbCount = (): number => useDonkStore((state) => state.settings.c
  */
 export const useAutoBonus = (): boolean =>
   useDonkStore(useShallow((state) => state.settings.autoBonus))
+
+/**
+ * Can we warp using all of the bananaports immediately upon entering a level?
+ * @returns true if we can warp all over within the levels immediately.
+ */
+export const useBananaportAll = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.bananaportOpen)) == 2

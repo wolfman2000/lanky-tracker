@@ -1,32 +1,32 @@
+import { useCavesIgloo, usePlayCaves } from '@renderer/hooks/caves'
+import { useBoulderTech, usePunch } from '@renderer/hooks/kongs'
+import { useBananaportAll } from '@renderer/hooks/settings'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import CavesCheck from '../CavesCheck'
-import { useCavesIgloo, usePlayCaves } from '@renderer/hooks/caves'
-import { useBoulderTech, usePunch } from '@renderer/hooks/kongs'
 
 const TinyMedal: React.FC = () => {
   const inStage = usePlayCaves()
   const igloo = useCavesIgloo()
   const punch = usePunch()
   const boulderTech = useBoulderTech()
-  const [cbCount, coloredBananaShuffle, kong, gun, music, move, crystal, pad, hunky, bananaport] =
-    useDonkStore(
-      useShallow((state) => [
-        state.settings.cbCount,
-        state.settings.shuffleColoredBananas,
-        state.moves.tiny,
-        state.moves.feather,
-        state.moves.sax,
-        state.moves.twirl,
-        state.moves.mini,
-        state.moves.port,
-        state.moves.hunky,
-        state.settings.bananaportOpen
-      ])
-    )
+  const warpAll = useBananaportAll()
+  const [cbCount, coloredBananaShuffle, kong, gun, music, move, crystal, pad, hunky] = useDonkStore(
+    useShallow((state) => [
+      state.settings.cbCount,
+      state.settings.shuffleColoredBananas,
+      state.moves.tiny,
+      state.moves.feather,
+      state.moves.sax,
+      state.moves.twirl,
+      state.moves.mini,
+      state.moves.port,
+      state.moves.hunky
+    ])
+  )
 
   let currLogic = 15
-  if (bananaport == 2 || crystal) {
+  if (warpAll || crystal) {
     currLogic += 5
   }
   if (gun) {
@@ -48,7 +48,7 @@ const TinyMedal: React.FC = () => {
     }
   }
   let currBreak = currLogic
-  if ((bananaport == 2 || crystal) && move) {
+  if ((warpAll || crystal) && move) {
     if (gun) {
       currLogic += 10
     }
@@ -56,7 +56,7 @@ const TinyMedal: React.FC = () => {
       currLogic += 5
     }
   }
-  if (bananaport == 2 || crystal) {
+  if (warpAll || crystal) {
     if (gun) {
       currBreak += 10
     }

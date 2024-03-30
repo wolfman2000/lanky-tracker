@@ -2,6 +2,7 @@ import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import { usePlayLevel, useSlamLevel } from './isles'
 import { useCoconut, useGrab, useSlam } from './kongs'
+import { useBananaportAll } from './settings'
 
 /**
  * Can we play in Frantic Factory?
@@ -47,6 +48,6 @@ export const useFactoryProductionEnabled = (): boolean => {
 export const useFactoryProductionTop = (): boolean => {
   const inStage = usePlayFactory()
   const factoryOn = useFactoryProductionEnabled()
-  const bananaport = useDonkStore(useShallow((state) => state.settings.bananaportOpen))
-  return factoryOn || (inStage && bananaport == 2)
+  const warpAll = useBananaportAll()
+  return factoryOn || (inStage && warpAll)
 }

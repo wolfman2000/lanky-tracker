@@ -1,41 +1,31 @@
+import { useCavesIgloo, usePlayCaves } from '@renderer/hooks/caves'
+import { useBoulderTech, useSlam } from '@renderer/hooks/kongs'
+import { useBananaportAll } from '@renderer/hooks/settings'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import CavesCheck from '../CavesCheck'
-import { useCavesIgloo, usePlayCaves } from '@renderer/hooks/caves'
-import { useBoulderTech, useSlam } from '@renderer/hooks/kongs'
 
 const ChunkyMedal: React.FC = () => {
   const inStage = usePlayCaves()
   const igloo = useCavesIgloo()
   const boulderTech = useBoulderTech()
   const slam = useSlam()
-  const [
-    cbCount,
-    coloredBananaShuffle,
-    kong,
-    gun,
-    music,
-    move,
-    crystal,
-    pad,
-    tiny,
-    mini,
-    bananaport
-  ] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.chunky,
-      state.moves.pineapple,
-      state.moves.triangle,
-      state.moves.punch,
-      state.moves.hunky,
-      state.moves.gone,
-      state.moves.tiny,
-      state.moves.mini,
-      state.settings.bananaportOpen
-    ])
-  )
+  const warpAll = useBananaportAll()
+  const [cbCount, coloredBananaShuffle, kong, gun, music, move, crystal, pad, tiny, mini] =
+    useDonkStore(
+      useShallow((state) => [
+        state.settings.cbCount,
+        state.settings.shuffleColoredBananas,
+        state.moves.chunky,
+        state.moves.pineapple,
+        state.moves.triangle,
+        state.moves.punch,
+        state.moves.hunky,
+        state.moves.gone,
+        state.moves.tiny,
+        state.moves.mini
+      ])
+    )
 
   let currLogic = 18
   if (boulderTech) {
@@ -53,7 +43,7 @@ const ChunkyMedal: React.FC = () => {
       }
     }
   }
-  if (gun && (bananaport == 2 || (tiny && mini))) {
+  if (gun && (warpAll || (tiny && mini))) {
     currLogic += 10
   }
   if (gun && igloo && music) {

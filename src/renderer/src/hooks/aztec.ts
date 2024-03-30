@@ -2,13 +2,6 @@ import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import { usePlayLevel, useSlamLevel } from './isles'
 import {
-  LogicBool,
-  logicBreak,
-  useSwitchsanityGun,
-  useSwitchsanityKong,
-  useSwitchsanityMusicPad
-} from './world'
-import {
   useFeather,
   useGrape,
   useMini,
@@ -18,6 +11,14 @@ import {
   useTwirl,
   useVine
 } from './kongs'
+import { useBananaportAll } from './settings'
+import {
+  LogicBool,
+  logicBreak,
+  useSwitchsanityGun,
+  useSwitchsanityKong,
+  useSwitchsanityMusicPad
+} from './world'
 
 /**
  * Can we play in Angry Aztec?
@@ -79,19 +80,13 @@ export const useAztecBack = (): LogicBool => {
   const musicSwitch = useAztecGuitarSwitch()
   const vine = useVine()
   const rocket = useRocket()
-  const [diddy, tiny, bananaport, backGateOpen] = useDonkStore(
-    useShallow((state) => [
-      state.moves.diddy,
-      state.moves.tiny,
-      state.settings.bananaportOpen,
-      state.removeBarriers.aztecBack
-    ])
+  const warpAll = useBananaportAll()
+  const [diddy, tiny, backGateOpen] = useDonkStore(
+    useShallow((state) => [state.moves.diddy, state.moves.tiny, state.removeBarriers.aztecBack])
   )
   return {
-    in: aztecFront.in && (backGateOpen || bananaport == 2 || ((vine || rocket) && musicSwitch)),
-    out:
-      logicBreak(aztecFront) &&
-      (backGateOpen || bananaport == 2 || (musicSwitch && (diddy || tiny)))
+    in: aztecFront.in && (backGateOpen || warpAll || ((vine || rocket) && musicSwitch)),
+    out: logicBreak(aztecFront) && (backGateOpen || warpAll || (musicSwitch && (diddy || tiny)))
   }
 }
 
@@ -138,10 +133,10 @@ export const useAztecLlamaTemple = (): LogicBool => {
 export const useAztecLlamaLava = (): LogicBool => {
   const llamaTemple = useAztecLlamaTemple()
   const mini = useMini()
-  const [bananaport] = useDonkStore(useShallow((state) => [state.settings.bananaportOpen]))
+  const warpAll = useBananaportAll()
   return {
-    in: llamaTemple.in && (bananaport == 2 || mini),
-    out: logicBreak(llamaTemple) && (bananaport == 2 || mini)
+    in: llamaTemple.in && (warpAll || mini),
+    out: logicBreak(llamaTemple) && (warpAll || mini)
   }
 }
 
@@ -154,10 +149,10 @@ export const useAztecBackTunnel = (): LogicBool => {
   const canSlam = useSlamAztec()
   const slamSwitch = useAztecLlamaTunnelSwitch()
   const front = useAztecFront()
-  const bananaport = useDonkStore(useShallow((state) => state.settings.bananaportOpen))
+  const warpAll = useBananaportAll()
   return {
-    in: (front.in && bananaport == 2) || (llama.in && slamSwitch && canSlam),
-    out: (logicBreak(front) && bananaport == 2) || (logicBreak(llama) && slamSwitch && canSlam)
+    in: (front.in && warpAll) || (llama.in && slamSwitch && canSlam),
+    out: (logicBreak(front) && warpAll) || (logicBreak(llama) && slamSwitch && canSlam)
   }
 }
 
