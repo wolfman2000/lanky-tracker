@@ -1,9 +1,7 @@
-import { useShallow } from 'zustand/react/shallow'
-
 import RainbowCoinPool from '@renderer/components/pools/RainbowCoins'
 import { useForestBean, usePlayForest } from '@renderer/hooks/forest'
 import { useAnyKong, useShockwave } from '@renderer/hooks/kongs'
-import useDonkStore from '@renderer/store'
+import { useShuffleDirt } from '@renderer/hooks/settings'
 import ForestCheck from './ForestCheck'
 
 const VanillaDirtLocations: React.FC = () => {
@@ -49,8 +47,7 @@ const ShuffledDirtLocations: React.FC = () => {
 }
 
 const DirtLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleDirt))
-  const locations = shuffle ? <ShuffledDirtLocations /> : <VanillaDirtLocations />
+  const locations = useShuffleDirt() ? <ShuffledDirtLocations /> : <VanillaDirtLocations />
   return <RainbowCoinPool>{locations}</RainbowCoinPool>
 }
 

@@ -21,20 +21,15 @@ const DirtAztec: React.FC = () => {
   const islesUpper = useIslesUpper()
   const boulderTech = useBoulderTech()
   const shockwave = useShockwave()
-  const [dk, diddy, rocket, tiny, twirl, dirtShuffle] = useDonkStore(
+  const [dk, diddy, rocket, tiny, twirl] = useDonkStore(
     useShallow((state) => [
       state.moves.dk,
       state.moves.diddy,
       state.moves.rocket,
       state.moves.tiny,
-      state.moves.twirl,
-      state.settings.shuffleDirt
+      state.moves.twirl
     ])
   )
-
-  if (dirtShuffle) {
-    return null
-  }
 
   return (
     <IslesCheck
