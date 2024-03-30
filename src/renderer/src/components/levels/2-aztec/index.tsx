@@ -58,7 +58,7 @@ const AztecChecks: React.FC = () => {
       </BananaMedalPool>
       <BossPool>
         <AztecCheck
-          id={1105}
+          id={2105}
           name="Aztec Boss"
           region="Troff 'N' Scoff"
           canGetLogic={aztecFront.in && anyKong}

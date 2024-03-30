@@ -12,7 +12,7 @@ export const initialSwitches: SwitchState = {
     japesHive: 3,
     japesPainting: 1,
     japesRambi: 0,
-    aztecBackAccess: 1,
+    aztecBack: 1,
     aztecBlueprint: 0,
     aztecDeadEnd: 0,
     aztecLlama1: 0,

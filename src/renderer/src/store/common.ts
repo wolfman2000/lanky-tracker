@@ -263,7 +263,7 @@ export type CheckSlice = CheckState & CheckActions
 //#endregion
 
 //#region Switchsanity
-interface SwitchsanitySwitches {
+export interface SwitchsanitySwitches {
   /**
    * What instrument is needed to reveal the Rocket barrel in Isles?
    */
@@ -330,7 +330,7 @@ interface SwitchsanitySwitches {
   /**
    * Which instrument is needed to access the back half of Aztec?
    */
-  aztecBackAccess: KongRange
+  aztecBack: KongRange
   /**
    * Which gun is needed to access the lighthouse area in Galleon?
    */
@@ -371,7 +371,7 @@ export interface SwitchState {
 }
 
 interface SwitchActions {
-  setSwitchsanity: (id: string, val: number) => void
+  setSwitchsanity: (id: keyof SwitchsanitySwitches, val: number) => void
 }
 
 export type SwitchSlice = SwitchState & SwitchActions

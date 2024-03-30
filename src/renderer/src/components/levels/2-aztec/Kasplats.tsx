@@ -77,31 +77,31 @@ const Shuffled: React.FC = () => {
   return (
     <>
       <AztecCheck
-        id={1250}
+        id={2250}
         name="Aztec Kasplat Location #1"
         canGetLogic={inStage.in && anyKong}
         canGetBreak={logicBreak(inStage) && anyKong}
       />
       <AztecCheck
-        id={1251}
+        id={2251}
         name="Aztec Kasplat Location #2"
         canGetLogic={inStage.in && anyKong}
         canGetBreak={logicBreak(inStage) && anyKong}
       />
       <AztecCheck
-        id={1252}
+        id={2252}
         name="Aztec Kasplat Location #3"
         canGetLogic={inStage.in && anyKong}
         canGetBreak={logicBreak(inStage) && anyKong}
       />
       <AztecCheck
-        id={1253}
+        id={2253}
         name="Aztec Kasplat Location #4"
         canGetLogic={inStage.in && anyKong}
         canGetBreak={logicBreak(inStage) && anyKong}
       />
       <AztecCheck
-        id={1254}
+        id={2254}
         name="Aztec Kasplat Location #5"
         canGetLogic={inStage.in && anyKong}
         canGetBreak={logicBreak(inStage) && anyKong}

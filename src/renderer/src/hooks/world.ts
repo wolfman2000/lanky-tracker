@@ -1,5 +1,5 @@
 import useDonkStore from '@renderer/store'
-import { KongRange } from '@renderer/store/common'
+import { KongRange, SwitchsanitySwitches } from '@renderer/store/common'
 import { useShallow } from 'zustand/react/shallow'
 import {
   useBongos,
@@ -35,7 +35,10 @@ export type LogicBool = {
  */
 export const logicBreak = (check: LogicBool): boolean => check.in || check.out!
 
-export const useSwitchsanityMusicPad = (id: string, normal: number): boolean => {
+export const useSwitchsanityMusicPad = (
+  id: keyof SwitchsanitySwitches,
+  normal: number
+): boolean => {
   const bongos = useBongos()
   const guitar = useGuitar()
   const trombone = useTrombone()
@@ -44,7 +47,7 @@ export const useSwitchsanityMusicPad = (id: string, normal: number): boolean => 
   const [isSwitchsanity, switches] = useDonkStore(
     useShallow((state) => [state.settings.isSwitchsanity, state.switchsanitySwitches])
   )
-  const target: KongRange = isSwitchsanity ? switches[id] : normal
+  const target: number = isSwitchsanity ? switches[id] : normal
   switch (target) {
     case 0:
       return bongos
