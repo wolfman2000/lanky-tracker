@@ -36,3 +36,10 @@ export const useShuffleCrates = (): boolean =>
  */
 export const usePoolShops = (): boolean =>
   useDonkStore(useShallow((state) => state.settings.poolShops))
+
+/**
+ * Are the rainbow coins shuffled in the pool, or always kept in dirt spots?
+ * @returns true if the rainbow coins are shuffled in the pool.
+ */
+export const usePoolRainbowCoins = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.poolRainbowCoins))

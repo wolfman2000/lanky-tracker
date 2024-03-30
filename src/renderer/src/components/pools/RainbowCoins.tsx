@@ -1,9 +1,6 @@
-import useDonkStore from '@renderer/store'
-import { useShallow } from 'zustand/react/shallow'
+import { usePoolRainbowCoins } from '@renderer/hooks/settings'
 
-const RainbowCoinPool: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const pool = useDonkStore(useShallow((state) => state.settings.poolRainbowCoins))
-  return pool ? <>{children}</> : null
-}
+const RainbowCoinPool: React.FC<React.PropsWithChildren> = ({ children }) =>
+  usePoolRainbowCoins() ? <>{children}</> : null
 
 export default RainbowCoinPool
