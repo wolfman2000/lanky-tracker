@@ -1,6 +1,7 @@
 import ArenaPool from '@renderer/components/pools/Arenas'
 import BananaMedalPool from '@renderer/components/pools/BananaMedals'
 import BossPool from '@renderer/components/pools/Bosses'
+import ShopPool from '@renderer/components/pools/Shops'
 import { usePlayCastle, useSlamCastle } from '@renderer/hooks/castle'
 import { useAnyKong, useLanky } from '@renderer/hooks/kongs'
 import CastleCheck from './CastleCheck'
@@ -60,7 +61,9 @@ const CastleChecks: React.FC = () => {
           canGetLogic={inStage && anyKong}
         />
       </BossPool>
-      <CastleShops />
+      <ShopPool>
+        <CastleShops />
+      </ShopPool>
     </div>
   )
 }

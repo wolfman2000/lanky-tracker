@@ -1,6 +1,7 @@
 import ArenaPool from '@renderer/components/pools/Arenas'
 import BananaMedalPool from '@renderer/components/pools/BananaMedals'
 import BossPool from '@renderer/components/pools/Bosses'
+import ShopPool from '@renderer/components/pools/Shops'
 import { useFactoryTesting, usePlayFactory } from '@renderer/hooks/factory'
 import { useAnyKong, useGrab } from '@renderer/hooks/kongs'
 import CrateLocations from './Crates'
@@ -60,7 +61,9 @@ const FactoryChecks: React.FC = () => {
           canGetLogic={inStage && anyKong}
         />
       </BossPool>
-      <FactoryShops />
+      <ShopPool>
+        <FactoryShops />
+      </ShopPool>
     </div>
   )
 }

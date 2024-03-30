@@ -1,5 +1,3 @@
-import useDonkStore from '@renderer/store'
-import { useShallow } from 'zustand/react/shallow'
 import { useIslesHelmEntry, useIslesKremTop, usePlayLevel, useSlamLevel } from './isles'
 import {
   useAnyMusic,
@@ -11,6 +9,7 @@ import {
   useStand,
   useVine
 } from './kongs'
+import { useHelmStartPosition } from './settings'
 import { LogicBool, logicBreak } from './world'
 
 /**
@@ -47,7 +46,7 @@ export const useHelmMachine = (): LogicBool => {
   const pineapple = usePineapple()
   const vine = useVine()
   const mini = useMini()
-  const [helmAccess] = useDonkStore(useShallow((state) => [state.settings.helmAccess]))
+  const helmAccess = useHelmStartPosition()
   return {
     in: entry && (helmAccess != 0 || (stand && pineapple && vine && mini)),
     out: entry && pineapple && vine && mini
@@ -65,7 +64,7 @@ export const useHelmDoors = (): LogicBool => {
   const grab = useGrab()
   const rocket = useRocket()
   const punch = usePunch()
-  const [helmAccess] = useDonkStore(useShallow((state) => [state.settings.helmAccess]))
+  const helmAccess = useHelmStartPosition()
 
   return {
     in:

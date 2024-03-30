@@ -4,22 +4,18 @@ import AztecCheck from './AztecCheck'
 import { useShallow } from 'zustand/react/shallow'
 
 const AztecShops: React.FC = () => {
-  const [dk, diddy, lanky, tiny, chunky, poolShops] = useDonkStore(
+  const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
     useShallow((state) => [
       state.moves.dk,
       state.moves.diddy,
       state.moves.lanky,
       state.moves.tiny,
-      state.moves.chunky,
-      state.settings.poolShops
+      state.moves.chunky
     ])
   )
   const aztecFront = useAztecFront()
   const aztecBack = useAztecBack()
   const anyKong = dk || diddy || lanky || tiny || chunky
-  if (!poolShops) {
-    return null
-  }
 
   return (
     <>

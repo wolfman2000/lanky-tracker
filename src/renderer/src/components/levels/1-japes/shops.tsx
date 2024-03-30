@@ -10,20 +10,16 @@ import { useAnyKong } from '@renderer/hooks/kongs'
  */
 const JapesShops: React.FC = () => {
   const anyKong = useAnyKong()
-  const [dk, diddy, lanky, tiny, chunky, poolShops] = useDonkStore(
+  const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
     useShallow((state) => [
       state.moves.dk,
       state.moves.diddy,
       state.moves.lanky,
       state.moves.tiny,
-      state.moves.chunky,
-      state.settings.poolShops
+      state.moves.chunky
     ])
   )
   const playJapes = usePlayJapes()
-  if (!poolShops) {
-    return null
-  }
 
   return (
     <>

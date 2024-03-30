@@ -1,10 +1,8 @@
-import { useShallow } from 'zustand/react/shallow'
-
 import RainbowCoinPool from '@renderer/components/pools/RainbowCoins'
 import { useAztec5DoorTemple, useAztecFront } from '@renderer/hooks/aztec'
 import { useAnyKong, usePineapple, useShockwave } from '@renderer/hooks/kongs'
+import { useShuffleDirt } from '@renderer/hooks/settings'
 import { logicBreak } from '@renderer/hooks/world'
-import useDonkStore from '@renderer/store'
 import AztecCheck from './AztecCheck'
 
 const VanillaDirtLocations: React.FC = () => {
@@ -55,8 +53,7 @@ const ShuffledDirtLocations: React.FC = () => {
 }
 
 const DirtLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleDirt))
-  const locations = shuffle ? <ShuffledDirtLocations /> : <VanillaDirtLocations />
+  const locations = useShuffleDirt() ? <ShuffledDirtLocations /> : <VanillaDirtLocations />
   return <RainbowCoinPool>{locations}</RainbowCoinPool>
 }
 

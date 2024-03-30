@@ -1,9 +1,7 @@
-import { useShallow } from 'zustand/react/shallow'
-
 import KasplatPool from '@renderer/components/pools/Kasplats'
 import { useForestNight, useForestOwl, usePlayForest } from '@renderer/hooks/forest'
 import { useAnyGun, useAnyKong } from '@renderer/hooks/kongs'
-import useDonkStore from '@renderer/store'
+import { useShuffleKasplats } from '@renderer/hooks/settings'
 import ForestCheck from './ForestCheck'
 
 const Vanilla: React.FC = () => {
@@ -65,8 +63,7 @@ const Shuffled: React.FC = () => {
 }
 
 const KasplatLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleKasplats))
-  const locations = shuffle ? <Shuffled /> : <Vanilla />
+  const locations = useShuffleKasplats() ? <Shuffled /> : <Vanilla />
   return <KasplatPool>{locations}</KasplatPool>
 }
 

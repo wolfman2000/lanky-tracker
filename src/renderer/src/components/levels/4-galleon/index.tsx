@@ -1,6 +1,7 @@
 import ArenaPool from '@renderer/components/pools/Arenas'
 import BananaMedalPool from '@renderer/components/pools/BananaMedals'
 import BossPool from '@renderer/components/pools/Bosses'
+import ShopPool from '@renderer/components/pools/Shops'
 import {
   useGalleonLighthouseArea,
   useGalleonOutskirts,
@@ -66,7 +67,9 @@ const GalleonChecks: React.FC = () => {
           canGetLogic={(inStage && vine) || (dive && (lighthouseArea || outskirts))}
         />
       </BossPool>
-      <GalleonShops />
+      <ShopPool>
+        <GalleonShops />
+      </ShopPool>
     </div>
   )
 }

@@ -8,21 +8,17 @@ import { usePlayCastle } from '@renderer/hooks/castle'
  * @returns the list of shop checks if shuffled.
  */
 const CastleShops: React.FC = () => {
-  const [dk, diddy, lanky, tiny, chunky, poolShops] = useDonkStore(
+  const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
     useShallow((state) => [
       state.moves.dk,
       state.moves.diddy,
       state.moves.lanky,
       state.moves.tiny,
-      state.moves.chunky,
-      state.settings.poolShops
+      state.moves.chunky
     ])
   )
   const anyKong = dk || diddy || lanky || tiny || chunky
   const inStage = usePlayCastle()
-  if (!poolShops) {
-    return null
-  }
 
   return (
     <>

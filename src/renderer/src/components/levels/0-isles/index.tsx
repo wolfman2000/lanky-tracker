@@ -1,11 +1,11 @@
-import { useShallow } from 'zustand/react/shallow'
-
 import ArenaPool from '@renderer/components/pools/Arenas'
 import CompanyPool from '@renderer/components/pools/Company'
+import ShopPool from '@renderer/components/pools/Shops'
+import { useCurrentBananaMedalCount } from '@renderer/hooks/consumables'
 import { usePlayForest } from '@renderer/hooks/forest'
 import { useIslesKremAscent } from '@renderer/hooks/isles'
 import { useAllGun, useAnyKong, useBoulderTech, useGone } from '@renderer/hooks/kongs'
-import useDonkStore from '@renderer/store'
+import { useJetpacCount } from '@renderer/hooks/settings'
 import CrateLocations from './Crates'
 import DirtLocations from './Dirt'
 import FairyLocations from './Fairies'
@@ -19,9 +19,8 @@ import TinyBananas from './gold-bananas/TinyBananas'
 import IslesShops from './shops'
 
 const IsleChecks: React.FC = () => {
-  const [medals, jetpacCount] = useDonkStore(
-    useShallow((state) => [state.consumables.bananaMedals, state.settings.jetpacCount])
-  )
+  const medals = useCurrentBananaMedalCount()
+  const jetpacCount = useJetpacCount()
   const playForest = usePlayForest()
   const anyKong = useAnyKong()
   const allGun = useAllGun()
@@ -60,7 +59,9 @@ const IsleChecks: React.FC = () => {
           canGetLogic={anyKong && medals >= jetpacCount}
         />
       </CompanyPool>
-      <IslesShops />
+      <ShopPool>
+        <IslesShops />
+      </ShopPool>
     </div>
   )
 }

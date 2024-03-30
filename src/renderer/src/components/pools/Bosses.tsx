@@ -1,9 +1,6 @@
-import useDonkStore from '@renderer/store'
-import { useShallow } from 'zustand/react/shallow'
+import { usePoolKeys } from '@renderer/hooks/settings'
 
-const BossPool: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const pool = useDonkStore(useShallow((state) => state.settings.poolKeys))
-  return pool ? <>{children}</> : null
-}
+const BossPool: React.FC<React.PropsWithChildren> = ({ children }) =>
+  usePoolKeys() ? <>{children}</> : null
 
 export default BossPool

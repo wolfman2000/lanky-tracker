@@ -1,9 +1,6 @@
-import useDonkStore from '@renderer/store'
-import { useShallow } from 'zustand/react/shallow'
+import { usePoolFairies } from '@renderer/hooks/settings'
 
-const FairyPool: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const pool = useDonkStore(useShallow((state) => state.settings.poolFairies))
-  return pool ? <>{children}</> : null
-}
+const FairyPool: React.FC<React.PropsWithChildren> = ({ children }) =>
+  usePoolFairies() ? <>{children}</> : null
 
 export default FairyPool

@@ -12,6 +12,7 @@ import {
   useTwirl
 } from './kongs'
 import { LogicBool, logicBreak, useSwitchsanityGun } from './world'
+import { useBananaportAll } from './settings'
 
 /**
  * Can we play in Jungle Japes?
@@ -89,10 +90,9 @@ export const useJapesHive = (): boolean => {
   const hiveSwitch = useJapesHiveSwitch()
   const canPlay = usePlayJapes()
   const japesMine = useJapesMine()
-  const [bananaport, hiveGateOpen] = useDonkStore(
-    useShallow((state) => [state.settings.bananaportOpen, state.removeBarriers.japesHiveGate])
-  )
-  return canPlay && (hiveGateOpen || hiveSwitch || (bananaport == 2 && japesMine))
+  const warpAll = useBananaportAll()
+  const [hiveGateOpen] = useDonkStore(useShallow((state) => [state.removeBarriers.japesHiveGate]))
+  return canPlay && (hiveGateOpen || hiveSwitch || (warpAll && japesMine))
 }
 
 /**

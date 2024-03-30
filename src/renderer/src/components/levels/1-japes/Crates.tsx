@@ -1,9 +1,7 @@
-import { useShallow } from 'zustand/react/shallow'
-
 import CratePool from '@renderer/components/pools/Crates'
 import { useJapesRambi, usePlayJapes } from '@renderer/hooks/japes'
 import { useAnyKong } from '@renderer/hooks/kongs'
-import useDonkStore from '@renderer/store'
+import { useShuffleCrates } from '@renderer/hooks/settings'
 import JapesCheck from './JapesCheck'
 
 const Vanilla: React.FC = () => {
@@ -49,8 +47,7 @@ const Shuffled: React.FC = () => {
 }
 
 const CrateLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleCrates))
-  const locations = shuffle ? <Shuffled /> : <Vanilla />
+  const locations = useShuffleCrates() ? <Shuffled /> : <Vanilla />
   return <CratePool>{locations}</CratePool>
 }
 

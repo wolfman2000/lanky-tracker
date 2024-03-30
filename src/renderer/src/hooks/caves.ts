@@ -1,8 +1,9 @@
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import { usePlayLevel, useSlamLevel } from './isles'
-import { LogicBool } from './world'
 import { useBalloon, useDk, useMini, useRocket, useTwirl } from './kongs'
+import { useBananaportAll } from './settings'
+import { LogicBool } from './world'
 
 /**
  * Can we play in Crystal Caves?
@@ -37,10 +38,10 @@ export const useCavesMiniFunky = (): LogicBool => {
   const inStage = usePlayCaves()
   const twirl = useTwirl()
   const mini = useMini()
-  const [bananaport] = useDonkStore(useShallow((state) => [state.settings.bananaportOpen]))
+  const warpAll = useBananaportAll()
 
   return {
-    in: inStage && (bananaport == 2 || (twirl && mini)),
+    in: inStage && (warpAll || (twirl && mini)),
     out: inStage && mini
   }
 }
@@ -55,9 +56,9 @@ export const useCavesPillar = (): LogicBool => {
   const twirl = useTwirl()
   const balloon = useBalloon()
   const dk = useDk()
-  const [bananaport] = useDonkStore(useShallow((state) => [state.settings.bananaportOpen]))
+  const warpAll = useBananaportAll()
   return {
-    in: inStage && (bananaport == 2 || rocket),
+    in: inStage && (warpAll || rocket),
     out: inStage && (dk || twirl || balloon)
   }
 }

@@ -13,6 +13,7 @@ import {
   useTriangle,
   useTrombone
 } from './kongs'
+import { useIsSwitchsanity } from './settings'
 
 /**
  * A type to handle both in-logic and out-of-logic checks in a single function.
@@ -44,9 +45,8 @@ export const useSwitchsanityMusicPad = (
   const trombone = useTrombone()
   const sax = useSax()
   const triangle = useTriangle()
-  const [isSwitchsanity, switches] = useDonkStore(
-    useShallow((state) => [state.settings.isSwitchsanity, state.switchsanitySwitches])
-  )
+  const isSwitchsanity = useIsSwitchsanity()
+  const [switches] = useDonkStore(useShallow((state) => [state.switchsanitySwitches]))
   const target: number = isSwitchsanity ? switches[id] : normal
   switch (target) {
     case 0:
@@ -68,9 +68,8 @@ export const useSwitchsanityGun = (id: string, normal: number): boolean => {
   const grape = useGrape()
   const feather = useFeather()
   const pineapple = usePineapple()
-  const [isSwitchsanity, switches] = useDonkStore(
-    useShallow((state) => [state.settings.isSwitchsanity, state.switchsanitySwitches])
-  )
+  const isSwitchsanity = useIsSwitchsanity()
+  const [switches] = useDonkStore(useShallow((state) => [state.switchsanitySwitches]))
   const target: KongRange = isSwitchsanity ? switches[id] : normal
   switch (target) {
     case 0:
@@ -87,14 +86,14 @@ export const useSwitchsanityGun = (id: string, normal: number): boolean => {
 }
 
 export const useSwitchsanityKong = (id: string, normal: number): boolean => {
-  const [dk, diddy, lanky, tiny, chunky, isSwitchsanity, switches] = useDonkStore(
+  const isSwitchsanity = useIsSwitchsanity()
+  const [dk, diddy, lanky, tiny, chunky, switches] = useDonkStore(
     useShallow((state) => [
       state.moves.dk,
       state.moves.diddy,
       state.moves.lanky,
       state.moves.tiny,
       state.moves.chunky,
-      state.settings.isSwitchsanity,
       state.switchsanitySwitches
     ])
   )

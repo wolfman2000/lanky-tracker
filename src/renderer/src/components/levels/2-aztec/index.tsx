@@ -1,6 +1,7 @@
 import ArenaPool from '@renderer/components/pools/Arenas'
 import BananaMedalPool from '@renderer/components/pools/BananaMedals'
 import BossPool from '@renderer/components/pools/Bosses'
+import ShopPool from '@renderer/components/pools/Shops'
 import { useAztecFront, useAztecTinyTemple, useSlamAztec } from '@renderer/hooks/aztec'
 import { useAnyGun, useAnyKong, useDive, useGrape, useLanky } from '@renderer/hooks/kongs'
 import AztecCheck from './AztecCheck'
@@ -65,7 +66,9 @@ const AztecChecks: React.FC = () => {
           canGetBreak={aztecFront.out && anyKong}
         />
       </BossPool>
-      <AztecShops />
+      <ShopPool>
+        <AztecShops />
+      </ShopPool>
     </div>
   )
 }

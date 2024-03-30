@@ -1,10 +1,8 @@
-import { useShallow } from 'zustand/react/shallow'
-
 import CratePool from '@renderer/components/pools/Crates'
 import { useAztecBack, useAztecFront, useAztecLlamaTemple } from '@renderer/hooks/aztec'
 import { useAnyKong, useRocket } from '@renderer/hooks/kongs'
+import { useShuffleCrates } from '@renderer/hooks/settings'
 import { logicBreak } from '@renderer/hooks/world'
-import useDonkStore from '@renderer/store'
 import AztecCheck from './AztecCheck'
 
 const Vanilla: React.FC = () => {
@@ -61,8 +59,7 @@ const Shuffled: React.FC = () => {
 }
 
 const CrateLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleCrates))
-  const locations = shuffle ? <Shuffled /> : <Vanilla />
+  const locations = useShuffleCrates() ? <Shuffled /> : <Vanilla />
   return <CratePool>{locations}</CratePool>
 }
 

@@ -2,6 +2,7 @@ import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import { usePlayLevel, useSlamLevel } from './isles'
 import { useDive, useGrab, useLanky, useRocket, useTwirl, useVine } from './kongs'
+import { useBananaportAll } from './settings'
 import { LogicBool, logicBreak, useSwitchsanityGun } from './world'
 
 /**
@@ -64,15 +65,17 @@ export const useGalleonLowTide = (): boolean => {
  * @returns a truthy statement if the platform can be reached.
  */
 export const useGalleonLighthousePlatform = (): LogicBool => {
+  const inStage = usePlayGalleon()
   const lighthouseArea = useGalleonLighthouseArea()
   const highTide = useGalleonHighTide()
   const twirl = useTwirl()
-  const [bananaport, galleonSeasick] = useDonkStore(
-    useShallow((state) => [state.settings.bananaportOpen, state.removeBarriers.galleonSeasick])
+  const warpAll = useBananaportAll()
+  const [galleonSeasick] = useDonkStore(
+    useShallow((state) => [state.removeBarriers.galleonSeasick])
   )
 
   return {
-    in: bananaport == 2 || (lighthouseArea && (highTide || (galleonSeasick && twirl))),
+    in: (inStage && warpAll) || (lighthouseArea && (highTide || (galleonSeasick && twirl))),
     out: lighthouseArea && galleonSeasick
   }
 }
@@ -107,9 +110,9 @@ export const useGalleonCavernTop = (): LogicBool => {
   const rocket = useRocket()
   const dive = useDive()
   const vine = useVine()
-  const [bananaport] = useDonkStore(useShallow((state) => [state.settings.bananaportOpen]))
+  const warpAll = useBananaportAll()
   return {
-    in: inStage && (vine || (bananaport == 2 && (dive || rocket))),
+    in: inStage && (vine || (warpAll && (dive || rocket))),
     out: inStage && logicBreak(seasick)
   }
 }
@@ -145,9 +148,9 @@ export const useGalleonTreasureRoom = (): LogicBool => {
   const inStage = usePlayGalleon()
   const lanky = useLanky()
   const dive = useDive()
-  const [bananaport] = useDonkStore(useShallow((state) => [state.settings.bananaportOpen]))
+  const warpAll = useBananaportAll()
   return {
-    in: (inStage && bananaport == 2) || (outskirts && lanky && dive && highTide),
+    in: (inStage && warpAll) || (outskirts && lanky && dive && highTide),
     out: outskirts && lanky && dive
   }
 }

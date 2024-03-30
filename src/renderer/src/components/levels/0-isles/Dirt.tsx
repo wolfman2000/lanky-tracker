@@ -9,6 +9,7 @@ import {
   useShockwave,
   useTiny
 } from '@renderer/hooks/kongs'
+import { useShuffleDirt } from '@renderer/hooks/settings'
 import useDonkStore from '@renderer/store'
 import DirtAztec from './DirtAztec'
 import IslesCheck from './IslesCheck'
@@ -82,8 +83,7 @@ const ShuffledDirtLocations: React.FC = () => {
 }
 
 const DirtLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleDirt))
-  const locations = shuffle ? <ShuffledDirtLocations /> : <VanillaDirtLocations />
+  const locations = useShuffleDirt() ? <ShuffledDirtLocations /> : <VanillaDirtLocations />
   return <RainbowCoinPool>{locations}</RainbowCoinPool>
 }
 

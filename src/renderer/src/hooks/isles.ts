@@ -3,9 +3,13 @@ import { useShallow } from 'zustand/react/shallow'
 import useDonkStore from '@renderer/store'
 import { Level } from '@renderer/store/common'
 import { usePlayAztec } from './aztec'
+import { usePlayCastle } from './castle'
 import { usePlayCaves } from './caves'
+import { useCurrentFairyCount } from './consumables'
 import { usePlayFactory } from './factory'
 import { usePlayGalleon, useSlamGalleon } from './galleon'
+import { usePlayHelm } from './helm'
+import { usePlayJapes } from './japes'
 import {
   useAnyKong,
   useBalloon,
@@ -44,11 +48,8 @@ import {
   useTwirl,
   useVine
 } from './kongs'
-import { useAutoBonus } from './settings'
+import { useAutoBonus, useBananaport, useFairyCount, useIsSwitchsanity } from './settings'
 import { LogicBool, logicBreak, useSwitchsanityGun, useSwitchsanityMusicPad } from './world'
-import { usePlayJapes } from './japes'
-import { usePlayCastle } from './castle'
-import { usePlayHelm } from './helm'
 
 /**
  * What is needed to turn on the rocket barrel in Isles?
@@ -98,7 +99,7 @@ export const useIslesCrossFungi = (): LogicBool => {
  */
 export const useIslesUpper = (): LogicBool => {
   const vine = useVine()
-  const [bananawarp] = useDonkStore(useShallow((state) => [state.settings.bananaportOpen]))
+  const bananawarp = useBananaport()
   const crossFungi = useIslesCrossFungi()
   return {
     in: crossFungi.in || vine || bananawarp != 0,
@@ -125,8 +126,9 @@ export const useIslesKremAscent = (): boolean => {
   const canRocket = useIslesRocket()
   const fungiIsland = useIslesFungiIsland()
   const rocket = useRocket()
-  const [bananaport, openLobbies, key2] = useDonkStore(
-    useShallow((state) => [state.settings.bananaportOpen, state.settings.openLobbies, state.key2])
+  const bananaport = useBananaport()
+  const [openLobbies, key2] = useDonkStore(
+    useShallow((state) => [state.settings.openLobbies, state.key2])
   )
   return openLobbies || key2 || bananaport != 0 || (canRocket && fungiIsland && rocket)
 }
@@ -141,11 +143,9 @@ export const useIslesKremTop = (): boolean => {
   const port = useMonkeyport()
   const blast = useBlast()
   const balloon = useBalloon()
-  const [isSwitchsanity, padPort] = useDonkStore(
-    useShallow((state) => [
-      state.settings.isSwitchsanity,
-      state.switchsanitySwitches.islesMonkeyport
-    ])
+  const isSwitchsanity = useIsSwitchsanity()
+  const [padPort] = useDonkStore(
+    useShallow((state) => [state.switchsanitySwitches.islesMonkeyport])
   )
   const target = isSwitchsanity ? padPort : 0
   switch (target) {
@@ -173,9 +173,8 @@ export const useIslesHelmEntry = (): boolean => {
   const charge = useCharge()
   const grab = useGrab()
   const gone = useGone()
-  const [isSwitchsanity, islesHelm] = useDonkStore(
-    useShallow((state) => [state.settings.isSwitchsanity, state.switchsanitySwitches.islesHelm])
-  )
+  const isSwitchsanity = useIsSwitchsanity()
+  const [islesHelm] = useDonkStore(useShallow((state) => [state.switchsanitySwitches.islesHelm]))
   const target = isSwitchsanity ? islesHelm : 0
   switch (target) {
     case 0:
@@ -502,9 +501,8 @@ export const useCheckTinyGalleonLobby = (): LogicBool => {
  * @returns true if we can access the BFI check.
  */
 export const useCheckBananaFairyIsle = (): boolean => {
-  const [fairies, fairyCount] = useDonkStore(
-    useShallow((state) => [state.consumables.fairies, state.settings.fairyCount])
-  )
+  const fairies = useCurrentFairyCount()
+  const fairyCount = useFairyCount()
   const mini = useMini()
   return fairies >= fairyCount && mini
 }

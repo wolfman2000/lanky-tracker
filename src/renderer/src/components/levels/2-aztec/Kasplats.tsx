@@ -1,5 +1,3 @@
-import { useShallow } from 'zustand/react/shallow'
-
 import KasplatPool from '@renderer/components/pools/Kasplats'
 import {
   useAztec5DoorTemple,
@@ -15,8 +13,8 @@ import {
   useStrong,
   useTwirl
 } from '@renderer/hooks/kongs'
+import { useShuffleKasplats } from '@renderer/hooks/settings'
 import { logicBreak } from '@renderer/hooks/world'
-import useDonkStore from '@renderer/store'
 import AztecCheck from './AztecCheck'
 
 const Vanilla: React.FC = () => {
@@ -111,8 +109,7 @@ const Shuffled: React.FC = () => {
 }
 
 const KasplatLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleKasplats))
-  const locations = shuffle ? <Shuffled /> : <Vanilla />
+  const locations = useShuffleKasplats() ? <Shuffled /> : <Vanilla />
   return <KasplatPool>{locations}</KasplatPool>
 }
 

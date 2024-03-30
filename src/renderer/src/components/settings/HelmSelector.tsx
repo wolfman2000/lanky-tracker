@@ -4,6 +4,7 @@ import { useShallow } from 'zustand/react/shallow'
 import useDonkStore from '@renderer/store'
 import { BananaportRange } from '@renderer/store/common'
 
+import { useHelmStartPosition } from '@renderer/hooks/settings'
 import helmFullIcon from '../../assets/images/settings/krem_isle.png'
 import helmHalfIcon from '../../assets/images/settings/krem_isle_half.png'
 
@@ -18,9 +19,8 @@ const nextPort = (num: number): number => clamp(num + 1)
 const prevPort = (num: number): number => clamp(num - 1)
 
 const HelmSelector: React.FC = () => {
-  const [helmAccess, setSetting] = useDonkStore(
-    useShallow((state) => [state.settings.helmAccess, state.setSetting])
-  )
+  const helmAccess = useHelmStartPosition()
+  const [setSetting] = useDonkStore(useShallow((state) => [state.setSetting]))
 
   const handleNextLevel = (): void => {
     setSetting('helmAccess', nextPort(helmAccess))

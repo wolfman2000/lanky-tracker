@@ -1,4 +1,5 @@
 import MiscPool from '@renderer/components/pools/Misc'
+import { useCurrentPearlCount } from '@renderer/hooks/consumables'
 import {
   useGalleonLighthouseArea,
   useGalleonOutskirts,
@@ -6,8 +7,6 @@ import {
   useSlamGalleon
 } from '@renderer/hooks/galleon'
 import { useDive, useMini, useSax, useTiny } from '@renderer/hooks/kongs'
-import useDonkStore from '@renderer/store'
-import { useShallow } from 'zustand/react/shallow'
 import GalleonCheck from '../GalleonCheck'
 
 const TinyBananas: React.FC = () => {
@@ -19,7 +18,7 @@ const TinyBananas: React.FC = () => {
   const mini = useMini()
   const dive = useDive()
   const sax = useSax()
-  const pearls = useDonkStore(useShallow((state) => state.consumables.pearls))
+  const pearls = useCurrentPearlCount()
   return (
     <>
       <GalleonCheck

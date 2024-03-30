@@ -2,6 +2,7 @@ import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import { usePlayLevel, useSlamLevel } from './isles'
 import { useAnyGun, useAnyKong, useOrange } from './kongs'
+import { useBananaportAll } from './settings'
 import { LogicBool, useSwitchsanityGun } from './world'
 
 /**
@@ -86,10 +87,9 @@ export const useForestBean = (): boolean => {
   const inStage = usePlayForest()
   const door1 = useSwitchsanityGun('forestBean1', 3)
   const door2 = useSwitchsanityGun('forestBean2', 4)
-  const [bananaport, removeBarriers] = useDonkStore(
-    useShallow((state) => [state.settings.bananaportOpen, state.removeBarriers])
-  )
-  return inStage && (bananaport == 2 || removeBarriers.forestBeanstalk || (door1 && door2))
+  const warpAll = useBananaportAll()
+  const [removeBarriers] = useDonkStore(useShallow((state) => [state.removeBarriers]))
+  return inStage && (warpAll || removeBarriers.forestBeanstalk || (door1 && door2))
 }
 
 /**
@@ -99,8 +99,7 @@ export const useForestBean = (): boolean => {
 export const useForestOwl = (): boolean => {
   const inStage = usePlayForest()
   const door = useSwitchsanityGun('forestOwlTree', 2)
-  const [bananaport, removeBarriers] = useDonkStore(
-    useShallow((state) => [state.settings.bananaportOpen, state.removeBarriers])
-  )
-  return inStage && (bananaport == 2 || removeBarriers.forestOwlTree || door)
+  const warpAll = useBananaportAll()
+  const [removeBarriers] = useDonkStore(useShallow((state) => [state.removeBarriers]))
+  return inStage && (warpAll || removeBarriers.forestOwlTree || door)
 }
