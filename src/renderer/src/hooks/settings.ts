@@ -22,3 +22,10 @@ export const useAutoBonus = (): boolean =>
  */
 export const useBananaportAll = (): boolean =>
   useDonkStore(useShallow((state) => state.settings.bananaportOpen)) == 2
+
+/**
+ * Are the melon crates shuffled in this seed?
+ * @returns true if the melon crates are shuffled.
+ */
+export const useShuffleCrates = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.shuffleCrates))
