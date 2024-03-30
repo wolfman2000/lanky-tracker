@@ -1,10 +1,6 @@
-import useDonkStore from '@renderer/store'
-import { PropsWithChildren } from 'react'
-import { useShallow } from 'zustand/react/shallow'
+import { usePoolMisc } from '@renderer/hooks/settings'
 
-const MiscPool: React.FC<PropsWithChildren> = ({ children }) => {
-  const pool = useDonkStore(useShallow((state) => state.settings.poolMisc))
-  return pool ? <>{children}</> : null
-}
+const MiscPool: React.FC<React.PropsWithChildren> = ({ children }) =>
+  usePoolMisc() ? <>{children}</> : null
 
 export default MiscPool

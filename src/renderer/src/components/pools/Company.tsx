@@ -1,10 +1,6 @@
-import useDonkStore from '@renderer/store'
-import { PropsWithChildren } from 'react'
-import { useShallow } from 'zustand/react/shallow'
+import { usePoolCompanyCoins } from '@renderer/hooks/settings'
 
-const CompanyPool: React.FC<PropsWithChildren> = ({ children }) => {
-  const pool = useDonkStore(useShallow((state) => state.settings.poolCompanyCoins))
-  return pool ? <>{children}</> : null
-}
+const CompanyPool: React.FC<React.PropsWithChildren> = ({ children }) =>
+  usePoolCompanyCoins() ? <>{children}</> : null
 
 export default CompanyPool

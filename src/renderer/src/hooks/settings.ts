@@ -9,6 +9,13 @@ import { useShallow } from 'zustand/react/shallow'
 export const useCbCount = (): number => useDonkStore(useShallow((state) => state.settings.cbCount))
 
 /**
+ * How many banana medals do we need for the Jetpac check?
+ * @returns The number of banana medals for Jetpac.
+ */
+export const useJetpacCount = (): number =>
+  useDonkStore(useShallow((state) => state.settings.jetpacCount))
+
+/**
  * Is each check containing a bonus barrel auto completed for you?
  *
  * Note that Helm's bonus barrels are not subject to this setting.
@@ -45,11 +52,74 @@ export const usePoolShops = (): boolean =>
   useDonkStore(useShallow((state) => state.settings.poolShops))
 
 /**
+ * Are the tough golden bananas in the rando pool?
+ * @returns true if the tough golden bananas are in the pool.
+ */
+export const usePoolToughBananas = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.poolToughBananas))
+
+/**
+ * Are the miscellaneous items in the rando pool?
+ * @returns true if the misc. items are in the pool.
+ */
+export const usePoolMisc = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.poolMisc))
+
+/**
+ * Are the blueprints the Kasplats hold in the rando pool?
+ * @returns true if the blueprints are in the pool.
+ */
+export const usePoolBlueprints = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.poolBlueprints))
+
+/**
+ * Are the banana fairies in the rando pool?
+ * @returns true if the fairies are in the pool.
+ */
+export const usePoolFairies = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.poolFairies))
+
+/**
+ * Are the boss keys in the rando pool?
+ * @returns true if the keys are in the pool.
+ */
+export const usePoolKeys = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.poolKeys))
+
+/**
+ * Are the melon crates in the rando pool?
+ * @returns true if the crates are in the pool.
+ */
+export const usePoolCrates = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.poolCrates))
+
+/**
  * Are the rainbow coins shuffled in the pool, or always kept in dirt spots?
  * @returns true if the rainbow coins are shuffled in the pool.
  */
 export const usePoolRainbowCoins = (): boolean =>
   useDonkStore(useShallow((state) => state.settings.poolRainbowCoins))
+
+/**
+ * Are the battle crowns in the rando pool?
+ * @returns true if the crowns are in the pool.
+ */
+export const usePoolCrowns = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.poolCrowns))
+
+/**
+ * Are the banana medals in the rando pool?
+ * @returns true if the banana medals are in the pool.
+ */
+export const usePoolBananaMedals = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.poolBananaMedals))
+
+/**
+ * Are the company coins in the rando pool?
+ * @returns true if the company coins are in the pool.
+ */
+export const usePoolCompanyCoins = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.poolCompanyCoins))
 
 /**
  * Are the dirt locations shuffled around in this seed?

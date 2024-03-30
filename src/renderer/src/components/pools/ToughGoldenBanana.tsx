@@ -1,10 +1,6 @@
-import useDonkStore from '@renderer/store'
-import { PropsWithChildren } from 'react'
-import { useShallow } from 'zustand/react/shallow'
+import { usePoolToughBananas } from '@renderer/hooks/settings'
 
-const ToughGoldenBanana: React.FC<PropsWithChildren> = ({ children }) => {
-  const pool = useDonkStore(useShallow((state) => state.settings.poolToughBananas))
-  return pool ? <>{children}</> : null
-}
+const ToughGoldenBanana: React.FC<React.PropsWithChildren> = ({ children }) =>
+  usePoolToughBananas() ? <>{children}</> : null
 
 export default ToughGoldenBanana

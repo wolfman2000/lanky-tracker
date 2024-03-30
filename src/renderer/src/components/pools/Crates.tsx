@@ -1,9 +1,6 @@
-import useDonkStore from '@renderer/store'
-import { useShallow } from 'zustand/react/shallow'
+import { usePoolCrates } from '@renderer/hooks/settings'
 
-const CratePool: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const pool = useDonkStore(useShallow((state) => state.settings.poolCrates))
-  return pool ? <>{children}</> : null
-}
+const CratePool: React.FC<React.PropsWithChildren> = ({ children }) =>
+  usePoolCrates() ? <>{children}</> : null
 
 export default CratePool

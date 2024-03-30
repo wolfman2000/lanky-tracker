@@ -1,9 +1,6 @@
-import useDonkStore from '@renderer/store'
-import { useShallow } from 'zustand/react/shallow'
+import { usePoolCrowns } from '@renderer/hooks/settings'
 
-const ArenaPool: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const pool = useDonkStore(useShallow((state) => state.settings.poolCrowns))
-  return pool ? <>{children}</> : null
-}
+const ArenaPool: React.FC<React.PropsWithChildren> = ({ children }) =>
+  usePoolCrowns() ? <>{children}</> : null
 
 export default ArenaPool

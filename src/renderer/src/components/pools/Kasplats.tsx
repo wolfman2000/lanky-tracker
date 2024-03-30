@@ -1,10 +1,6 @@
-import useDonkStore from '@renderer/store'
-import { PropsWithChildren } from 'react'
-import { useShallow } from 'zustand/react/shallow'
+import { usePoolBlueprints } from '@renderer/hooks/settings'
 
-const KasplatPool: React.FC<PropsWithChildren> = ({ children }) => {
-  const pool = useDonkStore(useShallow((state) => state.settings.poolBlueprints))
-  return pool ? <>{children}</> : null
-}
+const KasplatPool: React.FC<React.PropsWithChildren> = ({ children }) =>
+  usePoolBlueprints() ? <>{children}</> : null
 
 export default KasplatPool
