@@ -1,6 +1,7 @@
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 
+import { useIsSwitchsanity } from '@renderer/hooks/settings'
 import SwitchsanitySwitch from './SwitchsanitySwitch'
 
 import chunkyKongIcon from '../../assets/images/chunky.png'
@@ -30,9 +31,8 @@ const allGun = [dkGunIcon, diddyGunIcon, lankyGunIcon, tinyGunIcon, chunkyGunIco
 const allMusic = [dkMusicIcon, diddyMusicIcon, lankyMusicIcon, tinyMusicIcon, chunkyMusicIcon]
 
 const SwitchsanitySelector: React.FC = () => {
-  const [isSwitchsanity, switches] = useDonkStore(
-    useShallow((state) => [state.settings.isSwitchsanity, state.switchsanitySwitches])
-  )
+  const isSwitchsanity = useIsSwitchsanity()
+  const [switches] = useDonkStore(useShallow((state) => [state.switchsanitySwitches]))
   if (!isSwitchsanity) {
     return null
   }

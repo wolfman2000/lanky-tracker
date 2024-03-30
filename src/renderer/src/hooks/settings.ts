@@ -3,10 +3,31 @@ import { BananaportRange } from '@renderer/store/common'
 import { useShallow } from 'zustand/react/shallow'
 
 /**
+ * What time is it in Fungi Forest?
+ * @returns The current time in Forest.
+ */
+export const useForestTime = (): BananaportRange =>
+  useDonkStore(useShallow((state) => state.settings.forestTime))
+
+/**
+ * Is Switchsanity enabled? It can cause lots of chaos with the logic!
+ * @returns true if Switchsanity is enabled.
+ */
+export const useIsSwitchsanity = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.isSwitchsanity))
+
+/**
  * How many colored bananas are expected for a check within a stage?
  * @returns the number of colored bananas to collect for a check.
  */
 export const useCbCount = (): number => useDonkStore(useShallow((state) => state.settings.cbCount))
+
+/**
+ * How many banana fairies do we require for the Banana Fairy Island (BFI) check?
+ * @returns the number of banana fairies to have for the BFI check.
+ */
+export const useFairyCount = (): number =>
+  useDonkStore(useShallow((state) => state.settings.fairyCount))
 
 /**
  * How many banana medals do we need for the Jetpac check?
@@ -36,6 +57,13 @@ export const useBananaport = (): BananaportRange =>
  * @returns true if we can warp all over within the levels immediately.
  */
 export const useBananaportAll = (): boolean => useBananaport() == 2
+
+/**
+ * Where do we start Helm?
+ * @returns The starting position of Helm.
+ */
+export const useHelmStartPosition = (): BananaportRange =>
+  useDonkStore(useShallow((state) => state.settings.helmAccess))
 
 /**
  * Are the melon crates shuffled in this seed?

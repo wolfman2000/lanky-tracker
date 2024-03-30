@@ -1,7 +1,7 @@
 import ArenaPool from '@renderer/components/pools/Arenas'
 import CompanyPool from '@renderer/components/pools/Company'
 import ShopPool from '@renderer/components/pools/Shops'
-import { useBananaMedalCount } from '@renderer/hooks/consumables'
+import { useCurrentBananaMedalCount } from '@renderer/hooks/consumables'
 import { usePlayForest } from '@renderer/hooks/forest'
 import { useIslesKremAscent } from '@renderer/hooks/isles'
 import { useAllGun, useAnyKong, useBoulderTech, useGone } from '@renderer/hooks/kongs'
@@ -19,7 +19,7 @@ import TinyBananas from './gold-bananas/TinyBananas'
 import IslesShops from './shops'
 
 const IsleChecks: React.FC = () => {
-  const medals = useBananaMedalCount()
+  const medals = useCurrentBananaMedalCount()
   const jetpacCount = useJetpacCount()
   const playForest = usePlayForest()
   const anyKong = useAnyKong()

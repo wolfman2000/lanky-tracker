@@ -5,6 +5,7 @@ import { Level } from '@renderer/store/common'
 import { usePlayAztec } from './aztec'
 import { usePlayCastle } from './castle'
 import { usePlayCaves } from './caves'
+import { useCurrentFairyCount } from './consumables'
 import { usePlayFactory } from './factory'
 import { usePlayGalleon, useSlamGalleon } from './galleon'
 import { usePlayHelm } from './helm'
@@ -47,7 +48,7 @@ import {
   useTwirl,
   useVine
 } from './kongs'
-import { useAutoBonus, useBananaport } from './settings'
+import { useAutoBonus, useBananaport, useFairyCount, useIsSwitchsanity } from './settings'
 import { LogicBool, logicBreak, useSwitchsanityGun, useSwitchsanityMusicPad } from './world'
 
 /**
@@ -142,11 +143,9 @@ export const useIslesKremTop = (): boolean => {
   const port = useMonkeyport()
   const blast = useBlast()
   const balloon = useBalloon()
-  const [isSwitchsanity, padPort] = useDonkStore(
-    useShallow((state) => [
-      state.settings.isSwitchsanity,
-      state.switchsanitySwitches.islesMonkeyport
-    ])
+  const isSwitchsanity = useIsSwitchsanity()
+  const [padPort] = useDonkStore(
+    useShallow((state) => [state.switchsanitySwitches.islesMonkeyport])
   )
   const target = isSwitchsanity ? padPort : 0
   switch (target) {
@@ -174,9 +173,8 @@ export const useIslesHelmEntry = (): boolean => {
   const charge = useCharge()
   const grab = useGrab()
   const gone = useGone()
-  const [isSwitchsanity, islesHelm] = useDonkStore(
-    useShallow((state) => [state.settings.isSwitchsanity, state.switchsanitySwitches.islesHelm])
-  )
+  const isSwitchsanity = useIsSwitchsanity()
+  const [islesHelm] = useDonkStore(useShallow((state) => [state.switchsanitySwitches.islesHelm]))
   const target = isSwitchsanity ? islesHelm : 0
   switch (target) {
     case 0:
@@ -503,9 +501,8 @@ export const useCheckTinyGalleonLobby = (): LogicBool => {
  * @returns true if we can access the BFI check.
  */
 export const useCheckBananaFairyIsle = (): boolean => {
-  const [fairies, fairyCount] = useDonkStore(
-    useShallow((state) => [state.consumables.fairies, state.settings.fairyCount])
-  )
+  const fairies = useCurrentFairyCount()
+  const fairyCount = useFairyCount()
   const mini = useMini()
   return fairies >= fairyCount && mini
 }

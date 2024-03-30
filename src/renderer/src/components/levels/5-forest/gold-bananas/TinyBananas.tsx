@@ -1,6 +1,5 @@
-import { useShallow } from 'zustand/react/shallow'
-
 import MiscPool from '@renderer/components/pools/Misc'
+import { useBean } from '@renderer/hooks/consumables'
 import {
   useForestBean,
   useForestNight,
@@ -17,8 +16,8 @@ import {
   useSax,
   useTiny
 } from '@renderer/hooks/kongs'
+import { useForestTime } from '@renderer/hooks/settings'
 import { logicBreak } from '@renderer/hooks/world'
-import useDonkStore from '@renderer/store'
 import ForestCheck from '../ForestCheck'
 
 const TinyBananas: React.FC = () => {
@@ -34,9 +33,8 @@ const TinyBananas: React.FC = () => {
   const pineapple = usePineapple()
   const tiny = useTiny()
   const anyGun = useAnyGun()
-  const [bean, forestTime] = useDonkStore(
-    useShallow((state) => [state.consumables.bean, state.settings.forestTime])
-  )
+  const forestTime = useForestTime()
+  const bean = useBean()
   return (
     <>
       <ForestCheck
