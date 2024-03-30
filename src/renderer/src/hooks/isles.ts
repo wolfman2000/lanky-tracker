@@ -3,9 +3,12 @@ import { useShallow } from 'zustand/react/shallow'
 import useDonkStore from '@renderer/store'
 import { Level } from '@renderer/store/common'
 import { usePlayAztec } from './aztec'
+import { usePlayCastle } from './castle'
 import { usePlayCaves } from './caves'
 import { usePlayFactory } from './factory'
 import { usePlayGalleon, useSlamGalleon } from './galleon'
+import { usePlayHelm } from './helm'
+import { usePlayJapes } from './japes'
 import {
   useAnyKong,
   useBalloon,
@@ -44,11 +47,8 @@ import {
   useTwirl,
   useVine
 } from './kongs'
-import { useAutoBonus } from './settings'
+import { useAutoBonus, useBananaport } from './settings'
 import { LogicBool, logicBreak, useSwitchsanityGun, useSwitchsanityMusicPad } from './world'
-import { usePlayJapes } from './japes'
-import { usePlayCastle } from './castle'
-import { usePlayHelm } from './helm'
 
 /**
  * What is needed to turn on the rocket barrel in Isles?
@@ -98,7 +98,7 @@ export const useIslesCrossFungi = (): LogicBool => {
  */
 export const useIslesUpper = (): LogicBool => {
   const vine = useVine()
-  const [bananawarp] = useDonkStore(useShallow((state) => [state.settings.bananaportOpen]))
+  const bananawarp = useBananaport()
   const crossFungi = useIslesCrossFungi()
   return {
     in: crossFungi.in || vine || bananawarp != 0,
@@ -125,8 +125,9 @@ export const useIslesKremAscent = (): boolean => {
   const canRocket = useIslesRocket()
   const fungiIsland = useIslesFungiIsland()
   const rocket = useRocket()
-  const [bananaport, openLobbies, key2] = useDonkStore(
-    useShallow((state) => [state.settings.bananaportOpen, state.settings.openLobbies, state.key2])
+  const bananaport = useBananaport()
+  const [openLobbies, key2] = useDonkStore(
+    useShallow((state) => [state.settings.openLobbies, state.key2])
   )
   return openLobbies || key2 || bananaport != 0 || (canRocket && fungiIsland && rocket)
 }

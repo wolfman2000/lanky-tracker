@@ -1,11 +1,12 @@
 import useDonkStore from '@renderer/store'
+import { BananaportRange } from '@renderer/store/common'
 import { useShallow } from 'zustand/react/shallow'
 
 /**
  * How many colored bananas are expected for a check within a stage?
  * @returns the number of colored bananas to collect for a check.
  */
-export const useCbCount = (): number => useDonkStore((state) => state.settings.cbCount)
+export const useCbCount = (): number => useDonkStore(useShallow((state) => state.settings.cbCount))
 
 /**
  * Is each check containing a bonus barrel auto completed for you?
@@ -17,11 +18,17 @@ export const useAutoBonus = (): boolean =>
   useDonkStore(useShallow((state) => state.settings.autoBonus))
 
 /**
+ * What is the status of the bananaports at the beginning of the game?
+ * @returns the bananaport setting value.
+ */
+export const useBananaport = (): BananaportRange =>
+  useDonkStore(useShallow((state) => state.settings.bananaportOpen))
+
+/**
  * Can we warp using all of the bananaports immediately upon entering a level?
  * @returns true if we can warp all over within the levels immediately.
  */
-export const useBananaportAll = (): boolean =>
-  useDonkStore(useShallow((state) => state.settings.bananaportOpen)) == 2
+export const useBananaportAll = (): boolean => useBananaport() == 2
 
 /**
  * Are the melon crates shuffled in this seed?
