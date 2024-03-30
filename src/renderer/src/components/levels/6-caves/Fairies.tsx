@@ -1,4 +1,3 @@
-import { useShallow } from 'zustand/react/shallow'
 
 import FairyPool from '@renderer/components/pools/Fairies'
 import { usePlayCaves } from '@renderer/hooks/caves'
@@ -11,7 +10,7 @@ import {
   useSlam,
   useSpring
 } from '@renderer/hooks/kongs'
-import useDonkStore from '@renderer/store'
+import { useShuffleFairies } from '@renderer/hooks/settings'
 import CavesCheck from './CavesCheck'
 
 const Vanilla: React.FC = () => {
@@ -63,8 +62,7 @@ const Shuffled: React.FC = () => {
 }
 
 const FairyLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleFairies))
-  const locations = shuffle ? <Shuffled /> : <Vanilla />
+  const locations = useShuffleFairies() ? <Shuffled /> : <Vanilla />
   return <FairyPool>{locations}</FairyPool>
 }
 

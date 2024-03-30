@@ -1,4 +1,3 @@
-import { useShallow } from 'zustand/react/shallow'
 
 import FairyPool from '@renderer/components/pools/Fairies'
 import { useCastleTree, usePlayCastle, useSlamCastle } from '@renderer/hooks/castle'
@@ -11,7 +10,7 @@ import {
   useMonkeyport,
   useSniper
 } from '@renderer/hooks/kongs'
-import useDonkStore from '@renderer/store'
+import { useShuffleFairies } from '@renderer/hooks/settings'
 import CastleCheck from './CastleCheck'
 
 const Vanilla: React.FC = () => {
@@ -65,8 +64,7 @@ const Shuffled: React.FC = () => {
 }
 
 const FairyLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleFairies))
-  const locations = shuffle ? <Shuffled /> : <Vanilla />
+  const locations = useShuffleFairies() ? <Shuffled /> : <Vanilla />
   return <FairyPool>{locations}</FairyPool>
 }
 

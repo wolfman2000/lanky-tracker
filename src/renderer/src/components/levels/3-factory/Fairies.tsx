@@ -1,9 +1,7 @@
-import { useShallow } from 'zustand/react/shallow'
-
 import FairyPool from '@renderer/components/pools/Fairies'
 import { useFactoryTesting, usePlayFactory, useSlamFactory } from '@renderer/hooks/factory'
 import { useAnyKong, useCamera, useFeather, useMini } from '@renderer/hooks/kongs'
-import useDonkStore from '@renderer/store'
+import { useShuffleFairies } from '@renderer/hooks/settings'
 import FactoryCheck from './FactoryCheck'
 
 const Vanilla: React.FC = () => {
@@ -53,8 +51,7 @@ const Shuffled: React.FC = () => {
 }
 
 const FairyLocations: React.FC = () => {
-  const shuffle = useDonkStore(useShallow((state) => state.settings.shuffleFairies))
-  const locations = shuffle ? <Shuffled /> : <Vanilla />
+  const locations = useShuffleFairies() ? <Shuffled /> : <Vanilla />
   return <FairyPool>{locations}</FairyPool>
 }
 

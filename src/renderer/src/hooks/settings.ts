@@ -43,3 +43,10 @@ export const usePoolShops = (): boolean =>
  */
 export const usePoolRainbowCoins = (): boolean =>
   useDonkStore(useShallow((state) => state.settings.poolRainbowCoins))
+
+/**
+ * Are the fairy locations shuffled around in this seed?
+ * @returns true if the fairy locations rae shuffled this seed.
+ */
+export const useShuffleFairies = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.shuffleFairies))
