@@ -58,7 +58,7 @@ main > article:last-child {
   grid-column: 2;
   & > .react-tabs > ul {
     display: grid;
-    grid-template-columns: 1.5fr repeat(7, 1fr);
+    grid-template-columns: repeat(9, 1fr);
     padding-inline-start: 0;
     font-size: smaller;
     & > li {
@@ -73,7 +73,7 @@ main > article:last-child {
 .move-table {
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
+  grid-template-columns: repeat(10, 1fr);
   justify-items: center;
 }
 
@@ -101,6 +101,8 @@ main > article:last-child {
 }
 
 .count-icon,
+.slam-icon,
+.double-icon,
 .simple-icon {
   position: relative;
   cursor: pointer;
@@ -133,14 +135,23 @@ main > article:last-child {
   cursor: pointer;
 }
 
-.foolish-section h3 {
+.hint-drops {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+}
+
+.hint-section h3 {
   margin: 0 auto;
   text-align: center;
 }
 
-.foolish-drops {
-  overflow-y: scroll;
-  height: 100px;
+.hint-drops {
+  overflow-y: auto;
+  height: 18vh;
+}
+
+.hint-drops > *:nth-child(even) {
+  cursor: pointer;
 }
 
 .runtime-settings > h3 {
@@ -186,7 +197,7 @@ main > article:last-child {
 main .grid {
   display: grid;
   grid-template-columns: 4fr 2.5fr 0.5fr;
-  overflow-y: scroll;
+  overflow-y: auto;
   height: calc(100vh - 3ex);
 }
 
@@ -219,6 +230,9 @@ main .grid {
 
 .grid > :not(.checked).foolish {
   color: red;
+}
+.grid > :not(.checked).woth {
+  color: gold;
 }
 
 @media (max-width: 720px) {

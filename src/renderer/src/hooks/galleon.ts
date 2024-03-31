@@ -1,7 +1,7 @@
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import { usePlayLevel, useSlamLevel } from './isles'
-import { useDive, useGrab, useLanky, useRocket, useTwirl, useVine } from './kongs'
+import { useDive, useDk, useGrab, useLanky, useRocket, useSlam, useTwirl, useVine } from './kongs'
 import { useBananaportAll, useGalleonTideStartHigh } from './settings'
 import { LogicBool, logicBreak, useSwitchsanityGun } from './world'
 
@@ -150,5 +150,33 @@ export const useGalleonTreasureRoom = (): LogicBool => {
   return {
     in: (inStage && warpAll) || (outskirts && lanky && dive && highTide),
     out: outskirts && lanky && dive
+  }
+}
+
+export const useGalleonDkLighthouseBanana = (): LogicBool => {
+  const canSlam = useSlamGalleon()
+  const lighthouseArea = useGalleonLighthouseArea()
+  const highTide = useGalleonHighTide()
+  const dk = useDk()
+  const grab = useGrab()
+  const seasick = useDonkStore(useShallow((state) => state.removeBarriers.galleonSeasick))
+  return {
+    in: lighthouseArea && highTide && canSlam && dk && (seasick || grab),
+    out: lighthouseArea && canSlam && dk && (seasick || grab)
+  }
+}
+
+export const useGalleonDiddyLighthouseBanana = (): LogicBool => {
+  const seasick = useDonkStore(useShallow((state) => state.removeBarriers.galleonSeasick))
+  const canSlam = useSlamGalleon()
+  const slam = useSlam()
+  const lighthouseArea = useGalleonLighthouseArea()
+  const rocket = useRocket()
+  const dk = useDk()
+  const grab = useGrab()
+  const highTide = useGalleonHighTide()
+  return {
+    in: lighthouseArea && (seasick || (highTide && canSlam && dk && grab)) && canSlam && rocket,
+    out: lighthouseArea && (seasick || (canSlam && dk && grab)) && slam && rocket
   }
 }

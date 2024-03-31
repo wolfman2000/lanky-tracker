@@ -2,6 +2,7 @@ import { useShallow } from 'zustand/react/shallow'
 
 import {
   useJapesHive,
+  useJapesKongGates,
   useJapesRambi,
   useJapesUnderground,
   usePlayJapes
@@ -21,6 +22,7 @@ const ChunkyMedal: React.FC = () => {
   const barrel = useBarrel()
   const hunky = useHunky()
   const pineapple = usePineapple()
+  const kongGates = useJapesKongGates()
   const [coloredBananaShuffle] = useDonkStore(
     useShallow((state) => [state.settings.shuffleColoredBananas])
   )
@@ -34,14 +36,15 @@ const ChunkyMedal: React.FC = () => {
     currLogic += 20
   }
 
-  // Unsure how to handle Diddy Freed.
-  currLogic += 15 // one bunch on Cranky's lab, 10 regular bananas on path to hive.
-  if (haveRambiCage) {
-    if (pineapple) {
-      currLogic += 30
-    }
-    if (barrel) {
-      currLogic += 5
+  if (kongGates) {
+    currLogic += 15 // one bunch on Cranky's lab, 10 regular bananas on path to hive.
+    if (haveRambiCage) {
+      if (pineapple) {
+        currLogic += 30
+      }
+      if (barrel) {
+        currLogic += 5
+      }
     }
   }
 

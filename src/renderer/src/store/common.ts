@@ -6,6 +6,7 @@ type Enumerate<N extends number, Acc extends number[] = []> = Acc['length'] exte
 type IntRange<F extends number, T extends number> = Exclude<Enumerate<T>, Enumerate<F>>
 
 type PearlRange = IntRange<0, 6>
+type BlueprintRange = IntRange<0, 9>
 type CrownRange = IntRange<0, 11>
 type FairyRange = IntRange<0, 21>
 type ColoredBananaRange = IntRange<0, 101>
@@ -234,6 +235,11 @@ interface ConsumablesCollection {
    * This is a memetic item, but it has its use.
    */
   bean: boolean
+  dkBp: BlueprintRange
+  diddyBp: BlueprintRange
+  lankyBp: BlueprintRange
+  tinyBp: BlueprintRange
+  chunkyBp: BlueprintRange
 }
 
 export interface ConsumablesState {
@@ -375,6 +381,32 @@ interface SwitchActions {
 }
 
 export type SwitchSlice = SwitchState & SwitchActions
+//#endregion
+
+//#region Fast Checks
+interface FastCheckCollection {
+  /**
+   * Can the arcade game be skipped for Round 1?
+   */
+  factoryArcade: boolean
+  /**
+   * Can we turn in only one Pearl instead of five?
+   *
+   * @todo Watch this setting in the future: some folks want three.
+   */
+  galleonMermaid: boolean
+}
+
+export interface FastCheckState {
+  fastChecks: FastCheckCollection
+}
+
+interface FastCheckActions {
+  setFastCheck: (id: string, val: boolean) => void
+}
+
+export type FastCheckSlice = FastCheckState & FastCheckActions
+
 //#endregion
 
 //#region Barriers to Remove
@@ -579,11 +611,13 @@ interface SettingCollection {
    */
   poolKeys: boolean
   /**
-   * Which fast checks are enabled?
-   *
-   * Only the ones that affect logic should be placed in here.
+   * Are enemy drops in the pool?
    */
-  fastChecks: Record<string, boolean>
+  poolDrops: boolean
+  /**
+   * Are the enemies shuffled amongst themselves?
+   */
+  shuffleEnemies: boolean
   /**
    * Are hard shooting checks enabled?
    */
@@ -613,10 +647,13 @@ export interface HintState {
    * The collection of foolish hints identified within the game.
    */
   foolish: Record<string, SelectableRegionValues>
+  hoard: Record<string, SelectableRegionValues>
 }
 
 interface HintActions {
   setFool: (id: string, region: SelectableRegionValues) => void
+  setHoard: (id: string, region: SelectableRegionValues) => void
+  clearRegion: (id: string) => void
 }
 
 export type HintSlice = HintState & HintActions
@@ -728,7 +765,8 @@ export type AllSlice = CheckSlice &
   BarrierSlice &
   SettingSlice &
   LevelSlice &
-  HintSlice
+  HintSlice &
+  FastCheckSlice
 
 export const donkResetFns = new Set<() => void>()
 

@@ -1,5 +1,6 @@
 import { usePlayLevel, useSlamLevel } from './isles'
-import { useBlast } from './kongs'
+import { useAnyMusic, useBlast, useGone, usePineapple, usePunch, useTriangle } from './kongs'
+import { LogicBool } from './world'
 
 /**
  * Can we play in Creepy Castle?
@@ -22,4 +23,21 @@ export const useCastleTree = (): boolean => {
   const inStage = usePlayCastle()
   const blast = useBlast()
   return inStage && blast
+}
+
+/**
+ * Can the enemies in the shed be defeated?
+ * @returns true if the enemies in the shed can be defeated.
+ */
+export const useCastleShedEnemies = (): LogicBool => {
+  const inStage = usePlayCastle()
+  const punch = usePunch()
+  const triangle = useTriangle()
+  const gone = useGone()
+  const pineapple = usePineapple()
+  const anyMusic = useAnyMusic()
+  return {
+    in: inStage && punch && (triangle || (gone && pineapple)),
+    out: inStage && punch && anyMusic
+  }
 }

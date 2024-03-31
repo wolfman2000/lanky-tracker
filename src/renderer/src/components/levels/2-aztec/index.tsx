@@ -1,12 +1,14 @@
-import ArenaPool from '@renderer/components/pools/Arenas'
 import BananaMedalPool from '@renderer/components/pools/BananaMedals'
 import BossPool from '@renderer/components/pools/Bosses'
+import DropPool from '@renderer/components/pools/Drops'
 import ShopPool from '@renderer/components/pools/Shops'
-import { useAztecFront, useAztecTinyTemple, useSlamAztec } from '@renderer/hooks/aztec'
-import { useAnyGun, useAnyKong, useDive, useGrape, useLanky } from '@renderer/hooks/kongs'
+import { useAztecFront } from '@renderer/hooks/aztec'
+import { useAnyKong } from '@renderer/hooks/kongs'
+import ArenaLocations from './Arenas'
 import AztecCheck from './AztecCheck'
 import CrateLocations from './Crates'
 import DirtLocations from './Dirt'
+import EnemyLocations from './Enemies'
 import FairyLocations from './Fairies'
 import KasplatLocations from './Kasplats'
 import ChunkyBananas from './gold-bananas/ChunkyBananas'
@@ -23,13 +25,7 @@ import AztecShops from './shops'
 
 const AztecChecks: React.FC = () => {
   const aztecFront = useAztecFront()
-  const canSlam = useSlamAztec()
-  const anyGun = useAnyGun()
   const anyKong = useAnyKong()
-  const templeTiny = useAztecTinyTemple()
-  const lanky = useLanky()
-  const grape = useGrape()
-  const dive = useDive()
   return (
     <div className="grid">
       <DkBananas />
@@ -41,15 +37,7 @@ const AztecChecks: React.FC = () => {
       <CrateLocations />
       <DirtLocations />
       <FairyLocations />
-      <ArenaPool>
-        <AztecCheck
-          id={2090}
-          name="Aztec Arena"
-          region="Tiny Temple"
-          canGetLogic={templeTiny.in && dive && canSlam && lanky && grape}
-          canGetBreak={templeTiny.out && dive && canSlam && lanky && anyGun}
-        />
-      </ArenaPool>
+      <ArenaLocations />
       <BananaMedalPool>
         <DkMedal />
         <DiddyMedal />
@@ -69,6 +57,9 @@ const AztecChecks: React.FC = () => {
       <ShopPool>
         <AztecShops />
       </ShopPool>
+      <DropPool>
+        <EnemyLocations />
+      </DropPool>
     </div>
   )
 }

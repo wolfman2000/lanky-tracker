@@ -6,6 +6,7 @@ import {
 } from '@renderer/hooks/factory'
 import {
   useCharge,
+  useChunky,
   useDiddy,
   useDk,
   useGuitar,
@@ -24,6 +25,7 @@ const DiddyBananas: React.FC = () => {
   const canSlam = useSlamFactory()
   const dk = useDk()
   const diddy = useDiddy()
+  const chunky = useChunky()
   const spring = useSpring()
   const guitar = useGuitar()
   const charge = useCharge()
@@ -52,7 +54,7 @@ const DiddyBananas: React.FC = () => {
         name="Factory Diddy Chunky Room Barrel"
         region="Storage And Arcade"
         canGetLogic={hut.in && canSlam && diddy && (autoBonus || vine)}
-        canGetBreak={logicBreak(hut) && canSlam && diddy && (autoBonus || vine || dk)}
+        canGetBreak={logicBreak(hut) && canSlam && diddy && (autoBonus || vine || dk || chunky)}
       />
       <FactoryCheck
         id={3013}

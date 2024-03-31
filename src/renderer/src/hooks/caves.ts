@@ -1,8 +1,23 @@
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import { usePlayLevel, useSlamLevel } from './isles'
-import { useBalloon, useDk, useMini, useRocket, useTwirl } from './kongs'
-import { useBananaportAll } from './settings'
+import {
+  useAnyGun,
+  useBalloon,
+  useBongos,
+  useCoconut,
+  useDiddy,
+  useDk,
+  useGuitar,
+  useHoming,
+  useMini,
+  useOrange,
+  useRocket,
+  useTiny,
+  useTrombone,
+  useTwirl
+} from './kongs'
+import { useBananaportAll, useHardShooting } from './settings'
 import { LogicBool } from './world'
 
 /**
@@ -27,7 +42,7 @@ export const useCavesIgloo = (): boolean => {
   const rocket = useRocket()
   const [barriers] = useDonkStore(useShallow((state) => [state.removeBarriers]))
   const iglooBarrier = barriers.cavesIgloo
-  return inStage && (!iglooBarrier || rocket)
+  return inStage && (iglooBarrier || rocket)
 }
 
 /**
@@ -60,5 +75,41 @@ export const useCavesPillar = (): LogicBool => {
   return {
     in: inStage && (warpAll || rocket),
     out: inStage && (dk || twirl || balloon)
+  }
+}
+
+export const useCavesLankyCabin = (): LogicBool => {
+  const inStage = usePlayCaves()
+  const balloon = useBalloon()
+  const trombone = useTrombone()
+  const diddy = useDiddy()
+  const tiny = useTiny()
+  return {
+    in: inStage && trombone && balloon,
+    out: inStage && trombone && (diddy || tiny)
+  }
+}
+
+export const useCavesDkCabinBee = (): LogicBool => {
+  const inStage = usePlayCaves()
+  const bongos = useBongos()
+  const coconut = useCoconut()
+  const homing = useHoming()
+  const hardShooting = useHardShooting()
+  const anyGun = useAnyGun()
+  return {
+    in: inStage && bongos && coconut && (homing || hardShooting),
+    out: inStage && bongos && anyGun
+  }
+}
+
+export const useCavesDiddyCabinGauntlet = (): LogicBool => {
+  const inStage = usePlayCaves()
+  const guitar = useGuitar()
+  const rocket = useRocket()
+  const orange = useOrange()
+  return {
+    in: inStage && guitar && rocket && orange,
+    out: inStage && guitar
   }
 }

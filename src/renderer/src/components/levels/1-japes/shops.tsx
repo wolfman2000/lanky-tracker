@@ -1,4 +1,4 @@
-import { usePlayJapes } from '@renderer/hooks/japes'
+import { useJapesKongGates, usePlayJapes } from '@renderer/hooks/japes'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import JapesCheck from './JapesCheck'
@@ -20,6 +20,7 @@ const JapesShops: React.FC = () => {
     ])
   )
   const playJapes = usePlayJapes()
+  const kongGates = useJapesKongGates()
 
   return (
     <>
@@ -27,37 +28,37 @@ const JapesShops: React.FC = () => {
         id={1110}
         name="Japes Cranky Shared"
         region="Japes Shops"
-        canGetLogic={playJapes && anyKong}
+        canGetLogic={kongGates && anyKong}
       />
       <JapesCheck
         id={1111}
         name="Japes Cranky DK"
         region="Japes Shops"
-        canGetLogic={playJapes && dk}
+        canGetLogic={kongGates && dk}
       />
       <JapesCheck
         id={1112}
         name="Japes Cranky Diddy"
         region="Japes Shops"
-        canGetLogic={playJapes && diddy}
+        canGetLogic={kongGates && diddy}
       />
       <JapesCheck
         id={1113}
         name="Japes Cranky Lanky"
         region="Japes Shops"
-        canGetLogic={playJapes && lanky}
+        canGetLogic={kongGates && lanky}
       />
       <JapesCheck
         id={1114}
         name="Japes Cranky Tiny"
         region="Japes Shops"
-        canGetLogic={playJapes && tiny}
+        canGetLogic={kongGates && tiny}
       />
       <JapesCheck
         id={1115}
         name="Japes Cranky Chunky"
         region="Japes Shops"
-        canGetLogic={playJapes && chunky}
+        canGetLogic={kongGates && chunky}
       />
       <JapesCheck
         id={1120}

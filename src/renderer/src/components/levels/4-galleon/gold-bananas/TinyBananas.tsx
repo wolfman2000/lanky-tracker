@@ -1,5 +1,6 @@
 import MiscPool from '@renderer/components/pools/Misc'
 import { useCurrentPearlCount } from '@renderer/hooks/consumables'
+import { useFastMermaid } from '@renderer/hooks/fast-checks'
 import {
   useGalleonLighthouseArea,
   useGalleonOutskirts,
@@ -19,13 +20,14 @@ const TinyBananas: React.FC = () => {
   const dive = useDive()
   const sax = useSax()
   const pearls = useCurrentPearlCount()
+  const mermaid = useFastMermaid()
   return (
     <>
       <GalleonCheck
-        id={4030 /* TODO: Fast check for pearls. */}
+        id={4030}
         name="Galleon Tiny Pearls"
         region="Lighthouse Area"
-        canGetLogic={lighthouseArea && mini && dive && pearls != 0}
+        canGetLogic={lighthouseArea && mini && dive && pearls >= (mermaid ? 1 : 5)}
       />
       <GalleonCheck
         id={4031}

@@ -138,6 +138,21 @@ export const usePoolFairies = (): boolean =>
   useDonkStore(useShallow((state) => state.settings.poolFairies))
 
 /**
+ * Is Dropsanity turned on? That is, can enemy drops contain checks?
+ * @returns true if drops from enemies are enabled.
+ */
+export const usePoolDrops = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.poolDrops))
+
+/**
+ * Are the enemies (potentially) different from their defaults?
+ *
+ * @returns true if the enemies are shuffled.
+ */
+export const useShuffleEnemies = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.shuffleEnemies))
+
+/**
  * Are the boss keys in the rando pool?
  * @returns true if the keys are in the pool.
  */
@@ -199,3 +214,6 @@ export const useShuffleFairies = (): boolean =>
  */
 export const useShuffleKasplats = (): boolean =>
   useDonkStore(useShallow((state) => state.settings.shuffleKasplats))
+
+export const useShuffledArenas = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.shuffleArenas))

@@ -1,6 +1,12 @@
 import { useShallow } from 'zustand/react/shallow'
 
-import { useJapesRambi, useJapesSideArea, usePlayJapes, useSlamJapes } from '@renderer/hooks/japes'
+import {
+  useJapesKongGates,
+  useJapesRambi,
+  useJapesSideArea,
+  usePlayJapes,
+  useSlamJapes
+} from '@renderer/hooks/japes'
 import { useCharge, useDiddy, useDive, usePeanut } from '@renderer/hooks/kongs'
 import { useCbCount } from '@renderer/hooks/settings'
 import useDonkStore from '@renderer/store'
@@ -16,6 +22,7 @@ const DiddyMedal: React.FC = (): JSX.Element => {
   const peanut = usePeanut()
   const dive = useDive()
   const charge = useCharge()
+  const kongGates = useJapesKongGates()
   const [coloredBananaShuffle] = useDonkStore(
     useShallow((state) => [state.settings.shuffleColoredBananas])
   )
@@ -30,20 +37,24 @@ const DiddyMedal: React.FC = (): JSX.Element => {
     currLogic += 20
   }
 
-  // Unsure how to handle Diddy Freed.
-  currLogic += 3
-  if (haveRambiCage) {
-    currLogic += 5
-  }
-
-  // Mines have a specific situation.
   let currBreak = currLogic
-  if (canSlam) {
-    currLogic += 15
-    currBreak += 20
-    if (charge) {
-      // Minecart (OOL already covers this)
+  if (kongGates) {
+    // Unsure how to handle Diddy Freed.
+    currLogic += 3
+    currBreak += 3
+    if (haveRambiCage) {
       currLogic += 5
+      currBreak += 5
+    }
+
+    // Mines have a specific situation.
+    if (canSlam) {
+      currLogic += 15
+      currBreak += 20
+      if (charge) {
+        // Minecart (OOL already covers this)
+        currLogic += 5
+      }
     }
   }
 

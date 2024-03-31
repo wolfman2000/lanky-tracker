@@ -1,15 +1,6 @@
 import ToughGoldenBanana from '@renderer/components/pools/ToughGoldenBanana'
-import { useCavesIgloo, usePlayCaves } from '@renderer/hooks/caves'
-import {
-  useAnyGun,
-  useBlast,
-  useBongos,
-  useCoconut,
-  useHoming,
-  useSlam,
-  useStrong
-} from '@renderer/hooks/kongs'
-import { useHardShooting } from '@renderer/hooks/settings'
+import { useCavesDkCabinBee, useCavesIgloo, usePlayCaves } from '@renderer/hooks/caves'
+import { useBlast, useBongos, useSlam, useStrong } from '@renderer/hooks/kongs'
 import CavesCheck from '../CavesCheck'
 
 const DkBananas: React.FC = () => {
@@ -18,11 +9,8 @@ const DkBananas: React.FC = () => {
   const blast = useBlast()
   const bongos = useBongos()
   const strong = useStrong()
-  const coconut = useCoconut()
-  const homing = useHoming()
-  const anyGun = useAnyGun()
   const slam = useSlam()
-  const hardShooting = useHardShooting()
+  const dkCabin = useCavesDkCabinBee()
   return (
     <>
       <ToughGoldenBanana>
@@ -47,11 +35,11 @@ const DkBananas: React.FC = () => {
         canGetLogic={inStage && bongos && slam}
       />
       <CavesCheck
-        id={6004 /* TODO: Hard shooting */}
+        id={6004}
         name="Caves DK 5 Door Cabin"
         region="Cabins Area"
-        canGetLogic={inStage && bongos && coconut && (homing || hardShooting)}
-        canGetBreak={inStage && bongos && anyGun}
+        canGetLogic={dkCabin.in}
+        canGetBreak={dkCabin.out}
       />
     </>
   )

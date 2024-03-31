@@ -27,6 +27,15 @@ export const usePlayJapes = (): boolean => usePlayLevel('Japes')
  */
 export const useSlamJapes = (): boolean => useSlamLevel('Japes')
 
+export const useJapesKongGates = (): boolean => {
+  const inStage = usePlayJapes()
+  const [barriers, checks] = useDonkStore(
+    useShallow((state) => [state.removeBarriers, state.checks])
+  )
+
+  return inStage && (checks[1002] || barriers.japesCoconutGates)
+}
+
 /**
  * Can we open the Rambi cage with the correct gun?
  * @returns true if we can shoot the switch to use Rambi.
@@ -65,7 +74,7 @@ export const useJapesSideArea = (): boolean => {
  * @returns true if we can access the Rambi cage in Japes.
  */
 export const useJapesRambi = (): boolean => {
-  const canPlay = usePlayJapes()
+  const canPlay = useJapesKongGates()
   const rambiSwitch = useJapesRambiSwitch()
   return rambiSwitch && canPlay
 }
@@ -89,10 +98,11 @@ export const useJapesMine = (): boolean => {
 export const useJapesHive = (): boolean => {
   const hiveSwitch = useJapesHiveSwitch()
   const canPlay = usePlayJapes()
+  const coconutGates = useJapesKongGates()
   const japesMine = useJapesMine()
   const warpAll = useBananaportAll()
   const [hiveGateOpen] = useDonkStore(useShallow((state) => [state.removeBarriers.japesHiveGate]))
-  return canPlay && (hiveGateOpen || hiveSwitch || (warpAll && japesMine))
+  return canPlay && ((coconutGates && (hiveGateOpen || hiveSwitch)) || (warpAll && japesMine))
 }
 
 /**

@@ -19,9 +19,13 @@ type ItemCheckProps = LevelCheckProps & {
 const ItemCheck: React.FC<ItemCheckProps> = (props) => {
   const { id, name, region, done, canGetLogic } = props
   let { canGetBreak } = props
-  const [setCheck, foolish] = useDonkStore(useShallow((state) => [state.setCheck, state.foolish]))
+  const [setCheck, foolish, hoard] = useDonkStore(
+    useShallow((state) => [state.setCheck, state.foolish, state.hoard])
+  )
   const foolishValues = Object.values(foolish)
+  const hoardValues = Object.values(hoard)
   const isFoolish = foolishValues.some((f) => f === region)
+  const isHoard = hoardValues.some((f) => f === region)
   if (canGetBreak === undefined) {
     canGetBreak = canGetLogic
   }
@@ -38,6 +42,8 @@ const ItemCheck: React.FC<ItemCheckProps> = (props) => {
   }
   if (isFoolish) {
     rowNames.push('foolish')
+  } else if (isHoard) {
+    rowNames.push('woth')
   }
   const classNames = rowNames.join(' ')
 

@@ -30,11 +30,9 @@ export const initialSettings: SettingState = {
     shuffleCrates: false,
     shuffleFairies: false,
     autoBonus: false,
-    poolCompanyCoins: true,
-    fastChecks: {
-      factoryArcade: true,
-      galleonMermaid: true
-    },
+    poolCompanyCoins: false,
+    poolDrops: false,
+    shuffleEnemies: true,
     hardShooting: false,
     openLobbies: false
   }

@@ -1,5 +1,6 @@
 import {
   useGalleonLighthouseArea,
+  useGalleonLowTide,
   useGalleonOutskirts,
   useGalleonTreasureRoom,
   useSlamGalleon
@@ -12,6 +13,7 @@ const LankyBananas: React.FC = () => {
   const canSlam = useSlamGalleon()
   const lighthouseArea = useGalleonLighthouseArea()
   const treasure = useGalleonTreasureRoom()
+  const lowTide = useGalleonLowTide()
   const outskirts = useGalleonOutskirts()
   const dive = useDive()
   const lanky = useLanky()
@@ -43,7 +45,7 @@ const LankyBananas: React.FC = () => {
         id={4023}
         name="Galleon Lanky 5 Door Ship"
         region="5 Door Ship"
-        canGetLogic={outskirts && trombone && dive}
+        canGetLogic={outskirts && lowTide && trombone && dive}
       />
     </>
   )
