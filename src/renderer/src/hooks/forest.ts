@@ -2,7 +2,7 @@ import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import { usePlayLevel, useSlamLevel } from './isles'
 import { useAnyGun, useAnyKong, useOrange } from './kongs'
-import { useBananaportAll } from './settings'
+import { useBananaportAll, useForestTime } from './settings'
 import { LogicBool, useSwitchsanityGun } from './world'
 
 /**
@@ -26,7 +26,7 @@ export const useForestDay = (): LogicBool => {
   const inStage = usePlayForest()
   const anyGun = useAnyGun()
   const orange = useOrange()
-  const [forestTime] = useDonkStore(useShallow((state) => [state.settings.forestTime]))
+  const forestTime = useForestTime()
   if (forestTime != 1) {
     return {
       in: inStage,
@@ -47,7 +47,7 @@ export const useForestNight = (): LogicBool => {
   const anyGun = useAnyGun()
   const inStage = usePlayForest()
   const orange = useOrange()
-  const [forestTime] = useDonkStore(useShallow((state) => [state.settings.forestTime]))
+  const forestTime = useForestTime()
   const anyKong = useAnyKong()
   if (forestTime != 0) {
     return {

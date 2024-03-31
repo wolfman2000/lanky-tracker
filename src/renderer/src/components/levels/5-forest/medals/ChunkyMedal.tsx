@@ -1,15 +1,17 @@
 import {
-  usePlayForest,
-  useForestNight,
   useForestBean,
   useForestDay,
-  useSlamForest,
-  useForestMushroomTop
+  useForestMushroomTop,
+  useForestNight,
+  usePlayForest,
+  useSlamForest
 } from '@renderer/hooks/forest'
+import { useChunky, usePineapple, usePunch, useVine } from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
+import { logicBreak } from '@renderer/hooks/world'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import ForestCheck from '../ForestCheck'
-import { logicBreak } from '@renderer/hooks/world'
 
 const ChunkyMedal: React.FC = () => {
   const inStage = usePlayForest()
@@ -18,15 +20,13 @@ const ChunkyMedal: React.FC = () => {
   const bean = useForestBean()
   const canSlam = useSlamForest()
   const top = useForestMushroomTop()
-  const [cbCount, coloredBananaShuffle, kong, gun, move, vine] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.chunky,
-      state.moves.pineapple,
-      state.moves.punch,
-      state.moves.vine
-    ])
+  const cbCount = useCbCount()
+  const kong = useChunky()
+  const gun = usePineapple()
+  const move = usePunch()
+  const vine = useVine()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 40

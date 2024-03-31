@@ -5,11 +5,12 @@ import {
   usePlayForest,
   useSlamForest
 } from '@renderer/hooks/forest'
-import { useAllGun, useSlam } from '@renderer/hooks/kongs'
+import { useAllGun, useBlast, useCoconut, useDk, useSlam, useStrong } from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
+import { logicBreak } from '@renderer/hooks/world'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import ForestCheck from '../ForestCheck'
-import { logicBreak } from '@renderer/hooks/world'
 
 const DkMedal: React.FC = () => {
   const inStage = usePlayForest()
@@ -19,15 +20,13 @@ const DkMedal: React.FC = () => {
   const top = useForestMushroomTop()
   const allGun = useAllGun()
   const slam = useSlam()
-  const [cbCount, coloredBananaShuffle, kong, gun, crystal, pad] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.dk,
-      state.moves.coconut,
-      state.moves.strong,
-      state.moves.blast
-    ])
+  const cbCount = useCbCount()
+  const kong = useDk()
+  const gun = useCoconut()
+  const crystal = useStrong()
+  const pad = useBlast()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 30 // basic without mushroom top

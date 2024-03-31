@@ -10,11 +10,41 @@ export const useForestTime = (): BananaportRange =>
   useDonkStore(useShallow((state) => state.settings.forestTime))
 
 /**
+ * Does the Galleon tide start at high tide instead of the vanilla low tide?
+ * @returns true if the tide starts as high tide.
+ */
+export const useGalleonTideStartHigh = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.galleonHighTide))
+
+/**
  * Is Switchsanity enabled? It can cause lots of chaos with the logic!
  * @returns true if Switchsanity is enabled.
  */
 export const useIsSwitchsanity = (): boolean =>
   useDonkStore(useShallow((state) => state.settings.isSwitchsanity))
+
+/**
+ * Are the lobbies open at the start of the game, with keys only being needed for K. Rool?
+ * @returns true if the lobbies are already open without needing keys.
+ */
+export const useOpenLobbies = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.openLobbies))
+
+/**
+ * Is the Hard Shooting flag enabled, requiring harder shots without helpful tools?
+ * @returns true if harder shot tricks are expected.
+ */
+export const useHardShooting = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.hardShooting))
+
+/**
+ * Does each level's slam requirement get higher the further in the game we are?
+ *
+ * This depends on Lobby Shuffle: the lobbies in 5 onward require Super, and 7 onward require Super Duper.
+ * @returns true if the slam switches get more progressive.
+ */
+export const useProgressiveSlams = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.progressiveSlams))
 
 /**
  * How many colored bananas are expected for a check within a stage?

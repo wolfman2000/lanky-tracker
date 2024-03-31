@@ -1,5 +1,6 @@
 import useDonkStore from '@renderer/store'
-import GalleonCheck from '../GalleonCheck'
+import { useShallow } from 'zustand/react/shallow'
+
 import {
   useGalleonCannon,
   useGalleonCavernTop,
@@ -11,8 +12,10 @@ import {
   usePlayGalleon,
   useSlamGalleon
 } from '@renderer/hooks/galleon'
-import { useShallow } from 'zustand/react/shallow'
+import { useDive, useFeather, useMini, useSax, useTiny } from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
 import { logicBreak } from '@renderer/hooks/world'
+import GalleonCheck from '../GalleonCheck'
 
 const TinyMedal: React.FC = () => {
   const inStage = usePlayGalleon()
@@ -24,16 +27,14 @@ const TinyMedal: React.FC = () => {
   const highTide = useGalleonHighTide()
   const lowTide = useGalleonLowTide()
   const cavernTop = useGalleonCavernTop()
-  const [cbCount, coloredBananaShuffle, kong, gun, music, crystal, dive] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.tiny,
-      state.moves.feather,
-      state.moves.sax,
-      state.moves.mini,
-      state.moves.dive
-    ])
+  const cbCount = useCbCount()
+  const kong = useTiny()
+  const gun = useFeather()
+  const music = useSax()
+  const crystal = useMini()
+  const dive = useDive()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 9

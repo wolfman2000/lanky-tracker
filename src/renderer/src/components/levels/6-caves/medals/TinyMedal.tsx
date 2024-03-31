@@ -1,6 +1,16 @@
 import { useCavesIgloo, usePlayCaves } from '@renderer/hooks/caves'
-import { useBoulderTech, usePunch } from '@renderer/hooks/kongs'
-import { useBananaportAll } from '@renderer/hooks/settings'
+import {
+  useBoulderTech,
+  useFeather,
+  useHunky,
+  useMini,
+  useMonkeyport,
+  usePunch,
+  useSax,
+  useTiny,
+  useTwirl
+} from '@renderer/hooks/kongs'
+import { useBananaportAll, useCbCount } from '@renderer/hooks/settings'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import CavesCheck from '../CavesCheck'
@@ -11,18 +21,16 @@ const TinyMedal: React.FC = () => {
   const punch = usePunch()
   const boulderTech = useBoulderTech()
   const warpAll = useBananaportAll()
-  const [cbCount, coloredBananaShuffle, kong, gun, music, move, crystal, pad, hunky] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.tiny,
-      state.moves.feather,
-      state.moves.sax,
-      state.moves.twirl,
-      state.moves.mini,
-      state.moves.port,
-      state.moves.hunky
-    ])
+  const cbCount = useCbCount()
+  const kong = useTiny()
+  const gun = useFeather()
+  const music = useSax()
+  const move = useTwirl()
+  const crystal = useMini()
+  const pad = useMonkeyport()
+  const hunky = useHunky()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 15

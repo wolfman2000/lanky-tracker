@@ -1,5 +1,3 @@
-import { useShallow } from 'zustand/react/shallow'
-
 import { useCastleTree, usePlayCastle, useSlamCastle } from '@renderer/hooks/castle'
 import {
   useAnyMusic,
@@ -10,7 +8,7 @@ import {
   useSniper,
   useTriangle
 } from '@renderer/hooks/kongs'
-import useDonkStore from '@renderer/store'
+import { useHardShooting } from '@renderer/hooks/settings'
 import CastleCheck from '../CastleCheck'
 
 const ChunkyBananas: React.FC = () => {
@@ -24,7 +22,7 @@ const ChunkyBananas: React.FC = () => {
   const boulderTech = useBoulderTech()
   const gone = useGone()
   const anyMusic = useAnyMusic()
-  const hardShooting = useDonkStore(useShallow((state) => state.settings.hardShooting))
+  const hardShooting = useHardShooting()
   return (
     <>
       <CastleCheck

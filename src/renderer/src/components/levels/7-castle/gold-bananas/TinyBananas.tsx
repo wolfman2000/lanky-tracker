@@ -11,8 +11,7 @@ import {
   useSax,
   useTwirl
 } from '@renderer/hooks/kongs'
-import useDonkStore from '@renderer/store'
-import { useShallow } from 'zustand/react/shallow'
+import { useHardShooting } from '@renderer/hooks/settings'
 import CastleCheck from '../CastleCheck'
 
 const TinyBananas: React.FC = () => {
@@ -28,7 +27,7 @@ const TinyBananas: React.FC = () => {
   const grape = useGrape()
   const anyGun = useAnyGun()
   const dk = useDk()
-  const hardShooting = useDonkStore(useShallow((state) => state.settings.hardShooting))
+  const hardShooting = useHardShooting()
   return (
     <>
       <CastleCheck

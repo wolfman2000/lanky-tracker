@@ -6,11 +6,19 @@ import {
   usePlayForest,
   useSlamForest
 } from '@renderer/hooks/forest'
+import {
+  useDiddy,
+  useGuitar,
+  useHighGrab,
+  usePeanut,
+  useRocket,
+  useSpring
+} from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
+import { logicBreak } from '@renderer/hooks/world'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import ForestCheck from '../ForestCheck'
-import { logicBreak } from '@renderer/hooks/world'
-import { useHighGrab } from '@renderer/hooks/kongs'
 
 const DiddyMedal: React.FC = () => {
   const inStage = usePlayForest()
@@ -20,16 +28,14 @@ const DiddyMedal: React.FC = () => {
   const top = useForestMushroomTop()
   const owl = useForestOwl()
   const grab = useHighGrab()
-  const [cbCount, coloredBananaShuffle, kong, gun, music, crystal, pad] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.diddy,
-      state.moves.peanut,
-      state.moves.guitar,
-      state.moves.rocket,
-      state.moves.spring
-    ])
+  const cbCount = useCbCount()
+  const kong = useDiddy()
+  const gun = usePeanut()
+  const music = useGuitar()
+  const crystal = useRocket()
+  const pad = useSpring()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 35

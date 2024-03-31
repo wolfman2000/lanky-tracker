@@ -2,6 +2,8 @@ import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import { usePlayLevel, useSlamLevel } from './isles'
 import {
+  useAnyKong,
+  useCamera,
   useFeather,
   useGrape,
   useMini,
@@ -171,5 +173,19 @@ export const useAztec5DoorTemple = (): LogicBool => {
   return {
     in: aztecBack.in && (fiveDoor || (rocket && canSlam && peanut)),
     out: logicBreak(aztecBack) && (fiveDoor || (canSlam && peanut))
+  }
+}
+
+/**
+ * Can we capture any banana fairies in Aztec when not in their normal locations?
+ * @returns true if we can capture banana fairies in Aztec when they are elsewhere.
+ */
+export const useAztecShuffledFairyLogic = (): LogicBool => {
+  const anyKong = useAnyKong()
+  const camera = useCamera()
+  const inStage = useAztecFront()
+  return {
+    in: inStage.in && anyKong && camera,
+    out: logicBreak(inStage) && anyKong && camera
   }
 }

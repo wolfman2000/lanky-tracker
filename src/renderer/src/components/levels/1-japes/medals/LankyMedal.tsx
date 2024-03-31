@@ -7,7 +7,8 @@ import {
   useJapesSideArea,
   usePlayJapes
 } from '@renderer/hooks/japes'
-import { useAnyKong, useDive } from '@renderer/hooks/kongs'
+import { useAnyKong, useDive, useGrape, useLanky, useStand } from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
 import { logicBreak } from '@renderer/hooks/world'
 import useDonkStore from '@renderer/store'
 import JapesCheck from '../JapesCheck'
@@ -20,15 +21,13 @@ const LankyMedal: React.FC = (): JSX.Element => {
   const japesPaintingInside = useJapesPainting()
   const anyKong = useAnyKong()
   const dive = useDive()
+  const cbCount = useCbCount()
+  const lanky = useLanky()
+  const grape = useGrape()
+  const stand = useStand()
 
-  const [cbCount, coloredBananaShuffle, lanky, grape, stand] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.lanky,
-      state.moves.grape,
-      state.moves.stand
-    ])
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 10

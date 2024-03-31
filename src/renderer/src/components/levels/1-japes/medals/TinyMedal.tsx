@@ -10,6 +10,7 @@ import {
 import useDonkStore from '@renderer/store'
 import JapesCheck from '../JapesCheck'
 import { useFeather, useMini, useTiny } from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
 
 const TinyMedal: React.FC = () => {
   const inStage = usePlayJapes()
@@ -20,8 +21,9 @@ const TinyMedal: React.FC = () => {
   const tiny = useTiny()
   const feather = useFeather()
   const mini = useMini()
-  const [cbCount, coloredBananaShuffle] = useDonkStore(
-    useShallow((state) => [state.settings.cbCount, state.settings.shuffleColoredBananas])
+  const cbCount = useCbCount()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 5

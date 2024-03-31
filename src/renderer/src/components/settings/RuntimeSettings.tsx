@@ -3,6 +3,7 @@ import { useShallow } from 'zustand/react/shallow'
 import useDonkStore from '@renderer/store'
 import { BananaportRange } from '@renderer/store/common'
 import GeneratorSettings from './GeneratorSettings'
+import { useForestTime, useGalleonTideStartHigh } from '@renderer/hooks/settings'
 
 const timeToString = (time: BananaportRange): string => {
   switch (time) {
@@ -38,13 +39,9 @@ const prevTime = (time: BananaportRange): BananaportRange => {
 }
 
 const RuntimeSettings: React.FC = () => {
-  const [forestTime, galleonHighTide, setSetting] = useDonkStore(
-    useShallow((state) => [
-      state.settings.forestTime,
-      state.settings.galleonHighTide,
-      state.setSetting
-    ])
-  )
+  const forestTime = useForestTime()
+  const galleonHighTide = useGalleonTideStartHigh()
+  const [setSetting] = useDonkStore(useShallow((state) => [state.setSetting]))
 
   const handleClick = (): void => {
     setSetting('forestTime', nextTime(forestTime))

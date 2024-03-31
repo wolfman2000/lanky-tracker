@@ -251,18 +251,30 @@ export const useGone = (): boolean => {
 }
 
 // Global moves
+/**
+ * Can we do the slam move?
+ * @returns true if we can slam at all.
+ */
 export const useSlam = (): boolean => {
-  const slam = useDonkStore((state) => state.moves.slam)
+  const slam = useDonkStore(useShallow((state) => state.moves.slam))
   return slam != 0
 }
 
+/**
+ * Can we do the super simian slam, pounding blue switches?
+ * @returns true if we have the super simian slam.
+ */
 export const useSuperSlam = (): boolean => {
-  const slam = useDonkStore((state) => state.moves.slam)
+  const slam = useDonkStore(useShallow((state) => state.moves.slam))
   return slam > 1
 }
 
+/**
+ * Can we do the super duper simian slam, pounding red switches?
+ * @returns true if we have the super duper simian slam.
+ */
 export const useSuperDuperSlam = (): boolean => {
-  const slam = useDonkStore((state) => state.moves.slam)
+  const slam = useDonkStore(useShallow((state) => state.moves.slam))
   return slam > 2
 }
 

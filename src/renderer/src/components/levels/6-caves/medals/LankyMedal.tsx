@@ -1,9 +1,10 @@
 import { useCavesIgloo, useCavesPillar, usePlayCaves, useSlamCaves } from '@renderer/hooks/caves'
-import CavesCheck from '../CavesCheck'
+import { useBalloon, useGrape, useHighGrab, useLanky, useTrombone } from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
+import { logicBreak } from '@renderer/hooks/world'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
-import { useHighGrab } from '@renderer/hooks/kongs'
-import { logicBreak } from '@renderer/hooks/world'
+import CavesCheck from '../CavesCheck'
 
 const LankyMedal: React.FC = () => {
   const inStage = usePlayCaves()
@@ -11,15 +12,13 @@ const LankyMedal: React.FC = () => {
   const igloo = useCavesIgloo()
   const pillar = useCavesPillar()
   const highGrab = useHighGrab()
-  const [cbCount, coloredBananaShuffle, kong, gun, music, pad] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.lanky,
-      state.moves.grape,
-      state.moves.trombone,
-      state.moves.balloon
-    ])
+  const cbCount = useCbCount()
+  const kong = useLanky()
+  const gun = useGrape()
+  const music = useTrombone()
+  const pad = useBalloon()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 15

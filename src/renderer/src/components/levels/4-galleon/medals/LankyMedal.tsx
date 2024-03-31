@@ -1,5 +1,3 @@
-import useDonkStore from '@renderer/store'
-import GalleonCheck from '../GalleonCheck'
 import {
   useGalleonHighTide,
   useGalleonLighthouseArea,
@@ -8,9 +6,24 @@ import {
   usePlayGalleon,
   useSlamGalleon
 } from '@renderer/hooks/galleon'
-import { useShallow } from 'zustand/react/shallow'
+import {
+  useBalloon,
+  useDiddy,
+  useDive,
+  useGrape,
+  useHighGrab,
+  useLanky,
+  usePunch,
+  useSpring,
+  useTiny,
+  useTrombone,
+  useTwirl
+} from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
 import { logicBreak } from '@renderer/hooks/world'
-import { useHighGrab, usePunch } from '@renderer/hooks/kongs'
+import useDonkStore from '@renderer/store'
+import { useShallow } from 'zustand/react/shallow'
+import GalleonCheck from '../GalleonCheck'
 
 const LankyMedal: React.FC = () => {
   const inStage = usePlayGalleon()
@@ -21,22 +34,19 @@ const LankyMedal: React.FC = () => {
   const chunkyPunch = usePunch()
   const highTide = useGalleonHighTide()
   const highGrab = useHighGrab()
-  const [cbCount, coloredBananaShuffle, kong, gun, music, pad, dive, diddy, spring, tiny, twirl] =
-    useDonkStore(
-      useShallow((state) => [
-        state.settings.cbCount,
-        state.settings.shuffleColoredBananas,
-        state.moves.lanky,
-        state.moves.grape,
-        state.moves.trombone,
-        state.moves.balloon,
-        state.moves.dive,
-        state.moves.diddy,
-        state.moves.spring,
-        state.moves.tiny,
-        state.moves.twirl
-      ])
-    )
+  const cbCount = useCbCount()
+  const kong = useLanky()
+  const gun = useGrape()
+  const music = useTrombone()
+  const pad = useBalloon()
+  const dive = useDive()
+  const diddy = useDiddy()
+  const spring = useSpring()
+  const tiny = useTiny()
+  const twirl = useTwirl()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
+  )
 
   let currLogic = 5 // start of level
   if (chunkyPunch && gun) {

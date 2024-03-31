@@ -1,5 +1,6 @@
 import { useCastleTree, usePlayCastle, useSlamCastle } from '@renderer/hooks/castle'
-import { useBoulderTech } from '@renderer/hooks/kongs'
+import { useBoulderTech, useChunky, usePineapple, usePunch } from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import CastleCheck from '../CastleCheck'
@@ -9,14 +10,12 @@ const ChunkyMedal: React.FC = () => {
   const canSlam = useSlamCastle()
   const tree = useCastleTree()
   const boulderTech = useBoulderTech()
-  const [cbCount, coloredBananaShuffle, kong, gun, move] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.chunky,
-      state.moves.pineapple,
-      state.moves.punch
-    ])
+  const cbCount = useCbCount()
+  const kong = useChunky()
+  const gun = usePineapple()
+  const move = usePunch()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 30

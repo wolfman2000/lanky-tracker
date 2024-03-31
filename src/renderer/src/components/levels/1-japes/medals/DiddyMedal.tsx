@@ -1,6 +1,8 @@
 import { useShallow } from 'zustand/react/shallow'
 
 import { useJapesRambi, useJapesSideArea, usePlayJapes, useSlamJapes } from '@renderer/hooks/japes'
+import { useCharge, useDiddy, useDive, usePeanut } from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
 import useDonkStore from '@renderer/store'
 import JapesCheck from '../JapesCheck'
 
@@ -9,15 +11,13 @@ const DiddyMedal: React.FC = (): JSX.Element => {
   const haveRambiCage = useJapesRambi()
   const sideArea = useJapesSideArea()
   const canSlam = useSlamJapes()
-  const [cbCount, coloredBananaShuffle, diddy, peanut, dive, charge] = useDonkStore(
-    useShallow((state) => [
-      state.settings.cbCount,
-      state.settings.shuffleColoredBananas,
-      state.moves.diddy,
-      state.moves.peanut,
-      state.moves.dive,
-      state.moves.charge
-    ])
+  const cbCount = useCbCount()
+  const diddy = useDiddy()
+  const peanut = usePeanut()
+  const dive = useDive()
+  const charge = useCharge()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
   let currLogic = 32
   if (dive) {

@@ -4,11 +4,12 @@ import {
   useAztecFront,
   useAztecTinyTemple
 } from '@renderer/hooks/aztec'
+import { useChunky, useDive, usePineapple } from '@renderer/hooks/kongs'
+import { useCbCount } from '@renderer/hooks/settings'
+import { logicBreak } from '@renderer/hooks/world'
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import AztecCheck from '../AztecCheck'
-import { logicBreak } from '@renderer/hooks/world'
-import { useChunky, useDive, usePineapple } from '@renderer/hooks/kongs'
 
 const ChunkyMedal: React.FC = () => {
   const inStage = useAztecFront()
@@ -18,8 +19,9 @@ const ChunkyMedal: React.FC = () => {
   const chunky = useChunky()
   const pineapple = usePineapple()
   const dive = useDive()
-  const [cbCount, coloredBananaShuffle] = useDonkStore(
-    useShallow((state) => [state.settings.cbCount, state.settings.shuffleColoredBananas])
+  const cbCount = useCbCount()
+  const [coloredBananaShuffle] = useDonkStore(
+    useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
   let currLogic = 0
