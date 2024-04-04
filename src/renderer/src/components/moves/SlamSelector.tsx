@@ -50,7 +50,7 @@ const SlamSelector: React.FC = () => {
         height={24}
         src={slamToIcon(slam)}
         onClick={handleNextLevel}
-        onAuxClick={handlePrevLevel}
+        onContextMenu={handlePrevLevel}
         onWheel={handleWheel}
         style={{ filter: `grayscale(${slam != 0 ? '0' : '1'})` }}
       />

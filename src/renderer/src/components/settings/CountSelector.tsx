@@ -42,7 +42,7 @@ const CountSelector: React.FC<CountSelectorProps> = (props) => {
     <div
       className={`count-icon ${props.prefix}-${props.storeKey}`}
       onClick={handleNextLevel}
-      onAuxClick={handlePrevLevel}
+      onContextMenu={handlePrevLevel}
       onWheel={handleWheel}
     >
       <img height={24} src={imgUrl} style={{ filter: `grayscale(${num != 0 ? '0' : '1'})` }} />

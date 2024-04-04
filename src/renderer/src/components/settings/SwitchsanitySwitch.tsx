@@ -56,7 +56,7 @@ const SwitchsanitySwitch: React.FC<SwitchsanityProps> = (props) => {
         className="simple-icon"
         src={props.images[setting]}
         onClick={handleNextLevel}
-        onAuxClick={handlePrevLevel}
+        onContextMenu={handlePrevLevel}
         onWheel={handleWheel}
       />
     </>
