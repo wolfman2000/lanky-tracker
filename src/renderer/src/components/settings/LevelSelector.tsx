@@ -116,7 +116,7 @@ const LevelSelector: React.FC<LevelSelectorProps> = ({ storeKey }) => {
         height={24}
         src={levelToIcon(level)}
         onClick={handleNextLevel}
-        onAuxClick={handlePrevLevel}
+        onContextMenu={handlePrevLevel}
         onWheel={handleWheel}
       />
     </>
