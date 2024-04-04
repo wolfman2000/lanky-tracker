@@ -11,7 +11,12 @@ export const initialConsumables: ConsumablesState = {
     goldBananas: 0,
     nintendoCoin: false,
     pearls: 0,
-    rareCoin: false
+    rareCoin: false,
+    chunkyBp: 0,
+    diddyBp: 0,
+    dkBp: 0,
+    lankyBp: 0,
+    tinyBp: 0
   }
 }
 

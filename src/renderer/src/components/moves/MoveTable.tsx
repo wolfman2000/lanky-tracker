@@ -1,65 +1,66 @@
+import useDonkStore from '@renderer/store'
+import { useShallow } from 'zustand/react/shallow'
+
 import CountSelector from '../settings/CountSelector'
-import DoubleIcon from './DoubleIcon'
 import SimpleIcon from '../settings/SimpleIcon'
+import DoubleIcon from './DoubleIcon'
 import SlamSelector from './SlamSelector'
 
+import goldBananaIcon from '../../assets/images/GB.png'
+import bananaMedalIcon from '../../assets/images/bananamedal.png'
+import barrelIcon from '../../assets/images/barrel2.png'
+import beanIcon from '../../assets/images/bean.png'
 import chunkyIcon from '../../assets/images/chunky.png'
 import chunkyGunIcon from '../../assets/images/chunky_gun.png'
 import chunkyInstIcon from '../../assets/images/chunky_inst.png'
 import chunkyMoveIcon from '../../assets/images/chunky_move.png'
 import chunkyBarrelIcon from '../../assets/images/chunkybarrel.png'
 import chunkyPadIcon from '../../assets/images/chunkypad.png'
+import crownIcon from '../../assets/images/crown.png'
 import diddyIcon from '../../assets/images/diddy.png'
 import diddyGunIcon from '../../assets/images/diddy_gun.png'
 import diddyInstIcon from '../../assets/images/diddy_inst.png'
 import diddyMoveIcon from '../../assets/images/diddy_move.png'
 import diddyBarrelIcon from '../../assets/images/diddybarrel.png'
 import diddyPadIcon from '../../assets/images/diddypad.png'
+import diveIcon from '../../assets/images/diving.png'
 import dkIcon from '../../assets/images/dk.png'
 import dkGunIcon from '../../assets/images/dk_gun.png'
 import dkInstIcon from '../../assets/images/dk_inst.png'
 import dkMoveIcon from '../../assets/images/dk_move.png'
 import dkBarrelIcon from '../../assets/images/dkbarrel.png'
 import dkPadIcon from '../../assets/images/dkpad.png'
+import fairyIcon from '../../assets/images/fairy.png'
+import filmWaveBoth from '../../assets/images/filmwave.png'
+import filmWaveLeft from '../../assets/images/filmwave1.png'
+import filmWaveRight from '../../assets/images/filmwave2.png'
+import homeScopeBoth from '../../assets/images/homingscope.png'
+import homeScopeLeft from '../../assets/images/homingscope1.png'
+import homeScopeRight from '../../assets/images/homingscope2.png'
 import lankyIcon from '../../assets/images/lanky.png'
 import lankyGunIcon from '../../assets/images/lanky_gun.png'
 import lankyInstIcon from '../../assets/images/lanky_inst.png'
 import lankyMoveIcon from '../../assets/images/lanky_move.png'
 import lankyBarrelIcon from '../../assets/images/lankybarrel.png'
 import lankyPadIcon from '../../assets/images/lankypad.png'
+import companyCoinBoth from '../../assets/images/n64rw_coin.png'
+import companyCoinRight from '../../assets/images/n64rw_coin_n64bw.png'
+import companyCoinLeft from '../../assets/images/n64rw_coin_rwbw.png'
+import orangeIcon from '../../assets/images/orange.png'
+import pearlIcon from '../../assets/images/pearl.png'
+import rainbowCoinICon from '../../assets/images/rainbowcoin.png'
 import tinyIcon from '../../assets/images/tiny.png'
 import tinyGunIcon from '../../assets/images/tiny_gun.png'
 import tinyInstIcon from '../../assets/images/tiny_inst.png'
 import tinyMoveIcon from '../../assets/images/tiny_move.png'
 import tinyBarrelIcon from '../../assets/images/tinybarrel.png'
 import tinyPadIcon from '../../assets/images/tinypad.png'
-
-import barrelIcon from '../../assets/images/barrel2.png'
-import diveIcon from '../../assets/images/diving.png'
-import orangeIcon from '../../assets/images/orange.png'
 import vineIcon from '../../assets/images/vine.png'
-
-import filmWaveBoth from '../../assets/images/filmwave.png'
-import filmWaveLeft from '../../assets/images/filmwave1.png'
-import filmWaveRight from '../../assets/images/filmwave2.png'
-
-import homeScopeBoth from '../../assets/images/homingscope.png'
-import homeScopeLeft from '../../assets/images/homingscope1.png'
-import homeScopeRight from '../../assets/images/homingscope2.png'
-
-import companyCoinBoth from '../../assets/images/n64rw_coin.png'
-import companyCoinRight from '../../assets/images/n64rw_coin_n64bw.png'
-import companyCoinLeft from '../../assets/images/n64rw_coin_rwbw.png'
-
-import goldBananaIcon from '../../assets/images/GB.png'
-import bananaMedalIcon from '../../assets/images/bananamedal.png'
-import beanIcon from '../../assets/images/bean.png'
-import crownIcon from '../../assets/images/crown.png'
-import fairyIcon from '../../assets/images/fairy.png'
-import pearlIcon from '../../assets/images/pearl.png'
-import rainbowCoinICon from '../../assets/images/rainbowcoin.png'
-import useDonkStore from '@renderer/store'
-import { useShallow } from 'zustand/react/shallow'
+import dkBpIcon from '../../assets/images/dk_bp.png'
+import diddyBpIcon from '../../assets/images/diddy_bp.png'
+import lankyBpIcon from '../../assets/images/lanky_bp.png'
+import tinyBpIcon from '../../assets/images/tiny_bp.png'
+import chunkyBpIcon from '../../assets/images/chunky_bp.png'
 
 const MoveTable = (): JSX.Element => {
   const [setMove, setConsumable] = useDonkStore(
@@ -73,6 +74,13 @@ const MoveTable = (): JSX.Element => {
       <SimpleIcon storeKey="grab" imgUrl={dkMoveIcon} prefix="moves" updateItem={setMove} />
       <SimpleIcon storeKey="strong" imgUrl={dkBarrelIcon} prefix="moves" updateItem={setMove} />
       <SimpleIcon storeKey="blast" imgUrl={dkPadIcon} prefix="moves" updateItem={setMove} />
+      <CountSelector
+        storeKey="dkBp"
+        imgUrl={dkBpIcon}
+        prefix="consumables"
+        setCount={setConsumable}
+        maxValue={8}
+      />
       <SlamSelector />
       <DoubleIcon
         storeLeft="camera"
@@ -96,6 +104,13 @@ const MoveTable = (): JSX.Element => {
       <SimpleIcon storeKey="charge" imgUrl={diddyMoveIcon} prefix="moves" updateItem={setMove} />
       <SimpleIcon storeKey="rocket" imgUrl={diddyBarrelIcon} prefix="moves" updateItem={setMove} />
       <SimpleIcon storeKey="spring" imgUrl={diddyPadIcon} prefix="moves" updateItem={setMove} />
+      <CountSelector
+        storeKey="diddyBp"
+        imgUrl={diddyBpIcon}
+        prefix="consumables"
+        setCount={setConsumable}
+        maxValue={8}
+      />
       <SimpleIcon storeKey="dive" imgUrl={diveIcon} prefix="moves" updateItem={setMove} />
       <DoubleIcon
         storeLeft="homing"
@@ -119,6 +134,13 @@ const MoveTable = (): JSX.Element => {
       <SimpleIcon storeKey="stand" imgUrl={lankyMoveIcon} prefix="moves" updateItem={setMove} />
       <SimpleIcon storeKey="sprint" imgUrl={lankyBarrelIcon} prefix="moves" updateItem={setMove} />
       <SimpleIcon storeKey="balloon" imgUrl={lankyPadIcon} prefix="moves" updateItem={setMove} />
+      <CountSelector
+        storeKey="lankyBp"
+        imgUrl={lankyBpIcon}
+        prefix="consumables"
+        setCount={setConsumable}
+        maxValue={8}
+      />
       <SimpleIcon storeKey="orange" imgUrl={orangeIcon} prefix="moves" updateItem={setMove} />
       <DoubleIcon
         storeLeft="nintendoCoin"
@@ -142,6 +164,13 @@ const MoveTable = (): JSX.Element => {
       <SimpleIcon storeKey="twirl" imgUrl={tinyMoveIcon} prefix="moves" updateItem={setMove} />
       <SimpleIcon storeKey="mini" imgUrl={tinyBarrelIcon} prefix="moves" updateItem={setMove} />
       <SimpleIcon storeKey="port" imgUrl={tinyPadIcon} prefix="moves" updateItem={setMove} />
+      <CountSelector
+        storeKey="tinyBp"
+        imgUrl={tinyBpIcon}
+        prefix="consumables"
+        setCount={setConsumable}
+        maxValue={8}
+      />
       <SimpleIcon storeKey="vine" imgUrl={vineIcon} prefix="moves" updateItem={setMove} />
       <SimpleIcon
         storeKey="bean"
@@ -162,6 +191,13 @@ const MoveTable = (): JSX.Element => {
       <SimpleIcon storeKey="punch" imgUrl={chunkyMoveIcon} prefix="moves" updateItem={setMove} />
       <SimpleIcon storeKey="hunky" imgUrl={chunkyBarrelIcon} prefix="moves" updateItem={setMove} />
       <SimpleIcon storeKey="gone" imgUrl={chunkyPadIcon} prefix="moves" updateItem={setMove} />
+      <CountSelector
+        storeKey="chunkyBp"
+        imgUrl={chunkyBpIcon}
+        prefix="consumables"
+        setCount={setConsumable}
+        maxValue={8}
+      />
       <SimpleIcon storeKey="barrel" imgUrl={barrelIcon} prefix="moves" updateItem={setMove} />
       <CountSelector
         storeKey="pearls"

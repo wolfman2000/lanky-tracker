@@ -1,11 +1,13 @@
-import ArenaPool from '@renderer/components/pools/Arenas'
 import BananaMedalPool from '@renderer/components/pools/BananaMedals'
 import BossPool from '@renderer/components/pools/Bosses'
+import DropPool from '@renderer/components/pools/Drops'
 import ShopPool from '@renderer/components/pools/Shops'
 import { usePlayForest } from '@renderer/hooks/forest'
 import { useAnyKong } from '@renderer/hooks/kongs'
+import ArenaLocations from './Arenas'
 import CrateLocations from './Crates'
 import DirtLocations from './Dirt'
+import EnemyLocations from './Enemies'
 import FairyLocations from './Fairies'
 import ForestCheck from './ForestCheck'
 import KasplatLocations from './Kasplats'
@@ -36,14 +38,7 @@ const ForestChecks: React.FC = () => {
       <CrateLocations />
       <DirtLocations />
       <FairyLocations />
-      <ArenaPool>
-        <ForestCheck
-          id={5090}
-          name="Forest Arena"
-          region="Giant Mushroom Exterior"
-          canGetLogic={inStage && anyKong}
-        />
-      </ArenaPool>
+      <ArenaLocations />
       <BananaMedalPool>
         <DkMedal />
         <DiddyMedal />
@@ -62,6 +57,9 @@ const ForestChecks: React.FC = () => {
       <ShopPool>
         <ForestShops />
       </ShopPool>
+      <DropPool>
+        <EnemyLocations />
+      </DropPool>
     </div>
   )
 }

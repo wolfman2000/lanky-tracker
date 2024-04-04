@@ -1,23 +1,33 @@
-import FoolishDropDown from './fool'
+import FoolishDropDown from './region'
 
-const FoolishHints: React.FC = () => {
+const RegionHints: React.FC = () => {
   return (
-    <section className="foolish-section">
-      <h3>Foolish</h3>
-      <section className="foolish-drops">
-        <FoolishDropDown id="fool01" />
-        <FoolishDropDown id="fool02" />
-        <FoolishDropDown id="fool03" />
-        <FoolishDropDown id="fool04" />
-        <FoolishDropDown id="fool05" />
-        <FoolishDropDown id="fool06" />
-        <FoolishDropDown id="fool07" />
-        <FoolishDropDown id="fool08" />
-        <FoolishDropDown id="fool09" />
-        <FoolishDropDown id="fool10" />
+    <section className="hint-section">
+      <h3>Region Hints</h3>
+      <section className="hint-drops">
+        <FoolishDropDown id="check01" />
+        <FoolishDropDown id="check02" />
+        <FoolishDropDown id="check03" />
+        <FoolishDropDown id="check04" />
+        <FoolishDropDown id="check05" />
+        <FoolishDropDown id="check06" />
+        <FoolishDropDown id="check07" />
+        <FoolishDropDown id="check08" />
+        <FoolishDropDown id="check09" />
+        <FoolishDropDown id="check10" />
+        <FoolishDropDown id="check11" />
+        <FoolishDropDown id="check12" />
+        <FoolishDropDown id="check13" />
+        <FoolishDropDown id="check14" />
+        <FoolishDropDown id="check15" />
+        <FoolishDropDown id="check16" />
+        <FoolishDropDown id="check17" />
+        <FoolishDropDown id="check18" />
+        <FoolishDropDown id="check19" />
+        <FoolishDropDown id="check20" />
       </section>
     </section>
   )
 }
 
-export default FoolishHints
+export default RegionHints

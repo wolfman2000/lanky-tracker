@@ -1,11 +1,13 @@
-import ArenaPool from '@renderer/components/pools/Arenas'
 import BananaMedalPool from '@renderer/components/pools/BananaMedals'
 import BossPool from '@renderer/components/pools/Bosses'
+import DropPool from '@renderer/components/pools/Drops'
 import ShopPool from '@renderer/components/pools/Shops'
 import { useJapesRambi, useJapesSideArea, usePlayJapes } from '@renderer/hooks/japes'
 import { useAnyKong, useVine } from '@renderer/hooks/kongs'
+import ArenaLocations from './Arenas'
 import CrateLocations from './Crates'
 import DirtLocations from './Dirt'
+import EnemyLocations from './Enemies'
 import FairyLocations from './Fairies'
 import JapesCheck from './JapesCheck'
 import KasplatLocations from './Kasplats'
@@ -37,14 +39,7 @@ const JapesChecks: React.FC = () => {
       <CrateLocations />
       <DirtLocations />
       <FairyLocations />
-      <ArenaPool>
-        <JapesCheck
-          id={1090}
-          name="Japes Arena"
-          region="Japes Hillside"
-          canGetLogic={inStage && anyKong}
-        />
-      </ArenaPool>
+      <ArenaLocations />
       <BananaMedalPool>
         <DkMedal />
         <DiddyMedal />
@@ -64,6 +59,9 @@ const JapesChecks: React.FC = () => {
       <ShopPool>
         <JapesShops />
       </ShopPool>
+      <DropPool>
+        <EnemyLocations />
+      </DropPool>
     </div>
   )
 }

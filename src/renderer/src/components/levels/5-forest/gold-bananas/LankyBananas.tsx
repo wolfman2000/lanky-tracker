@@ -1,15 +1,18 @@
 import ToughGoldenBanana from '@renderer/components/pools/ToughGoldenBanana'
-import { useForestNight, useForestOwl, usePlayForest, useSlamForest } from '@renderer/hooks/forest'
+import {
+  useForestMushroomRoof,
+  useForestNight,
+  useForestOwl,
+  usePlayForest,
+  useSlamForest
+} from '@renderer/hooks/forest'
 import {
   useAnyGun,
   useBoulderTech,
   useGrape,
   useHoming,
   useLanky,
-  useRocket,
   useSprint,
-  useStand,
-  useTiny,
   useTrombone
 } from '@renderer/hooks/kongs'
 import { useHardShooting } from '@renderer/hooks/settings'
@@ -22,16 +25,14 @@ const LankyBananas: React.FC = () => {
   const owlTree = useForestOwl()
   const night = useForestNight()
   const grape = useGrape()
-  const stand = useStand()
   const homing = useHoming()
   const trombone = useTrombone()
   const sprint = useSprint()
   const anyGun = useAnyGun()
-  const rocket = useRocket()
   const lanky = useLanky()
-  const tiny = useTiny()
   const boulderTech = useBoulderTech()
   const hardShooting = useHardShooting()
+  const roof = useForestMushroomRoof()
   return (
     <>
       <ForestCheck
@@ -45,8 +46,8 @@ const LankyBananas: React.FC = () => {
         id={5021}
         name="Forest Lanky Colored Mushrooms"
         region="Giant Mushroom Insides"
-        canGetLogic={inStage && stand && canSlam}
-        canGetBreak={inStage && lanky && canSlam && (rocket || tiny)}
+        canGetLogic={roof.in && lanky && canSlam}
+        canGetBreak={logicBreak(roof) && lanky && canSlam}
       />
       <ToughGoldenBanana>
         <ForestCheck
@@ -61,8 +62,8 @@ const LankyBananas: React.FC = () => {
         id={5023}
         name="Forest Lanky Mushroom Attic"
         region="Giant Mushroom Insides"
-        canGetLogic={inStage && stand && canSlam}
-        canGetBreak={inStage && lanky && canSlam && (rocket || tiny)}
+        canGetLogic={roof.in && lanky && canSlam}
+        canGetBreak={logicBreak(roof) && lanky && canSlam}
       />
     </>
   )

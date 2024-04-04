@@ -8,6 +8,7 @@ import {
   usePlayFactory,
   useSlamFactory
 } from '@renderer/hooks/factory'
+import { useFastArcade } from '@renderer/hooks/fast-checks'
 import { useBlast, useCoconut, useDiddy, useDk, useGrab, useStrong } from '@renderer/hooks/kongs'
 import useDonkStore from '@renderer/store'
 import FactoryCheck from '../FactoryCheck'
@@ -24,11 +25,9 @@ const DkBananas: React.FC = () => {
   const blast = useBlast()
   const diddy = useDiddy()
   const hut = useFactoryHut()
-  const [productionPower, blastArcade] = useDonkStore(
-    useShallow((state) => [
-      state.removeBarriers.factoryProduction,
-      state.settings.fastChecks.factoryArcade
-    ])
+  const fastArcade = useFastArcade()
+  const [productionPower] = useDonkStore(
+    useShallow((state) => [state.removeBarriers.factoryProduction])
   )
   return (
     <>
@@ -49,7 +48,7 @@ const DkBananas: React.FC = () => {
         id={3003}
         name="Factory DK Blast (+ Arcade?)"
         region="Storage And Arcade"
-        canGetLogic={inStage && blast && (blastArcade || grab)}
+        canGetLogic={inStage && blast && (fastArcade || grab)}
       />
       <FactoryCheck
         id={3004}

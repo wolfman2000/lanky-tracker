@@ -35,6 +35,9 @@ import slamSwitchIcon from '../../assets/images/settings/slam_switch.png'
 import switchsanityIcon from '../../assets/images/settings/switch.png'
 import slamIcon from '../../assets/images/slam1.png'
 import featherIcon from '../../assets/images/tiny_gun.png'
+import dropIcon from '../../assets/images/settings/beaver.png'
+import dkPadIcon from '../../assets/images/dkpad.png'
+import pearlIcon from '../../assets/images/pearl.png'
 
 const customStyles: Modal.Styles = {
   content: {
@@ -45,8 +48,8 @@ const customStyles: Modal.Styles = {
 
 const GeneratorSettings: React.FC = () => {
   const [isOpen, setOpen] = useState(false)
-  const [setSetting, setBarrier] = useDonkStore(
-    useShallow((state) => [state.setSetting, state.setBarrier])
+  const [setSetting, setBarrier, setFastCheck] = useDonkStore(
+    useShallow((state) => [state.setSetting, state.setBarrier, state.setFastCheck])
   )
 
   const openModal = (): void => setOpen(true)
@@ -141,6 +144,13 @@ const GeneratorSettings: React.FC = () => {
               <SimpleIcon
                 imgUrl={beanIcon}
                 storeKey="poolMisc"
+                prefix="settings"
+                updateItem={setSetting}
+              />
+              <p>Enemy Drops?</p>
+              <SimpleIcon
+                imgUrl={dropIcon}
+                storeKey="poolDrops"
                 prefix="settings"
                 updateItem={setSetting}
               />
@@ -346,6 +356,23 @@ const GeneratorSettings: React.FC = () => {
                 storeKey="cavesIgloo"
                 prefix="removeBarriers"
                 updateItem={setBarrier}
+              />
+            </>
+            <h3>Fast Check Settings</h3>
+            <>
+              <p>Fast Factory Arcade?</p>
+              <SimpleIcon
+                imgUrl={dkPadIcon}
+                storeKey="factoryArcade"
+                prefix="fastChecks"
+                updateItem={setFastCheck}
+              />
+              <p style={{ gridColumnStart: 5 }}>Fast Mermaid Pearls?</p>
+              <SimpleIcon
+                imgUrl={pearlIcon}
+                storeKey="galleonMermaid"
+                prefix="fastChecks"
+                updateItem={setFastCheck}
               />
             </>
           </section>

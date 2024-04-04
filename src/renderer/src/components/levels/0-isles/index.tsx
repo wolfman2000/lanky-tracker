@@ -1,13 +1,13 @@
-import ArenaPool from '@renderer/components/pools/Arenas'
 import CompanyPool from '@renderer/components/pools/Company'
+import DropPool from '@renderer/components/pools/Drops'
 import ShopPool from '@renderer/components/pools/Shops'
 import { useCurrentBananaMedalCount } from '@renderer/hooks/consumables'
-import { usePlayForest } from '@renderer/hooks/forest'
-import { useIslesKremAscent } from '@renderer/hooks/isles'
-import { useAllGun, useAnyKong, useBoulderTech, useGone } from '@renderer/hooks/kongs'
+import { useAnyKong } from '@renderer/hooks/kongs'
 import { useJetpacCount } from '@renderer/hooks/settings'
+import ArenaLocations from './Arenas'
 import CrateLocations from './Crates'
 import DirtLocations from './Dirt'
+import EnemyLocations from './Enemies'
 import FairyLocations from './Fairies'
 import IslesCheck from './IslesCheck'
 import KasplatLocations from './Kasplats'
@@ -21,12 +21,7 @@ import IslesShops from './shops'
 const IsleChecks: React.FC = () => {
   const medals = useCurrentBananaMedalCount()
   const jetpacCount = useJetpacCount()
-  const playForest = usePlayForest()
   const anyKong = useAnyKong()
-  const allGun = useAllGun()
-  const islesKremAscent = useIslesKremAscent()
-  const gone = useGone()
-  const boulderTech = useBoulderTech()
   return (
     <div className="grid">
       <DkBananas />
@@ -38,20 +33,7 @@ const IsleChecks: React.FC = () => {
       <CrateLocations />
       <DirtLocations />
       <FairyLocations />
-      <ArenaPool>
-        <IslesCheck
-          id={90}
-          name="Isles Snide Arena"
-          region="Krem Isle"
-          canGetLogic={islesKremAscent && boulderTech}
-        />
-        <IslesCheck
-          id={91}
-          name="Isles Forest Arena"
-          region="Outer Isles"
-          canGetLogic={playForest && allGun && gone}
-        />
-      </ArenaPool>
+      <ArenaLocations />
       <CompanyPool>
         <IslesCheck
           id={105}
@@ -62,6 +44,9 @@ const IsleChecks: React.FC = () => {
       <ShopPool>
         <IslesShops />
       </ShopPool>
+      <DropPool>
+        <EnemyLocations />
+      </DropPool>
     </div>
   )
 }

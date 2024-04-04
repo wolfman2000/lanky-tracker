@@ -2,8 +2,9 @@ import MiscPool from '@renderer/components/pools/Misc'
 import { useBean } from '@renderer/hooks/consumables'
 import {
   useForestBean,
-  useForestNight,
+  useForestDusk,
   useForestOwl,
+  useForestSpiderBoss,
   usePlayForest,
   useSlamForest
 } from '@renderer/hooks/forest'
@@ -12,29 +13,26 @@ import {
   useFeather,
   useMini,
   usePineapple,
-  usePunch,
   useSax,
   useTiny
 } from '@renderer/hooks/kongs'
-import { useForestTime } from '@renderer/hooks/settings'
 import { logicBreak } from '@renderer/hooks/world'
 import ForestCheck from '../ForestCheck'
 
 const TinyBananas: React.FC = () => {
   const inStage = usePlayForest()
   const canSlam = useSlamForest()
-  const night = useForestNight()
   const owlTree = useForestOwl()
   const beanstalk = useForestBean()
   const mini = useMini()
   const sax = useSax()
   const feather = useFeather()
-  const punch = usePunch()
   const pineapple = usePineapple()
   const tiny = useTiny()
   const anyGun = useAnyGun()
-  const forestTime = useForestTime()
   const bean = useBean()
+  const spiderBoss = useForestSpiderBoss()
+  const dusk = useForestDusk()
   return (
     <>
       <ForestCheck
@@ -61,12 +59,8 @@ const TinyBananas: React.FC = () => {
         id={5032}
         name="Forest Tiny Spider Boss"
         region="Forest Mills"
-        canGetLogic={
-          inStage &&
-          ((forestTime == 2 && ((mini && feather) || (punch && pineapple))) ||
-            (night.in && punch && mini && feather))
-        }
-        canGetBreak={inStage && logicBreak(night) && punch && mini && anyGun}
+        canGetLogic={spiderBoss.in && ((dusk && (feather || pineapple)) || (!dusk && feather))}
+        canGetBreak={logicBreak(spiderBoss) && anyGun}
       />
       <ForestCheck
         id={5033}

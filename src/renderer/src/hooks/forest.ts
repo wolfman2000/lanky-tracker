@@ -1,9 +1,18 @@
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import { usePlayLevel, useSlamLevel } from './isles'
-import { useAnyGun, useAnyKong, useOrange } from './kongs'
+import {
+  useAnyGun,
+  useAnyKong,
+  useMini,
+  useOrange,
+  usePunch,
+  useRocket,
+  useStand,
+  useTiny
+} from './kongs'
 import { useBananaportAll, useForestTime } from './settings'
-import { LogicBool, useSwitchsanityGun } from './world'
+import { LogicBool, logicBreak, useSwitchsanityGun } from './world'
 
 /**
  * Can we play in Fungi Forest?
@@ -62,6 +71,34 @@ export const useForestNight = (): LogicBool => {
 }
 
 /**
+ * Is it dusk in Forest? AKA, are all time gates removed?
+ *
+ * This is only possible via changing the seed settings.
+ * @returns true if it's dusk.
+ */
+export const useForestDusk = (): boolean => {
+  const inStage = usePlayForest()
+  const dusk = useForestTime() == 2
+  return inStage && dusk
+}
+
+/**
+ * Can we access the spider boss room?
+ * @returns true if we can access the spider boss room.
+ */
+export const useForestSpiderBoss = (): LogicBool => {
+  const night = useForestNight()
+  const dusk = useForestDusk()
+  const mini = useMini()
+  const punch = usePunch()
+
+  return {
+    in: (dusk && (mini || punch)) || (night.in && punch && mini),
+    out: logicBreak(night) && punch && mini
+  }
+}
+
+/**
  * Do we have access to the top of the mushroom in Forest?
  *
  * Due to recent logic changes, this is always possible.
@@ -70,6 +107,21 @@ export const useForestNight = (): LogicBool => {
  */
 export const useForestMushroomTop = (): boolean => {
   return true
+}
+
+/**
+ * Can we access the roof of the mushroom exterior in Forest?
+ * @returns true if we can get on the roof.
+ */
+export const useForestMushroomRoof = (): LogicBool => {
+  const inStage = usePlayForest()
+  const stand = useStand()
+  const rocket = useRocket()
+  const tiny = useTiny()
+  return {
+    in: inStage && stand,
+    out: inStage && (rocket || tiny)
+  }
 }
 
 export const useForestBeanHalf = (): boolean => {

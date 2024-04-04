@@ -1,15 +1,17 @@
-import ArenaPool from '@renderer/components/pools/Arenas'
 import BananaMedalPool from '@renderer/components/pools/BananaMedals'
 import BossPool from '@renderer/components/pools/Bosses'
+import DropPool from '@renderer/components/pools/Drops'
 import ShopPool from '@renderer/components/pools/Shops'
 import {
   useGalleonLighthouseArea,
   useGalleonOutskirts,
   usePlayGalleon
 } from '@renderer/hooks/galleon'
-import { useDive, usePunch, useVine } from '@renderer/hooks/kongs'
+import { useDive, useVine } from '@renderer/hooks/kongs'
+import ArenaLocations from './Arenas'
 import CrateLocations from './Crates'
 import DirtLocations from './Dirt'
+import EnemyLocations from './Enemies'
 import FairyLocations from './Fairies'
 import GalleonCheck from './GalleonCheck'
 import KasplatLocations from './Kasplats'
@@ -29,7 +31,6 @@ const GalleonChecks: React.FC = () => {
   const inStage = usePlayGalleon()
   const lighthouseArea = useGalleonLighthouseArea()
   const outskirts = useGalleonOutskirts()
-  const punch = usePunch()
   const vine = useVine()
   const dive = useDive()
 
@@ -44,14 +45,7 @@ const GalleonChecks: React.FC = () => {
       <CrateLocations />
       <DirtLocations />
       <FairyLocations />
-      <ArenaPool>
-        <GalleonCheck
-          id={4090}
-          name="Galleon Arena"
-          region="Galleon Caverns"
-          canGetLogic={inStage && punch}
-        />
-      </ArenaPool>
+      <ArenaLocations />
       <BananaMedalPool>
         <DkMedal />
         <DiddyMedal />
@@ -70,6 +64,9 @@ const GalleonChecks: React.FC = () => {
       <ShopPool>
         <GalleonShops />
       </ShopPool>
+      <DropPool>
+        <EnemyLocations />
+      </DropPool>
     </div>
   )
 }

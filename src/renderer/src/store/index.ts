@@ -2,14 +2,16 @@ import { create, StateCreator } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 import { AllSlice } from './common'
+
+import barrierSlice from './barriers'
 import coreSlice from './checks'
+import consumablesSlice from './consumables'
+import fastCheckSlice from './fast-checks'
 import hintSlice from './hints'
 import levelSlice from './level'
-import settingSlice from './settings'
 import moveSlice from './moves'
-import consumablesSlice from './consumables'
+import settingSlice from './settings'
 import switchSlice from './switchsanities'
-import barrierSlice from './barriers'
 
 const initializer: StateCreator<AllSlice, [['zustand/persist', unknown]], []> = (...d) => ({
   ...coreSlice(...d),
@@ -19,7 +21,8 @@ const initializer: StateCreator<AllSlice, [['zustand/persist', unknown]], []> = 
   ...moveSlice(...d),
   ...consumablesSlice(...d),
   ...switchSlice(...d),
-  ...barrierSlice(...d)
+  ...barrierSlice(...d),
+  ...fastCheckSlice(...d)
 })
 
 /**

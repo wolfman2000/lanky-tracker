@@ -1,11 +1,13 @@
-import ArenaPool from '@renderer/components/pools/Arenas'
 import BananaMedalPool from '@renderer/components/pools/BananaMedals'
 import BossPool from '@renderer/components/pools/Bosses'
+import DropPool from '@renderer/components/pools/Drops'
 import ShopPool from '@renderer/components/pools/Shops'
-import { useFactoryTesting, usePlayFactory } from '@renderer/hooks/factory'
-import { useAnyKong, useGrab } from '@renderer/hooks/kongs'
+import { usePlayFactory } from '@renderer/hooks/factory'
+import { useAnyKong } from '@renderer/hooks/kongs'
+import ArenaLocations from './Arenas'
 import CrateLocations from './Crates'
 import DirtLocations from './Dirt'
+import EnemyLocations from './Enemies'
 import FactoryCheck from './FactoryCheck'
 import FairyLocations from './Fairies'
 import KasplatLocations from './Kasplats'
@@ -22,10 +24,8 @@ import TinyMedal from './medals/TinyMedal'
 import FactoryShops from './shops'
 
 const FactoryChecks: React.FC = () => {
-  const testing = useFactoryTesting()
   const inStage = usePlayFactory()
   const anyKong = useAnyKong()
-  const grab = useGrab()
 
   return (
     <div className="grid">
@@ -38,14 +38,7 @@ const FactoryChecks: React.FC = () => {
       <CrateLocations />
       <DirtLocations />
       <FairyLocations />
-      <ArenaPool>
-        <FactoryCheck
-          id={3090}
-          name="Factory Arena"
-          region="R&D Area"
-          canGetLogic={testing && grab}
-        />
-      </ArenaPool>
+      <ArenaLocations />
       <BananaMedalPool>
         <DkMedal />
         <DiddyMedal />
@@ -64,6 +57,9 @@ const FactoryChecks: React.FC = () => {
       <ShopPool>
         <FactoryShops />
       </ShopPool>
+      <DropPool>
+        <EnemyLocations />
+      </DropPool>
     </div>
   )
 }

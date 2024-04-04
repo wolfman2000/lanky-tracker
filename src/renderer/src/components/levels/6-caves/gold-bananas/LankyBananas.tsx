@@ -1,5 +1,10 @@
 import ToughGoldenBanana from '@renderer/components/pools/ToughGoldenBanana'
-import { useCavesIgloo, usePlayCaves, useSlamCaves } from '@renderer/hooks/caves'
+import {
+  useCavesIgloo,
+  useCavesLankyCabin,
+  usePlayCaves,
+  useSlamCaves
+} from '@renderer/hooks/caves'
 import {
   useBalloon,
   useDiddy,
@@ -9,11 +14,13 @@ import {
   useSprint,
   useTrombone
 } from '@renderer/hooks/kongs'
+import { logicBreak } from '@renderer/hooks/world'
 import CavesCheck from '../CavesCheck'
 
 const LankyBananas: React.FC = () => {
   const inStage = usePlayCaves()
   const igloo = useCavesIgloo()
+  const lankyCabin = useCavesLankyCabin()
   const canSlam = useSlamCaves()
   const balloon = useBalloon()
   const trombone = useTrombone()
@@ -50,8 +57,8 @@ const LankyBananas: React.FC = () => {
         id={6023}
         name="Caves Lanky 1 Door Cabin"
         region="Cabins Area"
-        canGetLogic={inStage && balloon && trombone && sprint}
-        canGetBreak={inStage && trombone && (sprint || dk || diddy)}
+        canGetLogic={lankyCabin.in && sprint}
+        canGetBreak={logicBreak(lankyCabin) && ((balloon && sprint) || dk || diddy)}
       />
     </>
   )

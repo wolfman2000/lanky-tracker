@@ -43,8 +43,8 @@ const ChunkyMedal: React.FC = () => {
 
   return (
     <FactoryCheck
-      id={3103}
-      name="Factory Tiny Medal"
+      id={3104}
+      name="Factory Chunky Medal"
       region="Factory Medal Rewards"
       canGetLogic={inStage && kong && (coloredBananaShuffle || currLogic >= cbCount)}
     />

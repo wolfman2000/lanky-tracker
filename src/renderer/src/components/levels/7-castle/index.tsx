@@ -1,9 +1,8 @@
-import ArenaPool from '@renderer/components/pools/Arenas'
 import BananaMedalPool from '@renderer/components/pools/BananaMedals'
 import BossPool from '@renderer/components/pools/Bosses'
 import ShopPool from '@renderer/components/pools/Shops'
-import { usePlayCastle, useSlamCastle } from '@renderer/hooks/castle'
-import { useAnyKong, useLanky } from '@renderer/hooks/kongs'
+import { usePlayCastle } from '@renderer/hooks/castle'
+import { useAnyKong } from '@renderer/hooks/kongs'
 import CastleCheck from './CastleCheck'
 import CrateLocations from './Crates'
 import DirtLocations from './Dirt'
@@ -20,12 +19,13 @@ import DkMedal from './medals/DkMedal'
 import LankyMedal from './medals/LankyMedal'
 import TinyMedal from './medals/TinyMedal'
 import CastleShops from './shops'
+import DropPool from '@renderer/components/pools/Drops'
+import EnemyLocations from './Enemies'
+import ArenaLocations from './Arenas'
 
 const CastleChecks: React.FC = () => {
   const inStage = usePlayCastle()
-  const canSlam = useSlamCastle()
   const anyKong = useAnyKong()
-  const lanky = useLanky()
 
   return (
     <div className="grid">
@@ -38,14 +38,7 @@ const CastleChecks: React.FC = () => {
       <CrateLocations />
       <DirtLocations />
       <FairyLocations />
-      <ArenaPool>
-        <CastleCheck
-          id={7090}
-          name="Castle Arena"
-          region="Castle Surroundings"
-          canGetLogic={inStage && lanky && canSlam}
-        />
-      </ArenaPool>
+      <ArenaLocations />
       <BananaMedalPool>
         <DkMedal />
         <DiddyMedal />
@@ -64,6 +57,9 @@ const CastleChecks: React.FC = () => {
       <ShopPool>
         <CastleShops />
       </ShopPool>
+      <DropPool>
+        <EnemyLocations />
+      </DropPool>
     </div>
   )
 }

@@ -5,7 +5,7 @@ import MoveTable from './components/moves/MoveTable'
 import ResetTracker from './components/ResetComponent'
 import RuntimeSettings from './components/settings/RuntimeSettings'
 import SwitchsanitySelector from './components/settings/Switchsanity'
-import FoolishHints from './components/hints'
+import RegionHints from './components/hints'
 import IsleChecks from './components/levels/0-isles'
 import JapesChecks from './components/levels/1-japes'
 import AztecChecks from './components/levels/2-aztec'
@@ -14,6 +14,7 @@ import GalleonChecks from './components/levels/4-galleon'
 import ForestChecks from './components/levels/5-forest'
 import CavesChecks from './components/levels/6-caves'
 import CastleChecks from './components/levels/7-castle'
+import HelmChecks from './components/levels/8-helm'
 
 function App(): JSX.Element {
   return (
@@ -22,7 +23,7 @@ function App(): JSX.Element {
         <article>
           <MoveTable />
           <LevelTable />
-          <FoolishHints />
+          <RegionHints />
           <RuntimeSettings />
           <SwitchsanitySelector />
           <ResetTracker />
@@ -30,7 +31,7 @@ function App(): JSX.Element {
         <article>
           <Tabs>
             <TabList>
-              <Tab>Isles &amp; Helm</Tab>
+              <Tab>Isles</Tab>
               <Tab>Japes</Tab>
               <Tab>Aztec</Tab>
               <Tab>Factory</Tab>
@@ -38,6 +39,7 @@ function App(): JSX.Element {
               <Tab>Forest</Tab>
               <Tab>Caves</Tab>
               <Tab>Castle</Tab>
+              <Tab>Helm</Tab>
             </TabList>
             <TabPanel>
               <IsleChecks />
@@ -62,6 +64,9 @@ function App(): JSX.Element {
             </TabPanel>
             <TabPanel>
               <CastleChecks />
+            </TabPanel>
+            <TabPanel>
+              <HelmChecks />
             </TabPanel>
           </Tabs>
         </article>

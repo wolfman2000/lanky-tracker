@@ -1,26 +1,28 @@
-import { useShallow } from 'zustand/react/shallow'
-
 import KasplatPool from '@renderer/components/pools/Kasplats'
-import { useJapesUnderground, usePlayJapes } from '@renderer/hooks/japes'
-import { useAnyKong } from '@renderer/hooks/kongs'
+import { useJapesKongGates, useJapesUnderground, usePlayJapes } from '@renderer/hooks/japes'
+import {
+  useAnyKong,
+  useDiddy,
+  useDk,
+  usePineapple,
+  useTiny,
+  useTwirl,
+  useVine
+} from '@renderer/hooks/kongs'
 import { useShuffleKasplats } from '@renderer/hooks/settings'
-import useDonkStore from '@renderer/store'
 import JapesCheck from './JapesCheck'
 
 const Vanilla: React.FC = () => {
   const inStage = usePlayJapes()
   const anyKong = useAnyKong()
   const under = useJapesUnderground()
-  const [dk, diddy, tiny, twirl, pineapple, vine] = useDonkStore(
-    useShallow((state) => [
-      state.moves.dk,
-      state.moves.diddy,
-      state.moves.tiny,
-      state.moves.twirl,
-      state.moves.pineapple,
-      state.moves.vine
-    ])
-  )
+  const kongGates = useJapesKongGates()
+  const pineapple = usePineapple()
+  const vine = useVine()
+  const dk = useDk()
+  const diddy = useDiddy()
+  const twirl = useTwirl()
+  const tiny = useTiny()
 
   return (
     <>
@@ -28,7 +30,7 @@ const Vanilla: React.FC = () => {
         id={1050}
         name="Japes Kasplat Hive Tunnel Lower"
         region="Hive Tunnel Area"
-        canGetLogic={inStage && anyKong}
+        canGetLogic={kongGates && anyKong}
       />
       <JapesCheck
         id={1051}
@@ -46,7 +48,7 @@ const Vanilla: React.FC = () => {
         id={1053}
         name="Japes Kasplat Hive Tunnel Upper"
         region="Hive Tunnel Area"
-        canGetLogic={inStage && anyKong}
+        canGetLogic={kongGates && anyKong}
       />
       <JapesCheck
         id={1054}

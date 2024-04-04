@@ -1,12 +1,14 @@
-import ArenaPool from '@renderer/components/pools/Arenas'
 import BananaMedalPool from '@renderer/components/pools/BananaMedals'
 import BossPool from '@renderer/components/pools/Bosses'
+import DropPool from '@renderer/components/pools/Drops'
 import ShopPool from '@renderer/components/pools/Shops'
 import { usePlayCaves } from '@renderer/hooks/caves'
-import { useAnyKong, useBongos, useSlam } from '@renderer/hooks/kongs'
+import { useAnyKong } from '@renderer/hooks/kongs'
+import ArenaLocations from './Arenas'
 import CavesCheck from './CavesCheck'
 import CrateLocations from './Crates'
 import DirtLocations from './Dirt'
+import EnemyLocations from './Enemies'
 import FairyLocations from './Fairies'
 import KasplatLocations from './Kasplats'
 import ChunkyBananas from './gold-bananas/ChunkyBananas'
@@ -24,8 +26,6 @@ import CavesShops from './shops'
 const CavesChecks: React.FC = () => {
   const inStage = usePlayCaves()
   const anyKong = useAnyKong()
-  const slam = useSlam()
-  const bongos = useBongos()
 
   return (
     <div className="grid">
@@ -38,14 +38,7 @@ const CavesChecks: React.FC = () => {
       <CrateLocations />
       <DirtLocations />
       <FairyLocations />
-      <ArenaPool>
-        <CavesCheck
-          id={6090}
-          name="Caves Arena"
-          region="Cabins Area"
-          canGetLogic={inStage && bongos && slam}
-        />
-      </ArenaPool>
+      <ArenaLocations />
       <BananaMedalPool>
         <DkMedal />
         <DiddyMedal />
@@ -64,6 +57,9 @@ const CavesChecks: React.FC = () => {
       <ShopPool>
         <CavesShops />
       </ShopPool>
+      <DropPool>
+        <EnemyLocations />
+      </DropPool>
     </div>
   )
 }
