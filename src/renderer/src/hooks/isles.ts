@@ -399,12 +399,16 @@ export const useCheckDiddyCage = (): LogicBool => {
 }
 
 export const useCheckDiddySummit = (): LogicBool => {
-  const crossFungi = useIslesCrossFungi()
+  const fungiIsland = useIslesFungiIsland()
+  // Redundancy due to avoiding infinite loops.
+  const islesUpper = useIslesUpper()
+  const boulderTech = useBoulderTech()
+  const target = useIslesRocketSwitch()
   const rocket = useRocket()
   const twirl = useTwirl()
   return {
-    in: crossFungi.in && rocket,
-    out: logicBreak(crossFungi) && twirl
+    in: fungiIsland && islesUpper && boulderTech && target && rocket,
+    out: fungiIsland && twirl
   }
 }
 
