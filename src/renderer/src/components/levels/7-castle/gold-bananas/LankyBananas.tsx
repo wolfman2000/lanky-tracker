@@ -3,7 +3,6 @@ import {
   useBalloon,
   useDiddy,
   useDk,
-  useFeather,
   useGrape,
   useHoming,
   useLanky,
@@ -19,7 +18,6 @@ const LankyBananas: React.FC = () => {
   const inStage = usePlayCastle()
   const canSlam = useSlamCastle()
   const grape = useGrape()
-  const feather = useFeather()
   const balloon = useBalloon()
   const sprint = useSprint()
   const trombone = useTrombone()
@@ -50,7 +48,7 @@ const LankyBananas: React.FC = () => {
         name="Castle Lanky Mausoleum"
         region="Castle Underground"
         canGetLogic={inStage && grape && sprint && vine}
-        canGetBreak={inStage && lanky && (grape || feather) && (sprint || dk || diddy)}
+        canGetBreak={inStage && grape && (sprint || dk || diddy)}
       />
       <CastleCheck
         id={7023}
