@@ -153,6 +153,13 @@ export const useShuffleEnemies = (): boolean =>
   useDonkStore(useShallow((state) => state.settings.shuffleEnemies))
 
 /**
+ * Do we shuffle where each colored banana, banana bunch, and banana balloon is located?
+ * @returns true if we do shuffle the colored banana locations.
+ */
+export const useShuffleColoredBananas = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.shuffleColoredBananas))
+
+/**
  * Are the boss keys in the rando pool?
  * @returns true if the keys are in the pool.
  */

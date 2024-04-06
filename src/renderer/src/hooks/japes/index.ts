@@ -1,6 +1,6 @@
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
-import { usePlayLevel, useSlamLevel } from './isles'
+import { usePlayLevel, useSlamLevel } from '../isles'
 import {
   useBoulderTech,
   useChunky,
@@ -10,9 +10,9 @@ import {
   useStand,
   useTiny,
   useTwirl
-} from './kongs'
-import { LogicBool, logicBreak, useSwitchsanityGun } from './world'
-import { useBananaportAll } from './settings'
+} from '../kongs'
+import { LogicBool, logicBreak, useSwitchsanityGun } from '../world'
+import { useBananaportAll } from '../settings'
 
 /**
  * Can we play in Jungle Japes?

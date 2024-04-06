@@ -27,20 +27,25 @@ const DiddyMedal: React.FC = () => {
     useShallow((state) => [state.settings.shuffleColoredBananas])
   )
 
+  // Cranky Cannon
   let currLogic = 10
   if (outskirts) {
     if (gun) {
+      // Balloon by Instrument Cactus
       currLogic += 10
     }
     if (dive) {
+      // 20 by Mech Fish Grate, 10 on 2 Door Ship Floor, 6 to Treasure Room
       currLogic += 36
       if (music) {
+        // 5 Door Ship
         currLogic += 14
       }
     }
   }
   let currBreak = currLogic
   if (treasureRoom.in && gun) {
+    // Treasure Room Balloon
     currLogic += 10
   }
   if (lighthousePlatform.in) {
