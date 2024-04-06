@@ -194,6 +194,11 @@ main > article:last-child {
   margin-left: auto;
 }
 
+.reset {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+}
+
 main .grid {
   display: grid;
   grid-template-columns: 4fr 2.5fr 0.5fr;
