@@ -2,20 +2,20 @@ import { act, renderHook } from '@testing-library/react'
 
 import useDonkStore from '@renderer/store'
 import { resetAllSlices } from '@renderer/store/common'
-import { usePlayAztec } from './aztec'
-import { usePlayCastle } from './castle'
-import { usePlayCaves } from './caves'
-import { usePlayFactory } from './factory'
-import { usePlayForest } from './forest'
-import { usePlayGalleon } from './galleon'
+import { usePlayAztec } from '../aztec'
+import { usePlayCastle } from '../castle'
+import { usePlayCaves } from '../caves'
+import { usePlayFactory } from '../factory'
+import { usePlayForest } from '../forest'
+import { usePlayGalleon } from '../galleon'
 import {
   useCheckBananaFairyIsle,
   useCheckTinyAztecLobby,
   useCheckTinyFeatherCage,
   useCheckTinyGalleonLobby,
   useCheckTinyMusicPad
-} from './isles'
-import { usePlayJapes } from './japes'
+} from '.'
+import { usePlayJapes } from '../japes'
 
 beforeEach(() => {
   act(() => resetAllSlices())

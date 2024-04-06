@@ -1,9 +1,9 @@
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
-import { usePlayLevel, useSlamLevel } from './isles'
-import { useCoconut, useDiddy, useGrab, useSlam, useTiny } from './kongs'
-import { useBananaportAll } from './settings'
-import { LogicBool } from './world'
+import { usePlayLevel, useSlamLevel } from '../isles'
+import { useCoconut, useDiddy, useGrab, useSlam, useTiny } from '../kongs'
+import { useBananaportAll } from '../settings'
+import { LogicBool } from '../world'
 
 /**
  * Can we play in Frantic Factory?

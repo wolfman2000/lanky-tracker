@@ -2,14 +2,14 @@ import { useShallow } from 'zustand/react/shallow'
 
 import useDonkStore from '@renderer/store'
 import { Level } from '@renderer/store/common'
-import { usePlayAztec } from './aztec'
-import { usePlayCastle } from './castle'
-import { usePlayCaves } from './caves'
-import { useCurrentFairyCount } from './consumables'
-import { usePlayFactory } from './factory'
-import { usePlayGalleon, useSlamGalleon } from './galleon'
-import { usePlayHelm } from './helm'
-import { usePlayJapes } from './japes'
+import { usePlayAztec } from '../aztec'
+import { usePlayCastle } from '../castle'
+import { usePlayCaves } from '../caves'
+import { useCurrentFairyCount } from '../consumables'
+import { usePlayFactory } from '../factory'
+import { usePlayGalleon, useSlamGalleon } from '../galleon'
+import { usePlayHelm } from '../helm'
+import { usePlayJapes } from '../japes'
 import {
   useAnyKong,
   useBalloon,
@@ -48,7 +48,7 @@ import {
   useTrombone,
   useTwirl,
   useVine
-} from './kongs'
+} from '../kongs'
 import {
   useAutoBonus,
   useBananaport,
@@ -56,8 +56,8 @@ import {
   useIsSwitchsanity,
   useOpenLobbies,
   useProgressiveSlams
-} from './settings'
-import { LogicBool, logicBreak, useSwitchsanityGun, useSwitchsanityMusicPad } from './world'
+} from '../settings'
+import { LogicBool, logicBreak, useSwitchsanityGun, useSwitchsanityMusicPad } from '../world'
 
 /**
  * What is needed to turn on the rocket barrel in Isles?

@@ -1,6 +1,6 @@
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
-import { usePlayLevel, useSlamLevel } from './isles'
+import { usePlayLevel, useSlamLevel } from '../isles'
 import {
   useAnyKong,
   useCamera,
@@ -12,15 +12,15 @@ import {
   useRocket,
   useTwirl,
   useVine
-} from './kongs'
-import { useBananaportAll } from './settings'
+} from '../kongs'
+import { useBananaportAll } from '../settings'
 import {
   LogicBool,
   logicBreak,
   useSwitchsanityGun,
   useSwitchsanityKong,
   useSwitchsanityMusicPad
-} from './world'
+} from '../world'
 
 /**
  * Can we play in Angry Aztec?

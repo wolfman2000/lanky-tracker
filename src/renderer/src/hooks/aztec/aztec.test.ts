@@ -2,8 +2,8 @@ import { act, renderHook } from '@testing-library/react'
 
 import useDonkStore from '@renderer/store'
 import { resetAllSlices } from '@renderer/store/common'
-import { useAztecBack, useAztecFront, useAztecShuffledFairyLogic } from './aztec'
-import { logicBreak } from './world'
+import { useAztecBack, useAztecFront, useAztecShuffledFairyLogic } from '.'
+import { logicBreak } from '../world'
 
 beforeEach(() => {
   act(() => resetAllSlices())

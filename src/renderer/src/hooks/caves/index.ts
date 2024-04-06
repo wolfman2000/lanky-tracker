@@ -1,6 +1,6 @@
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
-import { usePlayLevel, useSlamLevel } from './isles'
+import { usePlayLevel, useSlamLevel } from '../isles'
 import {
   useAnyGun,
   useBalloon,
@@ -16,9 +16,9 @@ import {
   useTiny,
   useTrombone,
   useTwirl
-} from './kongs'
-import { useBananaportAll, useHardShooting } from './settings'
-import { LogicBool } from './world'
+} from '../kongs'
+import { useBananaportAll, useHardShooting } from '../settings'
+import { LogicBool } from '../world'
 
 /**
  * Can we play in Crystal Caves?

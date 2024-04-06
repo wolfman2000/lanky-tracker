@@ -1,6 +1,6 @@
 {
   "name": "lanky-tracker",
-  "version": "3.1.0",
+  "version": "3.1.2",
   "description": "An DK 64 Rando Tracker Electron application with React and TypeScript",
   "main": "./out/main/index.js",
   "author": "wolfman2000",

@@ -1,6 +1,6 @@
-import { usePlayLevel, useSlamLevel } from './isles'
-import { useAnyMusic, useBlast, useGone, usePineapple, usePunch, useTriangle } from './kongs'
-import { LogicBool } from './world'
+import { usePlayLevel, useSlamLevel } from '../isles'
+import { useAnyMusic, useBlast, useGone, usePineapple, usePunch, useTriangle } from '../kongs'
+import { LogicBool } from '../world'
 
 /**
  * Can we play in Creepy Castle?

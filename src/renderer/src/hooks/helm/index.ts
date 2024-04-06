@@ -1,4 +1,4 @@
-import { useIslesHelmEntry, useIslesKremTop, usePlayLevel, useSlamLevel } from './isles'
+import { useIslesHelmEntry, useIslesKremTop, usePlayLevel, useSlamLevel } from '../isles'
 import {
   useAnyMusic,
   useGrab,
@@ -8,9 +8,9 @@ import {
   useRocket,
   useStand,
   useVine
-} from './kongs'
-import { useHelmStartPosition } from './settings'
-import { LogicBool, logicBreak } from './world'
+} from '../kongs'
+import { useHelmStartPosition } from '../settings'
+import { LogicBool, logicBreak } from '../world'
 
 /**
  * Can we play in Hideout Helm?

@@ -1,7 +1,7 @@
 import { act, renderHook } from '@testing-library/react'
 
 import { resetAllSlices } from '@renderer/store/common'
-import { useCheckDkCoconutCage, useCheckDkJapesRock, useCheckDkMusicPad } from './isles'
+import { useCheckDkCoconutCage, useCheckDkJapesRock, useCheckDkMusicPad } from '.'
 import useDonkStore from '@renderer/store'
 
 beforeEach(() => {

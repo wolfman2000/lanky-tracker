@@ -6,16 +6,16 @@ export const initialBarriers: BarrierState = {
     japesCoconutGates: false,
     japesHiveGate: false,
     aztecBack: false,
-    aztec5DoorTemple: true,
-    aztecLlamaTemple: true,
-    factoryProduction: true,
+    aztec5DoorTemple: false,
+    aztecLlamaTemple: false,
+    factoryProduction: false,
     factoryTesting: false,
     galleonLighthouse: false,
-    galleonOutskirts: true,
-    galleonSeasick: true,
+    galleonOutskirts: false,
+    galleonSeasick: false,
     forestBeanstalk: false,
     forestOwlTree: false,
-    cavesIgloo: true
+    cavesIgloo: false
   }
 }
 

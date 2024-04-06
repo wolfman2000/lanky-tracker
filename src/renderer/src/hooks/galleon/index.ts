@@ -1,9 +1,9 @@
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
-import { usePlayLevel, useSlamLevel } from './isles'
-import { useDive, useDk, useGrab, useLanky, useRocket, useSlam, useTwirl, useVine } from './kongs'
-import { useBananaportAll, useGalleonTideStartHigh } from './settings'
-import { LogicBool, logicBreak, useSwitchsanityGun } from './world'
+import { usePlayLevel, useSlamLevel } from '../isles'
+import { useDive, useDk, useGrab, useLanky, useRocket, useSlam, useTwirl, useVine } from '../kongs'
+import { useBananaportAll, useGalleonTideStartHigh } from '../settings'
+import { LogicBool, logicBreak, useSwitchsanityGun } from '../world'
 
 /**
  * Can we play in Gloomy Galleon?

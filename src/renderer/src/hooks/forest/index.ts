@@ -1,6 +1,6 @@
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
-import { usePlayLevel, useSlamLevel } from './isles'
+import { usePlayLevel, useSlamLevel } from '../isles'
 import {
   useAnyGun,
   useAnyKong,
@@ -10,9 +10,9 @@ import {
   useRocket,
   useStand,
   useTiny
-} from './kongs'
-import { useBananaportAll, useForestTime } from './settings'
-import { LogicBool, logicBreak, useSwitchsanityGun } from './world'
+} from '../kongs'
+import { useBananaportAll, useForestTime } from '../settings'
+import { LogicBool, logicBreak, useSwitchsanityGun } from '../world'
 
 /**
  * Can we play in Fungi Forest?
