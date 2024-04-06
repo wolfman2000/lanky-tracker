@@ -24,7 +24,7 @@ const LankyBananas: React.FC = () => {
       <IslesCheck
         id={22}
         name="Isles Lanky Instrument Pad"
-        region="Main Isle"
+        region="Japes-Forest Lobbies"
         canGetLogic={music}
       />
       <IslesCheck

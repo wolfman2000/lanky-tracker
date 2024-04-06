@@ -225,7 +225,7 @@ const EnemyLocations: React.FC = () => {
       />
       <ForestCheck
         id={5332}
-        name="Forest Enemy Near Snide"
+        name="Forest Enemy Near Cranky"
         region="Giant Mushroom Exterior"
         canGetLogic={inStage && zinger}
       />
