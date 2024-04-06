@@ -659,6 +659,27 @@ interface HintActions {
 export type HintSlice = HintState & HintActions
 //#endregion
 
+//#region Presets
+export type Preset =
+  | 'beginner'
+  | 's2'
+  | 'sandbox'
+  | 'balancedLzr'
+  | 'nsak'
+  | 'anotherDay'
+  | 'hitlist'
+  | 'treasureHurry'
+  | 'kevin'
+  | 'bountyHunter'
+  | 'radicalSlo'
+  | 's3allKeys'
+
+export type PresetSlice = {
+  setPreset: (id: Preset) => void
+}
+
+//#endregion
+
 export type Level =
   | ''
   | 'Isles'
@@ -766,7 +787,8 @@ export type AllSlice = CheckSlice &
   SettingSlice &
   LevelSlice &
   HintSlice &
-  FastCheckSlice
+  FastCheckSlice &
+  PresetSlice
 
 export const donkResetFns = new Set<() => void>()
 

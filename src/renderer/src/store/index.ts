@@ -10,6 +10,7 @@ import fastCheckSlice from './fast-checks'
 import hintSlice from './hints'
 import levelSlice from './level'
 import moveSlice from './moves'
+import presetSlice from './presets'
 import settingSlice from './settings'
 import switchSlice from './switchsanities'
 
@@ -22,7 +23,8 @@ const initializer: StateCreator<AllSlice, [['zustand/persist', unknown]], []> = 
   ...consumablesSlice(...d),
   ...switchSlice(...d),
   ...barrierSlice(...d),
-  ...fastCheckSlice(...d)
+  ...fastCheckSlice(...d),
+  ...presetSlice(...d)
 })
 
 /**
