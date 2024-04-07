@@ -1,102 +1,68 @@
-import useDonkStore from '@renderer/store'
-import { useShallow } from 'zustand/react/shallow'
-import ForestCheck from './ForestCheck'
-import { useForestBean, usePlayForest } from '@renderer/hooks/forest'
+import ShopGenerator from '@renderer/components/pools/ShopGenerator'
+import ShopPool from '@renderer/components/pools/Shops'
+import { useForestBean, useForestDay, usePlayForest } from '@renderer/hooks/forest'
+import { useShuffledShops } from '@renderer/hooks/settings'
 
-/**
- * Get the list of potential shuffled locations from the shops.
- * @returns The forest shop shuffled items.
- */
-const ForestShops: React.FC = () => {
-  const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
-    useShallow((state) => [
-      state.moves.dk,
-      state.moves.diddy,
-      state.moves.lanky,
-      state.moves.tiny,
-      state.moves.chunky
-    ])
-  )
-  const anyKong = dk || diddy || lanky || tiny || chunky
+const Vanilla: React.FC = () => {
   const inStage = usePlayForest()
   const beanstalk = useForestBean()
 
   return (
     <>
-      <ForestCheck
-        id={5110}
-        name="Forest Cranky Shared"
+      <ShopGenerator
+        baseId={5110}
+        baseName="Forest Cranky"
+        level="Forest"
         region="Forest Shops"
-        canGetLogic={inStage && anyKong}
+        inLogic={inStage}
       />
-      <ForestCheck
-        id={5111}
-        name="Forest Cranky DK"
+      <ShopGenerator
+        baseId={5120}
+        baseName="Forest Funky"
+        level="Forest"
         region="Forest Shops"
-        canGetLogic={inStage && dk}
-      />
-      <ForestCheck
-        id={5112}
-        name="Forest Cranky Diddy"
-        region="Forest Shops"
-        canGetLogic={inStage && diddy}
-      />
-      <ForestCheck
-        id={5113}
-        name="Forest Cranky Lanky"
-        region="Forest Shops"
-        canGetLogic={inStage && lanky}
-      />
-      <ForestCheck
-        id={5114}
-        name="Forest Cranky Tiny"
-        region="Forest Shops"
-        canGetLogic={inStage && tiny}
-      />
-      <ForestCheck
-        id={5115}
-        name="Forest Cranky Chunky"
-        region="Forest Shops"
-        canGetLogic={inStage && chunky}
-      />
-      <ForestCheck
-        id={5120}
-        name="Forest Funky Shared"
-        region="Forest Shops"
-        canGetLogic={beanstalk && anyKong}
-      />
-      <ForestCheck
-        id={5121}
-        name="Forest Funky DK"
-        region="Forest Shops"
-        canGetLogic={beanstalk && dk}
-      />
-      <ForestCheck
-        id={5122}
-        name="Forest Funky Diddy"
-        region="Forest Shops"
-        canGetLogic={beanstalk && diddy}
-      />
-      <ForestCheck
-        id={5123}
-        name="Forest Funky Lanky"
-        region="Forest Shops"
-        canGetLogic={beanstalk && lanky}
-      />
-      <ForestCheck
-        id={5124}
-        name="Forest Funky Tiny"
-        region="Forest Shops"
-        canGetLogic={beanstalk && tiny}
-      />
-      <ForestCheck
-        id={5125}
-        name="Forest Funky Chunky"
-        region="Forest Shops"
-        canGetLogic={beanstalk && chunky}
+        inLogic={beanstalk}
       />
     </>
   )
 }
 
-export default ForestShops
+const Shuffled: React.FC = () => {
+  const inStage = usePlayForest()
+  const beanstalk = useForestBean()
+  const day = useForestDay()
+
+  return (
+    <>
+      <ShopGenerator
+        baseId={5140}
+        baseName="Forest Cranky Location"
+        level="Forest"
+        region="Forest Shops"
+        inLogic={inStage}
+      />
+      <ShopGenerator
+        baseId={5150}
+        baseName="Forest Funky Location"
+        level="Forest"
+        region="Forest Shops"
+        inLogic={beanstalk}
+      />
+      <ShopGenerator
+        baseId={5170}
+        baseName="Forest Snide Location"
+        level="Forest"
+        region="Forest Shops"
+        inLogic={day.in}
+        outLogic={day.out}
+      />
+    </>
+  )
+}
+
+const ShopLocations: React.FC = () => {
+  const locations = useShuffledShops() ? <Shuffled /> : <Vanilla />
+  return <ShopPool>{locations}</ShopPool>
+}
+
+export default ShopLocations

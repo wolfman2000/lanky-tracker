@@ -1,133 +1,80 @@
-import useDonkStore from '@renderer/store'
-import CavesCheck from './CavesCheck'
+import ShopGenerator from '@renderer/components/pools/ShopGenerator'
+import ShopPool from '@renderer/components/pools/Shops'
 import { usePlayCaves } from '@renderer/hooks/caves'
-import { useShallow } from 'zustand/react/shallow'
+import { usePunch } from '@renderer/hooks/kongs'
+import { useShuffledShops } from '@renderer/hooks/settings'
 
-const CavesShops: React.FC = () => {
-  const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
-    useShallow((state) => [
-      state.moves.dk,
-      state.moves.diddy,
-      state.moves.lanky,
-      state.moves.tiny,
-      state.moves.chunky
-    ])
-  )
-  const anyKong = dk || diddy || lanky || tiny || chunky
+const Vanilla: React.FC = () => {
   const inStage = usePlayCaves()
 
   return (
     <>
-      <CavesCheck
-        id={6110}
-        name="Caves Cranky Shared"
+      <ShopGenerator
+        baseId={6110}
+        baseName="Caves Cranky"
+        level="Caves"
         region="Caves Shops"
-        canGetLogic={inStage && anyKong}
+        inLogic={inStage}
       />
-      <CavesCheck
-        id={6111}
-        name="Caves Cranky DK"
+      <ShopGenerator
+        baseId={6120}
+        baseName="Caves Funky"
+        level="Caves"
         region="Caves Shops"
-        canGetLogic={inStage && dk}
+        inLogic={inStage}
       />
-      <CavesCheck
-        id={6112}
-        name="Caves Cranky Diddy"
+      <ShopGenerator
+        baseId={6130}
+        baseName="Caves Candy"
+        level="Caves"
         region="Caves Shops"
-        canGetLogic={inStage && diddy}
-      />
-      <CavesCheck
-        id={6113}
-        name="Caves Cranky Lanky"
-        region="Caves Shops"
-        canGetLogic={inStage && lanky}
-      />
-      <CavesCheck
-        id={6114}
-        name="Caves Cranky Tiny"
-        region="Caves Shops"
-        canGetLogic={inStage && tiny}
-      />
-      <CavesCheck
-        id={6115}
-        name="Caves Cranky Chunky"
-        region="Caves Shops"
-        canGetLogic={inStage && chunky}
-      />
-      <CavesCheck
-        id={6120}
-        name="Caves Funky Shared"
-        region="Caves Shops"
-        canGetLogic={inStage && anyKong}
-      />
-      <CavesCheck
-        id={6121}
-        name="Caves Funky DK"
-        region="Caves Shops"
-        canGetLogic={inStage && dk}
-      />
-      <CavesCheck
-        id={6122}
-        name="Caves Funky Diddy"
-        region="Caves Shops"
-        canGetLogic={inStage && diddy}
-      />
-      <CavesCheck
-        id={6123}
-        name="Caves Funky Lanky"
-        region="Caves Shops"
-        canGetLogic={inStage && lanky}
-      />
-      <CavesCheck
-        id={6124}
-        name="Caves Funky Tiny"
-        region="Caves Shops"
-        canGetLogic={inStage && tiny}
-      />
-      <CavesCheck
-        id={6125}
-        name="Caves Funky Chunky"
-        region="Caves Shops"
-        canGetLogic={inStage && chunky}
-      />
-      <CavesCheck
-        id={6130}
-        name="Caves Candy Shared"
-        region="Caves Shops"
-        canGetLogic={inStage && anyKong}
-      />
-      <CavesCheck
-        id={6131}
-        name="Caves Candy DK"
-        region="Caves Shops"
-        canGetLogic={inStage && dk}
-      />
-      <CavesCheck
-        id={6132}
-        name="Caves Candy Diddy"
-        region="Caves Shops"
-        canGetLogic={inStage && diddy}
-      />
-      <CavesCheck
-        id={6133}
-        name="Caves Candy Lanky"
-        region="Caves Shops"
-        canGetLogic={inStage && lanky}
-      />
-      <CavesCheck
-        id={6134}
-        name="Caves Candy Tiny"
-        region="Caves Shops"
-        canGetLogic={inStage && tiny}
-      />
-      <CavesCheck
-        id={6135}
-        name="Caves Candy Chunky"
-        region="Caves Shops"
-        canGetLogic={inStage && chunky}
+        inLogic={inStage}
       />
     </>
   )
 }
 
-export default CavesShops
+const Shuffled: React.FC = () => {
+  const inStage = usePlayCaves()
+  const punch = usePunch()
+
+  return (
+    <>
+      <ShopGenerator
+        baseId={6140}
+        baseName="Caves Cranky Location"
+        level="Caves"
+        region="Caves Shops"
+        inLogic={inStage}
+      />
+      <ShopGenerator
+        baseId={6150}
+        baseName="Caves Funky Location"
+        level="Caves"
+        region="Caves Shops"
+        inLogic={inStage}
+      />
+      <ShopGenerator
+        baseId={6160}
+        baseName="Caves Candy Location"
+        level="Caves"
+        region="Caves Shops"
+        inLogic={inStage}
+      />
+      <ShopGenerator
+        baseId={6170}
+        baseName="Caves Snide Location"
+        level="Caves"
+        region="Caves Shops"
+        inLogic={inStage && punch}
+      />
+    </>
+  )
+}
+
+const ShopLocations: React.FC = () => {
+  const locations = useShuffledShops() ? <Shuffled /> : <Vanilla />
+  return <ShopPool>{locations}</ShopPool>
+}
+
+export default ShopLocations

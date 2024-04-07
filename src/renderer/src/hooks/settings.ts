@@ -224,3 +224,6 @@ export const useShuffleKasplats = (): boolean =>
 
 export const useShuffledArenas = (): boolean =>
   useDonkStore(useShallow((state) => state.settings.shuffleArenas))
+
+export const useShuffledShops = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.shuffleShops))

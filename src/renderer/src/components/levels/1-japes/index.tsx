@@ -1,7 +1,6 @@
 import BananaMedalPool from '@renderer/components/pools/BananaMedals'
 import BossPool from '@renderer/components/pools/Bosses'
 import DropPool from '@renderer/components/pools/Drops'
-import ShopPool from '@renderer/components/pools/Shops'
 import { useJapesRambi, useJapesSideArea, usePlayJapes } from '@renderer/hooks/japes'
 import { useAnyKong, useVine } from '@renderer/hooks/kongs'
 import ArenaLocations from './Arenas'
@@ -56,9 +55,7 @@ const JapesChecks: React.FC = () => {
           canGetBreak={inStage && anyKong}
         />
       </BossPool>
-      <ShopPool>
-        <JapesShops />
-      </ShopPool>
+      <JapesShops />
       <DropPool>
         <EnemyLocations />
       </DropPool>

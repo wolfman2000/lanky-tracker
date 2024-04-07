@@ -1,137 +1,78 @@
-import useDonkStore from '@renderer/store'
-import { useShallow } from 'zustand/react/shallow'
-import CastleCheck from './CastleCheck'
+import ShopGenerator from '@renderer/components/pools/ShopGenerator'
+import ShopPool from '@renderer/components/pools/Shops'
 import { usePlayCastle } from '@renderer/hooks/castle'
+import { useShuffledShops } from '@renderer/hooks/settings'
 
-/**
- * Show the shop checks within Creepy Castle.
- * @returns the list of shop checks if shuffled.
- */
-const CastleShops: React.FC = () => {
-  const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
-    useShallow((state) => [
-      state.moves.dk,
-      state.moves.diddy,
-      state.moves.lanky,
-      state.moves.tiny,
-      state.moves.chunky
-    ])
-  )
-  const anyKong = dk || diddy || lanky || tiny || chunky
+const Vanilla: React.FC = () => {
   const inStage = usePlayCastle()
 
   return (
     <>
-      <CastleCheck
-        id={7110}
-        name="Castle Cranky Shared"
+      <ShopGenerator
+        baseId={7110}
+        baseName="Castle Cranky"
+        level="Castle"
         region="Castle Shops"
-        canGetLogic={inStage && anyKong}
+        inLogic={inStage}
       />
-      <CastleCheck
-        id={7111}
-        name="Castle Cranky DK"
+      <ShopGenerator
+        baseId={7120}
+        baseName="Castle Funky"
+        level="Castle"
         region="Castle Shops"
-        canGetLogic={inStage && dk}
+        inLogic={inStage}
       />
-      <CastleCheck
-        id={7112}
-        name="Castle Cranky Diddy"
+      <ShopGenerator
+        baseId={7130}
+        baseName="Castle Candy"
+        level="Castle"
         region="Castle Shops"
-        canGetLogic={inStage && diddy}
-      />
-      <CastleCheck
-        id={7113}
-        name="Castle Cranky Lanky"
-        region="Castle Shops"
-        canGetLogic={inStage && lanky}
-      />
-      <CastleCheck
-        id={7114}
-        name="Castle Cranky Tiny"
-        region="Castle Shops"
-        canGetLogic={inStage && tiny}
-      />
-      <CastleCheck
-        id={7115}
-        name="Castle Cranky Chunky"
-        region="Castle Shops"
-        canGetLogic={inStage && chunky}
-      />
-      <CastleCheck
-        id={7120}
-        name="Castle Funky Shared"
-        region="Castle Shops"
-        canGetLogic={inStage && anyKong}
-      />
-      <CastleCheck
-        id={7121}
-        name="Castle Funky DK"
-        region="Castle Shops"
-        canGetLogic={inStage && dk}
-      />
-      <CastleCheck
-        id={7122}
-        name="Castle Funky Diddy"
-        region="Castle Shops"
-        canGetLogic={inStage && diddy}
-      />
-      <CastleCheck
-        id={7123}
-        name="Castle Funky Lanky"
-        region="Castle Shops"
-        canGetLogic={inStage && lanky}
-      />
-      <CastleCheck
-        id={7124}
-        name="Castle Funky Tiny"
-        region="Castle Shops"
-        canGetLogic={inStage && tiny}
-      />
-      <CastleCheck
-        id={7125}
-        name="Castle Funky Chunky"
-        region="Castle Shops"
-        canGetLogic={inStage && chunky}
-      />
-      <CastleCheck
-        id={7130}
-        name="Castle Candy Shared"
-        region="Castle Shops"
-        canGetLogic={inStage && anyKong}
-      />
-      <CastleCheck
-        id={7131}
-        name="Castle Candy DK"
-        region="Castle Shops"
-        canGetLogic={inStage && dk}
-      />
-      <CastleCheck
-        id={7132}
-        name="Castle Candy Diddy"
-        region="Castle Shops"
-        canGetLogic={inStage && diddy}
-      />
-      <CastleCheck
-        id={7133}
-        name="Castle Candy Lanky"
-        region="Castle Shops"
-        canGetLogic={inStage && lanky}
-      />
-      <CastleCheck
-        id={7134}
-        name="Castle Candy Tiny"
-        region="Castle Shops"
-        canGetLogic={inStage && tiny}
-      />
-      <CastleCheck
-        id={7135}
-        name="Castle Candy Chunky"
-        region="Castle Shops"
-        canGetLogic={inStage && chunky}
+        inLogic={inStage}
       />
     </>
   )
 }
 
-export default CastleShops
+const Shuffled: React.FC = () => {
+  const inStage = usePlayCastle()
+
+  return (
+    <>
+      <ShopGenerator
+        baseId={7140}
+        baseName="Castle Cranky Location"
+        level="Castle"
+        region="Castle Shops"
+        inLogic={inStage}
+      />
+      <ShopGenerator
+        baseId={7150}
+        baseName="Castle Funky Location"
+        level="Castle"
+        region="Castle Shops"
+        inLogic={inStage}
+      />
+      <ShopGenerator
+        baseId={7160}
+        baseName="Castle Candy Location"
+        level="Castle"
+        region="Castle Shops"
+        inLogic={inStage}
+      />
+      <ShopGenerator
+        baseId={7170}
+        baseName="Castle Snide Location"
+        level="Castle"
+        region="Castle Shops"
+        inLogic={inStage}
+      />
+    </>
+  )
+}
+
+const ShopLocations: React.FC = () => {
+  const locations = useShuffledShops() ? <Shuffled /> : <Vanilla />
+  return <ShopPool>{locations}</ShopPool>
+}
+
+export default ShopLocations

@@ -13,6 +13,7 @@ export const initialSettings: SettingState = {
     bananaportOpen: 1,
     forestTime: 0,
     galleonHighTide: false,
+    shuffleShops: false,
     poolShops: true,
     poolMisc: true,
     poolKeys: true,

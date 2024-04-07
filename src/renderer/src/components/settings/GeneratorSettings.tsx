@@ -263,6 +263,13 @@ const GeneratorSettings: React.FC = () => {
                 prefix="settings"
                 updateItem={setSetting}
               />
+              <p>Shops?</p>
+              <SimpleIcon
+                imgUrl={shopIcon}
+                storeKey="shuffleShops"
+                prefix="settings"
+                updateItem={setSetting}
+              />
             </>
             <h3>Fast Barrier Settings</h3>
             <>

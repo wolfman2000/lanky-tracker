@@ -535,6 +535,10 @@ interface SettingCollection {
    */
   poolShops: boolean
   /**
+   * Are the shop locations shuffled?
+   */
+  shuffleShops: boolean
+  /**
    * Are the colored bananas shuffled?
    */
   shuffleColoredBananas: boolean
