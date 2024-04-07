@@ -547,13 +547,16 @@ const bountyHunterPreset = (state: AllSlice): AllSlice => {
       jetpacCount: 10,
       fairyCount: 5,
       bananaportOpen: 1,
-      helmAccess: 0
+      helmAccess: 0,
+      shuffleFairies: true,
+      shuffleColoredBananas: true
     },
     moves: {
       ...startState.moves
     },
     removeBarriers: {
       ...startState.removeBarriers,
+      japesCoconutGates: true,
       aztec5DoorTemple: true,
       aztecLlamaTemple: true,
       factoryTesting: true,

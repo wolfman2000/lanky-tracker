@@ -1,86 +1,19 @@
-import {
-  useAztec5DoorTemple,
-  useAztecBack,
-  useAztecFront,
-  useAztecLlamaTemple,
-  useAztecTinyTemple
-} from '@renderer/hooks/aztec'
-import { useAnyMusic, useDive, useGrape, useLanky, useVine } from '@renderer/hooks/kongs'
+import { useLankyMedalInLogic, useLankyMedalOutLogic } from '@renderer/hooks/aztec/medals/lanky'
 import { useCbCount } from '@renderer/hooks/settings'
-import { logicBreak } from '@renderer/hooks/world'
-import useDonkStore from '@renderer/store'
-import { useShallow } from 'zustand/react/shallow'
 import AztecCheck from '../AztecCheck'
 
 const LankyMedal: React.FC = () => {
-  const inStage = useAztecFront()
-  const tinyTemple = useAztecTinyTemple()
-  const aztecBack = useAztecBack()
-  const llamaTemple = useAztecLlamaTemple()
-  const doorTemple = useAztec5DoorTemple()
-  const anyMusic = useAnyMusic()
+  const inLogic = useLankyMedalInLogic()
+  const outLogic = useLankyMedalOutLogic()
   const cbCount = useCbCount()
-  const lanky = useLanky()
-  const grape = useGrape()
-  const vine = useVine()
-  const dive = useDive()
-  const [coloredBananaShuffle] = useDonkStore(
-    useShallow((state) => [state.settings.shuffleColoredBananas])
-  )
-
-  let currLogic = 0
-  if (inStage.in) {
-    currLogic += 5
-    if (tinyTemple.in && dive) {
-      currLogic += 14
-    }
-    if (aztecBack.in) {
-      currLogic += 35
-      if (doorTemple.in && grape) {
-        currLogic += 10
-      }
-      if (llamaTemple.in) {
-        currLogic += 11
-        if (grape && vine) {
-          currLogic += 5
-        }
-        if (anyMusic && dive && grape) {
-          currLogic += 20
-        }
-      }
-    }
-  }
-
-  let currBreak = 0
-  if (logicBreak(inStage)) {
-    currBreak += 5
-    if (logicBreak(tinyTemple) && dive) {
-      currBreak += 14
-    }
-    if (logicBreak(aztecBack)) {
-      currBreak += 35
-      if (logicBreak(doorTemple) && grape) {
-        currBreak += 10
-      }
-      if (logicBreak(llamaTemple)) {
-        currBreak += 11
-        if (grape && vine) {
-          currBreak += 5
-        }
-        if (anyMusic && dive && grape) {
-          currBreak += 20
-        }
-      }
-    }
-  }
 
   return (
     <AztecCheck
       id={2102}
       name="Aztec Lanky Medal"
       region="Aztec Medal Rewards"
-      canGetLogic={inStage.in && lanky && (coloredBananaShuffle || currLogic >= cbCount)}
-      canGetBreak={logicBreak(inStage) && lanky && (coloredBananaShuffle || currBreak >= cbCount)}
+      canGetLogic={inLogic >= cbCount}
+      canGetBreak={outLogic >= cbCount}
     />
   )
 }

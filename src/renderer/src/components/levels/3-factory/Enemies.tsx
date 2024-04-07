@@ -147,7 +147,7 @@ const EnemyLocations: React.FC = () => {
       />
       <FactoryCheck
         id={3322}
-        name="Factory Enemy 3124 Gauntlet 01"
+        name="Factory Enemy 3124 Gauntlet 0"
         region="R&D Area"
         canGetLogic={testing && guitar}
       />

@@ -153,7 +153,7 @@ const EnemyLocations: React.FC = () => {
       />
       <CastleCheck
         id={7318}
-        name="Castle Enemy Ballroom Board 45"
+        name="Castle Enemy Ballroom Board 4"
         region="Castle Rooms"
         canGetLogic={inStage && diddy && canSlam}
       />
@@ -428,7 +428,7 @@ const EnemyLocations: React.FC = () => {
       />
       <CastleCheck
         id={7363}
-        name="Castle Enemy Museum Main 12"
+        name="Castle Enemy Museum Main 1"
         region="Castle Rooms"
         canGetLogic={inStage && chunky && canSlam}
       />
