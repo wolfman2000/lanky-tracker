@@ -1,34 +1,46 @@
-import { useShallow } from 'zustand/react/shallow'
+import ShopGenerator from '@renderer/components/pools/ShopGenerator'
+import ShopPool from '@renderer/components/pools/Shops'
+import { useIslesKremAscent } from '@renderer/hooks/isles'
+import { useShuffledShops } from '@renderer/hooks/settings'
 
-import useDonkStore from '@renderer/store'
-import IslesCheck from './IslesCheck'
-
-/**
- * Gather the list of shuffled shop item locations in Isles.
- * @returns the shuffled shop locations in Isles.
- */
-const IslesShops: React.FC = () => {
-  const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
-    useShallow((state) => [
-      state.moves.dk,
-      state.moves.diddy,
-      state.moves.lanky,
-      state.moves.tiny,
-      state.moves.chunky
-    ])
+const Vanilla: React.FC = () => {
+  return (
+    <ShopGenerator
+      baseId={110}
+      baseName="Isles Cranky"
+      level="Isles"
+      region="Isles Shops"
+      inLogic={true}
+    />
   )
-  const anyKong = dk || diddy || lanky || tiny || chunky
+}
+
+const Shuffled: React.FC = () => {
+  const kremAscent = useIslesKremAscent()
 
   return (
     <>
-      <IslesCheck id={110} name="Isles Cranky Shared" region="Isles Shops" canGetLogic={anyKong} />
-      <IslesCheck id={111} name="Isles Cranky DK" region="Isles Shops" canGetLogic={dk} />
-      <IslesCheck id={112} name="Isles Cranky Diddy" region="Isles Shops" canGetLogic={diddy} />
-      <IslesCheck id={113} name="Isles Cranky Lanky" region="Isles Shops" canGetLogic={lanky} />
-      <IslesCheck id={114} name="Isles Cranky Tiny" region="Isles Shops" canGetLogic={tiny} />
-      <IslesCheck id={115} name="Isles Cranky Chunky" region="Isles Shops" canGetLogic={chunky} />
+      <ShopGenerator
+        baseId={140}
+        baseName="Isles Cranky Location"
+        level="Isles"
+        region="Isles Shops"
+        inLogic={true}
+      />
+      <ShopGenerator
+        baseId={170}
+        baseName="Isles Snide Location"
+        level="Isles"
+        region="Isles Shops"
+        inLogic={kremAscent}
+      />
     </>
   )
 }
 
-export default IslesShops
+const ShopLocations: React.FC = () => {
+  const locations = useShuffledShops() ? <Shuffled /> : <Vanilla />
+  return <ShopPool>{locations}</ShopPool>
+}
+
+export default ShopLocations

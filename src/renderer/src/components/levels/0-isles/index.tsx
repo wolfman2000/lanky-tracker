@@ -1,6 +1,5 @@
 import CompanyPool from '@renderer/components/pools/Company'
 import DropPool from '@renderer/components/pools/Drops'
-import ShopPool from '@renderer/components/pools/Shops'
 import { useCurrentBananaMedalCount } from '@renderer/hooks/consumables'
 import { useAnyKong } from '@renderer/hooks/kongs'
 import { useJetpacCount } from '@renderer/hooks/settings'
@@ -16,7 +15,7 @@ import DiddyBananas from './gold-bananas/DiddyBananas'
 import DkBananas from './gold-bananas/DkBananas'
 import LankyBananas from './gold-bananas/LankyBananas'
 import TinyBananas from './gold-bananas/TinyBananas'
-import IslesShops from './shops'
+import ShopLocations from './shops'
 
 const IsleChecks: React.FC = () => {
   const medals = useCurrentBananaMedalCount()
@@ -41,9 +40,7 @@ const IsleChecks: React.FC = () => {
           canGetLogic={anyKong && medals >= jetpacCount}
         />
       </CompanyPool>
-      <ShopPool>
-        <IslesShops />
-      </ShopPool>
+      <ShopLocations />
       <DropPool>
         <EnemyLocations />
       </DropPool>

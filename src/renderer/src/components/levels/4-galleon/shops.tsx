@@ -1,138 +1,88 @@
-import useDonkStore from '@renderer/store'
-import { useShallow } from 'zustand/react/shallow'
-import GalleonCheck from './GalleonCheck'
-import { useGalleonOutskirts, usePlayGalleon } from '@renderer/hooks/galleon'
+import ShopGenerator from '@renderer/components/pools/ShopGenerator'
+import ShopPool from '@renderer/components/pools/Shops'
+import {
+  useGalleonHighTide,
+  useGalleonLighthouseArea,
+  useGalleonOutskirts,
+  usePlayGalleon
+} from '@renderer/hooks/galleon'
+import { useShuffledShops } from '@renderer/hooks/settings'
 
-/**
- * Gather the list of shuffled shop item locations in Galleon.
- * @returns the shuffled shop locations in Galleon.
- */
-const GalleonShops: React.FC = () => {
-  const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
-    useShallow((state) => [
-      state.moves.dk,
-      state.moves.diddy,
-      state.moves.lanky,
-      state.moves.tiny,
-      state.moves.chunky
-    ])
-  )
-  const anyKong = dk || diddy || lanky || tiny || chunky
+const Vanilla: React.FC = () => {
   const inStage = usePlayGalleon()
   const outskirts = useGalleonOutskirts()
 
   return (
     <>
-      <GalleonCheck
-        id={4110}
-        name="Galleon Cranky Shared"
+      <ShopGenerator
+        baseId={4110}
+        baseName="Galleon Cranky"
+        level="Galleon"
         region="Galleon Shops"
-        canGetLogic={inStage && anyKong}
+        inLogic={inStage}
       />
-      <GalleonCheck
-        id={4111}
-        name="Galleon Cranky DK"
+      <ShopGenerator
+        baseId={4120}
+        baseName="Galleon Funky"
+        level="Galleon"
         region="Galleon Shops"
-        canGetLogic={inStage && dk}
+        inLogic={outskirts}
       />
-      <GalleonCheck
-        id={4112}
-        name="Galleon Cranky Diddy"
+      <ShopGenerator
+        baseId={4130}
+        baseName="Galleon Candy"
+        level="Galleon"
         region="Galleon Shops"
-        canGetLogic={inStage && diddy}
-      />
-      <GalleonCheck
-        id={4113}
-        name="Galleon Cranky Lanky"
-        region="Galleon Shops"
-        canGetLogic={inStage && lanky}
-      />
-      <GalleonCheck
-        id={4114}
-        name="Galleon Cranky Tiny"
-        region="Galleon Shops"
-        canGetLogic={inStage && tiny}
-      />
-      <GalleonCheck
-        id={4115}
-        name="Galleon Cranky Chunky"
-        region="Galleon Shops"
-        canGetLogic={inStage && chunky}
-      />
-      <GalleonCheck
-        id={4120}
-        name="Galleon Funky Shared"
-        region="Galleon Shops"
-        canGetLogic={outskirts && anyKong}
-      />
-      <GalleonCheck
-        id={4121}
-        name="Galleon Funky DK"
-        region="Galleon Shops"
-        canGetLogic={outskirts && dk}
-      />
-      <GalleonCheck
-        id={4122}
-        name="Galleon Funky Diddy"
-        region="Galleon Shops"
-        canGetLogic={outskirts && diddy}
-      />
-      <GalleonCheck
-        id={4123}
-        name="Galleon Funky Lanky"
-        region="Galleon Shops"
-        canGetLogic={outskirts && lanky}
-      />
-      <GalleonCheck
-        id={4124}
-        name="Galleon Funky Tiny"
-        region="Galleon Shops"
-        canGetLogic={outskirts && tiny}
-      />
-      <GalleonCheck
-        id={4125}
-        name="Galleon Funky Chunky"
-        region="Galleon Shops"
-        canGetLogic={outskirts && chunky}
-      />
-      <GalleonCheck
-        id={4130}
-        name="Galleon Candy Shared"
-        region="Galleon Shops"
-        canGetLogic={outskirts && anyKong}
-      />
-      <GalleonCheck
-        id={4131}
-        name="Galleon Candy DK"
-        region="Galleon Shops"
-        canGetLogic={outskirts && dk}
-      />
-      <GalleonCheck
-        id={4132}
-        name="Galleon Candy Diddy"
-        region="Galleon Shops"
-        canGetLogic={outskirts && diddy}
-      />
-      <GalleonCheck
-        id={4133}
-        name="Galleon Candy Lanky"
-        region="Galleon Shops"
-        canGetLogic={outskirts && lanky}
-      />
-      <GalleonCheck
-        id={4134}
-        name="Galleon Candy Tiny"
-        region="Galleon Shops"
-        canGetLogic={outskirts && tiny}
-      />
-      <GalleonCheck
-        id={4135}
-        name="Galleon Candy Chunky"
-        region="Galleon Shops"
-        canGetLogic={outskirts && chunky}
+        inLogic={outskirts}
       />
     </>
   )
 }
 
-export default GalleonShops
+const Shuffled: React.FC = () => {
+  const inStage = usePlayGalleon()
+  const outskirts = useGalleonOutskirts()
+  const lighthouseArea = useGalleonLighthouseArea()
+  const highTide = useGalleonHighTide()
+
+  return (
+    <>
+      <ShopGenerator
+        baseId={4140}
+        baseName="Galleon Cranky Location"
+        level="Galleon"
+        region="Galleon Shops"
+        inLogic={inStage}
+      />
+      <ShopGenerator
+        baseId={4150}
+        baseName="Galleon Funky Location"
+        level="Galleon"
+        region="Galleon Shops"
+        inLogic={outskirts}
+      />
+      <ShopGenerator
+        baseId={4160}
+        baseName="Galleon Candy Location"
+        level="Galleon"
+        region="Galleon Shops"
+        inLogic={outskirts}
+      />
+      <ShopGenerator
+        baseId={4170}
+        baseName="Galleon Snide Location"
+        level="Galleon"
+        region="Galleon Shops"
+        inLogic={lighthouseArea && highTide}
+        outLogic={lighthouseArea}
+      />
+    </>
+  )
+}
+
+const ShopLocations: React.FC = () => {
+  const locations = useShuffledShops() ? <Shuffled /> : <Vanilla />
+  return <ShopPool>{locations}</ShopPool>
+}
+
+export default ShopLocations

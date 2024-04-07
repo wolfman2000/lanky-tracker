@@ -1,152 +1,87 @@
+import ShopGenerator from '@renderer/components/pools/ShopGenerator'
+import ShopPool from '@renderer/components/pools/Shops'
 import { useAztecBack, useAztecFront } from '@renderer/hooks/aztec'
-import useDonkStore from '@renderer/store'
-import AztecCheck from './AztecCheck'
-import { useShallow } from 'zustand/react/shallow'
+import { useShuffledShops } from '@renderer/hooks/settings'
 
-const AztecShops: React.FC = () => {
-  const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
-    useShallow((state) => [
-      state.moves.dk,
-      state.moves.diddy,
-      state.moves.lanky,
-      state.moves.tiny,
-      state.moves.chunky
-    ])
-  )
+const Vanilla: React.FC = () => {
   const aztecFront = useAztecFront()
   const aztecBack = useAztecBack()
-  const anyKong = dk || diddy || lanky || tiny || chunky
 
   return (
     <>
-      <AztecCheck
-        id={2110}
-        name="Aztec Cranky Shared"
+      <ShopGenerator
+        baseId={2110}
+        baseName="Aztec Cranky"
+        level="Aztec"
         region="Aztec Shops"
-        canGetLogic={aztecBack.in && anyKong}
-        canGetBreak={aztecBack.out && anyKong}
+        inLogic={aztecBack.in}
+        outLogic={aztecBack.out}
       />
-      <AztecCheck
-        id={2111}
-        name="Aztec Cranky DK"
+      <ShopGenerator
+        baseId={2120}
+        baseName="Aztec Funky"
+        level="Aztec"
         region="Aztec Shops"
-        canGetLogic={aztecBack.in && dk}
-        canGetBreak={aztecBack.out && dk}
+        inLogic={aztecBack.in}
+        outLogic={aztecBack.out}
       />
-      <AztecCheck
-        id={2112}
-        name="Aztec Cranky Diddy"
+      <ShopGenerator
+        baseId={2130}
+        baseName="Aztec Candy"
+        level="Aztec"
         region="Aztec Shops"
-        canGetLogic={aztecBack.in && diddy}
-        canGetBreak={aztecBack.out && diddy}
-      />
-      <AztecCheck
-        id={2113}
-        name="Aztec Cranky Lanky"
-        region="Aztec Shops"
-        canGetLogic={aztecBack.in && lanky}
-        canGetBreak={aztecBack.out && lanky}
-      />
-      <AztecCheck
-        id={2114}
-        name="Aztec Cranky Tiny"
-        region="Aztec Shops"
-        canGetLogic={aztecBack.in && tiny}
-        canGetBreak={aztecBack.out && tiny}
-      />
-      <AztecCheck
-        id={2115}
-        name="Aztec Cranky Chunky"
-        region="Aztec Shops"
-        canGetLogic={aztecBack.in && chunky}
-        canGetBreak={aztecBack.out && chunky}
-      />
-      <AztecCheck
-        id={2120}
-        name="Aztec Funky Shared"
-        region="Aztec Shops"
-        canGetLogic={aztecBack.in && anyKong}
-        canGetBreak={aztecBack.out && anyKong}
-      />
-      <AztecCheck
-        id={2121}
-        name="Aztec Funky DK"
-        region="Aztec Shops"
-        canGetLogic={aztecBack.in && dk}
-        canGetBreak={aztecBack.out && dk}
-      />
-      <AztecCheck
-        id={2122}
-        name="Aztec Funky Diddy"
-        region="Aztec Shops"
-        canGetLogic={aztecBack.in && diddy}
-        canGetBreak={aztecBack.out && diddy}
-      />
-      <AztecCheck
-        id={2123}
-        name="Aztec Funky Lanky"
-        region="Aztec Shops"
-        canGetLogic={aztecBack.in && lanky}
-        canGetBreak={aztecBack.out && lanky}
-      />
-      <AztecCheck
-        id={2124}
-        name="Aztec Funky Tiny"
-        region="Aztec Shops"
-        canGetLogic={aztecBack.in && tiny}
-        canGetBreak={aztecBack.out && tiny}
-      />
-      <AztecCheck
-        id={2125}
-        name="Aztec Funky Chunky"
-        region="Aztec Shops"
-        canGetLogic={aztecBack.in && chunky}
-        canGetBreak={aztecBack.out && chunky}
-      />
-      <AztecCheck
-        id={2130}
-        name="Aztec Candy Shared"
-        region="Aztec Shops"
-        canGetLogic={aztecFront.in && anyKong}
-        canGetBreak={aztecFront.out && anyKong}
-      />
-      <AztecCheck
-        id={2131}
-        name="Aztec Candy DK"
-        region="Aztec Shops"
-        canGetLogic={aztecFront.in && dk}
-        canGetBreak={aztecFront.out && dk}
-      />
-      <AztecCheck
-        id={2132}
-        name="Aztec Candy Diddy"
-        region="Aztec Shops"
-        canGetLogic={aztecFront.in && diddy}
-        canGetBreak={aztecFront.out && diddy}
-      />
-      <AztecCheck
-        id={2133}
-        name="Aztec Candy Lanky"
-        region="Aztec Shops"
-        canGetLogic={aztecFront.in && lanky}
-        canGetBreak={aztecFront.out && lanky}
-      />
-      <AztecCheck
-        id={2134}
-        name="Aztec Candy Tiny"
-        region="Aztec Shops"
-        canGetLogic={aztecFront.in && tiny}
-        canGetBreak={aztecFront.out && tiny}
-      />
-      <AztecCheck
-        id={2135}
-        name="Aztec Candy Chunky"
-        region="Aztec Shops"
-        canGetLogic={aztecFront.in && chunky}
-        canGetBreak={aztecFront.out && chunky}
+        inLogic={aztecFront.in}
+        outLogic={aztecFront.out}
       />
     </>
   )
 }
 
-export default AztecShops
+const Shuffled: React.FC = () => {
+  const aztecFront = useAztecFront()
+  const aztecBack = useAztecBack()
+
+  return (
+    <>
+      <ShopGenerator
+        baseId={2140}
+        baseName="Aztec Cranky Location"
+        level="Aztec"
+        region="Aztec Shops"
+        inLogic={aztecBack.in}
+        outLogic={aztecBack.out}
+      />
+      <ShopGenerator
+        baseId={2150}
+        baseName="Aztec Funky Location"
+        level="Aztec"
+        region="Aztec Shops"
+        inLogic={aztecBack.in}
+        outLogic={aztecBack.out}
+      />
+      <ShopGenerator
+        baseId={2160}
+        baseName="Aztec Candy Location"
+        level="Aztec"
+        region="Aztec Shops"
+        inLogic={aztecFront.in}
+        outLogic={aztecFront.out}
+      />
+      <ShopGenerator
+        baseId={2170}
+        baseName="Aztec Snide Location"
+        level="Aztec"
+        region="Aztec Shops"
+        inLogic={aztecBack.in}
+        outLogic={aztecBack.out}
+      />
+    </>
+  )
+}
+
+const ShopLocations: React.FC = () => {
+  const locations = useShuffledShops() ? <Shuffled /> : <Vanilla />
+  return <ShopPool>{locations}</ShopPool>
+}
+
+export default ShopLocations

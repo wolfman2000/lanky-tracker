@@ -1,11 +1,13 @@
 import BananaMedalPool from '@renderer/components/pools/BananaMedals'
 import BossPool from '@renderer/components/pools/Bosses'
-import ShopPool from '@renderer/components/pools/Shops'
+import DropPool from '@renderer/components/pools/Drops'
 import { usePlayCastle } from '@renderer/hooks/castle'
 import { useAnyKong } from '@renderer/hooks/kongs'
+import ArenaLocations from './Arenas'
 import CastleCheck from './CastleCheck'
 import CrateLocations from './Crates'
 import DirtLocations from './Dirt'
+import EnemyLocations from './Enemies'
 import FairyLocations from './Fairies'
 import KasplatLocations from './Kasplats'
 import ChunkyBananas from './gold-bananas/ChunkyBananas'
@@ -19,9 +21,6 @@ import DkMedal from './medals/DkMedal'
 import LankyMedal from './medals/LankyMedal'
 import TinyMedal from './medals/TinyMedal'
 import CastleShops from './shops'
-import DropPool from '@renderer/components/pools/Drops'
-import EnemyLocations from './Enemies'
-import ArenaLocations from './Arenas'
 
 const CastleChecks: React.FC = () => {
   const inStage = usePlayCastle()
@@ -54,9 +53,7 @@ const CastleChecks: React.FC = () => {
           canGetLogic={inStage && anyKong}
         />
       </BossPool>
-      <ShopPool>
-        <CastleShops />
-      </ShopPool>
+      <CastleShops />
       <DropPool>
         <EnemyLocations />
       </DropPool>

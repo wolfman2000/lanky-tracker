@@ -1,134 +1,80 @@
+import ShopGenerator from '@renderer/components/pools/ShopGenerator'
+import ShopPool from '@renderer/components/pools/Shops'
 import { useFactoryTesting, usePlayFactory } from '@renderer/hooks/factory'
-import useDonkStore from '@renderer/store'
-import { useShallow } from 'zustand/react/shallow'
-import FactoryCheck from './FactoryCheck'
+import { useShuffledShops } from '@renderer/hooks/settings'
 
-const FactoryShops: React.FC = () => {
-  const [dk, diddy, lanky, tiny, chunky] = useDonkStore(
-    useShallow((state) => [
-      state.moves.dk,
-      state.moves.diddy,
-      state.moves.lanky,
-      state.moves.tiny,
-      state.moves.chunky
-    ])
-  )
-  const anyKong = dk || diddy || lanky || tiny || chunky
+const Vanilla: React.FC = () => {
   const inStage = usePlayFactory()
   const testing = useFactoryTesting()
 
   return (
     <>
-      <FactoryCheck
-        id={3110}
-        name="Factory Cranky Shared"
+      <ShopGenerator
+        baseId={3110}
+        baseName="Factory Cranky"
+        level="Factory"
         region="Factory Shops"
-        canGetLogic={inStage && anyKong}
+        inLogic={inStage}
       />
-      <FactoryCheck
-        id={3111}
-        name="Factory Cranky DK"
+      <ShopGenerator
+        baseId={3120}
+        baseName="Factory Funky"
+        level="Factory"
         region="Factory Shops"
-        canGetLogic={inStage && dk}
+        inLogic={testing}
       />
-      <FactoryCheck
-        id={3112}
-        name="Factory Cranky Diddy"
+      <ShopGenerator
+        baseId={3130}
+        baseName="Factory Candy"
+        level="Factory"
         region="Factory Shops"
-        canGetLogic={inStage && diddy}
-      />
-      <FactoryCheck
-        id={3113}
-        name="Factory Cranky Lanky"
-        region="Factory Shops"
-        canGetLogic={inStage && lanky}
-      />
-      <FactoryCheck
-        id={3114}
-        name="Factory Cranky Tiny"
-        region="Factory Shops"
-        canGetLogic={inStage && tiny}
-      />
-      <FactoryCheck
-        id={3115}
-        name="Factory Cranky Chunky"
-        region="Factory Shops"
-        canGetLogic={inStage && chunky}
-      />
-      <FactoryCheck
-        id={3120}
-        name="Factory Funky Shared"
-        region="Factory Shops"
-        canGetLogic={testing && anyKong}
-      />
-      <FactoryCheck
-        id={3121}
-        name="Factory Funky DK"
-        region="Factory Shops"
-        canGetLogic={testing && dk}
-      />
-      <FactoryCheck
-        id={3122}
-        name="Factory Funky Diddy"
-        region="Factory Shops"
-        canGetLogic={testing && diddy}
-      />
-      <FactoryCheck
-        id={3123}
-        name="Factory Funky Lanky"
-        region="Factory Shops"
-        canGetLogic={testing && lanky}
-      />
-      <FactoryCheck
-        id={3124}
-        name="Factory Funky Tiny"
-        region="Factory Shops"
-        canGetLogic={testing && tiny}
-      />
-      <FactoryCheck
-        id={3125}
-        name="Factory Funky Chunky"
-        region="Factory Shops"
-        canGetLogic={testing && chunky}
-      />
-      <FactoryCheck
-        id={3130}
-        name="Factory Candy Shared"
-        region="Factory Shops"
-        canGetLogic={inStage && anyKong}
-      />
-      <FactoryCheck
-        id={3131}
-        name="Factory Candy DK"
-        region="Factory Shops"
-        canGetLogic={inStage && dk}
-      />
-      <FactoryCheck
-        id={3132}
-        name="Factory Candy Diddy"
-        region="Factory Shops"
-        canGetLogic={inStage && diddy}
-      />
-      <FactoryCheck
-        id={3133}
-        name="Factory Candy Lanky"
-        region="Factory Shops"
-        canGetLogic={inStage && lanky}
-      />
-      <FactoryCheck
-        id={3134}
-        name="Factory Candy Tiny"
-        region="Factory Shops"
-        canGetLogic={inStage && tiny}
-      />
-      <FactoryCheck
-        id={3135}
-        name="Factory Candy Chunky"
-        region="Factory Shops"
-        canGetLogic={inStage && chunky}
+        inLogic={inStage}
       />
     </>
   )
 }
 
-export default FactoryShops
+const Shuffled: React.FC = () => {
+  const inStage = usePlayFactory()
+  const testing = useFactoryTesting()
+
+  return (
+    <>
+      <ShopGenerator
+        baseId={3140}
+        baseName="Factory Cranky Location"
+        level="Factory"
+        region="Factory Shops"
+        inLogic={inStage}
+      />
+      <ShopGenerator
+        baseId={3150}
+        baseName="Factory Funky Location"
+        level="Factory"
+        region="Factory Shops"
+        inLogic={testing}
+      />
+      <ShopGenerator
+        baseId={3160}
+        baseName="Factory Candy Location"
+        level="Factory"
+        region="Factory Shops"
+        inLogic={inStage}
+      />
+      <ShopGenerator
+        baseId={3170}
+        baseName="Factory Snide Location"
+        level="Factory"
+        region="Factory Shops"
+        inLogic={testing}
+      />
+    </>
+  )
+}
+
+const ShopLocations: React.FC = () => {
+  const locations = useShuffledShops() ? <Shuffled /> : <Vanilla />
+  return <ShopPool>{locations}</ShopPool>
+}
+
+export default ShopLocations
