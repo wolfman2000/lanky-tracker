@@ -100,6 +100,27 @@ main > article:last-child {
   height: 24px;
 }
 
+.ending {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.ending > div {
+  font-size: larger;
+  margin: 0 auto;
+  text-align: center;
+}
+.ending > div > span:first-child::after {
+  content: " ";
+}
+.ending > section {
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+.ending > section:last-child > img {
+  margin-left: auto;
+}
+
 .count-icon,
 .slam-icon,
 .double-icon,
@@ -221,15 +242,18 @@ main .grid {
   text-decoration: none;
 }
 
-.grid > :not(.checked) > .not-available {
+.grid > :not(.checked) > .not-available,
+.ending .not-available {
   color: red;
 }
 
-.grid > :not(.checked) > .logic-break {
+.grid > :not(.checked) > .logic-break,
+.ending .logic-break {
   color: yellow;
 }
 
-.grid > :not(.checked) > .available {
+.grid > :not(.checked) > .available,
+.ending .available {
   color: cyan;
 }
 

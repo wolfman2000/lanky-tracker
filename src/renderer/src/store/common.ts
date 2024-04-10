@@ -5,7 +5,7 @@ type Enumerate<N extends number, Acc extends number[] = []> = Acc['length'] exte
 
 type IntRange<F extends number, T extends number> = Exclude<Enumerate<T>, Enumerate<F>>
 
-type PearlRange = IntRange<0, 6>
+export type PearlRange = IntRange<0, 6>
 type BlueprintRange = IntRange<0, 9>
 type CrownRange = IntRange<0, 11>
 type FairyRange = IntRange<0, 21>
@@ -663,6 +663,29 @@ interface HintActions {
 export type HintSlice = HintState & HintActions
 //#endregion
 
+//#region Ending
+
+export interface EndingState {
+  helm1: PearlRange
+  helm2: PearlRange
+  helm3: PearlRange
+  helm4: PearlRange
+  helm5: PearlRange
+  rool1: PearlRange
+  rool2: PearlRange
+  rool3: PearlRange
+  rool4: PearlRange
+  rool5: PearlRange
+}
+
+interface EndingActions {
+  setEnd: (id: keyof EndingState, val: PearlRange) => void
+}
+
+export type EndingSlice = EndingState & EndingActions
+
+//#endregion
+
 //#region Presets
 export type Preset =
   | 'beginner'
@@ -792,7 +815,8 @@ export type AllSlice = CheckSlice &
   LevelSlice &
   HintSlice &
   FastCheckSlice &
-  PresetSlice
+  PresetSlice &
+  EndingSlice
 
 export const donkResetFns = new Set<() => void>()
 

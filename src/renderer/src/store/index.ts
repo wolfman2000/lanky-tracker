@@ -13,6 +13,7 @@ import moveSlice from './moves'
 import presetSlice from './presets'
 import settingSlice from './settings'
 import switchSlice from './switchsanities'
+import endingSlice from './ending'
 
 const initializer: StateCreator<AllSlice, [['zustand/persist', unknown]], []> = (...d) => ({
   ...coreSlice(...d),
@@ -24,7 +25,8 @@ const initializer: StateCreator<AllSlice, [['zustand/persist', unknown]], []> = 
   ...switchSlice(...d),
   ...barrierSlice(...d),
   ...fastCheckSlice(...d),
-  ...presetSlice(...d)
+  ...presetSlice(...d),
+  ...endingSlice(...d)
 })
 
 /**
