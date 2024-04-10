@@ -160,6 +160,15 @@ export const useAnyMusic = (): boolean => {
   return dk || diddy || lanky || tiny || chunky
 }
 
+export const useAllMusic = (): boolean => {
+  const dk = useBongos()
+  const diddy = useGuitar()
+  const lanky = useTrombone()
+  const tiny = useSax()
+  const chunky = useTriangle()
+  return dk && diddy && lanky && tiny && chunky
+}
+
 export const useGrab = (): boolean => {
   const kong = useDk()
   const move = useDonkStore((state) => state.moves.grab)
