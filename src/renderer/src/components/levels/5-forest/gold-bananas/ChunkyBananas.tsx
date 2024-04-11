@@ -1,31 +1,14 @@
 import ToughGoldenBanana from '@renderer/components/pools/ToughGoldenBanana'
-import { useForestBean, useForestDay, usePlayForest, useSlamForest } from '@renderer/hooks/forest'
 import {
-  useBoulderTech,
-  useChunky,
-  useGrab,
-  useHunky,
-  usePineapple,
-  usePunch,
-  useSlam,
-  useTriangle
-} from '@renderer/hooks/kongs'
-import { logicBreak } from '@renderer/hooks/world'
+  useChunkyAppleGb,
+  useChunkyFaceGb,
+  useChunkyMillGb,
+  useChunkyMineGb
+} from '@renderer/hooks/forest'
 import ForestCheck from '../ForestCheck'
 
 const ChunkyBananas: React.FC = () => {
-  const inStage = usePlayForest()
-  const canSlam = useSlamForest()
-  const beanstalk = useForestBean()
-  const day = useForestDay()
-  const slam = useSlam()
-  const chunky = useChunky()
-  const pineapple = usePineapple()
-  const boulderTech = useBoulderTech()
-  const triangle = useTriangle()
-  const punch = usePunch()
-  const grab = useGrab()
-  const hunky = useHunky()
+  const millGb = useChunkyMillGb()
   return (
     <>
       <ToughGoldenBanana>
@@ -33,27 +16,27 @@ const ChunkyBananas: React.FC = () => {
           id={5040}
           name="Forest Chunky Minecarts"
           region="Forest Center And Beanstalk"
-          canGetLogic={inStage && chunky && slam}
+          canGetLogic={useChunkyMineGb()}
         />
       </ToughGoldenBanana>
       <ForestCheck
         id={5041}
         name="Forest Chunky Face Puzzle"
         region="Giant Mushroom Insides"
-        canGetLogic={inStage && canSlam && pineapple}
+        canGetLogic={useChunkyFaceGb()}
       />
       <ForestCheck
         id={5042}
         name="Forest Chunky Kegs"
         region="Forest Mills"
-        canGetLogic={inStage && day.in && boulderTech && punch && triangle && grab}
-        canGetBreak={inStage && logicBreak(day) && boulderTech && punch && triangle}
+        canGetLogic={millGb.in}
+        canGetBreak={millGb.out}
       />
       <ForestCheck
         id={5043}
         name="Forest Chunky Apple"
         region="Forest Center And Beanstalk"
-        canGetLogic={beanstalk && boulderTech && hunky}
+        canGetLogic={useChunkyAppleGb()}
       />
     </>
   )

@@ -2,7 +2,7 @@ import { act, renderHook } from '@testing-library/react'
 
 import useDonkStore from '@renderer/store'
 import { resetAllSlices } from '@renderer/store/common'
-import { useAztecBack, useAztecFront, useAztecShuffledFairyLogic } from '.'
+import { useAztecBack, useAztecFront, useGeneralFairy } from '.'
 import { logicBreak } from '../world'
 
 beforeEach(() => {
@@ -93,14 +93,14 @@ describe('The fairies in Aztec', () => {
       act(() => store.current.setSetting('shuffleFairies', true))
     })
     it('require the camera no matter what.', () => {
-      const { result: check } = renderHook(() => useAztecShuffledFairyLogic())
+      const { result: check } = renderHook(() => useGeneralFairy())
       expect(check.current.in).toBeFalsy()
       expect(check.current.out).toBeFalsy()
     })
     it('can be captured out of logic with a camera.', () => {
       const { result: store } = renderHook(() => useDonkStore())
       act(() => store.current.setMove('camera', true))
-      const { result: check } = renderHook(() => useAztecShuffledFairyLogic())
+      const { result: check } = renderHook(() => useGeneralFairy())
       expect(check.current.in).toBeFalsy()
       expect(check.current.out).toBeTruthy()
     })
@@ -108,7 +108,7 @@ describe('The fairies in Aztec', () => {
       const { result: store } = renderHook(() => useDonkStore())
       act(() => store.current.setMove('camera', true))
       act(() => store.current.setMove('vine', true))
-      const { result: check } = renderHook(() => useAztecShuffledFairyLogic())
+      const { result: check } = renderHook(() => useGeneralFairy())
       expect(check.current.in).toBeTruthy()
       expect(check.current.out).toBeTruthy()
     })

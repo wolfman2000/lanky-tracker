@@ -1,31 +1,29 @@
-import { useCavesDiddyCabinGauntlet, useCavesIgloo, usePlayCaves } from '@renderer/hooks/caves'
-import { useBarrel, useDk, useGuitar, useRocket, useSpring, useTwirl } from '@renderer/hooks/kongs'
+import {
+  useDiddyCandleGb,
+  useDiddyGauntletGb,
+  useDiddyIglooGb,
+  useDiddyWaterfallGb
+} from '@renderer/hooks/caves'
 import CavesCheck from '../CavesCheck'
 
 const DiddyBananas: React.FC = () => {
-  const inStage = usePlayCaves()
-  const igloo = useCavesIgloo()
-  const cabinGauntlet = useCavesDiddyCabinGauntlet()
-  const rocket = useRocket()
-  const guitar = useGuitar()
-  const spring = useSpring()
-  const barrel = useBarrel()
-  const twirl = useTwirl()
-  const dk = useDk()
+  const cabinGauntlet = useDiddyGauntletGb()
+  const waterfallGb = useDiddyWaterfallGb()
+  const candleGb = useDiddyCandleGb()
   return (
     <>
       <CavesCheck
         id={6010}
         name="Caves Diddy Waterfall"
         region="Main Caves Area"
-        canGetLogic={inStage && rocket}
-        canGetBreak={inStage && (dk || twirl)}
+        canGetLogic={waterfallGb.in}
+        canGetBreak={waterfallGb.out}
       />
       <CavesCheck
         id={6011}
         name="Caves Diddy 5 Door Igloo"
         region="Igloo Area"
-        canGetLogic={igloo && guitar && barrel}
+        canGetLogic={useDiddyIglooGb()}
       />
       <CavesCheck
         id={6012}
@@ -38,8 +36,8 @@ const DiddyBananas: React.FC = () => {
         id={6013}
         name="Caves Diddy 5 Door Cabin Upper"
         region="Cabins Area"
-        canGetLogic={inStage && guitar && rocket && spring}
-        canGetBreak={inStage && guitar && rocket}
+        canGetLogic={candleGb.in}
+        canGetBreak={candleGb.out}
       />
     </>
   )

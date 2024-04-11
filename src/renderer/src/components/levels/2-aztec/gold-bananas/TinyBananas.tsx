@@ -1,56 +1,48 @@
 import ToughGoldenBanana from '@renderer/components/pools/ToughGoldenBanana'
 import {
-  useAztec5DoorTemple,
-  useAztecBack,
-  useAztecLlamaLava,
-  useAztecTinyTemple
+  useTiny5DoorGb,
+  useTinyBeetleGb,
+  useTinyKlaptrapGb,
+  useTinyLavaGb
 } from '@renderer/hooks/aztec'
-import { useCharge, useDive, useFeather, useMini, useRocket, useSax } from '@renderer/hooks/kongs'
-import { logicBreak } from '@renderer/hooks/world'
 import AztecCheck from '../AztecCheck'
 
 const TinyBananas: React.FC = () => {
-  const templeTiny = useAztecTinyTemple()
-  const aztec5Door = useAztec5DoorTemple()
-  const aztecBack = useAztecBack()
-  const mini = useMini()
-  const sax = useSax()
-  const feather = useFeather()
-  const dive = useDive()
-  const charge = useCharge()
-  const rocket = useRocket()
-  const lava = useAztecLlamaLava()
+  const klaptrapGb = useTinyKlaptrapGb()
+  const doorGb = useTiny5DoorGb()
+  const beetleGb = useTinyBeetleGb()
+  const lavaGb = useTinyLavaGb()
   return (
     <>
       <AztecCheck
         id={2030}
         name="Aztec Tiny Klaptrap Room"
         region="Tiny Temple"
-        canGetLogic={templeTiny.in && mini && dive}
-        canGetBreak={logicBreak(templeTiny) && mini && dive}
+        canGetLogic={klaptrapGb.in}
+        canGetBreak={klaptrapGb.out}
       />
       <AztecCheck
         id={2031}
         name="Aztec Tiny 5 Door Temple"
         region="5 Door Temple"
-        canGetLogic={aztec5Door.in && feather}
-        canGetBreak={logicBreak(aztec5Door) && feather}
+        canGetLogic={doorGb.in}
+        canGetBreak={doorGb.out}
       />
       <ToughGoldenBanana>
         <AztecCheck
           id={2032}
           name="Aztec Tiny Beetle Race"
           region="Aztec Oasis And Totem Area"
-          canGetLogic={aztecBack.in && charge && rocket && mini && sax}
-          canGetBreak={logicBreak(aztecBack) && charge && rocket && mini && sax}
+          canGetLogic={beetleGb.in}
+          canGetBreak={beetleGb.out}
         />
       </ToughGoldenBanana>
       <AztecCheck
         id={2033}
         name="Aztec Tiny Llama Temple"
         region="Llama Temple"
-        canGetLogic={lava.in}
-        canGetBreak={logicBreak(lava)}
+        canGetLogic={lavaGb.in}
+        canGetBreak={lavaGb.out}
       />
     </>
   )

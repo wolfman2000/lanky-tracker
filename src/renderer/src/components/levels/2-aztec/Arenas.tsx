@@ -1,39 +1,26 @@
 import ArenaPool from '@renderer/components/pools/Arenas'
-import { useAztecFront, useAztecTinyTemple, useSlamAztec } from '@renderer/hooks/aztec'
-import { useAnyGun, useAnyKong, useDive, useGrape, useLanky } from '@renderer/hooks/kongs'
+import { useGeneralThing, useLankyVultureGb } from '@renderer/hooks/aztec'
 import { useShuffledArenas } from '@renderer/hooks/settings'
-import { logicBreak } from '@renderer/hooks/world'
 import AztecCheck from './AztecCheck'
 
 const Vanilla: React.FC = () => {
-  const templeTiny = useAztecTinyTemple()
-  const dive = useDive()
-  const canSlam = useSlamAztec()
-  const lanky = useLanky()
-  const grape = useGrape()
-  const anyGun = useAnyGun()
+  const vulture = useLankyVultureGb()
   return (
     <AztecCheck
       id={2090}
       name="Aztec Arena"
       region="Tiny Temple"
-      canGetLogic={templeTiny.in && dive && canSlam && lanky && grape}
-      canGetBreak={logicBreak(templeTiny) && dive && canSlam && lanky && anyGun}
+      canGetLogic={vulture.in}
+      canGetBreak={vulture.out}
     />
   )
 }
 
 const Shuffled: React.FC = () => {
-  const inStage = useAztecFront()
-  const anyKong = useAnyKong()
+  const thing = useGeneralThing()
   return (
     <>
-      <AztecCheck
-        id={2190}
-        name="Aztec Arena"
-        canGetLogic={inStage.in && anyKong}
-        canGetBreak={inStage.out && anyKong}
-      />
+      <AztecCheck id={2190} name="Aztec Arena" canGetLogic={thing.in} canGetBreak={thing.out} />
     </>
   )
 }

@@ -1,50 +1,39 @@
 import {
-  useGalleonCannon,
-  useGalleonHighTide,
-  useGalleonLighthouseArea,
-  useGalleonOutskirts,
-  usePlayGalleon
+  useChunky5DoorShipGb,
+  useChunkyCannonGb,
+  useChunkyChestGb,
+  useChunkySeasickGb
 } from '@renderer/hooks/galleon'
-import { useBoulderTech, useDive, usePunch, useSlam, useTriangle } from '@renderer/hooks/kongs'
 import GalleonCheck from '../GalleonCheck'
 
 const ChunkyBananas: React.FC = () => {
-  const inStage = usePlayGalleon()
-  const lighthouseArea = useGalleonLighthouseArea()
-  const outskirts = useGalleonOutskirts()
-  const highTide = useGalleonHighTide()
-  const cannon = useGalleonCannon()
-  const boulderTech = useBoulderTech()
-  const punch = usePunch()
-  const triangle = useTriangle()
-  const slam = useSlam()
-  const dive = useDive()
+  const cannonGb = useChunkyCannonGb()
   return (
     <>
       <GalleonCheck
         id={4040}
         name="Galleon Chunky Chest"
         region="Galleon Caverns"
-        canGetLogic={inStage && punch}
+        canGetLogic={useChunkyChestGb()}
       />
       <GalleonCheck
         id={4041}
         name="Galleon Chunky Cannon Game"
         region="Galleon Caverns"
-        canGetLogic={cannon && boulderTech && highTide}
-        canGetBreak={cannon && boulderTech}
+        canGetLogic={cannonGb.in}
+        canGetBreak={cannonGb.out}
       />
       <GalleonCheck
         id={4042}
         name="Galleon Chunky Seasick"
         region="Lighthouse Area"
-        canGetLogic={lighthouseArea && punch && slam}
+        canGetLogic={useChunkySeasickGb()}
       />
       <GalleonCheck
         id={4043}
         name="Galleon Chunky 5 Door Ship"
         region="5 Door Ship"
-        canGetLogic={lighthouseArea && outskirts && dive && triangle}
+        canGetLogic={useChunky5DoorShipGb()}
       />
     </>
   )

@@ -3,25 +3,12 @@ import { useShuffleColoredBananas } from '@renderer/hooks/settings'
 import { useJapesKongGates, useJapesRambi, useJapesSideArea, usePlayJapes, useSlamJapes } from '..'
 
 const useDiddyMedalCommonLogic = (): number => {
-  const inStage = usePlayJapes()
   const haveRambiCage = useJapesRambi()
   const sideArea = useJapesSideArea()
   const canSlam = useSlamJapes()
-  const kong = useDiddy()
   const gun = usePeanut()
   const dive = useDive()
   const kongGates = useJapesKongGates()
-  const shuffleBananas = useShuffleColoredBananas()
-
-  if (!inStage) {
-    return 0
-  }
-  if (!kong) {
-    return 0
-  }
-  if (shuffleBananas) {
-    return 100
-  }
 
   let bananas = 32 // start (5), tree bunches (20), around mine (7)
   if (dive) {
@@ -74,9 +61,22 @@ export const useDiddyMedalInLogic = (): number => {
 }
 
 export const useDiddyMedalOutLogic = (): number => {
+  const inStage = usePlayJapes()
+  const kong = useDiddy()
   const gun = usePeanut()
   const highGrab = useHighGrab()
+  const shuffleBananas = useShuffleColoredBananas()
   let bananas = useDiddyMedalCommonLogic()
+
+  if (!inStage) {
+    return 0
+  }
+  if (!kong) {
+    return 0
+  }
+  if (shuffleBananas) {
+    return 100
+  }
 
   if (gun && highGrab) {
     bananas += 5 // sequence break

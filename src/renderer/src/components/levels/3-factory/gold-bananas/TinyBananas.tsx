@@ -1,47 +1,39 @@
 import {
-  useFactoryProductionEnabled,
-  useFactoryTesting,
-  usePlayFactory,
-  useSlamFactory
+  useTinyArcadeGb,
+  useTinyDartGb,
+  useTinyProductionGb,
+  useTinyRaceGb
 } from '@renderer/hooks/factory'
-import { useDk, useFeather, useMini, useTwirl } from '@renderer/hooks/kongs'
 import FactoryCheck from '../FactoryCheck'
 
 const TinyBananas: React.FC = () => {
-  const inStage = usePlayFactory()
-  const testing = useFactoryTesting()
-  const production = useFactoryProductionEnabled()
-  const canSlam = useSlamFactory()
-  const mini = useMini()
-  const feather = useFeather()
-  const twirl = useTwirl()
-  const dk = useDk()
+  const prodGb = useTinyProductionGb()
   return (
     <>
       <FactoryCheck
         id={3030}
         name="Factory Tiny Dartboard"
         region="Testing Area"
-        canGetLogic={testing && mini && feather && canSlam}
+        canGetLogic={useTinyDartGb()}
       />
       <FactoryCheck
         id={3031}
         name="Factory Tiny Car Race"
         region="R&D Area"
-        canGetLogic={testing && mini}
+        canGetLogic={useTinyRaceGb()}
       />
       <FactoryCheck
         id={3032}
         name="Factory Tiny by Arcade"
         region="Storage And Arcade"
-        canGetLogic={inStage && mini}
+        canGetLogic={useTinyArcadeGb()}
       />
       <FactoryCheck
         id={3033}
         name="Factory Tiny Production Room"
         region="Production Room"
-        canGetLogic={production && canSlam && twirl}
-        canGetBreak={production && (twirl || dk)}
+        canGetLogic={prodGb.in}
+        canGetBreak={prodGb.out}
       />
     </>
   )

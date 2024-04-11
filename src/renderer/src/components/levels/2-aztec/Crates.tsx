@@ -1,14 +1,18 @@
 import CratePool from '@renderer/components/pools/Crates'
-import { useAztecBack, useAztecFront, useAztecLlamaTemple } from '@renderer/hooks/aztec'
-import { useAnyKong, useRocket } from '@renderer/hooks/kongs'
+import {
+  useAztecBack,
+  useGeneralThing,
+  useLlamaCrate,
+  useLlamaOutsideCrate
+} from '@renderer/hooks/aztec'
 import { useShuffleCrates } from '@renderer/hooks/settings'
 import { logicBreak } from '@renderer/hooks/world'
 import AztecCheck from './AztecCheck'
 
 const Vanilla: React.FC = () => {
-  const llama = useAztecLlamaTemple()
+  const llama = useLlamaCrate()
   const aztecBack = useAztecBack()
-  const rocket = useRocket()
+  const outside = useLlamaOutsideCrate()
   return (
     <>
       <AztecCheck
@@ -22,8 +26,8 @@ const Vanilla: React.FC = () => {
         id={2061}
         name="Aztec Crate Llama Exterior"
         region="Aztec Oasis And Totem Area"
-        canGetLogic={aztecBack.in && rocket}
-        canGetBreak={logicBreak(aztecBack) && rocket}
+        canGetLogic={outside.in}
+        canGetBreak={outside.out}
       />
       <AztecCheck
         id={2062}
@@ -37,22 +41,20 @@ const Vanilla: React.FC = () => {
 }
 
 const Shuffled: React.FC = () => {
-  const anyKong = useAnyKong()
-  const inStage = useAztecFront()
-
+  const thing = useGeneralThing()
   return (
     <>
       <AztecCheck
         id={2260}
         name="Aztec Crate Location #1 (maybe)"
-        canGetLogic={inStage.in && anyKong}
-        canGetBreak={logicBreak(inStage) && anyKong}
+        canGetLogic={thing.in}
+        canGetBreak={thing.out}
       />
       <AztecCheck
         id={2261}
         name="Aztec Crate Location #2 (maybe)"
-        canGetLogic={inStage.in && anyKong}
-        canGetBreak={logicBreak(inStage) && anyKong}
+        canGetLogic={thing.in}
+        canGetBreak={thing.out}
       />
     </>
   )

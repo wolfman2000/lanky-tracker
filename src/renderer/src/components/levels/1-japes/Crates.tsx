@@ -1,47 +1,32 @@
 import CratePool from '@renderer/components/pools/Crates'
-import { useJapesRambi, usePlayJapes } from '@renderer/hooks/japes'
-import { useAnyKong } from '@renderer/hooks/kongs'
+import { useArena, useRambiCrate } from '@renderer/hooks/japes'
 import { useShuffleCrates } from '@renderer/hooks/settings'
 import JapesCheck from './JapesCheck'
 
 const Vanilla: React.FC = () => {
-  const inStage = usePlayJapes()
-  const anyKong = useAnyKong()
-  const japesRambi = useJapesRambi()
   return (
     <>
       <JapesCheck
         id={1060}
         name="Japes Crate Mountain"
         region="Japes Hillside"
-        canGetLogic={inStage && anyKong}
+        canGetLogic={useArena()}
       />
       <JapesCheck
         id={1061}
         name="Japes Crate Rambi"
         region="Stormy Tunnel Area"
-        canGetLogic={japesRambi && anyKong}
+        canGetLogic={useRambiCrate()}
       />
     </>
   )
 }
 
 const Shuffled: React.FC = () => {
-  const anyKong = useAnyKong()
-  const inStage = usePlayJapes()
-
   return (
     <>
-      <JapesCheck
-        id={1260}
-        name="Japes Crate Location #1 (maybe)"
-        canGetLogic={inStage && anyKong}
-      />
-      <JapesCheck
-        id={1261}
-        name="Japes Crate Location #2 (maybe)"
-        canGetLogic={inStage && anyKong}
-      />
+      <JapesCheck id={1260} name="Japes Crate Location #1 (maybe)" canGetLogic={useArena()} />
+      <JapesCheck id={1261} name="Japes Crate Location #2 (maybe)" canGetLogic={useArena()} />
     </>
   )
 }

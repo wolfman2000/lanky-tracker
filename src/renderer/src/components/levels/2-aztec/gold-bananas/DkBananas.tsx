@@ -1,51 +1,40 @@
-import {
-  useAztec5DoorTemple,
-  useAztecBack,
-  useAztecBackTunnel,
-  useAztecLlamaTemple
-} from '@renderer/hooks/aztec'
-import { useBlast, useCoconut, useDive, useStrong } from '@renderer/hooks/kongs'
-import { logicBreak } from '@renderer/hooks/world'
+import { useDk5DoorGb, useDkBlastGb, useDkFreeLankyGb, useDkTunnelGb } from '@renderer/hooks/aztec'
 import AztecCheck from '../AztecCheck'
 
 const DkBananas: React.FC = () => {
-  const aztecBack = useAztecBack()
-  const aztecTunnel = useAztecBackTunnel()
-  const aztec5Door = useAztec5DoorTemple()
-  const llama = useAztecLlamaTemple()
-  const dive = useDive()
-  const strong = useStrong()
-  const coconut = useCoconut()
-  const blast = useBlast()
+  const blastGb = useDkBlastGb()
+  const tunnelGb = useDkTunnelGb()
+  const doorGb = useDk5DoorGb()
+  const freeGb = useDkFreeLankyGb()
   return (
     <>
       <AztecCheck
         id={2001}
         name="Aztec DK Free Llama"
         region="Aztec Oasis And Totem Area"
-        canGetLogic={aztecBack.in && blast}
-        canGetBreak={logicBreak(aztecBack) && blast}
+        canGetLogic={blastGb.in}
+        canGetBreak={blastGb.out}
       />
       <AztecCheck
         id={2002}
         name="Aztec DK Quicksand Cave"
         region="Various Aztec Tunnels"
-        canGetLogic={aztecTunnel.in && strong}
-        canGetBreak={logicBreak(aztecTunnel)}
+        canGetLogic={tunnelGb.in}
+        canGetBreak={tunnelGb.out}
       />
       <AztecCheck
         id={2003}
         name="Aztec DK 5 Door Temple"
         region="5 Door Temple"
-        canGetLogic={aztec5Door.in && coconut}
-        canGetBreak={logicBreak(aztec5Door) && coconut}
+        canGetLogic={doorGb.in}
+        canGetBreak={doorGb.out}
       />
       <AztecCheck
         id={2004}
         name="Aztec DK Free Lanky"
         region="Llama Temple"
-        canGetLogic={llama.in && dive}
-        canGetBreak={logicBreak(llama) && dive}
+        canGetLogic={freeGb.in}
+        canGetBreak={freeGb.out}
       />
     </>
   )

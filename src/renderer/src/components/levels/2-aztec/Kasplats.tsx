@@ -1,47 +1,37 @@
 import KasplatPool from '@renderer/components/pools/Kasplats'
 import {
-  useAztec5DoorTemple,
   useAztecBack,
-  useAztecFront,
-  useAztecLlamaLava
+  useAztecLlamaLava,
+  useChunky5DoorGb,
+  useCoconutKasplat,
+  useGeneralThing,
+  useOasisKasplat
 } from '@renderer/hooks/aztec'
-import {
-  useAnyKong,
-  useCoconut,
-  usePineapple,
-  useRocket,
-  useStrong,
-  useTwirl
-} from '@renderer/hooks/kongs'
 import { useShuffleKasplats } from '@renderer/hooks/settings'
 import { logicBreak } from '@renderer/hooks/world'
 import AztecCheck from './AztecCheck'
 
 const Vanilla: React.FC = () => {
-  const aztecFront = useAztecFront()
   const aztecBack = useAztecBack()
   const lava = useAztecLlamaLava()
-  const aztec5Door = useAztec5DoorTemple()
-  const strong = useStrong()
-  const twirl = useTwirl()
-  const coconut = useCoconut()
-  const rocket = useRocket()
-  const pineapple = usePineapple()
+  const coconut = useCoconutKasplat()
+  const chunky = useChunky5DoorGb()
+  const oasis = useOasisKasplat()
   return (
     <>
       <AztecCheck
         id={2050}
         name="Aztec Kasplat Behind DK Stone Door"
         region="Various Aztec Tunnels"
-        canGetLogic={aztecFront.in && coconut && (strong || twirl)}
-        canGetBreak={aztecFront.out && coconut}
+        canGetLogic={coconut.in}
+        canGetBreak={coconut.out}
       />
       <AztecCheck
         id={2051}
         name="Aztec Kasplat On Tiny Temple"
         region="Aztec Oasis And Totem Area"
-        canGetLogic={aztecFront.in && rocket}
-        canGetBreak={aztecFront.out && rocket}
+        canGetLogic={oasis.in}
+        canGetBreak={oasis.out}
       />
       <AztecCheck
         id={2052}
@@ -61,48 +51,47 @@ const Vanilla: React.FC = () => {
         id={2054}
         name="Aztec Kasplat Chunky 5-Door Temple"
         region="5 Door Temple"
-        canGetLogic={aztec5Door.in && pineapple}
-        canGetBreak={aztec5Door.out && pineapple}
+        canGetLogic={chunky.in}
+        canGetBreak={chunky.out}
       />
     </>
   )
 }
 
 const Shuffled: React.FC = () => {
-  const anyKong = useAnyKong()
-  const inStage = useAztecFront()
+  const thing = useGeneralThing()
 
   return (
     <>
       <AztecCheck
         id={2250}
         name="Aztec Kasplat Location #1"
-        canGetLogic={inStage.in && anyKong}
-        canGetBreak={logicBreak(inStage) && anyKong}
+        canGetLogic={thing.in}
+        canGetBreak={thing.out}
       />
       <AztecCheck
         id={2251}
         name="Aztec Kasplat Location #2"
-        canGetLogic={inStage.in && anyKong}
-        canGetBreak={logicBreak(inStage) && anyKong}
+        canGetLogic={thing.in}
+        canGetBreak={thing.out}
       />
       <AztecCheck
         id={2252}
         name="Aztec Kasplat Location #3"
-        canGetLogic={inStage.in && anyKong}
-        canGetBreak={logicBreak(inStage) && anyKong}
+        canGetLogic={thing.in}
+        canGetBreak={thing.out}
       />
       <AztecCheck
         id={2253}
         name="Aztec Kasplat Location #4"
-        canGetLogic={inStage.in && anyKong}
-        canGetBreak={logicBreak(inStage) && anyKong}
+        canGetLogic={thing.in}
+        canGetBreak={thing.out}
       />
       <AztecCheck
         id={2254}
         name="Aztec Kasplat Location #5"
-        canGetLogic={inStage.in && anyKong}
-        canGetBreak={logicBreak(inStage) && anyKong}
+        canGetLogic={thing.in}
+        canGetBreak={thing.out}
       />
     </>
   )

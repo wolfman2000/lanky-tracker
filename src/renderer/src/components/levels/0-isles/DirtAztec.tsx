@@ -1,13 +1,4 @@
-import { useShallow } from 'zustand/react/shallow'
-
-import {
-  useIslesCrossFungi,
-  useIslesFungiIsland,
-  useIslesRocket,
-  useIslesUpper
-} from '@renderer/hooks/isles'
-import { useBoulderTech, useShockwave } from '@renderer/hooks/kongs'
-import useDonkStore from '@renderer/store'
+import { useAztecDirt } from '@renderer/hooks/isles'
 import IslesCheck from './IslesCheck'
 
 /**
@@ -15,32 +6,15 @@ import IslesCheck from './IslesCheck'
  * @returns The dirt check element if it is necessary.
  */
 const DirtAztec: React.FC = () => {
-  const crossFungi = useIslesCrossFungi()
-  const islesFungi = useIslesFungiIsland()
-  const islesRocket = useIslesRocket()
-  const islesUpper = useIslesUpper()
-  const boulderTech = useBoulderTech()
-  const shockwave = useShockwave()
-  const [dk, diddy, rocket, tiny, twirl] = useDonkStore(
-    useShallow((state) => [
-      state.moves.dk,
-      state.moves.diddy,
-      state.moves.rocket,
-      state.moves.tiny,
-      state.moves.twirl
-    ])
-  )
+  const dirt = useAztecDirt()
 
   return (
     <IslesCheck
       id={74}
       name="Isles Dirt Aztec Roof"
       region="Main Isle"
-      canGetLogic={islesRocket && islesFungi && diddy && rocket && shockwave}
-      canGetBreak={
-        shockwave &&
-        ((islesUpper && boulderTech && (diddy || tiny)) || (crossFungi && (dk || (tiny && twirl))))
-      }
+      canGetLogic={dirt.in}
+      canGetBreak={dirt.out}
     />
   )
 }

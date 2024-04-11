@@ -1,61 +1,41 @@
 import {
-  useJapesPainting,
-  useJapesRambi,
-  useJapesSideArea,
-  usePlayJapes,
-  useSlamJapes
+  useLankyCagedGb,
+  useLankyGateGb,
+  useLankyPaintingGb,
+  useLankySlopeGb
 } from '@renderer/hooks/japes'
-import {
-  useAnyGun,
-  useAnyKong,
-  useAnyMusic,
-  useGrape,
-  useLanky,
-  useSlam,
-  useStand
-} from '@renderer/hooks/kongs'
 import JapesCheck from '../JapesCheck'
 
 const LankyBananas: React.FC = () => {
-  const inStage = usePlayJapes()
-  const canSlam = useSlamJapes()
-  const japesRambi = useJapesRambi()
-  const japesSide = useJapesSideArea()
-  const lanky = useLanky()
-  const grape = useGrape()
-  const stand = useStand()
-  const anyKong = useAnyKong()
-  const slam = useSlam()
-  const anyGun = useAnyGun()
-  const anyMusic = useAnyMusic()
-  const japesPaintingInside = useJapesPainting()
+  const slopeGb = useLankySlopeGb()
+  const paintingGb = useLankyPaintingGb()
   return (
     <>
       <JapesCheck
         id={1020}
         name="Japes Lanky Caged Banana"
         region="Japes Hillside"
-        canGetLogic={japesRambi && lanky && canSlam}
+        canGetLogic={useLankyCagedGb()}
       />
       <JapesCheck
         id={1021}
         name="Japes Lanky Grape Gate"
         region="Japes Hillside"
-        canGetLogic={japesSide && grape}
+        canGetLogic={useLankyGateGb()}
       />
       <JapesCheck
         id={1022}
         name="Japes Lanky Slope"
         region="Stormy Tunnel Area"
-        canGetLogic={inStage && stand}
-        canGetBreak={inStage && anyKong}
+        canGetLogic={slopeGb.in}
+        canGetBreak={slopeGb.out}
       />
       <JapesCheck
-        id={1023 /* TODO: FTA? */}
+        id={1023}
         name="Japes Lanky Painting Room"
         region="Japes Caves And Mines"
-        canGetLogic={lanky && slam && japesPaintingInside.in && (anyGun || anyMusic)}
-        canGetBreak={lanky && slam && japesPaintingInside.out && (anyGun || anyMusic)}
+        canGetLogic={paintingGb.in}
+        canGetBreak={paintingGb.out}
       />
     </>
   )

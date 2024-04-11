@@ -1,49 +1,39 @@
-import { useCavesIgloo, usePlayCaves } from '@renderer/hooks/caves'
 import {
-  useBoulderTech,
-  useGone,
-  useHunky,
-  usePunch,
-  useSlam,
-  useTriangle
-} from '@renderer/hooks/kongs'
+  useChunkyCabinGb,
+  useChunkyClearGb,
+  useChunkyGoneGb,
+  useChunkyIglooGb
+} from '@renderer/hooks/caves'
 import CavesCheck from '../CavesCheck'
 
 const ChunkyBananas: React.FC = () => {
-  const inStage = usePlayCaves()
-  const igloo = useCavesIgloo()
-  const punch = usePunch()
-  const gone = useGone()
-  const hunky = useHunky()
-  const boulderTech = useBoulderTech()
-  const triangle = useTriangle()
-  const slam = useSlam()
+  const clearGb = useChunkyClearGb()
   return (
     <>
       <CavesCheck
         id={6040}
         name="Caves Chunky Gorilla Gone"
         region="Main Caves Area"
-        canGetLogic={inStage && punch && gone}
+        canGetLogic={useChunkyGoneGb()}
       />
       <CavesCheck
         id={6041}
         name="Caves Chunky Transparent Igloo"
         region="Igloo Area"
-        canGetLogic={inStage && punch && boulderTech && hunky}
-        canGetBreak={inStage && punch && boulderTech}
+        canGetLogic={clearGb.in}
+        canGetBreak={clearGb.out}
       />
       <CavesCheck
         id={6042}
         name="Caves Chunky 5 Door Igloo"
         region="Igloo Area"
-        canGetLogic={igloo && triangle}
+        canGetLogic={useChunkyIglooGb()}
       />
       <CavesCheck
         id={6043}
         name="Caves Chunky 5 Door Cabin"
         region="Cabins Area"
-        canGetLogic={inStage && triangle && gone && slam}
+        canGetLogic={useChunkyCabinGb()}
       />
     </>
   )

@@ -1,56 +1,49 @@
 import KasplatPool from '@renderer/components/pools/Kasplats'
-import { usePlayCastle } from '@renderer/hooks/castle'
-import { usePlayCaves } from '@renderer/hooks/caves'
-import { usePlayFactory } from '@renderer/hooks/factory'
-import { usePlayGalleon } from '@renderer/hooks/galleon'
-import { usePlayHelm } from '@renderer/hooks/helm'
-import { useAnyKong, useCoconut, usePunch, useSniper, useTwirl } from '@renderer/hooks/kongs'
+import {
+  useCastleKasplat,
+  useCavesKasplat,
+  useFactoryKasplat,
+  useGalleonKasplat,
+  useHelmKasplat
+} from '@renderer/hooks/isles'
+import { useAnyKong } from '@renderer/hooks/kongs'
 import { useShuffleKasplats } from '@renderer/hooks/settings'
 import IslesCheck from './IslesCheck'
 
 const Vanilla: React.FC = () => {
-  const playHelm = usePlayHelm()
-  const playCastle = usePlayCastle()
-  const playCaves = usePlayCaves()
-  const playFactory = usePlayFactory()
-  const playGalleon = usePlayGalleon()
-  const sniper = useSniper()
-  const coconut = useCoconut()
-  const twirl = useTwirl()
-  const punch = usePunch()
-  const anyKong = useAnyKong()
+  const helmKasplat = useHelmKasplat()
   return (
     <>
       <IslesCheck
         id={50}
         name="Isles Kasplat Helm Lobby"
         region="Caves-Helm Lobbies"
-        canGetLogic={playHelm && sniper && coconut}
-        canGetBreak={playHelm && twirl}
+        canGetLogic={helmKasplat.in}
+        canGetBreak={helmKasplat.out}
       />
       <IslesCheck
         id={51}
         name="Isles Kasplat Castle Lobby"
         region="Caves-Helm Lobbies"
-        canGetLogic={playCastle && coconut}
+        canGetLogic={useCastleKasplat()}
       />
       <IslesCheck
         id={52}
         name="Isles Kasplat Caves Lobby Punch"
         region="Caves-Helm Lobbies"
-        canGetLogic={playCaves && punch}
+        canGetLogic={useCavesKasplat()}
       />
       <IslesCheck
         id={53}
         name="Isles Kasplat Factory Lobby Box"
         region="Japes-Forest Lobbies"
-        canGetLogic={playFactory && punch}
+        canGetLogic={useFactoryKasplat()}
       />
       <IslesCheck
         id={54}
         name="Isles Kasplat Galleon Lobby"
         region="Japes-Forest Lobbies"
-        canGetLogic={playGalleon && anyKong}
+        canGetLogic={useGalleonKasplat()}
       />
     </>
   )
