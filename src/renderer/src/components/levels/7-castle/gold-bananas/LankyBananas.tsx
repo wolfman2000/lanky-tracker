@@ -1,61 +1,43 @@
-import { usePlayCastle, useSlamCastle } from '@renderer/hooks/castle'
 import {
-  useBalloon,
-  useDiddy,
-  useDk,
-  useGrape,
-  useHoming,
-  useLanky,
-  useSniper,
-  useSprint,
-  useTrombone,
-  useTwirl,
-  useVine
-} from '@renderer/hooks/kongs'
+  useLankyDungeonGb,
+  useLankyGreenhouseGb,
+  useLankyMausoleumGb,
+  useLankyRoomGb
+} from '@renderer/hooks/castle'
 import CastleCheck from '../CastleCheck'
 
 const LankyBananas: React.FC = () => {
-  const inStage = usePlayCastle()
-  const canSlam = useSlamCastle()
-  const grape = useGrape()
-  const balloon = useBalloon()
-  const sprint = useSprint()
-  const trombone = useTrombone()
-  const sniper = useSniper()
-  const homing = useHoming()
-  const lanky = useLanky()
-  const dk = useDk()
-  const diddy = useDiddy()
-  const twirl = useTwirl()
-  const vine = useVine()
+  const roomGb = useLankyRoomGb()
+  const mausoleumGb = useLankyMausoleumGb()
+  const dungeonGb = useLankyDungeonGb()
   return (
     <>
       <CastleCheck
         id={7020}
         name="Castle Lanky Tower"
         region="Castle Rooms"
-        canGetLogic={inStage && canSlam && grape && balloon && sniper}
-        canGetBreak={inStage && canSlam && grape && balloon && homing}
+        canGetLogic={roomGb.in}
+        canGetBreak={roomGb.out}
       />
       <CastleCheck
         id={7021}
         name="Castle Lanky Greenhouse"
         region="Castle Surroundings"
-        canGetLogic={inStage && lanky && canSlam}
+        canGetLogic={useLankyGreenhouseGb()}
       />
       <CastleCheck
         id={7022}
         name="Castle Lanky Mausoleum"
         region="Castle Underground"
-        canGetLogic={inStage && grape && sprint && vine}
-        canGetBreak={inStage && grape && (sprint || dk || diddy)}
+        canGetLogic={mausoleumGb.in}
+        canGetBreak={mausoleumGb.out}
       />
       <CastleCheck
         id={7023}
         name="Castle Lanky Dungeon"
         region="Castle Underground"
-        canGetLogic={inStage && canSlam && trombone && balloon}
-        canGetBreak={inStage && canSlam && trombone && twirl}
+        canGetLogic={dungeonGb.in}
+        canGetBreak={dungeonGb.out}
       />
     </>
   )

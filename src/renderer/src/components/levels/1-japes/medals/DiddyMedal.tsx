@@ -1,4 +1,4 @@
-import { useDiddyMedalInLogic, useDiddyMedalOutLogic } from '@renderer/hooks/forest/medals/diddy'
+import { useDiddyMedalInLogic, useDiddyMedalOutLogic } from '@renderer/hooks/japes/medals/diddy'
 import { useCbCount } from '@renderer/hooks/settings'
 import JapesCheck from '../JapesCheck'
 

@@ -1,48 +1,48 @@
 import ToughGoldenBanana from '@renderer/components/pools/ToughGoldenBanana'
-import { useAztec5DoorTemple, useAztecBack, useAztecTinyTemple } from '@renderer/hooks/aztec'
-import { useCharge, useDive, usePeanut, useRocket } from '@renderer/hooks/kongs'
-import { logicBreak } from '@renderer/hooks/world'
+import {
+  useDiddy5DoorGb,
+  useDiddyFreeTinyGb,
+  useDiddyGongGb,
+  useDiddyVultureGb
+} from '@renderer/hooks/aztec'
 import AztecCheck from '../AztecCheck'
 
 const DiddyBananas: React.FC = () => {
-  const templeTiny = useAztecTinyTemple()
-  const aztecBack = useAztecBack()
-  const aztec5Door = useAztec5DoorTemple()
-  const charge = useCharge()
-  const rocket = useRocket()
-  const peanut = usePeanut()
-  const dive = useDive()
+  const freeGb = useDiddyFreeTinyGb()
+  const gongGb = useDiddyGongGb()
+  const vultureGb = useDiddyVultureGb()
+  const doorGb = useDiddy5DoorGb()
   return (
     <>
       <AztecCheck
         id={2010}
         name="Aztec Diddy Free Tiny"
         region="Tiny Temple"
-        canGetLogic={templeTiny.in && dive}
-        canGetBreak={logicBreak(templeTiny) && dive}
+        canGetLogic={freeGb.in}
+        canGetBreak={freeGb.out}
       />
       <AztecCheck
         id={2011}
         name="Aztec Diddy Ram Gongs"
         region="Aztec Oasis And Totem Area"
-        canGetLogic={aztecBack.in && charge && rocket}
-        canGetBreak={logicBreak(aztecBack) && charge && rocket}
+        canGetLogic={gongGb.in}
+        canGetBreak={gongGb.out}
       />
       <ToughGoldenBanana>
         <AztecCheck
           id={2012}
           name="Aztec Diddy Vulture Race"
           region="Aztec Oasis And Totem Area"
-          canGetLogic={aztecBack.in && rocket}
-          canGetBreak={logicBreak(aztecBack) && rocket}
+          canGetLogic={vultureGb.in}
+          canGetBreak={vultureGb.out}
         />
       </ToughGoldenBanana>
       <AztecCheck
         id={2013}
         name="Aztec Diddy 5 Door Temple"
         region="5 Door Temple"
-        canGetLogic={aztec5Door.in && peanut}
-        canGetBreak={logicBreak(aztec5Door) && peanut}
+        canGetLogic={doorGb.in}
+        canGetBreak={doorGb.out}
       />
     </>
   )

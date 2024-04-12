@@ -1,59 +1,48 @@
 import MiscPool from '@renderer/components/pools/Misc'
-import { useCurrentPearlCount } from '@renderer/hooks/consumables'
-import { useFastMermaid } from '@renderer/hooks/fast-checks'
 import {
-  useGalleonLighthouseArea,
-  useGalleonOutskirts,
-  useGalleonTreasureRoom,
-  useSlamGalleon
+  useTiny2DoorShipGb,
+  useTiny5DoorShipGb,
+  useTinyClams,
+  useTinyMermaidGb,
+  useTinySubGb
 } from '@renderer/hooks/galleon'
-import { useDive, useMini, useSax, useTiny } from '@renderer/hooks/kongs'
 import GalleonCheck from '../GalleonCheck'
 
 const TinyBananas: React.FC = () => {
-  const lighthouseArea = useGalleonLighthouseArea()
-  const outskirts = useGalleonOutskirts()
-  const treasure = useGalleonTreasureRoom()
-  const canSlam = useSlamGalleon()
-  const tiny = useTiny()
-  const mini = useMini()
-  const dive = useDive()
-  const sax = useSax()
-  const pearls = useCurrentPearlCount()
-  const mermaid = useFastMermaid()
+  const clams = useTinyClams()
   return (
     <>
       <GalleonCheck
         id={4030}
-        name="Galleon Tiny Pearls"
+        name="Galleon Tiny Mermaid"
         region="Lighthouse Area"
-        canGetLogic={lighthouseArea && mini && dive && pearls >= (mermaid ? 1 : 5)}
+        canGetLogic={useTinyMermaidGb()}
       />
       <GalleonCheck
         id={4031}
         name="Galleon Tiny Submarine"
         region="Shipyard Outskirts"
-        canGetLogic={outskirts && mini && dive}
+        canGetLogic={useTinySubGb()}
       />
       <GalleonCheck
         id={4032}
         name="Galleon Tiny 2 Door Ship"
         region="Shipyard Outskirts"
-        canGetLogic={outskirts && canSlam && tiny && dive}
+        canGetLogic={useTiny2DoorShipGb()}
       />
       <GalleonCheck
         id={4033}
         name="Galleon Tiny 5 Door Ship"
         region="5 Door Ship"
-        canGetLogic={outskirts && sax && dive}
+        canGetLogic={useTiny5DoorShipGb()}
       />
       <MiscPool>
         <GalleonCheck
           id={4034}
           name="Galleon Tiny Treasure Chest Clams x5"
           region="Treasure Room"
-          canGetLogic={treasure.in && mini}
-          canGetBreak={treasure.out && mini}
+          canGetLogic={clams.in}
+          canGetBreak={clams.out}
         />
       </MiscPool>
     </>

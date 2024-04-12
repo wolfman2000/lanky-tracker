@@ -14,7 +14,7 @@ const SwitchsanitySwitch: React.FC<SwitchsanityProps> = (props) => {
   const [switchsanitySwitches, setSwitchsanity] = useDonkStore(
     useShallow((state) => [state.switchsanitySwitches, state.setSwitchsanity])
   )
-  const setting: number = switchsanitySwitches[props.storeKey]
+  const setting: number = switchsanitySwitches[props.storeKey] ?? 0
 
   const nextSwitch = (num: number): number => {
     let target = num + 1

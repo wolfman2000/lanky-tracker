@@ -1,17 +1,42 @@
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
+import { useBean } from '../consumables'
 import { usePlayLevel, useSlamLevel } from '../isles'
 import {
+  useAllGun,
   useAnyGun,
   useAnyKong,
+  useBlast,
+  useBoulderTech,
+  useCharge,
+  useChunky,
+  useDiddy,
+  useDk,
+  useFeather,
+  useGrab,
+  useGrape,
+  useGuitar,
+  useHighGrab,
+  useHoming,
+  useHunky,
+  useLanky,
   useMini,
   useOrange,
+  usePineapple,
   usePunch,
   useRocket,
+  useSax,
+  useSlam,
+  useSpring,
+  useSprint,
   useStand,
-  useTiny
+  useStrong,
+  useTiny,
+  useTriangle,
+  useTrombone,
+  useVine
 } from '../kongs'
-import { useBananaportAll, useForestTime } from '../settings'
+import { useBananaportAll, useForestTime, useHardShooting } from '../settings'
 import { LogicBool, logicBreak, useSwitchsanityGun } from '../world'
 
 /**
@@ -154,4 +179,192 @@ export const useForestOwl = (): boolean => {
   const warpAll = useBananaportAll()
   const [removeBarriers] = useDonkStore(useShallow((state) => [state.removeBarriers]))
   return inStage && (warpAll || removeBarriers.forestOwlTree || door)
+}
+
+export const useChunkyMineGb = (): boolean => {
+  const inStage = usePlayForest()
+  const chunky = useChunky()
+  const slam = useSlam()
+  return inStage && chunky && slam
+}
+
+export const useChunkyFaceGb = (): boolean => {
+  const inStage = usePlayForest()
+  const canSlam = useSlamForest()
+  const pineapple = usePineapple()
+  return inStage && canSlam && pineapple
+}
+
+export const useChunkyAppleGb = (): boolean => {
+  const beanstalk = useForestBean()
+  const boulder = useBoulderTech()
+  const hunky = useHunky()
+  return beanstalk && boulder && hunky
+}
+
+export const useChunkyMillGb = (): LogicBool => {
+  const inStage = usePlayForest()
+  const day = useForestDay()
+  const boulderTech = useBoulderTech()
+  const punch = usePunch()
+  const grab = useGrab()
+  const triangle = useTriangle()
+  return {
+    in: inStage && day.in && boulderTech && punch && triangle && grab,
+    out: inStage && logicBreak(day) && boulderTech && punch && triangle
+  }
+}
+
+export const useDiddyTopGb = (): LogicBool => {
+  const inStage = usePlayForest()
+  const rocket = useRocket()
+  const diddy = useDiddy()
+  const tiny = useTiny()
+  const stand = useStand()
+  return {
+    in: inStage && rocket,
+    out: inStage && (diddy || tiny) && (tiny || stand)
+  }
+}
+
+export const useDiddyOwlGb = (): LogicBool => {
+  const owlTree = useForestOwl()
+  const night = useForestNight()
+  const guitar = useGuitar()
+  const rocket = useRocket()
+  return {
+    in: owlTree && night.in && guitar && rocket,
+    out: owlTree && night.out && guitar && rocket
+  }
+}
+
+export const useDiddyCageGb = (): boolean => {
+  const inStage = usePlayForest()
+  const charge = useCharge()
+  const guitar = useGuitar()
+  const anyGun = useAnyGun()
+  return inStage && charge && guitar && anyGun
+}
+
+export const useDiddyRaftersGb = (): LogicBool => {
+  const inStage = usePlayForest()
+  const night = useForestNight()
+  const spring = useSpring()
+  const guitar = useGuitar()
+  const highGrab = useHighGrab()
+  return {
+    in: inStage && night.in && spring && guitar,
+    out: inStage && logicBreak(night) && (spring || highGrab)
+  }
+}
+
+/**
+ * Can we get the blast course banana in Forest?
+ * @returns true if we can get the banana.
+ */
+export const useDkBlastGb = (): boolean => {
+  const inStage = usePlayForest()
+  return useBlast() && inStage
+}
+
+export const useDkMushGb = (): boolean => {
+  const inStage = usePlayForest()
+  const allGun = useAllGun()
+  return useSlamForest() && inStage && allGun
+}
+
+export const useDkMillGb = (): LogicBool => {
+  const inStage = usePlayForest()
+  const day = useForestDay()
+  const night = useForestNight()
+  const canSlam = useSlamForest()
+  const grab = useGrab()
+  return {
+    in: inStage && day.in && night.in && canSlam && grab,
+    out: inStage && logicBreak(day) && logicBreak(night) && canSlam && grab
+  }
+}
+
+export const useDkBarnGb = (): LogicBool => {
+  const inStage = usePlayForest()
+  const night = useForestNight()
+  const canSlam = useSlamForest()
+  const dk = useDk()
+  const strong = useStrong()
+  const vine = useVine()
+  return {
+    in: inStage && night.in && canSlam && strong && vine,
+    out: inStage && logicBreak(night) && dk && canSlam
+  }
+}
+
+export const useLankyMillGb = (): LogicBool => {
+  const inStage = usePlayForest()
+  const night = useForestNight()
+  const canSlam = useSlamForest()
+  const grape = useGrape()
+  const homing = useHoming()
+  const hardShooting = useHardShooting()
+  const anyGun = useAnyGun()
+  const lanky = useLanky()
+  return {
+    in: inStage && night.in && canSlam && grape && (homing || hardShooting),
+    out: inStage && logicBreak(night) && lanky && canSlam && anyGun
+  }
+}
+
+export const useLankyMushGb = (): LogicBool => {
+  const roof = useForestMushroomRoof()
+  const lanky = useLanky()
+  const canSlam = useSlamForest()
+  return {
+    in: roof.in && lanky && canSlam,
+    out: logicBreak(roof) && lanky && canSlam
+  }
+}
+
+export const useLankyRaceGb = (): LogicBool => {
+  const owl = useForestOwl()
+  const trombone = useTrombone()
+  const sprint = useSprint()
+  const boulder = useBoulderTech()
+  return {
+    in: owl && trombone && sprint,
+    out: owl && trombone && boulder
+  }
+}
+
+export const useTinyMushGb = (): boolean => {
+  const inStage = usePlayForest()
+  const tiny = useTiny()
+  const canSlam = useSlamForest()
+  return inStage && tiny && canSlam
+}
+
+export const useTinyAntGb = (): boolean => {
+  const owl = useForestOwl()
+  const mini = useMini()
+  const sax = useSax()
+  return owl && mini && sax
+}
+
+// TODO: Free Trade Agreement will be a pain.
+export const useTinySpiderGb = (): LogicBool => {
+  const spider = useForestSpiderBoss()
+  const dusk = useForestDusk()
+  const feather = useFeather()
+  const pineapple = usePineapple()
+  const anyGun = useAnyGun()
+  return {
+    in: spider.in && ((dusk && (feather || pineapple)) || (!dusk && feather)),
+    out: logicBreak(spider) && anyGun
+  }
+}
+
+export const useTinyBeanGb = (): boolean => {
+  const beanstalk = useForestBean()
+  const bean = useBean()
+  const mini = useMini()
+  const sax = useSax()
+  return beanstalk && bean && mini && sax
 }

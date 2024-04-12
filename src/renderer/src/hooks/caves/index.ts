@@ -4,21 +4,38 @@ import { usePlayLevel, useSlamLevel } from '../isles'
 import {
   useAnyGun,
   useBalloon,
+  useBarrel,
+  useBlast,
   useBongos,
+  useBoulderTech,
   useCoconut,
   useDiddy,
   useDk,
+  useFeather,
+  useGone,
   useGuitar,
+  useHighGrab,
   useHoming,
+  useHunky,
+  useLanky,
   useMini,
+  useMonkeyport,
   useOrange,
+  usePunch,
   useRocket,
+  useSax,
+  useShockwave,
+  useSlam,
+  useSpring,
+  useSprint,
+  useStrong,
   useTiny,
+  useTriangle,
   useTrombone,
   useTwirl
 } from '../kongs'
 import { useBananaportAll, useHardShooting } from '../settings'
-import { LogicBool } from '../world'
+import { LogicBool, logicBreak } from '../world'
 
 /**
  * Can we play in Crystal Caves?
@@ -103,7 +120,7 @@ export const useCavesDkCabinBee = (): LogicBool => {
   }
 }
 
-export const useCavesDiddyCabinGauntlet = (): LogicBool => {
+export const useDiddyGauntletGb = (): LogicBool => {
   const inStage = usePlayCaves()
   const guitar = useGuitar()
   const rocket = useRocket()
@@ -111,5 +128,174 @@ export const useCavesDiddyCabinGauntlet = (): LogicBool => {
   return {
     in: inStage && guitar && rocket && orange,
     out: inStage && guitar
+  }
+}
+
+export const useChunkyGoneGb = (): boolean => {
+  const inStage = usePlayCaves()
+  const punch = usePunch()
+  const gone = useGone()
+  return inStage && punch && gone
+}
+
+export const useChunkyClearGb = (): LogicBool => {
+  const inStage = usePlayCaves()
+  const punch = usePunch()
+  const boulder = useBoulderTech()
+  const hunky = useHunky()
+  return {
+    in: inStage && punch && boulder && hunky,
+    out: inStage && punch && boulder
+  }
+}
+
+export const useChunkyIglooGb = (): boolean => {
+  const igloo = useCavesIgloo()
+  return useTriangle() && igloo
+}
+
+export const useChunkyCabinGb = (): boolean => {
+  const inStage = usePlayCaves()
+  const triangle = useTriangle()
+  const gone = useGone()
+  return useSlam() && inStage && triangle && gone
+}
+
+export const useDiddyWaterfallGb = (): LogicBool => {
+  const inStage = usePlayCaves()
+  const rocket = useRocket()
+  const dk = useDk()
+  const twirl = useTwirl()
+  return {
+    in: inStage && rocket,
+    out: inStage && (dk || twirl)
+  }
+}
+
+export const useDiddyIglooGb = (): boolean => {
+  const igloo = useCavesIgloo()
+  const guitar = useGuitar()
+  const barrel = useBarrel()
+  return igloo && guitar && barrel
+}
+
+export const useDiddyCandleGb = (): LogicBool => {
+  const inStage = usePlayCaves()
+  const guitar = useGuitar()
+  const rocket = useRocket()
+  const spring = useSpring()
+  return {
+    in: inStage && guitar && rocket && spring,
+    out: inStage && guitar && rocket
+  }
+}
+
+/**
+ * Can we get the banana in the blast course within Caves?
+ * @returns true if we can get the banana.
+ */
+export const useDkBlastGb = (): boolean => {
+  const inStage = usePlayCaves()
+  return useBlast() && inStage
+}
+
+export const useDkIglooGb = (): LogicBool => {
+  const igloo = useCavesIgloo()
+  const bongos = useBongos()
+  const strong = useStrong()
+  return {
+    in: igloo && bongos && strong,
+    out: igloo && bongos
+  }
+}
+
+export const useDkRotateGb = (): boolean => {
+  const inStage = usePlayCaves()
+  const bongos = useBongos()
+  const slam = useSlam()
+  return inStage && bongos && slam
+}
+
+/**
+ * Can we race the beetle in Caves for a GB?
+ * @returns true if we can race the beetle.
+ */
+export const useLankyRaceGb = (): LogicBool => {
+  const inStage = usePlayCaves()
+  const canSlam = useSlamCaves()
+  const balloon = useBalloon()
+  const highGrab = useHighGrab()
+  const sprint = useSprint()
+  return {
+    in: inStage && canSlam && sprint && balloon,
+    out: inStage && canSlam && sprint && highGrab
+  }
+}
+
+export const useLankyCastleGb = (): boolean => {
+  const inStage = usePlayCaves()
+  const lanky = useLanky()
+  const canSlam = useSlamCaves()
+  return inStage && lanky && canSlam
+}
+
+export const useLankyIglooGb = (): LogicBool => {
+  const igloo = useCavesIgloo()
+  const trombone = useTrombone()
+  const balloon = useBalloon()
+  const highGrab = useHighGrab()
+  return {
+    in: igloo && trombone && balloon,
+    out: igloo && trombone && highGrab
+  }
+}
+
+export const useLankyCabinGb = (): LogicBool => {
+  const cabin = useCavesLankyCabin()
+  const sprint = useSprint()
+  const balloon = useBalloon()
+  const dk = useDk()
+  const diddy = useDiddy()
+  return {
+    in: cabin.in && balloon && sprint,
+    out: logicBreak(cabin) && ((balloon && sprint) || dk || diddy)
+  }
+}
+
+export const useTinyCaveGb = (): boolean => {
+  const inStage = usePlayCaves()
+  const mini = useMini()
+  const warpAll = useBananaportAll()
+  return inStage && (mini || warpAll)
+}
+
+export const useTinyPortGb = (): LogicBool => {
+  const inStage = usePlayCaves()
+  const mini = useMini()
+  const port = useMonkeyport()
+  const warpAll = useBananaportAll()
+  const twirl = useTwirl()
+  return {
+    in: inStage && mini && port,
+    out: inStage && twirl && warpAll && port
+  }
+}
+
+export const useTinyIglooGb = (): boolean => {
+  const igloo = useCavesIgloo()
+  const sax = useSax()
+  const slam = useSlam()
+  return igloo && sax && slam
+}
+
+export const useTinyCabinGb = (): LogicBool => {
+  const inStage = usePlayCaves()
+  const sax = useSax()
+  const orange = useOrange()
+  const shockwave = useShockwave()
+  const feather = useFeather()
+  return {
+    in: inStage && sax && orange,
+    out: inStage && sax && shockwave && feather
   }
 }

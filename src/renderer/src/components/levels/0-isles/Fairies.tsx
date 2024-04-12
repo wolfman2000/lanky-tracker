@@ -1,59 +1,47 @@
 import FairyPool from '@renderer/components/pools/Fairies'
-import { usePlayFactory } from '@renderer/hooks/factory'
-import { usePlayForest } from '@renderer/hooks/forest'
-import { useIslesFairySwitch, useIslesKremTop } from '@renderer/hooks/isles'
-import { useAnyKong, useCamera, usePunch } from '@renderer/hooks/kongs'
+import {
+  useFactoryFairy,
+  useForestFairy,
+  useGeneralFairy,
+  useKremFairy
+} from '@renderer/hooks/isles'
 import { useShuffleFairies } from '@renderer/hooks/settings'
 import IslesCheck from './IslesCheck'
 
 const Vanilla: React.FC = () => {
-  const camera = useCamera()
-  const anyKong = useAnyKong()
-  const punch = usePunch()
-  const playFactory = usePlayFactory()
-  const playForest = usePlayForest()
-  const islesKremTop = useIslesKremTop()
-  const islesFairySwitch = useIslesFairySwitch()
   return (
     <>
       <IslesCheck
         id={80}
         name="Isles Outer Fairy"
         region="Outer Isles"
-        canGetLogic={anyKong && camera}
+        canGetLogic={useGeneralFairy()}
       />
       <IslesCheck
         id={81}
         name="Isles Factory Fairy"
         region="Japes-Forest Lobbies"
-        canGetLogic={playFactory && punch && camera}
+        canGetLogic={useFactoryFairy()}
       />
       <IslesCheck
         id={82}
         name="Isles Forest Fairy"
         region="Japes-Forest Lobbies"
-        canGetLogic={playForest && islesFairySwitch && camera}
+        canGetLogic={useForestFairy()}
       />
-      <IslesCheck
-        id={83}
-        name="Isles Krem Fairy"
-        region="Krem Isle"
-        canGetLogic={islesKremTop && camera}
-      />
+      <IslesCheck id={83} name="Isles Krem Fairy" region="Krem Isle" canGetLogic={useKremFairy()} />
     </>
   )
 }
 
 const Shuffled: React.FC = () => {
-  const anyKong = useAnyKong()
-  const camera = useCamera()
-
+  const fairy = useGeneralFairy()
   return (
     <>
-      <IslesCheck id={280} name="Isles Fairy Location #1" canGetLogic={anyKong && camera} />
-      <IslesCheck id={281} name="Isles Fairy Location #2" canGetLogic={anyKong && camera} />
-      <IslesCheck id={282} name="Isles Fairy Location #3" canGetLogic={anyKong && camera} />
-      <IslesCheck id={283} name="Isles Fairy Location #4" canGetLogic={anyKong && camera} />
+      <IslesCheck id={280} name="Isles Fairy Location #1" canGetLogic={fairy} />
+      <IslesCheck id={281} name="Isles Fairy Location #2" canGetLogic={fairy} />
+      <IslesCheck id={282} name="Isles Fairy Location #3" canGetLogic={fairy} />
+      <IslesCheck id={283} name="Isles Fairy Location #4" canGetLogic={fairy} />
     </>
   )
 }

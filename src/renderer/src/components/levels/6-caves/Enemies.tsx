@@ -1,5 +1,5 @@
 import {
-  useCavesDiddyCabinGauntlet,
+  useDiddyGauntletGb,
   useCavesDkCabinBee,
   useCavesIgloo,
   useCavesLankyCabin,
@@ -38,7 +38,7 @@ const EnemyLocations: React.FC = () => {
   const hunky = useHunky()
   const port = useMonkeyport()
   const dkBee = useCavesDkCabinBee()
-  const diddyGauntlet = useCavesDiddyCabinGauntlet()
+  const diddyGauntlet = useDiddyGauntletGb()
 
   return (
     <>

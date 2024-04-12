@@ -1,9 +1,36 @@
 import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
+import { useFastArcade } from '../fast-checks'
 import { usePlayLevel, useSlamLevel } from '../isles'
-import { useCoconut, useDiddy, useGrab, useSlam, useTiny } from '../kongs'
-import { useBananaportAll } from '../settings'
-import { LogicBool } from '../world'
+import {
+  useAnyKong,
+  useBalloon,
+  useBlast,
+  useCharge,
+  useChunky,
+  useCoconut,
+  useDiddy,
+  useDk,
+  useFeather,
+  useGrab,
+  useGuitar,
+  useHighGrab,
+  useHunky,
+  useLanky,
+  useMini,
+  usePunch,
+  useSlam,
+  useSpring,
+  useStand,
+  useStrong,
+  useTiny,
+  useTriangle,
+  useTrombone,
+  useTwirl,
+  useVine
+} from '../kongs'
+import { useAutoBonus, useBananaportAll } from '../settings'
+import { LogicBool, logicBreak } from '../world'
 
 /**
  * Can we play in Frantic Factory?
@@ -66,4 +93,213 @@ export const useFactoryProductionTop = (): boolean => {
   const factoryOn = useFactoryProductionEnabled()
   const warpAll = useBananaportAll()
   return factoryOn || (inStage && warpAll)
+}
+
+export const useChunkyKaijuGb = (): boolean => {
+  const testing = useFactoryTesting()
+  const punch = usePunch()
+  const triangle = useTriangle()
+  const hunky = useHunky()
+  return testing && punch && triangle && hunky
+}
+
+export const useChunkyArcadeGb = (): boolean => {
+  const inStage = usePlayFactory()
+  const punch = usePunch()
+  return inStage && punch
+}
+
+export const useChunkyDarkGb = (): boolean => {
+  const arcade = useChunkyArcadeGb()
+  const canSlam = useSlamFactory()
+  return arcade && canSlam
+}
+
+export const useChunkyProductionGb = (): boolean => {
+  const production = useFactoryProductionEnabled()
+  const chunky = useChunky()
+  const canSlam = useSlamFactory()
+  return production && chunky && canSlam
+}
+
+export const useDiddyBlockGb = (): LogicBool => {
+  const testing = useFactoryTesting()
+  const spring = useSpring()
+  const highGrab = useHighGrab()
+  return {
+    in: testing && spring,
+    out: testing && highGrab
+  }
+}
+
+export const useDiddyEnemyGb = (): boolean => {
+  const testing = useFactoryTesting()
+  const guitar = useGuitar()
+  const charge = useCharge()
+  return testing && guitar && charge
+}
+
+export const useDiddyStorageGb = (): LogicBool => {
+  const hut = useFactoryHut()
+  const canSlam = useSlamFactory()
+  const diddy = useDiddy()
+  const autoBonus = useAutoBonus()
+  const vine = useVine()
+  const dk = useDk()
+  const chunky = useChunky()
+  return {
+    in: hut.in && canSlam && diddy && (autoBonus || vine),
+    out: logicBreak(hut) && canSlam && diddy && (autoBonus || vine || dk || chunky)
+  }
+}
+
+export const useDiddyProductionGb = (): LogicBool => {
+  const production = useFactoryProductionEnabled()
+  const canSlam = useSlamFactory()
+  const diddy = useDiddy()
+  const spring = useSpring()
+  const twirl = useTwirl()
+  const highGrab = useHighGrab()
+  return {
+    in: production && canSlam && diddy && spring,
+    out: production && canSlam && diddy && (twirl || highGrab)
+  }
+}
+
+export const useDkNumberGb = (): boolean => {
+  const testing = useFactoryTesting()
+  const dk = useDk()
+  const canSlam = useSlamFactory()
+  return testing && dk && canSlam
+}
+
+export const useDkHutGb = (): LogicBool => {
+  const hut = useFactoryHut()
+  const coconut = useCoconut()
+  const grab = useGrab()
+  const productionPower = useDonkStore(
+    useShallow((state) => state.removeBarriers.factoryProduction)
+  )
+  return {
+    in: hut.in && coconut && (productionPower || grab),
+    out: hut.out && coconut && (productionPower || grab)
+  }
+}
+
+/**
+ * Can we go through the blast course and either get the banana immediately, or play DK Arcade later?
+ *
+ * This is one of the few things Fast Checks can affect.
+ * @returns true if we can access the Blast associated GB.
+ */
+export const useDkBlastGb = (): boolean => {
+  const inStage = usePlayFactory()
+  const blast = useBlast()
+  const fastArcade = useFastArcade()
+  const grab = useGrab()
+  return inStage && blast && (fastArcade || grab)
+}
+
+export const useDkCoin = (): boolean => {
+  const blast = useDkBlastGb()
+  const grab = useGrab()
+  return blast && grab
+}
+
+export const useDkProdGb = (): LogicBool => {
+  const production = useFactoryProductionEnabled()
+  const strong = useStrong()
+  const dk = useDk()
+  const diddy = useDiddy()
+  return {
+    in: production && strong,
+    out: production && (dk || diddy)
+  }
+}
+
+export const useLankyTestingGb = (): LogicBool => {
+  const testing = useFactoryTesting()
+  const balloon = useBalloon()
+  const anyKong = useAnyKong()
+  return {
+    in: testing && balloon,
+    out: testing && anyKong
+  }
+}
+
+export const useLankyPianoGb = (): boolean => {
+  const testing = useFactoryTesting()
+  const canSlam = useSlamFactory()
+  const trombone = useTrombone()
+  return testing && canSlam && trombone
+}
+
+const useFreeChunkySwitch = (): boolean => {
+  const slam = useSlamFactory()
+  const dk = useDk()
+  const diddy = useDiddy()
+  const lanky = useLanky()
+  const tiny = useTiny()
+  const chunky = useChunky()
+  const freeChunky = useDonkStore(useShallow((state) => state.switchsanitySwitches.freeChunky))
+  switch (freeChunky) {
+    case 1:
+      return dk && slam
+    case 2:
+      return diddy && slam
+    case 3:
+      return lanky && slam
+    case 4:
+      return tiny && slam
+    case 5:
+      return chunky && slam
+    default:
+      return true
+  }
+}
+
+export const useLankyFreeChunkyGb = (): boolean => {
+  const inStage = usePlayFactory()
+  return useFreeChunkySwitch() && inStage
+}
+
+export const useLankyProductionGb = (): LogicBool => {
+  const production = useFactoryProductionEnabled()
+  const canSlam = useSlamFactory()
+  const stand = useStand()
+  const tiny = useTiny()
+  return {
+    in: production && canSlam && stand,
+    out: production && (stand || tiny)
+  }
+}
+
+export const useTinyRaceGb = (): boolean => {
+  const testing = useFactoryTesting()
+  const mini = useMini()
+  return testing && mini
+}
+
+export const useTinyDartGb = (): boolean => {
+  const car = useTinyRaceGb()
+  const feather = useFeather()
+  const canSlam = useSlamFactory()
+  return car && feather && canSlam
+}
+
+export const useTinyArcadeGb = (): boolean => {
+  const inStage = usePlayFactory()
+  const mini = useMini()
+  return inStage && mini
+}
+
+export const useTinyProductionGb = (): LogicBool => {
+  const production = useFactoryProductionEnabled()
+  const canSlam = useSlamFactory()
+  const twirl = useTwirl()
+  const dk = useDk()
+  return {
+    in: production && canSlam && twirl,
+    out: production && (twirl || dk)
+  }
 }

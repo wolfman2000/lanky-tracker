@@ -2,17 +2,37 @@ import useDonkStore from '@renderer/store'
 import { useShallow } from 'zustand/react/shallow'
 import { usePlayLevel, useSlamLevel } from '../isles'
 import {
+  useAnyGun,
+  useAnyKong,
+  useAnyMusic,
+  useBlast,
   useBoulderTech,
+  useCamera,
+  useCharge,
   useChunky,
+  useCoconut,
+  useDiddy,
   useDk,
+  useFeather,
+  useGrape,
+  useHighGrab,
+  useHunky,
+  useLanky,
+  useMini,
+  useOrange,
   usePeanut,
+  usePineapple,
+  useSax,
+  useShockwave,
   useSlam,
   useStand,
   useTiny,
-  useTwirl
+  useTrombone,
+  useTwirl,
+  useVine
 } from '../kongs'
-import { LogicBool, logicBreak, useSwitchsanityGun } from '../world'
 import { useBananaportAll } from '../settings'
+import { LogicBool, logicBreak, useSwitchsanityGun } from '../world'
 
 /**
  * Can we play in Jungle Japes?
@@ -144,4 +164,232 @@ export const useJapesUnderground = (): boolean => {
   const boulderTech = useBoulderTech()
   const inStage = usePlayJapes()
   return inStage && boulderTech && slam
+}
+
+export const useChunkyBoulderGb = (): boolean => {
+  const inStage = usePlayJapes()
+  const boulderTech = useBoulderTech()
+  return inStage && boulderTech
+}
+
+export const useChunkyCagedGb = (): boolean => {
+  const boulderTech = useBoulderTech()
+  const canSlam = useSlamJapes()
+  const rambi = useJapesRambi()
+  return rambi && boulderTech && canSlam
+}
+
+export const useChunkyHiveGb = (): boolean => {
+  const hive = useJapesHive()
+  const hunky = useHunky()
+  return hive && hunky
+}
+
+export const useChunkyUndergroundGb = (): LogicBool => {
+  const under = useJapesUnderground()
+  const pineapple = usePineapple()
+  const vine = useVine()
+  const dk = useDk()
+  const twirl = useTwirl()
+  const tiny = useTiny()
+  const diddy = useDiddy()
+  return {
+    in: under && pineapple && vine,
+    out: under && (dk || twirl || ((tiny || diddy) && vine))
+  }
+}
+
+export const useDiddyCagedGb = (): boolean => {
+  const rambi = useJapesRambi()
+  const diddy = useDiddy()
+  const canSlam = useSlamJapes()
+  return rambi && diddy && canSlam
+}
+
+export const useDiddyMountainGb = (): boolean => {
+  const mine = useJapesMine()
+  const canSlam = useSlamJapes()
+  return mine && canSlam
+}
+
+export const useDiddyTunnelGb = (): boolean => {
+  const side = useJapesSideArea()
+  return side
+}
+
+export const useDiddyMinecartGb = (): LogicBool => {
+  const mine = useJapesMine()
+  const canSlam = useSlamJapes()
+  const charge = useCharge()
+  const highGrab = useHighGrab()
+  return {
+    in: mine && canSlam && charge,
+    out: mine && highGrab
+  }
+}
+
+export const useDkFreebieGb = (): boolean => {
+  const inStage = usePlayJapes()
+  const anyKong = useAnyKong()
+  return inStage && anyKong
+}
+
+const useFreeDiddySwitch = (): boolean => {
+  const dk = useCoconut()
+  const diddy = usePeanut()
+  const lanky = useGrape()
+  const tiny = useFeather()
+  const chunky = usePineapple()
+  const freeDiddy = useDonkStore(useShallow((state) => state.switchsanitySwitches.freeDiddy))
+  switch (freeDiddy) {
+    case 1:
+      return dk
+    case 2:
+      return diddy
+    case 3:
+      return lanky
+    case 4:
+      return tiny
+    case 5:
+      return chunky
+    default:
+      return true
+  }
+}
+
+export const useDkFreeDiddyGb = (): boolean => {
+  const inStage = usePlayJapes()
+  return useFreeDiddySwitch() && inStage
+}
+
+export const useDkCagedGb = (): boolean => {
+  const rambi = useJapesRambi()
+  const dk = useDk()
+  const canSlam = useSlamJapes()
+  return rambi && dk && canSlam
+}
+
+export const useDkBlastGb = (): boolean => {
+  const inStage = usePlayJapes()
+  const blast = useBlast()
+  const vine = useVine()
+  return inStage && blast && vine
+}
+
+export const useLankyCagedGb = (): boolean => {
+  const rambi = useJapesRambi()
+  const lanky = useLanky()
+  const canSlam = useSlamJapes()
+  return rambi && lanky && canSlam
+}
+
+export const useLankyGateGb = (): boolean => {
+  const side = useJapesSideArea()
+  const grape = useGrape()
+  return side && grape
+}
+
+export const useLankySlopeGb = (): LogicBool => {
+  const tunnel = useJapesKongGates()
+  const stand = useStand()
+  const anyKong = useAnyKong()
+  return {
+    in: tunnel && stand,
+    out: tunnel && anyKong
+  }
+}
+
+export const useLankyPaintingGb = (): LogicBool => {
+  const painting = useJapesPainting()
+  const grape = useGrape()
+  const trombone = useTrombone()
+  const lanky = useLanky()
+  const slam = useSlam()
+  const anyGun = useAnyGun()
+  const anyMusic = useAnyMusic()
+  return {
+    in: lanky && slam && painting.in && (grape || trombone),
+    out: lanky && slam && logicBreak(painting) && (anyGun || anyMusic)
+  }
+}
+
+export const useTinyCagedGb = (): boolean => {
+  const rambi = useJapesRambi()
+  const tiny = useTiny()
+  const canSlam = useSlamJapes()
+  return rambi && tiny && canSlam
+}
+
+export const useTinyGateGb = (): boolean => {
+  const side = useJapesSideArea()
+  const feather = useFeather()
+  return side && feather
+}
+
+export const useTinyStumpGb = (): boolean => {
+  const hive = useJapesHive()
+  const mini = useMini()
+  return hive && mini
+}
+
+export const useTinyHiveGb = (): LogicBool => {
+  const hive = useTinyStumpGb()
+  const canSlam = useSlamJapes()
+  const sax = useSax()
+  const orange = useOrange()
+  return {
+    in: hive && canSlam && (sax || orange),
+    out: hive && canSlam
+  }
+}
+
+export const useArena = (): boolean => {
+  const anyKong = useAnyKong()
+  return usePlayJapes() && anyKong
+}
+
+export const useRambiCrate = (): boolean => {
+  const anyKong = useAnyKong()
+  return useJapesRambi() && anyKong
+}
+
+export const usePaintingDirt = (): LogicBool => {
+  const japesPaintingOutside = useJapesPaintingOutside()
+  const shockwave = useShockwave()
+  return {
+    in: shockwave && japesPaintingOutside.in,
+    out: shockwave && japesPaintingOutside.out
+  }
+}
+
+export const useGeneralDirt = (): boolean => {
+  const shockwave = useShockwave()
+  const inStage = usePlayJapes()
+  return inStage && shockwave
+}
+
+export const useRambiFairy = (): boolean => {
+  const camera = useCamera()
+  const japesRambi = useJapesRambi()
+  return japesRambi && camera
+}
+
+export const usePaintingFairy = (): LogicBool => {
+  const camera = useCamera()
+  const banana = useLankyPaintingGb()
+  return {
+    in: camera && banana.in,
+    out: camera && banana.out
+  }
+}
+
+export const useGeneralFairy = (): boolean => {
+  const camera = useCamera()
+  return usePlayJapes() && camera
+}
+
+export const useGateKasplat = (): boolean => {
+  const kongGates = useJapesKongGates()
+  const anyKong = useAnyKong()
+  return kongGates && anyKong
 }

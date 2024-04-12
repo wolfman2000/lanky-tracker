@@ -270,6 +270,10 @@ export type CheckSlice = CheckState & CheckActions
 
 //#region Switchsanity
 export interface SwitchsanitySwitches {
+  freeDiddy: PearlRange
+  freeLanky: KongRange // always need music instrument to start.
+  freeTiny: BananaportRange
+  freeChunky: PearlRange
   /**
    * What instrument is needed to reveal the Rocket barrel in Isles?
    */

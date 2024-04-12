@@ -1,67 +1,43 @@
 import {
-  useFactoryHut,
-  useFactoryProductionEnabled,
-  useFactoryTesting,
-  useSlamFactory
+  useDiddyBlockGb,
+  useDiddyEnemyGb,
+  useDiddyProductionGb,
+  useDiddyStorageGb
 } from '@renderer/hooks/factory'
-import {
-  useCharge,
-  useChunky,
-  useDiddy,
-  useDk,
-  useGuitar,
-  useHighGrab,
-  useSpring,
-  useTwirl,
-  useVine
-} from '@renderer/hooks/kongs'
-import { useAutoBonus } from '@renderer/hooks/settings'
-import { logicBreak } from '@renderer/hooks/world'
 import FactoryCheck from '../FactoryCheck'
 
 const DiddyBananas: React.FC = () => {
-  const testing = useFactoryTesting()
-  const production = useFactoryProductionEnabled()
-  const canSlam = useSlamFactory()
-  const dk = useDk()
-  const diddy = useDiddy()
-  const chunky = useChunky()
-  const spring = useSpring()
-  const guitar = useGuitar()
-  const charge = useCharge()
-  const highGrab = useHighGrab()
-  const vine = useVine()
-  const twirl = useTwirl()
-  const autoBonus = useAutoBonus()
-  const hut = useFactoryHut()
+  const blockGb = useDiddyBlockGb()
+  const storageGb = useDiddyStorageGb()
+  const prodGb = useDiddyProductionGb()
   return (
     <>
       <FactoryCheck
         id={3010}
         name="Factory Diddy Block Tower"
         region="Testing Area"
-        canGetLogic={testing && spring}
-        canGetBreak={testing && highGrab}
+        canGetLogic={blockGb.in}
+        canGetBreak={blockGb.out}
       />
       <FactoryCheck
         id={3011}
         name="Factory Diddy R&D"
         region="R&D Area"
-        canGetLogic={testing && guitar && charge}
+        canGetLogic={useDiddyEnemyGb()}
       />
       <FactoryCheck
         id={3012}
         name="Factory Diddy Chunky Room Barrel"
         region="Storage And Arcade"
-        canGetLogic={hut.in && canSlam && diddy && (autoBonus || vine)}
-        canGetBreak={logicBreak(hut) && canSlam && diddy && (autoBonus || vine || dk || chunky)}
+        canGetLogic={storageGb.in}
+        canGetBreak={storageGb.out}
       />
       <FactoryCheck
         id={3013}
         name="Factory Diddy Production Room"
         region="Production Room"
-        canGetLogic={production && canSlam && diddy && spring}
-        canGetBreak={production && canSlam && diddy && (twirl || highGrab)}
+        canGetLogic={prodGb.in}
+        canGetBreak={prodGb.out}
       />
     </>
   )

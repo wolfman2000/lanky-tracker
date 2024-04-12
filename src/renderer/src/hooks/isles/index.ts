@@ -7,15 +7,18 @@ import { usePlayCastle } from '../castle'
 import { usePlayCaves } from '../caves'
 import { useCurrentFairyCount } from '../consumables'
 import { usePlayFactory } from '../factory'
+import { usePlayForest } from '../forest'
 import { usePlayGalleon, useSlamGalleon } from '../galleon'
 import { usePlayHelm } from '../helm'
 import { usePlayJapes } from '../japes'
 import {
+  useAllGun,
   useAnyKong,
   useBalloon,
   useBlast,
   useBongos,
   useBoulderTech,
+  useCamera,
   useCharge,
   useChunky,
   useCoconut,
@@ -37,7 +40,9 @@ import {
   usePunch,
   useRocket,
   useSax,
+  useShockwave,
   useSlam,
+  useSniper,
   useSpring,
   useSprint,
   useStrong,
@@ -542,4 +547,128 @@ export const useCheckChunkyHelm = (): LogicBool => {
     in: playHelm && helmEntry && vine,
     out: playHelm && helmEntry && twirl
   }
+}
+
+export const useSnideArena = (): boolean => {
+  const islesKremAscent = useIslesKremAscent()
+  const boulderTech = useBoulderTech()
+  return islesKremAscent && boulderTech
+}
+
+export const useForestArena = (): boolean => {
+  const playForest = usePlayForest()
+  const allGun = useAllGun()
+  const gone = useGone()
+  return playForest && allGun && gone
+}
+
+export const useGeneralDirt = (): boolean => {
+  const anyKong = useAnyKong()
+  const shockwave = useShockwave()
+  return anyKong && shockwave
+}
+
+export const useHoardDirt = (): boolean => {
+  const dirt = useGeneralDirt()
+  const vine = useVine()
+  return dirt && vine
+}
+
+export const useIslandDirt = (): boolean => {
+  const dirt = useGeneralDirt()
+  const fungi = useIslesFungiIsland()
+  return dirt && fungi
+}
+
+export const useCastleDirt = (): LogicBool => {
+  const shockwave = useShockwave()
+  const boulderTech = useBoulderTech()
+  const tiny = useTiny()
+  const balloon = useBalloon()
+  const playCastle = usePlayCastle()
+  return {
+    in: playCastle && boulderTech && balloon && shockwave,
+    out: playCastle && tiny && shockwave
+  }
+}
+
+export const useAztecDirt = (): LogicBool => {
+  const crossFungi = useIslesCrossFungi()
+  const islesFungi = useIslesFungiIsland()
+  const islesRocket = useIslesRocket()
+  const islesUpper = useIslesUpper()
+  const boulderTech = useBoulderTech()
+  const shockwave = useShockwave()
+  const dk = useDk()
+  const diddy = useDiddy()
+  const rocket = useRocket()
+  const tiny = useTiny()
+  const twirl = useTwirl()
+  return {
+    in: islesRocket && islesFungi && diddy && rocket && shockwave,
+    out:
+      shockwave &&
+      ((islesUpper && boulderTech && (diddy || tiny)) || (crossFungi && (dk || (tiny && twirl))))
+  }
+}
+
+export const useGeneralFairy = (): boolean => {
+  const anyKong = useAnyKong()
+  const camera = useCamera()
+  return anyKong && camera
+}
+
+export const useFactoryFairy = (): boolean => {
+  const camera = useCamera()
+  const punch = usePunch()
+  const factory = usePlayFactory()
+  return factory && punch && camera
+}
+
+export const useForestFairy = (): boolean => {
+  const forest = usePlayForest()
+  const camera = useCamera()
+  const islesSwitch = useIslesFairySwitch()
+  return forest && camera && islesSwitch
+}
+
+export const useKremFairy = (): boolean => {
+  const top = useIslesKremTop()
+  const camera = useCamera()
+  return top && camera
+}
+
+export const useHelmKasplat = (): LogicBool => {
+  const playHelm = usePlayHelm()
+  const sniper = useSniper()
+  const coconut = useCoconut()
+  const twirl = useTwirl()
+  return {
+    in: playHelm && sniper && coconut,
+    out: playHelm && twirl
+  }
+}
+
+export const useCastleKasplat = (): boolean => {
+  const playCastle = usePlayCastle()
+  const coconut = useCoconut()
+  return playCastle && coconut
+}
+
+export const useCavesKasplat = (): boolean => {
+  const playCaves = usePlayCaves()
+  const punch = usePunch()
+  return playCaves && punch
+}
+
+export const useFactoryKasplat = (): boolean => {
+  const playFactory = usePlayFactory()
+  const punch = usePunch()
+  return playFactory && punch
+}
+
+export const useGalleonKasplat = (): boolean => {
+  const playGalleon = usePlayGalleon()
+  const anyKong = useAnyKong()
+  return playGalleon && anyKong
 }

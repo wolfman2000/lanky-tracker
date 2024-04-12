@@ -1,5 +1,5 @@
 import {
-  useCastleShedEnemies,
+  useChunkyShedGb,
   useCastleTree,
   usePlayCastle,
   useSlamCastle
@@ -24,7 +24,7 @@ import CastleCheck from './CastleCheck'
 const EnemyLocations: React.FC = () => {
   const inStage = usePlayCastle()
   const canSlam = useSlamCastle()
-  const shed = useCastleShedEnemies()
+  const shed = useChunkyShedGb()
   const tree = useCastleTree()
   const anyKong = useAnyKong()
   const diddy = useDiddy()

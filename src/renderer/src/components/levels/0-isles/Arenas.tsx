@@ -1,29 +1,23 @@
 import ArenaPool from '@renderer/components/pools/Arenas'
-import { usePlayForest } from '@renderer/hooks/forest'
-import { useIslesKremAscent } from '@renderer/hooks/isles'
-import { useAllGun, useAnyKong, useBoulderTech, useGone } from '@renderer/hooks/kongs'
+import { useForestArena, useSnideArena } from '@renderer/hooks/isles'
+import { useAnyKong } from '@renderer/hooks/kongs'
 import { useShuffledArenas } from '@renderer/hooks/settings'
 import IslesCheck from './IslesCheck'
 
 const Vanilla: React.FC = () => {
-  const islesKremAscent = useIslesKremAscent()
-  const boulderTech = useBoulderTech()
-  const playForest = usePlayForest()
-  const allGun = useAllGun()
-  const gone = useGone()
   return (
     <>
       <IslesCheck
         id={90}
         name="Isles Snide Arena"
         region="Krem Isle"
-        canGetLogic={islesKremAscent && boulderTech}
+        canGetLogic={useSnideArena()}
       />
       <IslesCheck
         id={91}
         name="Isles Forest Arena"
-        region="Outer Isles"
-        canGetLogic={playForest && allGun && gone}
+        region="Japes-Forest Lobbies"
+        canGetLogic={useForestArena()}
       />
     </>
   )
