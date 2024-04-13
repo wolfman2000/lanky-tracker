@@ -1,23 +1,16 @@
 import ArenaPool from '@renderer/components/pools/Arenas'
-import { useFactoryTesting, usePlayFactory } from '@renderer/hooks/factory'
-import { useAnyKong, useGrab } from '@renderer/hooks/kongs'
+import { useArena, useGeneralThing } from '@renderer/hooks/factory'
 import { useShuffledArenas } from '@renderer/hooks/settings'
 import FactoryCheck from './FactoryCheck'
 
 const Vanilla: React.FC = () => {
-  const inStage = useFactoryTesting()
-  const grab = useGrab()
-  return (
-    <FactoryCheck id={3090} name="Factory Arena" region="R&D Area" canGetLogic={inStage && grab} />
-  )
+  return <FactoryCheck id={3090} name="Factory Arena" region="R&D Area" canGetLogic={useArena()} />
 }
 
 const Shuffled: React.FC = () => {
-  const inStage = usePlayFactory()
-  const anyKong = useAnyKong()
   return (
     <>
-      <FactoryCheck id={3190} name="Factory Arena" canGetLogic={inStage && anyKong} />
+      <FactoryCheck id={3190} name="Factory Arena" canGetLogic={useGeneralThing()} />
     </>
   )
 }

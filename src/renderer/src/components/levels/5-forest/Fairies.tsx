@@ -1,66 +1,37 @@
-
 import FairyPool from '@renderer/components/pools/Fairies'
-import { useForestNight, usePlayForest, useSlamForest } from '@renderer/hooks/forest'
-import {
-  useAnyKong,
-  useCamera,
-  useDk,
-  useGuitar,
-  useHighGrab,
-  useSpring,
-  useStrong
-} from '@renderer/hooks/kongs'
+import { useBarnFairy, useGeneralFairy, useRaftersFairy } from '@renderer/hooks/forest'
 import { useShuffleFairies } from '@renderer/hooks/settings'
-import { logicBreak } from '@renderer/hooks/world'
 import ForestCheck from './ForestCheck'
 
 const Vanilla: React.FC = () => {
-  const inStage = usePlayForest()
-  const camera = useCamera()
-  const night = useForestNight()
-  const guitar = useGuitar()
-  const spring = useSpring()
-  const highGrab = useHighGrab()
-  const canSlam = useSlamForest()
-  const dk = useDk()
-  const strong = useStrong()
+  const barn = useBarnFairy()
+  const rafters = useRaftersFairy()
   return (
     <>
       <ForestCheck
         id={5080}
         name="Forest Fairy Rafters"
         region="Forest Mills"
-        canGetLogic={inStage && camera && night.in && spring && guitar}
-        canGetBreak={inStage && camera && logicBreak(night) && highGrab}
+        canGetLogic={rafters.in}
+        canGetBreak={rafters.out}
       />
       <ForestCheck
         id={5081}
         name="Forest Fairy Barn"
         region="Forest Mills"
-        canGetLogic={inStage && camera && night.in && canSlam && strong}
-        canGetBreak={inStage && camera && logicBreak(night) && dk && canSlam}
+        canGetLogic={barn.in}
+        canGetBreak={barn.out}
       />
     </>
   )
 }
 
 const Shuffled: React.FC = () => {
-  const anyKong = useAnyKong()
-  const inStage = usePlayForest()
-  const camera = useCamera()
-
+  const thing = useGeneralFairy()
   return (
     <>
-      <ForestCheck
-        id={5280}
-        name="Forest Fairy Location #1"
-        canGetLogic={inStage && anyKong && camera}
-      />
-      <ForestCheck
-        id={5281}
-        name="Forest Fairy Location #2"
-        canGetLogic={inStage && anyKong && camera}
-      />
+      <ForestCheck id={5280} name="Forest Fairy Location #1" canGetLogic={thing} />
+      <ForestCheck id={5281} name="Forest Fairy Location #2" canGetLogic={thing} />
     </>
   )
 }

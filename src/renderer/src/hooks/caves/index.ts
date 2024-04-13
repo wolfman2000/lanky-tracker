@@ -3,11 +3,13 @@ import { useShallow } from 'zustand/react/shallow'
 import { usePlayLevel, useSlamLevel } from '../isles'
 import {
   useAnyGun,
+  useAnyKong,
   useBalloon,
   useBarrel,
   useBlast,
   useBongos,
   useBoulderTech,
+  useCamera,
   useCoconut,
   useDiddy,
   useDk,
@@ -270,14 +272,11 @@ export const useTinyCaveGb = (): boolean => {
 }
 
 export const useTinyPortGb = (): LogicBool => {
-  const inStage = usePlayCaves()
-  const mini = useMini()
+  const funky = useCavesMiniFunky()
   const port = useMonkeyport()
-  const warpAll = useBananaportAll()
-  const twirl = useTwirl()
   return {
-    in: inStage && mini && port,
-    out: inStage && twirl && warpAll && port
+    in: funky.in && port,
+    out: funky.out && port
   }
 }
 
@@ -297,5 +296,44 @@ export const useTinyCabinGb = (): LogicBool => {
   return {
     in: inStage && sax && orange,
     out: inStage && sax && shockwave && feather
+  }
+}
+
+export const useGeneralThing = (): boolean => {
+  const inStage = usePlayCaves()
+  return useAnyKong() && inStage
+}
+
+export const useGeneralDirt = (): boolean => {
+  const inStage = usePlayCaves()
+  return useShockwave() && inStage
+}
+
+export const useKoshaDirt = (): LogicBool => {
+  const igloo = useChunkyClearGb()
+  const port = useMonkeyport()
+  const shock = useShockwave()
+  return {
+    in: igloo.in && port && shock,
+    out: igloo.out && port && shock
+  }
+}
+
+export const useGenericFairy = (): boolean => {
+  const inStage = usePlayCaves()
+  return useCamera() && inStage
+}
+
+export const useIglooFairy = (): boolean => {
+  const thing = useTinyIglooGb()
+  return useCamera() && thing
+}
+
+export const useCabinFairy = (): LogicBool => {
+  const thing = useDiddyCandleGb()
+  const camera = useCamera()
+  return {
+    in: thing.in && camera,
+    out: thing.out && camera
   }
 }

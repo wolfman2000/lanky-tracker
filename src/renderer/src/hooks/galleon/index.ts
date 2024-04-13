@@ -4,10 +4,12 @@ import { useCurrentPearlCount } from '../consumables'
 import { useFastMermaid } from '../fast-checks'
 import { usePlayLevel, useSlamLevel } from '../isles'
 import {
+  useAnyKong,
   useBalloon,
   useBlast,
   useBongos,
   useBoulderTech,
+  useCamera,
   useDiddy,
   useDive,
   useDk,
@@ -19,6 +21,7 @@ import {
   usePunch,
   useRocket,
   useSax,
+  useShockwave,
   useSlam,
   useSpring,
   useTiny,
@@ -103,6 +106,16 @@ export const useGalleonLighthousePlatform = (): LogicBool => {
   }
 }
 
+export const useGalleonLighthouseInside = (): LogicBool => {
+  const canSlam = useSlamGalleon()
+  const lighthousePlatform = useGalleonLighthousePlatform()
+  const dk = useDk()
+  return {
+    in: lighthousePlatform.in && canSlam && dk,
+    out: lighthousePlatform.out && canSlam && dk
+  }
+}
+
 /**
  * Can we board the ship summoned by turning on the Lighthouse in Galleon?
  * @returns a truthy statement if we can board the ship.
@@ -179,15 +192,12 @@ export const useGalleonTreasureRoom = (): LogicBool => {
 }
 
 export const useDkLighthouseGb = (): LogicBool => {
-  const canSlam = useSlamGalleon()
-  const lighthouseArea = useGalleonLighthouseArea()
-  const highTide = useGalleonHighTide()
-  const dk = useDk()
   const grab = useGrab()
+  const inside = useGalleonLighthousePlatform()
   const seasick = useDonkStore(useShallow((state) => state.removeBarriers.galleonSeasick))
   return {
-    in: lighthouseArea && highTide && canSlam && dk && (seasick || grab),
-    out: lighthouseArea && canSlam && dk && (seasick || grab)
+    in: inside.in && (seasick || grab),
+    out: inside.out && (seasick || grab)
   }
 }
 
@@ -360,5 +370,70 @@ export const useTinyClams = (): LogicBool => {
   return {
     in: treasure.in && mini,
     out: treasure.out && mini
+  }
+}
+
+export const useGeneralThing = (): boolean => {
+  const inStage = usePlayGalleon()
+  return useAnyKong() && inStage
+}
+
+export const useArena = (): boolean => {
+  const inStage = usePlayGalleon()
+  return usePunch() && inStage
+}
+
+export const useGeneralOutskirts = (): boolean => {
+  const inStage = useGalleonOutskirts()
+  return useAnyKong() && inStage
+}
+
+export const useLighthouseDirt = (): LogicBool => {
+  const inside = useGalleonLighthouseInside()
+  const dirt = useShockwave()
+  return {
+    in: inside.in && dirt,
+    out: inside.out && dirt
+  }
+}
+
+export const useGeneralDirt = (): boolean => {
+  const thing = useGeneralThing()
+  return useShockwave() && thing
+}
+
+export const useChestFairy = (): boolean => {
+  const thing = useChunkyChestGb()
+  const fairy = useCamera()
+  return thing && fairy
+}
+
+export const useShipFairy = (): boolean => {
+  const ship = useTiny5DoorShipGb()
+  const fairy = useCamera()
+  return ship && fairy
+}
+
+export const useGeneralFairy = (): boolean => {
+  const thing = useGeneralThing()
+  return useCamera() && thing
+}
+
+export const useTreasureKasplat = (): LogicBool => {
+  const treasure = useGalleonTreasureRoom()
+  const spring = useSpring()
+  const highGrab = useHighGrab()
+  return {
+    in: treasure.in && spring,
+    out: logicBreak(treasure) && (spring || highGrab)
+  }
+}
+
+export const useCannonKasplat = (): LogicBool => {
+  const highTide = useGalleonHighTide()
+  const cannon = useGalleonCannon()
+  return {
+    in: cannon && highTide,
+    out: cannon
   }
 }

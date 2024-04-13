@@ -138,10 +138,13 @@ export const useAztecLlamaTemple = (): LogicBool => {
   const llama1 = useAztecLlamaCoconutSwitch()
   const llama2 = useAztecLlamaGrapeSwitch()
   const llama3 = useAztecLlamaFeatherSwitch()
+  const blast = useBlast()
+  const barrier = useDonkStore(useShallow((state) => state.removeBarriers.aztecLlamaTemple))
+  const entry = blast || barrier
   const properGun = llama1 || llama2 || llama3
   return {
-    in: aztecBack.in && properGun,
-    out: logicBreak(aztecBack) && properGun
+    in: aztecBack.in && entry && properGun,
+    out: logicBreak(aztecBack) && entry && properGun
   }
 }
 

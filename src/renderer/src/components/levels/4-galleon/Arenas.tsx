@@ -1,28 +1,23 @@
 import ArenaPool from '@renderer/components/pools/Arenas'
-import { usePlayGalleon } from '@renderer/hooks/galleon'
-import { useAnyKong, usePunch } from '@renderer/hooks/kongs'
+import { useArena, useGeneralThing } from '@renderer/hooks/galleon'
 import { useShuffledArenas } from '@renderer/hooks/settings'
 import GalleonCheck from './GalleonCheck'
 
 const Vanilla: React.FC = () => {
-  const inStage = usePlayGalleon()
-  const punch = usePunch()
   return (
     <GalleonCheck
       id={4090}
       name="Galleon Arena"
       region="Galleon Caverns"
-      canGetLogic={inStage && punch}
+      canGetLogic={useArena()}
     />
   )
 }
 
 const Shuffled: React.FC = () => {
-  const inStage = usePlayGalleon()
-  const anyKong = useAnyKong()
   return (
     <>
-      <GalleonCheck id={4190} name="Galleon Arena" canGetLogic={inStage && anyKong} />
+      <GalleonCheck id={4190} name="Galleon Arena" canGetLogic={useGeneralThing()} />
     </>
   )
 }

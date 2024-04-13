@@ -1,51 +1,33 @@
 import FairyPool from '@renderer/components/pools/Fairies'
-import { useGalleonOutskirts, usePlayGalleon } from '@renderer/hooks/galleon'
-import { useAnyKong, useCamera, useDive, usePunch, useSax } from '@renderer/hooks/kongs'
+import { useChestFairy, useGeneralFairy, useShipFairy } from '@renderer/hooks/galleon'
 import { useShuffleFairies } from '@renderer/hooks/settings'
 import GalleonCheck from './GalleonCheck'
 
 const Vanilla: React.FC = () => {
-  const camera = useCamera()
-  const punch = usePunch()
-  const inStage = usePlayGalleon()
-  const outskirts = useGalleonOutskirts()
-  const sax = useSax()
-  const dive = useDive()
   return (
     <>
       <GalleonCheck
         id={4080}
         name="Galleon Fairy Chest"
         region="Galleon Caverns"
-        canGetLogic={inStage && punch && camera}
+        canGetLogic={useChestFairy()}
       />
       <GalleonCheck
         id={4081}
         name="Galleon Fairy 5 Door Ship"
         region="5 Door Ship"
-        canGetLogic={outskirts && sax && dive}
+        canGetLogic={useShipFairy()}
       />
     </>
   )
 }
 
 const Shuffled: React.FC = () => {
-  const anyKong = useAnyKong()
-  const inStage = usePlayGalleon()
-  const camera = useCamera()
-
+  const thing = useGeneralFairy()
   return (
     <>
-      <GalleonCheck
-        id={4280}
-        name="Galleon Fairy Location #1"
-        canGetLogic={inStage && anyKong && camera}
-      />
-      <GalleonCheck
-        id={4281}
-        name="Galleon Fairy Location #2"
-        canGetLogic={inStage && anyKong && camera}
-      />
+      <GalleonCheck id={4280} name="Galleon Fairy Location #1" canGetLogic={thing} />
+      <GalleonCheck id={4281} name="Galleon Fairy Location #2" canGetLogic={thing} />
     </>
   )
 }

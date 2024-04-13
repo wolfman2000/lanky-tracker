@@ -8,6 +8,7 @@ import {
   useAnyKong,
   useBlast,
   useBoulderTech,
+  useCamera,
   useCharge,
   useChunky,
   useDiddy,
@@ -26,6 +27,7 @@ import {
   usePunch,
   useRocket,
   useSax,
+  useShockwave,
   useSlam,
   useSpring,
   useSprint,
@@ -128,10 +130,10 @@ export const useForestSpiderBoss = (): LogicBool => {
  *
  * Due to recent logic changes, this is always possible.
  * However, the future may put restrictions on again.
- * @returns true. This is always possible.
+ * @returns true (as long as we're in the stage). This is always possible.
  */
 export const useForestMushroomTop = (): boolean => {
-  return true
+  return usePlayForest()
 }
 
 /**
@@ -285,16 +287,24 @@ export const useDkMillGb = (): LogicBool => {
   }
 }
 
-export const useDkBarnGb = (): LogicBool => {
+export const useForestBarn = (): LogicBool => {
   const inStage = usePlayForest()
   const night = useForestNight()
   const canSlam = useSlamForest()
   const dk = useDk()
   const strong = useStrong()
+  return {
+    in: inStage && night.in && canSlam && strong,
+    out: inStage && logicBreak(night) && dk && canSlam
+  }
+}
+
+export const useDkBarnGb = (): LogicBool => {
+  const barn = useForestBarn()
   const vine = useVine()
   return {
-    in: inStage && night.in && canSlam && strong && vine,
-    out: inStage && logicBreak(night) && dk && canSlam
+    in: barn.in && vine,
+    out: logicBreak(barn)
   }
 }
 
@@ -367,4 +377,72 @@ export const useTinyBeanGb = (): boolean => {
   const mini = useMini()
   const sax = useSax()
   return beanstalk && bean && mini && sax
+}
+
+export const useGeneralThing = (): boolean => {
+  const inStage = usePlayForest()
+  const anyKong = useAnyKong()
+  return inStage && anyKong
+}
+
+export const useArena = (): boolean => {
+  const top = useForestMushroomTop()
+  const anyKong = useAnyKong()
+  return top && anyKong
+}
+
+export const useBeanDirt = (): boolean => {
+  const beanstalk = useForestBean()
+  return useShockwave() && beanstalk
+}
+
+export const useGeneralDirt = (): boolean => {
+  const inStage = usePlayForest()
+  return useShockwave() && inStage
+}
+
+export const useBarnFairy = (): LogicBool => {
+  const barn = useForestBarn()
+  const camera = useCamera()
+  return {
+    in: barn.in && camera,
+    out: barn.out && camera
+  }
+}
+
+export const useRaftersFairy = (): LogicBool => {
+  const rafters = useDiddyRaftersGb()
+  const camera = useCamera()
+  return {
+    in: rafters.in && camera,
+    out: rafters.out && camera
+  }
+}
+
+export const useGeneralFairy = (): boolean => {
+  const thing = useGeneralThing()
+  const camera = useCamera()
+  return thing && camera
+}
+
+export const useBarnKasplat = (): LogicBool => {
+  const inStage = usePlayForest()
+  const night = useForestNight()
+  const anyGun = useAnyGun()
+  return {
+    in: inStage && night.in && anyGun,
+    out: inStage && (night.in || night.out)
+  }
+}
+
+export const useOwlKasplat = (): boolean => {
+  const inStage = useForestOwl()
+  const anyKong = useAnyKong()
+  return inStage && anyKong
+}
+
+export const useNightKasplat = (): boolean => {
+  const inStage = useForestMushroomTop()
+  const anyKong = useAnyKong()
+  return inStage && anyKong
 }

@@ -1,41 +1,27 @@
 import RainbowCoinPool from '@renderer/components/pools/RainbowCoins'
-import { usePlayCastle } from '@renderer/hooks/castle'
-import { useAnyKong, useShockwave } from '@renderer/hooks/kongs'
+import { useGeneralDirt } from '@renderer/hooks/castle'
 import { useShuffleDirt } from '@renderer/hooks/settings'
 import CastleCheck from './CastleCheck'
 
 const VanillaDirtLocations: React.FC = () => {
-  const inStage = usePlayCastle()
-  const anyKong = useAnyKong()
-  const shockwave = useShockwave()
   return (
     <>
       <CastleCheck
         id={7070}
         name="Castle Dirt Top Floor"
         region="Castle Surroundings"
-        canGetLogic={inStage && anyKong && shockwave}
+        canGetLogic={useGeneralDirt()}
       />
     </>
   )
 }
 
 const ShuffledDirtLocations: React.FC = () => {
-  const anyKong = useAnyKong()
-  const shockwave = useShockwave()
-  const inStage = usePlayCastle()
+  const dirt = useGeneralDirt()
   return (
     <>
-      <CastleCheck
-        id={7270}
-        name="Castle Dirt Location #1"
-        canGetLogic={inStage && anyKong && shockwave}
-      />
-      <CastleCheck
-        id={7271}
-        name="Castle Dirt Location #2"
-        canGetLogic={inStage && anyKong && shockwave}
-      />
+      <CastleCheck id={7270} name="Castle Dirt Location #1" canGetLogic={dirt} />
+      <CastleCheck id={7271} name="Castle Dirt Location #2" canGetLogic={dirt} />
     </>
   )
 }
