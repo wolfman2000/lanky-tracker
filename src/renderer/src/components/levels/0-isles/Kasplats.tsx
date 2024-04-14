@@ -16,32 +16,32 @@ const Vanilla: React.FC = () => {
     <>
       <IslesCheck
         id={50}
-        name="Isles Kasplat Helm Lobby"
+        name="Isles Kasplat: Helm Lobby"
         region="Caves-Helm Lobbies"
         canGetLogic={helmKasplat.in}
         canGetBreak={helmKasplat.out}
       />
       <IslesCheck
         id={51}
-        name="Isles Kasplat Castle Lobby"
+        name="Isles Kasplat: Castle Lobby"
         region="Caves-Helm Lobbies"
         canGetLogic={useCastleKasplat()}
       />
       <IslesCheck
         id={52}
-        name="Isles Kasplat Caves Lobby Punch"
+        name="Isles Kasplat: Caves Lobby Punch"
         region="Caves-Helm Lobbies"
         canGetLogic={useCavesKasplat()}
       />
       <IslesCheck
         id={53}
-        name="Isles Kasplat Factory Lobby Box"
+        name="Isles Kasplat: Factory Lobby Box"
         region="Japes-Forest Lobbies"
         canGetLogic={useFactoryKasplat()}
       />
       <IslesCheck
         id={54}
-        name="Isles Kasplat Galleon Lobby"
+        name="Isles Kasplat: Galleon Lobby"
         region="Japes-Forest Lobbies"
         canGetLogic={useGalleonKasplat()}
       />

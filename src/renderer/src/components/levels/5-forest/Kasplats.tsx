@@ -14,32 +14,32 @@ const Vanilla: React.FC = () => {
     <>
       <ForestCheck
         id={5050}
-        name="Forest Kasplat Behind DK's Barn"
+        name="Forest Kasplat: Behind DK's Barn"
         region="Forest Mills"
         canGetLogic={barn.in}
         canGetBreak={barn.out}
       />
       <ForestCheck
         id={5051}
-        name="Forest Kasplat Inside Giant Mushroom"
+        name="Forest Kasplat: Inside Giant Mushroom"
         region="Giant Mushroom Insides"
         canGetLogic={useGeneralThing()}
       />
       <ForestCheck
         id={5052}
-        name="Forest Kasplat Under Owl Tree"
+        name="Forest Kasplat: Under Owl Tree"
         region="Owl Tree"
         canGetLogic={useOwlKasplat()}
       />
       <ForestCheck
         id={5053}
-        name="Forest Kasplat Low Mushroom Exterior"
+        name="Forest Kasplat: Low Mushroom Exterior"
         region="Giant Mushroom Exterior"
         canGetLogic={useGeneralThing()}
       />
       <ForestCheck
         id={5054}
-        name="Forest Kasplat Mushroom Night Door"
+        name="Forest Kasplat: Mushroom Night Door"
         region="Giant Mushroom Exterior"
         canGetLogic={useNightKasplat()}
       />

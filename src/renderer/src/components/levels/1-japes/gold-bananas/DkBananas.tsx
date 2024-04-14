@@ -6,25 +6,25 @@ const DkBananas: React.FC = () => {
     <>
       <JapesCheck
         id={1001}
-        name="Japes DK Front of Cage"
+        name="Japes Donkey Front of Diddy Cage"
         region="Japes Hillside"
         canGetLogic={useDkFreebieGb()}
       />
       <JapesCheck
         id={1002}
-        name="Japes DK Free Diddy"
+        name="Japes Free Diddy Item"
         region="Japes Hillside"
         canGetLogic={useDkFreeDiddyGb()}
       />
       <JapesCheck
         id={1003}
-        name="Japes DK Caged Banana"
+        name="Japes Donkey Floor Cage Banana"
         region="Japes Lowlands"
         canGetLogic={useDkCagedGb()}
       />
       <JapesCheck
         id={1004}
-        name="Japes DK Baboon Blast"
+        name="Japes Donkey Baboon Blast"
         region="Japes Lowlands"
         canGetLogic={useDkBlastGb()}
       />

@@ -8,7 +8,7 @@ const VanillaDirtLocations: React.FC = () => {
   return (
     <CavesCheck
       id={6070}
-      name="Caves Dirt Giant Kosha"
+      name="Caves Dirt: Giant Kosha"
       region="Igloo Area"
       canGetLogic={dirt.in}
       canGetBreak={dirt.out}

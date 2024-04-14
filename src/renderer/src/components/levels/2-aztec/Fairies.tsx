@@ -10,14 +10,14 @@ const Vanilla: React.FC = () => {
     <>
       <AztecCheck
         id={2080}
-        name="Aztec Fairy Llama Temple"
+        name="Aztec Fairy (Llama Temple)"
         region="Llama Temple"
         canGetLogic={llama.in}
         canGetBreak={llama.out}
       />
       <AztecCheck
         id={2081}
-        name="Aztec Fairy 5 Door Temple"
+        name="Aztec Fairy (Tiny 5-Door Temple)"
         region="5 Door Temple"
         canGetLogic={door.in}
         canGetBreak={door.out}

@@ -14,7 +14,7 @@ const DiddyBananas: React.FC = () => {
     <>
       <CavesCheck
         id={6010}
-        name="Caves Diddy Waterfall"
+        name="Caves Diddy Jetpack Barrel"
         region="Main Caves Area"
         canGetLogic={waterfallGb.in}
         canGetBreak={waterfallGb.out}
@@ -27,14 +27,14 @@ const DiddyBananas: React.FC = () => {
       />
       <CavesCheck
         id={6012}
-        name="Caves Diddy 5 Door Cabin Lower"
+        name="Caves Diddy 5 Door Cabin Lower (Gauntlet)"
         region="Cabins Area"
         canGetLogic={cabinGauntlet.in}
         canGetBreak={cabinGauntlet.out}
       />
       <CavesCheck
         id={6013}
-        name="Caves Diddy 5 Door Cabin Upper"
+        name="Caves Diddy 5 Door Cabin Upper (Candle)"
         region="Cabins Area"
         canGetLogic={candleGb.in}
         canGetBreak={candleGb.out}

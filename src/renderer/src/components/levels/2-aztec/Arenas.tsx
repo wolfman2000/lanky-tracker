@@ -8,7 +8,7 @@ const Vanilla: React.FC = () => {
   return (
     <AztecCheck
       id={2090}
-      name="Aztec Arena"
+      name="Aztec Arena (Tiny Temple: Vulture Room)"
       region="Tiny Temple"
       canGetLogic={vulture.in}
       canGetBreak={vulture.out}

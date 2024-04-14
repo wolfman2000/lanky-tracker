@@ -29,7 +29,7 @@ const ChunkyBananas: React.FC = () => {
       />
       <AztecCheck
         id={2042}
-        name="Aztec Chunky Caged Barrel"
+        name="Aztec Chunky Hunky Chunky Barrel"
         region="Various Aztec Tunnels"
         canGetLogic={hunkyGb.in}
         canGetBreak={hunkyGb.out}

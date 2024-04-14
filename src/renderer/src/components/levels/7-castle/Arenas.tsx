@@ -7,7 +7,7 @@ const Vanilla: React.FC = () => {
   return (
     <CastleCheck
       id={7090}
-      name="Castle Arena"
+      name="Castle Arena (Greenhouse: Center)"
       region="Castle Surroundings"
       canGetLogic={useLankyGreenhouseGb()}
     />

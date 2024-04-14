@@ -10,7 +10,11 @@ const Vanilla: React.FC = () => {
   const anyKong = useAnyKong()
   return (
     <>
-      <HelmCheck id={8110} name="Helm Fairies x2" canGetLogic={helmDoors && camera && anyKong} />
+      <HelmCheck
+        id={8110}
+        name="Helm Fairies (Key 8 Room) x2"
+        canGetLogic={helmDoors && camera && anyKong}
+      />
     </>
   )
 }

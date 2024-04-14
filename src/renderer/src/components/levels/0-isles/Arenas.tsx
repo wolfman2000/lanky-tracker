@@ -9,13 +9,13 @@ const Vanilla: React.FC = () => {
     <>
       <IslesCheck
         id={90}
-        name="Isles Snide Arena"
+        name="Isles Arena 1 (Snide's Room: Under Rock)"
         region="Krem Isle"
         canGetLogic={useSnideArena()}
       />
       <IslesCheck
         id={91}
-        name="Isles Forest Arena"
+        name="Isles Arena 2 (Fungi Lobby: Gone Box)"
         region="Japes-Forest Lobbies"
         canGetLogic={useForestArena()}
       />

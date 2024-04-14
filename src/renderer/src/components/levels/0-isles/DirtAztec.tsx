@@ -11,7 +11,7 @@ const DirtAztec: React.FC = () => {
   return (
     <IslesCheck
       id={74}
-      name="Isles Dirt Aztec Roof"
+      name="Isles Dirt: Aztec Roof"
       region="Main Isle"
       canGetLogic={dirt.in}
       canGetBreak={dirt.out}

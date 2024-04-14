@@ -21,34 +21,34 @@ const Vanilla: React.FC = () => {
     <>
       <GalleonCheck
         id={4050}
-        name="Galleon Kasplat Diddy Gold Tower"
+        name="Galleon Kasplat: Diddy Gold Tower"
         region="Treasure Room"
         canGetLogic={treasure.in}
         canGetBreak={treasure.out}
       />
       <GalleonCheck
         id={4051}
-        name="Galleon Kasplat Lighthouse Alcove"
+        name="Galleon Kasplat: Lighthouse Alcove"
         region="Lighthouse Area"
         canGetLogic={useGalleonLighthouseArea()}
       />
       <GalleonCheck
         id={4052}
-        name="Galleon Kasplat Cannon Game Room"
+        name="Galleon Kasplat: Cannon Game Room"
         region="Galleon Caverns"
         canGetLogic={cannon.in}
         canGetBreak={cannon.out}
       />
       <GalleonCheck
         id={4053}
-        name="Galleon Kasplat Past Vines"
+        name="Galleon Kasplat: Past Vines"
         region="Galleon Caverns"
         canGetLogic={galleonTop.in}
         canGetBreak={logicBreak(galleonTop)}
       />
       <GalleonCheck
         id={4054}
-        name="Galleon Kasplat Musical Cactus"
+        name="Galleon Kasplat: Musical Cactus"
         region="Shipyard Outskirts"
         canGetLogic={outskirts}
       />

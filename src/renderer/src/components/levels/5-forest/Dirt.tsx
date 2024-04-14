@@ -8,13 +8,13 @@ const VanillaDirtLocations: React.FC = () => {
     <>
       <ForestCheck
         id={5070}
-        name="Forest Dirt Beanstalk"
+        name="Forest Dirt: Beanstalk"
         region="Forest Center And Beanstalk"
         canGetLogic={useBeanDirt()}
       />
       <ForestCheck
         id={5071}
-        name="Forest Dirt Mills Grass"
+        name="Forest Dirt: Mills Grass"
         region="Forest Mills"
         canGetLogic={useGeneralDirt()}
       />

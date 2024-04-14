@@ -15,7 +15,7 @@ const LankyBananas: React.FC = () => {
     <>
       <AztecCheck
         id={2020}
-        name="Aztec Lanky Vulture"
+        name="Aztec Lanky Vulture Shooting"
         region="Tiny Temple"
         canGetLogic={vultureGb.in}
         canGetBreak={vultureGb.out}

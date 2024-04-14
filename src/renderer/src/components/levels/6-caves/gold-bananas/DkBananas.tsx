@@ -15,27 +15,27 @@ const DkBananas: React.FC = () => {
       <ToughGoldenBanana>
         <CavesCheck
           id={6001}
-          name="Caves DK Baboon Blast"
+          name="Caves Donkey Baboon Blast"
           region="Main Caves Area"
           canGetLogic={useDkBlastGb()}
         />
       </ToughGoldenBanana>
       <CavesCheck
         id={6002}
-        name="Caves DK 5 Door Igloo"
+        name="Caves Donkey 5 Door Igloo"
         region="Igloo Area"
         canGetLogic={iglooGb.in}
         canGetBreak={iglooGb.out}
       />
       <CavesCheck
         id={6003}
-        name="Caves DK Rotating Cabin"
+        name="Caves Donkey Rotating Cabin"
         region="Cabins Area"
         canGetLogic={useDkRotateGb()}
       />
       <CavesCheck
         id={6004}
-        name="Caves DK 5 Door Cabin"
+        name="Caves Donkey 5 Door Cabin"
         region="Cabins Area"
         canGetLogic={cabinGb.in}
         canGetBreak={cabinGb.out}

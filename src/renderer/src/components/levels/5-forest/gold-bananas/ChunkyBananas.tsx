@@ -14,7 +14,7 @@ const ChunkyBananas: React.FC = () => {
       <ToughGoldenBanana>
         <ForestCheck
           id={5040}
-          name="Forest Chunky Minecarts"
+          name="Forest Chunky Minecart"
           region="Forest Center And Beanstalk"
           canGetLogic={useChunkyMineGb()}
         />
@@ -27,14 +27,14 @@ const ChunkyBananas: React.FC = () => {
       />
       <ForestCheck
         id={5042}
-        name="Forest Chunky Kegs"
+        name="Forest Chunky Keg Crushing"
         region="Forest Mills"
         canGetLogic={millGb.in}
         canGetBreak={millGb.out}
       />
       <ForestCheck
         id={5043}
-        name="Forest Chunky Apple"
+        name="Forest Chunky Apple Rescue"
         region="Forest Center And Beanstalk"
         canGetLogic={useChunkyAppleGb()}
       />

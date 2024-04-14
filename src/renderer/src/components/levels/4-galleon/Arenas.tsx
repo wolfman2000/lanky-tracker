@@ -7,7 +7,7 @@ const Vanilla: React.FC = () => {
   return (
     <GalleonCheck
       id={4090}
-      name="Galleon Arena"
+      name="Galleon Arena (Under Cranky)"
       region="Galleon Caverns"
       canGetLogic={useArena()}
     />

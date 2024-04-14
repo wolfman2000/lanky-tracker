@@ -7,7 +7,13 @@ import HelmCheck from './HelmCheck'
 const Vanilla: React.FC = () => {
   const helmMachine = useHelmMachine()
   const rocket = useRocket()
-  return <HelmCheck id={8090} name="Helm Arena" canGetLogic={helmMachine && rocket} />
+  return (
+    <HelmCheck
+      id={8090}
+      name="Helm Arena (Top of Blast-o-Matic)"
+      canGetLogic={helmMachine && rocket}
+    />
+  )
 }
 
 const Shuffled: React.FC = () => {

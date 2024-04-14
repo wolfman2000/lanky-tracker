@@ -10,7 +10,7 @@ const DkMedal: React.FC = () => {
   return (
     <AztecCheck
       id={2100}
-      name="Aztec DK Medal"
+      name="Aztec Donkey Medal"
       region="Aztec Medal Rewards"
       canGetLogic={inLogic >= cbCount}
       canGetBreak={outLogic >= cbCount}

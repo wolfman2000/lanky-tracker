@@ -7,7 +7,7 @@ const Vanilla: React.FC = () => {
   return (
     <ForestCheck
       id={5090}
-      name="Forest Arena"
+      name="Forest Arena (Mushroom High Platform)"
       region="Giant Mushroom Exterior"
       canGetLogic={useArena()}
     />

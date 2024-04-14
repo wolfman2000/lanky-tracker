@@ -8,7 +8,7 @@ const TinyBananas: React.FC = () => {
     <>
       <CavesCheck
         id={6030}
-        name="Caves Tiny Cave Barrel"
+        name="Caves Tiny Mini Cave Barrel"
         region="Main Caves Area"
         canGetLogic={useTinyCaveGb()}
       />

@@ -11,7 +11,7 @@ const ChunkyBananas: React.FC = () => {
     <>
       <FactoryCheck
         id={3040}
-        name="Factory Chunky Kaiju"
+        name="Factory Chunky Toy Monster"
         region="R&D Area"
         canGetLogic={useChunkyKaijuGb()}
       />
@@ -23,13 +23,13 @@ const ChunkyBananas: React.FC = () => {
       />
       <FactoryCheck
         id={3042}
-        name="Factory Chunky Arcade Barrel"
+        name="Factory Chunky Barrel by Arcade"
         region="Storage And Arcade"
         canGetLogic={useChunkyArcadeGb()}
       />
       <FactoryCheck
         id={3043}
-        name="Factory Chunky Production Room"
+        name="Factory Chunky Production Timer"
         region="Production Room"
         canGetLogic={useChunkyProductionGb()}
       />

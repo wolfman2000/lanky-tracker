@@ -8,13 +8,13 @@ const Vanilla: React.FC = () => {
     <>
       <GalleonCheck
         id={4080}
-        name="Galleon Fairy Chest"
+        name="Galleon Fairy (In Punch Chest)"
         region="Galleon Caverns"
         canGetLogic={useChestFairy()}
       />
       <GalleonCheck
         id={4081}
-        name="Galleon Fairy 5 Door Ship"
+        name="Galleon Fairy (In Tiny's 5 Door Ship)"
         region="5 Door Ship"
         canGetLogic={useShipFairy()}
       />

@@ -12,26 +12,36 @@ const Vanilla: React.FC = () => {
     <>
       <CavesCheck
         id={6050}
-        name="Caves Kasplat Near Ice Castle"
+        name="Caves Kasplat: Near Ice Castle"
         region="Main Caves Area"
         canGetLogic={thing}
       />
       <CavesCheck
         id={6051}
-        name="Caves Kasplat Mini Room by Funky"
+        name="Caves Kasplat: Mini Room by Funky"
         region="Main Caves Area"
         canGetLogic={miniFunky.in}
         canGetBreak={logicBreak(miniFunky)}
       />
       <CavesCheck
         id={6052}
-        name="Caves Kasplat On the Pillar"
+        name="Caves Kasplat: On the Pillar"
         region="Main Caves Area"
         canGetLogic={pillar.in}
         canGetBreak={pillar.out}
       />
-      <CavesCheck id={6053} name="Caves Kasplat Cabins" region="Cabins Area" canGetLogic={thing} />
-      <CavesCheck id={6054} name="Caves Kasplat Igloo" region="Igloo Area" canGetLogic={thing} />
+      <CavesCheck
+        id={6053}
+        name="Caves Kasplat: By the Far Warp 2 (Cabins)"
+        region="Cabins Area"
+        canGetLogic={thing}
+      />
+      <CavesCheck
+        id={6054}
+        name="Caves Kasplat On 5-Door Igloo"
+        region="Igloo Area"
+        canGetLogic={thing}
+      />
     </>
   )
 }

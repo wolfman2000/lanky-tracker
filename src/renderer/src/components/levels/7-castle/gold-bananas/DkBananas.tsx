@@ -9,27 +9,27 @@ const DkBananas: React.FC = () => {
       <ToughGoldenBanana>
         <CastleCheck
           id={7001}
-          name="Castle DK Tree"
+          name="Castle Donkey Tree Sniping"
           region="Castle Surroundings"
           canGetLogic={useDkTreeGb()}
         />
       </ToughGoldenBanana>
       <CastleCheck
         id={7002}
-        name="Castle DK Library"
+        name="Castle Donkey Library"
         region="Castle Rooms"
         canGetLogic={roomGb.in}
         canGetBreak={roomGb.out}
       />
       <CastleCheck
         id={7003}
-        name="Castle DK Minecarts"
+        name="Castle Donkey Minecart"
         region="Castle Underground"
         canGetLogic={useDkCryptGb()}
       />
       <CastleCheck
         id={7004}
-        name="Castle DK Dungeon"
+        name="Castle Donkey Dungeon"
         region="Castle Underground"
         canGetLogic={useDkDungeonGb()}
       />

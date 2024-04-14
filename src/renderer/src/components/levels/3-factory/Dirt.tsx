@@ -7,7 +7,7 @@ const VanillaDirtLocations: React.FC = () => {
   return (
     <FactoryCheck
       id={3070}
-      name="Factory Dirt Dark Room"
+      name="Factory Dirt: Dark Room"
       region="Storage And Arcade"
       canGetLogic={useFactoryDirt()}
     />

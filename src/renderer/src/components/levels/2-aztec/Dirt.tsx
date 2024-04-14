@@ -10,14 +10,14 @@ const VanillaDirtLocations: React.FC = () => {
     <>
       <AztecCheck
         id={2070}
-        name="Aztec Dirt Oasis"
+        name="Aztec Dirt: Oasis"
         region="Aztec Oasis And Totem Area"
         canGetLogic={thing.in}
         canGetBreak={thing.out}
       />
       <AztecCheck
         id={2071}
-        name="Aztec Dirt Chunky Temple"
+        name="Aztec Dirt: Chunky Temple"
         region="5 Door Temple"
         canGetLogic={door.in}
         canGetBreak={door.out}

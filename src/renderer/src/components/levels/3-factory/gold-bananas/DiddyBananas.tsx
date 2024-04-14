@@ -21,13 +21,13 @@ const DiddyBananas: React.FC = () => {
       />
       <FactoryCheck
         id={3011}
-        name="Factory Diddy R&D"
+        name="Factory Diddy Charge Enemies"
         region="R&D Area"
         canGetLogic={useDiddyEnemyGb()}
       />
       <FactoryCheck
         id={3012}
-        name="Factory Diddy Chunky Room Barrel"
+        name="Factory Diddy Storage Room Barrel"
         region="Storage And Arcade"
         canGetLogic={storageGb.in}
         canGetBreak={storageGb.out}

@@ -7,7 +7,7 @@ const TinyBananas: React.FC = () => {
     <>
       <JapesCheck
         id={1030}
-        name="Japes Tiny Caged Banana"
+        name="Japes Tiny Timed Cage Banana"
         region="Japes Hillside"
         canGetLogic={useTinyCagedGb()}
       />

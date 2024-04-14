@@ -16,7 +16,7 @@ const HelmChecks: React.FC = () => {
       <BossPool>
         <HelmCheck
           id={8105}
-          name="Helm Key 8 Location"
+          name="The End of Helm"
           canGetLogic={helmDoors.in}
           canGetBreak={helmDoors.out}
         />

@@ -4,7 +4,14 @@ import { useShuffledArenas } from '@renderer/hooks/settings'
 import FactoryCheck from './FactoryCheck'
 
 const Vanilla: React.FC = () => {
-  return <FactoryCheck id={3090} name="Factory Arena" region="R&D Area" canGetLogic={useArena()} />
+  return (
+    <FactoryCheck
+      id={3090}
+      name="Factory Arena (Under R and D Grate)"
+      region="R&D Area"
+      canGetLogic={useArena()}
+    />
+  )
 }
 
 const Shuffled: React.FC = () => {

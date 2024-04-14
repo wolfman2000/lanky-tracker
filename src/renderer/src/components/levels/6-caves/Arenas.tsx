@@ -5,7 +5,12 @@ import CavesCheck from './CavesCheck'
 
 const Vanilla: React.FC = () => {
   return (
-    <CavesCheck id={6090} name="Caves Arena" region="Cabins Area" canGetLogic={useDkRotateGb()} />
+    <CavesCheck
+      id={6090}
+      name="Caves Arena (Rotating Room: Left Portion)"
+      region="Cabins Area"
+      canGetLogic={useDkRotateGb()}
+    />
   )
 }
 

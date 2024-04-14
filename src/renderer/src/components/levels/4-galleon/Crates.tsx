@@ -8,7 +8,7 @@ const Vanilla: React.FC = () => {
     <>
       <GalleonCheck
         id={4060}
-        name="Galleon Crate Cactus"
+        name="Galleon Crate: Near Cactus"
         region="Shipyard Outskirts"
         canGetLogic={useGeneralOutskirts()}
       />

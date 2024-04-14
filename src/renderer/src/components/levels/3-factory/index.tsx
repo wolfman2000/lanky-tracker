@@ -48,7 +48,7 @@ const FactoryChecks: React.FC = () => {
       <BossPool>
         <FactoryCheck
           id={3105}
-          name="Factory Boss"
+          name="Factory Boss Defeated"
           region="Troff 'N' Scoff"
           canGetLogic={inStage && anyKong}
         />

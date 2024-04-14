@@ -14,13 +14,13 @@ const TinyBananas: React.FC = () => {
     <>
       <GalleonCheck
         id={4030}
-        name="Galleon Tiny Mermaid"
+        name="Galleon Tiny Mermaid Reward"
         region="Lighthouse Area"
         canGetLogic={useTinyMermaidGb()}
       />
       <GalleonCheck
         id={4031}
-        name="Galleon Tiny Submarine"
+        name="Galleon Tiny Submarine Barrel"
         region="Shipyard Outskirts"
         canGetLogic={useTinySubGb()}
       />

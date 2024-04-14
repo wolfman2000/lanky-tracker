@@ -8,13 +8,13 @@ const Vanilla: React.FC = () => {
     <>
       <FactoryCheck
         id={3060}
-        name="Factory Crate Candy"
+        name="Factory Crate: Near Candy"
         region="Storage And Arcade"
         canGetLogic={useGeneralThing()}
       />
       <FactoryCheck
         id={3061}
-        name="Factory Crate Funky"
+        name="Factory Crate: Near Funky"
         region="Testing Area"
         canGetLogic={useGeneralTest()}
       />

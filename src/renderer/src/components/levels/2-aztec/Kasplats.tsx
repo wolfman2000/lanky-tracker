@@ -21,35 +21,35 @@ const Vanilla: React.FC = () => {
     <>
       <AztecCheck
         id={2050}
-        name="Aztec Kasplat Behind DK Stone Door"
+        name="Aztec Kasplat: Behind DK Stone Door"
         region="Various Aztec Tunnels"
         canGetLogic={coconut.in}
         canGetBreak={coconut.out}
       />
       <AztecCheck
         id={2051}
-        name="Aztec Kasplat On Tiny Temple"
+        name="Aztec Kasplat: On Tiny Temple"
         region="Aztec Oasis And Totem Area"
         canGetLogic={oasis.in}
         canGetBreak={oasis.out}
       />
       <AztecCheck
         id={2052}
-        name="Aztec Kasplat Llama Temple Lava"
+        name="Aztec Kasplat: Llama Temple Lava"
         region="Llama Temple"
         canGetLogic={lava.in}
         canGetBreak={logicBreak(lava)}
       />
       <AztecCheck
         id={2053}
-        name="Aztec Kasplat Hunky Chunky Barrel"
+        name="Aztec Kasplat: Hunky Chunky Barrel"
         region="Various Aztec Tunnels"
         canGetLogic={aztecBack.in}
         canGetBreak={aztecBack.out}
       />
       <AztecCheck
         id={2054}
-        name="Aztec Kasplat Chunky 5-Door Temple"
+        name="Aztec Kasplat: Chunky 5-Door Temple"
         region="5 Door Temple"
         canGetLogic={chunky.in}
         canGetBreak={chunky.out}

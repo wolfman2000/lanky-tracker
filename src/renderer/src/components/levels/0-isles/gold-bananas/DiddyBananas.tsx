@@ -16,28 +16,28 @@ const DiddyBananas: React.FC = () => {
     <>
       <IslesCheck
         id={10}
-        name="Isles Diddy Snides Lobby"
+        name="Isles Diddy Snide's Spring Barrel"
         region="Krem Isle"
         canGetLogic={snide.in}
         canGetBreak={snide.out}
       />
       <IslesCheck
         id={11}
-        name="Isles Diddy Caged Banana"
+        name="Isles Diddy Peanut Cage"
         region="Main Isle"
         canGetLogic={cage.in}
         canGetBreak={cage.out}
       />
       <IslesCheck
         id={12}
-        name="Isles Diddy Summit"
+        name="Isles Diddy Summit Barrel"
         region="Main Isle"
         canGetLogic={summit.in}
         canGetBreak={summit.out}
       />
       <IslesCheck
         id={13}
-        name="Isles Diddy Instrument Pad"
+        name="Isles Diddy Guitar Pad"
         region="Caves-Helm Lobbies"
         canGetLogic={cave.in}
         canGetBreak={cave.out}
