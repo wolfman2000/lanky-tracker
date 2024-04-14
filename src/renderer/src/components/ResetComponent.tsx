@@ -31,6 +31,8 @@ const ResetTracker: React.FC = () => {
         <option value="bountyHunter">Bounty Hunter (revven)</option>
         <option value="radicalSlo">S3 Test: Radical SLO</option>
         <option value="s3allKeys">S3 Test: All Keys</option>
+        <option value="s3Clo">S3 Test: CLO</option>
+        <option value="s3Traditionalist">S3 Test: Traditionalist</option>
       </select>
       <button
         type="button"
