@@ -10,7 +10,7 @@ const DkMedal: React.FC = () => {
   return (
     <ForestCheck
       id={5100}
-      name="Forest DK Medal"
+      name="Forest Donkey Medal"
       region="Forest Medal Rewards"
       canGetLogic={inLogic >= cbCount}
       canGetBreak={outLogic >= cbCount}

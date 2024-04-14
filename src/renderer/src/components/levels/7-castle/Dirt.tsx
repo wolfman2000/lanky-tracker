@@ -8,7 +8,7 @@ const VanillaDirtLocations: React.FC = () => {
     <>
       <CastleCheck
         id={7070}
-        name="Castle Dirt Top Floor"
+        name="Castle Dirt: Top Floor"
         region="Castle Surroundings"
         canGetLogic={useGeneralDirt()}
       />

@@ -13,7 +13,7 @@ const ChunkyBananas: React.FC = () => {
     <>
       <CastleCheck
         id={7040}
-        name="Castle Chunky Tree"
+        name="Castle Chunky Tree Sniping Barrel"
         region="Castle Surroundings"
         canGetLogic={treeGb.in}
         canGetBreak={treeGb.out}

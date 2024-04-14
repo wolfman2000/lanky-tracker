@@ -20,13 +20,13 @@ const LankyBananas: React.FC = () => {
       />
       <FactoryCheck
         id={3021}
-        name="Factory Lanky Piano"
+        name="Factory Lanky Piano Game"
         region="Testing Area"
         canGetLogic={useLankyPianoGb()}
       />
       <FactoryCheck
         id={3022}
-        name="Factory Lanky Free Chunky"
+        name="Factory Free Chunky Item"
         region="Storage And Arcade"
         canGetLogic={useLankyFreeChunkyGb()}
       />

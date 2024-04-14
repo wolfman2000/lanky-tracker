@@ -20,7 +20,7 @@ const MedalLocations: React.FC = () => {
   const triangle = useTriangle()
   return (
     <BananaMedalPool>
-      <HelmCheck id={8100} name="Helm DK Banana Medal" canGetLogic={helmMachine && bongos} />
+      <HelmCheck id={8100} name="Helm Donkey Banana Medal" canGetLogic={helmMachine && bongos} />
       <HelmCheck
         id={8101}
         name="Helm Diddy Banana Medal"

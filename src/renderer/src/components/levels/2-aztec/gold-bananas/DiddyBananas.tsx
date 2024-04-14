@@ -16,7 +16,7 @@ const DiddyBananas: React.FC = () => {
     <>
       <AztecCheck
         id={2010}
-        name="Aztec Diddy Free Tiny"
+        name="Aztec Free Tiny Item"
         region="Tiny Temple"
         canGetLogic={freeGb.in}
         canGetBreak={freeGb.out}

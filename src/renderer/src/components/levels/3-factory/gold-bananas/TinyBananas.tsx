@@ -24,7 +24,7 @@ const TinyBananas: React.FC = () => {
       />
       <FactoryCheck
         id={3032}
-        name="Factory Tiny by Arcade"
+        name="Factory Tiny Mini by Arcade"
         region="Storage And Arcade"
         canGetLogic={useTinyArcadeGb()}
       />

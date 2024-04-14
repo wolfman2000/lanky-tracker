@@ -10,7 +10,7 @@ const DkMedal: React.FC = () => {
   return (
     <GalleonCheck
       id={4100}
-      name="Galleon DK Medal"
+      name="Galleon Donkey Medal"
       region="Galleon Medal Rewards"
       canGetLogic={inLogic >= cbCount}
       canGetBreak={outLogic >= cbCount}

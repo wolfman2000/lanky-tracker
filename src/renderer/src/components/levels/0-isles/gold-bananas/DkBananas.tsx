@@ -13,18 +13,23 @@ const DkBananas: React.FC = () => {
   const cave = useCheckDkCavesLobby()
   return (
     <>
-      <IslesCheck id={1} name="Isles DK Japes Rock" region="Main Isle" canGetLogic={japesRock} />
-      <IslesCheck id={2} name="Isles DK Caged Banana" region="Krem Isle" canGetLogic={cage} />
+      <IslesCheck
+        id={1}
+        name="Isles Japes Lobby Entrance Item"
+        region="Main Isle"
+        canGetLogic={japesRock}
+      />
+      <IslesCheck id={2} name="Isles Donkey Coconut Cage" region="Krem Isle" canGetLogic={cage} />
       <IslesCheck
         id={3}
-        name="Isles DK Instrument Pad"
+        name="Isles Donkey Bongos Pad"
         region="Japes-Forest Lobbies"
         canGetLogic={pad.in}
         canGetBreak={pad.out}
       />
       <IslesCheck
         id={4}
-        name="Isles DK Lava Banana"
+        name="Isles Donkey Caves Lava"
         region="Caves-Helm Lobbies"
         canGetLogic={cave.in}
         canGetBreak={cave.out}

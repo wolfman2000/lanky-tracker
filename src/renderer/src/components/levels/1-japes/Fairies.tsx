@@ -9,13 +9,13 @@ const Vanilla: React.FC = () => {
     <>
       <JapesCheck
         id={1080}
-        name="Japes Fairy Rambi"
+        name="Japes Fairy (Rambi Door Pool)"
         region="Stormy Tunnel Area"
         canGetLogic={useRambiFairy()}
       />
       <JapesCheck
         id={1081}
-        name="Japes Fairy Painting Room"
+        name="Japes Fairy (Painting Room)"
         region="Japes Caves And Mines"
         canGetLogic={painting.in}
         canGetBreak={painting.out}

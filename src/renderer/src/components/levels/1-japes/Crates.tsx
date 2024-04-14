@@ -8,13 +8,13 @@ const Vanilla: React.FC = () => {
     <>
       <JapesCheck
         id={1060}
-        name="Japes Crate Mountain"
+        name="Japes Crate: Behind the Mountain"
         region="Japes Hillside"
         canGetLogic={useArena()}
       />
       <JapesCheck
         id={1061}
-        name="Japes Crate Rambi"
+        name="Japes Crate: In the Rambi Cave"
         region="Stormy Tunnel Area"
         canGetLogic={useRambiCrate()}
       />

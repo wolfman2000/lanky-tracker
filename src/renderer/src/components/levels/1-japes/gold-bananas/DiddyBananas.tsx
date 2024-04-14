@@ -13,26 +13,26 @@ const DiddyBananas: React.FC = () => {
     <>
       <JapesCheck
         id={1010}
-        name="Japes Diddy Caged Banana"
+        name="Japes Diddy Timed Caged Banana"
         region="Japes Hillside"
         canGetLogic={useDiddyCagedGb()}
       />
       <JapesCheck
         id={1011}
-        name="Japes Diddy Mountain"
+        name="Japes Diddy Top of Mountain"
         region="Japes Hillside"
         canGetLogic={useDiddyMountainGb()}
       />
       <JapesCheck
         id={1012}
-        name="Japes Diddy Tunnel"
+        name="Japes Diddy Peanut Tunnel"
         region="Japes Lowlands"
         canGetLogic={useDiddyTunnelGb()}
       />
       <ToughGoldenBanana>
         <JapesCheck
           id={1013}
-          name="Japes Diddy Minecarts"
+          name="Japes Diddy Minecart"
           region="Japes Caves And Mines"
           canGetLogic={mineGb.in}
           canGetBreak={mineGb.out}

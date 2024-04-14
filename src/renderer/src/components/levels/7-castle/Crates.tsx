@@ -8,7 +8,7 @@ const Vanilla: React.FC = () => {
     <>
       <CastleCheck
         id={7060}
-        name="Castle Crate Mausoleum"
+        name="Castle Crate: Behind Mausoleum Entrance"
         region="Castle Underground"
         canGetLogic={useGeneralThing()}
       />

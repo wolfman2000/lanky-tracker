@@ -10,7 +10,7 @@ const DkMedal: React.FC = () => {
   return (
     <FactoryCheck
       id={3100}
-      name="Factory DK Medal"
+      name="Factory Donkey Medal"
       region="Factory Medal Rewards"
       canGetLogic={inLogic >= cbCount}
       canGetBreak={outLogic >= cbCount}

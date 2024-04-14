@@ -14,14 +14,14 @@ const TinyBananas: React.FC = () => {
       />
       <ForestCheck
         id={5031}
-        name="Forest Tiny Anthill"
+        name="Forest Tiny Anthill Banana"
         region="Owl Tree"
         canGetLogic={useTinyAntGb()}
       />
       <MiscPool>
         <ForestCheck
           id={5034}
-          name="Forest Tiny Bean"
+          name="Forest Tiny Anthill Bean"
           region="Owl Tree"
           canGetLogic={useTinyAntGb()}
         />
@@ -35,7 +35,7 @@ const TinyBananas: React.FC = () => {
       />
       <ForestCheck
         id={5033}
-        name="Forest Tiny Beanstalk"
+        name="Forest Tiny Top of the Beanstalk"
         region="Forest Center And Beanstalk"
         canGetLogic={useTinyBeanGb()}
       />

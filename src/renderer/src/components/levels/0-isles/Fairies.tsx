@@ -13,23 +13,28 @@ const Vanilla: React.FC = () => {
     <>
       <IslesCheck
         id={80}
-        name="Isles Outer Fairy"
+        name="Isles Fairy (Small Island)"
         region="Outer Isles"
         canGetLogic={useGeneralFairy()}
       />
       <IslesCheck
         id={81}
-        name="Isles Factory Fairy"
+        name="Isles Fairy (Factory Lobby)"
         region="Japes-Forest Lobbies"
         canGetLogic={useFactoryFairy()}
       />
       <IslesCheck
         id={82}
-        name="Isles Forest Fairy"
+        name="Isles Fairy (Fungi Lobby)"
         region="Japes-Forest Lobbies"
         canGetLogic={useForestFairy()}
       />
-      <IslesCheck id={83} name="Isles Krem Fairy" region="Krem Isle" canGetLogic={useKremFairy()} />
+      <IslesCheck
+        id={83}
+        name="Isles Fairy (Upper Krem Isles)"
+        region="Krem Isle"
+        canGetLogic={useKremFairy()}
+      />
     </>
   )
 }

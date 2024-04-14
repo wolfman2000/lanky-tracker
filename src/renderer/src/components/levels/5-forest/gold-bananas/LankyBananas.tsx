@@ -10,14 +10,14 @@ const LankyBananas: React.FC = () => {
     <>
       <ForestCheck
         id={5020}
-        name="Forest Lanky Zingers"
+        name="Forest Lanky Attic Shooting"
         region="Forest Mills"
         canGetLogic={millGb.in}
         canGetBreak={millGb.out}
       />
       <ForestCheck
         id={5021}
-        name="Forest Lanky Colored Mushrooms"
+        name="Forest Lanky Colored Mushroom Slam"
         region="Giant Mushroom Insides"
         canGetLogic={mushGb.in}
         canGetBreak={mushGb.out}
@@ -33,7 +33,7 @@ const LankyBananas: React.FC = () => {
       </ToughGoldenBanana>
       <ForestCheck
         id={5023}
-        name="Forest Lanky Mushroom Attic"
+        name="Forest Lanky Zinger Bounce"
         region="Giant Mushroom Insides"
         canGetLogic={mushGb.in}
         canGetBreak={mushGb.out}

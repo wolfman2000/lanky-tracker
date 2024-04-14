@@ -39,7 +39,7 @@ const TinyBananas: React.FC = () => {
       </ToughGoldenBanana>
       <AztecCheck
         id={2033}
-        name="Aztec Tiny Llama Temple"
+        name="Aztec Tiny Llama Temple Lava Pedestals"
         region="Llama Temple"
         canGetLogic={lavaGb.in}
         canGetBreak={lavaGb.out}

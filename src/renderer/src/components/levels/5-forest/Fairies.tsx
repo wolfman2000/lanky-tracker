@@ -10,14 +10,14 @@ const Vanilla: React.FC = () => {
     <>
       <ForestCheck
         id={5080}
-        name="Forest Fairy Rafters"
+        name="Forest Fairy (Dark Rafters)"
         region="Forest Mills"
         canGetLogic={rafters.in}
         canGetBreak={rafters.out}
       />
       <ForestCheck
         id={5081}
-        name="Forest Fairy Barn"
+        name="Forest Fairy (Thornvine Barn)"
         region="Forest Mills"
         canGetLogic={barn.in}
         canGetBreak={barn.out}

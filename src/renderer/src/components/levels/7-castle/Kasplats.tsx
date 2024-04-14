@@ -9,31 +9,31 @@ const Vanilla: React.FC = () => {
     <>
       <CastleCheck
         id={7050}
-        name="Castle Kasplat Inside the Tree"
+        name="Castle Kasplat: Inside the Tree"
         region="Castle Surroundings"
         canGetLogic={useTreeKasplat()}
       />
       <CastleCheck
         id={7051}
-        name="Castle Kasplat Lower Cave Center"
+        name="Castle Kasplat: Lower Cave Center"
         region="Castle Underground"
         canGetLogic={kasplat}
       />
       <CastleCheck
         id={7052}
-        name="Castle Kasplat Near Upper Warp 2"
+        name="Castle Kasplat: Near Upper Warp 2"
         region="Castle Surroundings"
         canGetLogic={kasplat}
       />
       <CastleCheck
         id={7053}
-        name="Castle Kasplat On a Lone Platform"
+        name="Castle Kasplat: On a lone platform"
         region="Castle Surroundings"
         canGetLogic={kasplat}
       />
       <CastleCheck
         id={7054}
-        name="Castle Kasplat Near Candy's"
+        name="Castle Kasplat: Near Candy's"
         region="Castle Underground"
         canGetLogic={kasplat}
       />

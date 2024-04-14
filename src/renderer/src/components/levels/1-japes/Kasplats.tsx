@@ -10,31 +10,31 @@ const Vanilla: React.FC = () => {
     <>
       <JapesCheck
         id={1050}
-        name="Japes Kasplat Hive Tunnel Lower"
+        name="Japes Kasplat: Hive Tunnel Lower"
         region="Hive Tunnel Area"
         canGetLogic={kasplat}
       />
       <JapesCheck
         id={1051}
-        name="Japes Kasplat Near Painting Room"
+        name="Japes Kasplat: Near Painting Room"
         region="Stormy Tunnel Area"
         canGetLogic={kasplat}
       />
       <JapesCheck
         id={1052}
-        name="Japes Kasplat By Lanky Slope Bonus"
+        name="Japes Kasplat: By Lanky Slope Bonus"
         region="Stormy Tunnel Area"
         canGetLogic={kasplat}
       />
       <JapesCheck
         id={1053}
-        name="Japes Kasplat Hive Tunnel Upper"
+        name="Japes Kasplat: Hive Tunnel Upper"
         region="Hive Tunnel Area"
         canGetLogic={kasplat}
       />
       <JapesCheck
         id={1054}
-        name="Japes Kasplat Underground"
+        name="Japes Kasplat: Underground"
         region="Japes Caves And Mines"
         canGetLogic={under.in}
         canGetBreak={under.out}

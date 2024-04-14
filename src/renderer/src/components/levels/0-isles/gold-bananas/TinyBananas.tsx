@@ -19,26 +19,26 @@ const TinyBananas: React.FC = () => {
     <>
       <IslesCheck
         id={30}
-        name="Isles Tiny Caged Banana"
+        name="Isles Tiny Feather Cage"
         region="Outer Isles"
         canGetLogic={checkFeatherCage}
       />
       <IslesCheck
         id={31}
-        name="Isles Tiny Instrument Pad"
+        name="Isles Tiny Saxophone Pad"
         region="Krem Isle"
         canGetLogic={checkTinyMusicPad}
       />
       <IslesCheck
         id={32}
-        name="Isles Tiny Aztec Lobby"
+        name="Isles Tiny Aztec Lobby Barrel"
         region="Japes-Forest Lobbies"
         canGetLogic={checkTinyAztec.in}
         canGetBreak={checkTinyAztec.out}
       />
       <IslesCheck
         id={33}
-        name="Isles Tiny Galleon Lobby"
+        name="Isles Tiny Galleon Lobby Swim"
         region="Japes-Forest Lobbies"
         canGetLogic={checkTinyGalleon.in}
         canGetBreak={checkTinyGalleon.out}
@@ -46,7 +46,7 @@ const TinyBananas: React.FC = () => {
       <ToughGoldenBanana>
         <IslesCheck
           id={47}
-          name="Isles Rareware Banana"
+          name="Returning the Banana Fairies"
           region="Outer Isles"
           canGetLogic={checkBfi}
         />

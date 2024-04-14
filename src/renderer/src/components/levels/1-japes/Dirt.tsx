@@ -9,7 +9,7 @@ const VanillaDirtLocations: React.FC = () => {
     <>
       <JapesCheck
         id={1070}
-        name="Japes Dirt Painting Hill"
+        name="Japes Dirt: Painting Hill"
         region="Japes Hillside"
         canGetLogic={dirt.in}
         canGetBreak={dirt.out}

@@ -9,14 +9,14 @@ const DkBananas: React.FC = () => {
     <>
       <GalleonCheck
         id={4001}
-        name="Galleon DK Lighthouse"
+        name="Galleon DK=onkey Lighthouse"
         region="Lighthouse Area"
         canGetLogic={lighthouseGb.in}
         canGetBreak={lighthouseGb.out}
       />
       <GalleonCheck
         id={4002}
-        name="Galleon DK Free the Seal"
+        name="Galleon Donkey Free the Seal"
         region="Shipyard Outskirts"
         canGetLogic={blastGb.in}
         canGetBreak={blastGb.out}
@@ -24,7 +24,7 @@ const DkBananas: React.FC = () => {
       <ToughGoldenBanana>
         <GalleonCheck
           id={4003}
-          name="Galleon DK Seal Race"
+          name="Galleon Donkey Seal Race"
           region="Shipyard Outskirts"
           canGetLogic={blastGb.in}
           canGetBreak={blastGb.out}
@@ -32,7 +32,7 @@ const DkBananas: React.FC = () => {
       </ToughGoldenBanana>
       <GalleonCheck
         id={4004}
-        name="Galleon DK 5 Door Ship"
+        name="Galleon Donkey 5 Door Ship"
         region="5 Door Ship"
         canGetLogic={useDk5DoorShipGb()}
       />

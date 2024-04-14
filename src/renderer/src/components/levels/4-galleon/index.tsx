@@ -55,7 +55,7 @@ const GalleonChecks: React.FC = () => {
       <BossPool>
         <GalleonCheck
           id={4105}
-          name="Galleon Boss"
+          name="Galleon Boss Defeated"
           region="Troff 'N' Scoff"
           canGetLogic={(inStage && vine) || (dive && (lighthouseArea || outskirts))}
         />

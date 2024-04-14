@@ -17,21 +17,21 @@ const Vanilla: React.FC = () => {
     <>
       <AztecCheck
         id={2060}
-        name="Aztec Crate Llama Interior"
+        name="Aztec Crate: Llama Temple Entrance"
         region="Llama Temple"
         canGetLogic={llama.in}
         canGetBreak={logicBreak(llama)}
       />
       <AztecCheck
         id={2061}
-        name="Aztec Crate Llama Exterior"
+        name="Aztec Crate: On Llama Temple"
         region="Aztec Oasis And Totem Area"
         canGetLogic={outside.in}
         canGetBreak={outside.out}
       />
       <AztecCheck
         id={2062}
-        name="Aztec Crate Gongs"
+        name="Aztec Crate: Near Gong Tower"
         region="Aztec Oasis And Totem Area"
         canGetLogic={aztecBack.in}
         canGetBreak={logicBreak(aztecBack)}

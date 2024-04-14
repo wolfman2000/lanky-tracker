@@ -21,7 +21,7 @@ const ChunkyBananas: React.FC = () => {
       />
       <JapesCheck
         id={1041}
-        name="Japes Chunky Caged Banana"
+        name="Japes Chunky Timed Caged Banana"
         region="Japes Hillside"
         canGetLogic={chunkyCageGb}
       />

@@ -24,7 +24,7 @@ const LankyBananas: React.FC = () => {
       </ToughGoldenBanana>
       <CavesCheck
         id={6021}
-        name="Caves Lanky Castle"
+        name="Caves Lanky Ice Castle Slam Challenge"
         region="Main Caves Area"
         canGetLogic={useLankyCastleGb()}
       />
@@ -37,7 +37,7 @@ const LankyBananas: React.FC = () => {
       />
       <CavesCheck
         id={6023}
-        name="Caves Lanky 1 Door Cabin"
+        name="Caves Lanky Sprint Cabin"
         region="Cabins Area"
         canGetLogic={cabinGb.in}
         canGetBreak={cabinGb.out}

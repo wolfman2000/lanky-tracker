@@ -9,7 +9,7 @@ const VanillaDirtLocations: React.FC = () => {
     <>
       <GalleonCheck
         id={4070}
-        name="Galleon Dirt Lighthouse"
+        name="Galleon Dirt: Lighthouse"
         region="Lighthouse Area"
         canGetLogic={dirt.in}
         canGetBreak={dirt.out}

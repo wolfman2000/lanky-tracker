@@ -5,7 +5,12 @@ import JapesCheck from './JapesCheck'
 
 const Vanilla: React.FC = () => {
   return (
-    <JapesCheck id={1090} name="Japes Arena" region="Japes Hillside" canGetLogic={useArena()} />
+    <JapesCheck
+      id={1090}
+      name="Japes Arena (Near Funky)"
+      region="Japes Hillside"
+      canGetLogic={useArena()}
+    />
   )
 }
 

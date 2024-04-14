@@ -9,13 +9,13 @@ const Vanilla: React.FC = () => {
     <>
       <CavesCheck
         id={6080}
-        name="Caves Fairy Igloo"
+        name="Caves Fairy (Tiny Igloo)"
         region="Igloo Area"
         canGetLogic={useIglooFairy()}
       />
       <CavesCheck
         id={6081}
-        name="Caves Fairy Cabin"
+        name="Caves Fairy (Diddy Candles Cabin)"
         region="Cabins Area"
         canGetLogic={cabin.in}
         canGetBreak={cabin.out}

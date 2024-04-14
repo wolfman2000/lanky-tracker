@@ -10,27 +10,27 @@ const DkBananas: React.FC = () => {
       <ToughGoldenBanana>
         <ForestCheck
           id={5001}
-          name="Forest DK Baboon Blast"
+          name="Forest Donkey Baboon Blast"
           region="Giant Mushroom Exterior"
           canGetLogic={useDkBlastGb()}
         />
       </ToughGoldenBanana>
       <ForestCheck
         id={5002}
-        name="Forest DK Mushroom Cannons"
+        name="Forest Donkey Mushroom Cannons"
         region="Giant Mushroom Insides"
         canGetLogic={useDkMushGb()}
       />
       <ForestCheck
         id={5003}
-        name="Forest DK Mill"
+        name="Forest Donkey Mill Levers"
         region="Forest Mills"
         canGetLogic={millGb.in}
         canGetBreak={millGb.out}
       />
       <ForestCheck
         id={5004}
-        name="Forest DK Barn"
+        name="Forest Donkey Thornvine Barn Barrel"
         region="Forest Mills"
         canGetLogic={barnGb.in}
         canGetBreak={barnGb.out}

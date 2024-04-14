@@ -8,31 +8,31 @@ const Vanilla: React.FC = () => {
     <>
       <FactoryCheck
         id={3050}
-        name="Factory Kasplat Upper Production Pipe"
+        name="Factory Kasplat: Upper Production Pipe"
         region="Production Room"
         canGetLogic={useProductionKasplat()}
       />
       <FactoryCheck
         id={3051}
-        name="Factory Kasplat Production Floor"
+        name="Factory Kasplat: Base of Production"
         region="Production Room"
         canGetLogic={useGeneralThing()}
       />
       <FactoryCheck
         id={3052}
-        name="Factory Kasplat R&D"
+        name="Factory Kasplat: Research and Development"
         region="R&D Area"
         canGetLogic={useGeneralTest()}
       />
       <FactoryCheck
         id={3053}
-        name="Factory Kasplat Pole to Arcade"
+        name="Factory Kasplat: Pole to Arcade"
         region="Storage And Arcade"
         canGetLogic={useGeneralThing()}
       />
       <FactoryCheck
         id={3054}
-        name="Factory Kasplat Block Tower"
+        name="Factory Kasplat: Block Tower"
         region="Testing Area"
         canGetLogic={useGeneralTest()}
       />

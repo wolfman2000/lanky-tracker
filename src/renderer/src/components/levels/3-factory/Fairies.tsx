@@ -8,13 +8,13 @@ const Vanilla: React.FC = () => {
     <>
       <FactoryCheck
         id={3080}
-        name="Factory Fairy Counting"
+        name="Factory Fairy (Number Game)"
         region="Testing Area"
         canGetLogic={useNumberFairy()}
       />
       <FactoryCheck
         id={3081}
-        name="Factory Fairy Dartboard"
+        name="Factory Fairy (Near Funky's)"
         region="Testing Area"
         canGetLogic={useDartFairy()}
       />

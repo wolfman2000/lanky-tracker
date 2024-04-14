@@ -14,14 +14,14 @@ const DiddyBananas: React.FC = () => {
     <>
       <GalleonCheck
         id={4010}
-        name="Galleon Diddy Ship Switch"
+        name="Galleon Diddy Top of Lighthouse"
         region="Lighthouse Area"
         canGetLogic={shipGb.in}
         canGetBreak={shipGb.out}
       />
       <GalleonCheck
         id={4011}
-        name="Galleon Diddy Gold Tower"
+        name="Galleon Diddy Gold Tower Barrel"
         region="Treasure Room"
         canGetLogic={goldGb.in}
         canGetBreak={goldGb.out}

@@ -18,7 +18,7 @@ const LankyBananas: React.FC = () => {
       />
       <GalleonCheck
         id={4021}
-        name="Galleon Lanky Gold Tower"
+        name="Galleon Lanky Gold Tower Barrel"
         region="Treasure Room"
         canGetLogic={goldGb.in}
         canGetBreak={goldGb.out}
