@@ -1,10 +1,10 @@
 {
   "name": "lanky-tracker",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "description": "An DK 64 Rando Tracker Electron application with React and TypeScript",
   "main": "./out/main/index.js",
   "author": "wolfman2000",
-  "homepage": "https://electron-vite.org",
+  "homepage": "https://wolfman2000.github.io/",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",

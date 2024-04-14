@@ -1,62 +1,54 @@
 import KasplatPool from '@renderer/components/pools/Kasplats'
-import { useFactoryProductionTop, useFactoryTesting, usePlayFactory } from '@renderer/hooks/factory'
-import { useAnyKong } from '@renderer/hooks/kongs'
+import { useGeneralTest, useGeneralThing, useProductionKasplat } from '@renderer/hooks/factory'
 import { useShuffleKasplats } from '@renderer/hooks/settings'
 import FactoryCheck from './FactoryCheck'
 
 const Vanilla: React.FC = () => {
-  const inStage = usePlayFactory()
-  const production = useFactoryProductionTop()
-  const testing = useFactoryTesting()
-  const anyKong = useAnyKong()
-
   return (
     <>
       <FactoryCheck
         id={3050}
         name="Factory Kasplat Upper Production Pipe"
         region="Production Room"
-        canGetLogic={production && anyKong}
+        canGetLogic={useProductionKasplat()}
       />
       <FactoryCheck
         id={3051}
         name="Factory Kasplat Production Floor"
         region="Production Room"
-        canGetLogic={inStage && anyKong}
+        canGetLogic={useGeneralThing()}
       />
       <FactoryCheck
         id={3052}
         name="Factory Kasplat R&D"
-        region="Testing Area"
-        canGetLogic={testing && anyKong}
+        region="R&D Area"
+        canGetLogic={useGeneralTest()}
       />
       <FactoryCheck
         id={3053}
         name="Factory Kasplat Pole to Arcade"
         region="Storage And Arcade"
-        canGetLogic={inStage && anyKong}
+        canGetLogic={useGeneralThing()}
       />
       <FactoryCheck
         id={3054}
         name="Factory Kasplat Block Tower"
         region="Testing Area"
-        canGetLogic={testing && anyKong}
+        canGetLogic={useGeneralTest()}
       />
     </>
   )
 }
 
 const Shuffled: React.FC = () => {
-  const anyKong = useAnyKong()
-  const inStage = usePlayFactory()
-
+  const kasplat = useGeneralThing()
   return (
     <>
-      <FactoryCheck id={3250} name="Factory Kasplat Location #1" canGetLogic={inStage && anyKong} />
-      <FactoryCheck id={3251} name="Factory Kasplat Location #2" canGetLogic={inStage && anyKong} />
-      <FactoryCheck id={3252} name="Factory Kasplat Location #3" canGetLogic={inStage && anyKong} />
-      <FactoryCheck id={3253} name="Factory Kasplat Location #4" canGetLogic={inStage && anyKong} />
-      <FactoryCheck id={3254} name="Factory Kasplat Location #5" canGetLogic={inStage && anyKong} />
+      <FactoryCheck id={3250} name="Factory Kasplat Location #1" canGetLogic={kasplat} />
+      <FactoryCheck id={3251} name="Factory Kasplat Location #2" canGetLogic={kasplat} />
+      <FactoryCheck id={3252} name="Factory Kasplat Location #3" canGetLogic={kasplat} />
+      <FactoryCheck id={3253} name="Factory Kasplat Location #4" canGetLogic={kasplat} />
+      <FactoryCheck id={3254} name="Factory Kasplat Location #5" canGetLogic={kasplat} />
     </>
   )
 }

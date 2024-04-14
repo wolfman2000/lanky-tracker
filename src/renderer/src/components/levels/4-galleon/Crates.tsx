@@ -1,40 +1,27 @@
 import CratePool from '@renderer/components/pools/Crates'
-import { useGalleonOutskirts, usePlayGalleon } from '@renderer/hooks/galleon'
-import { useAnyKong } from '@renderer/hooks/kongs'
+import { useGeneralOutskirts, useGeneralThing } from '@renderer/hooks/galleon'
 import { useShuffleCrates } from '@renderer/hooks/settings'
 import GalleonCheck from './GalleonCheck'
 
 const Vanilla: React.FC = () => {
-  const outskirts = useGalleonOutskirts()
-  const anyKong = useAnyKong()
   return (
     <>
       <GalleonCheck
         id={4060}
         name="Galleon Crate Cactus"
         region="Shipyard Outskirts"
-        canGetLogic={outskirts && anyKong}
+        canGetLogic={useGeneralOutskirts()}
       />
     </>
   )
 }
 
 const Shuffled: React.FC = () => {
-  const anyKong = useAnyKong()
-  const inStage = usePlayGalleon()
-
+  const thing = useGeneralThing()
   return (
     <>
-      <GalleonCheck
-        id={4260}
-        name="Galleon Crate Location #1 (maybe)"
-        canGetLogic={inStage && anyKong}
-      />
-      <GalleonCheck
-        id={4261}
-        name="Galleon Crate Location #2 (maybe)"
-        canGetLogic={inStage && anyKong}
-      />
+      <GalleonCheck id={4260} name="Galleon Crate Location #1 (maybe)" canGetLogic={thing} />
+      <GalleonCheck id={4261} name="Galleon Crate Location #2 (maybe)" canGetLogic={thing} />
     </>
   )
 }

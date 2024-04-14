@@ -1,11 +1,14 @@
 import { usePlayLevel, useSlamLevel } from '../isles'
 import {
   useAnyGun,
+  useAnyKong,
   useAnyMusic,
   useBalloon,
   useBlast,
   useBoulderTech,
+  useCamera,
   useCharge,
+  useChunky,
   useCoconut,
   useDiddy,
   useDk,
@@ -22,6 +25,7 @@ import {
   usePunch,
   useRocket,
   useSax,
+  useShockwave,
   useSniper,
   useSprint,
   useStrong,
@@ -242,4 +246,44 @@ export const useTinyMausoleumGb = (): LogicBool => {
 export const useTinyChasmGb = (): boolean => {
   const twirl = useTwirl()
   return usePlayCastle() && twirl
+}
+
+export const useGeneralThing = (): boolean => {
+  const inStage = usePlayCastle()
+  return useAnyKong() && inStage
+}
+
+export const useGeneralDirt = (): boolean => {
+  const inStage = useGeneralThing()
+  return useShockwave() && inStage
+}
+
+export const useGeneralFairy = (): boolean => {
+  const inStage = useGeneralThing()
+  return useCamera() && inStage
+}
+
+export const useTreeFairy = (): boolean => {
+  const tree = useTreeKasplat()
+  const camera = useCamera()
+  return tree && camera
+}
+
+export const useRoomFairy = (): LogicBool => {
+  const slam = useSlamCastle()
+  const inStage = usePlayCastle()
+  const diddy = useDiddy()
+  const port = useMonkeyport()
+  const camera = useCamera()
+  const chunky = useChunky()
+  return {
+    in: inStage && slam && camera && diddy && port,
+    out: inStage && slam && camera && chunky
+  }
+}
+
+export const useTreeKasplat = (): boolean => {
+  const tree = useCastleTree()
+  const coconut = useCoconut()
+  return tree && coconut
 }

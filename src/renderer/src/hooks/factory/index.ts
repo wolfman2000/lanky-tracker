@@ -6,6 +6,7 @@ import {
   useAnyKong,
   useBalloon,
   useBlast,
+  useCamera,
   useCharge,
   useChunky,
   useCoconut,
@@ -19,6 +20,7 @@ import {
   useLanky,
   useMini,
   usePunch,
+  useShockwave,
   useSlam,
   useSpring,
   useStand,
@@ -302,4 +304,58 @@ export const useTinyProductionGb = (): LogicBool => {
     in: production && canSlam && twirl,
     out: production && (twirl || dk)
   }
+}
+
+export const useGeneralThing = (): boolean => {
+  const inStage = usePlayFactory()
+  const anyKong = useAnyKong()
+  return inStage && anyKong
+}
+
+export const useArena = (): boolean => {
+  const inStage = useFactoryTesting()
+  const grab = useGrab()
+  return inStage && grab
+}
+
+export const useGeneralTest = (): boolean => {
+  const inStage = useFactoryTesting()
+  const anyKong = useAnyKong()
+  return inStage && anyKong
+}
+
+export const useGeneralDirt = (): boolean => {
+  const thing = useGeneralThing()
+  const dirt = useShockwave()
+  return thing && dirt
+}
+
+export const useFactoryDirt = (): boolean => {
+  const inStage = usePlayFactory()
+  const shockwave = useShockwave()
+  const punch = usePunch()
+  return inStage && punch && shockwave
+}
+
+export const useGeneralFairy = (): boolean => {
+  const thing = useGeneralThing()
+  const camera = useCamera()
+  return thing && camera
+}
+
+export const useNumberFairy = (): boolean => {
+  const testing = useFactoryTesting()
+  const camera = useCamera()
+  return testing && camera
+}
+
+export const useDartFairy = (): boolean => {
+  const banana = useTinyDartGb()
+  const camera = useCamera()
+  return banana && camera
+}
+
+export const useProductionKasplat = (): boolean => {
+  const production = useFactoryProductionTop()
+  return useAnyKong() && production
 }

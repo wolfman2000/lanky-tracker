@@ -1,62 +1,35 @@
-
 import FairyPool from '@renderer/components/pools/Fairies'
-import { usePlayCaves } from '@renderer/hooks/caves'
-import {
-  useAnyKong,
-  useCamera,
-  useGuitar,
-  useRocket,
-  useSax,
-  useSlam,
-  useSpring
-} from '@renderer/hooks/kongs'
+import { useCabinFairy, useGenericFairy, useIglooFairy } from '@renderer/hooks/caves'
 import { useShuffleFairies } from '@renderer/hooks/settings'
 import CavesCheck from './CavesCheck'
 
 const Vanilla: React.FC = () => {
-  const inStage = usePlayCaves()
-  const camera = useCamera()
-  const sax = useSax()
-  const slam = useSlam()
-  const rocket = useRocket()
-  const guitar = useGuitar()
-  const spring = useSpring()
+  const cabin = useCabinFairy()
   return (
     <>
       <CavesCheck
         id={6080}
         name="Caves Fairy Igloo"
         region="Igloo Area"
-        canGetLogic={inStage && sax && slam && camera}
+        canGetLogic={useIglooFairy()}
       />
       <CavesCheck
         id={6081}
         name="Caves Fairy Cabin"
         region="Cabins Area"
-        canGetLogic={inStage && camera && guitar && rocket && spring}
-        canGetBreak={inStage && camera && guitar && rocket}
+        canGetLogic={cabin.in}
+        canGetBreak={cabin.out}
       />
     </>
   )
 }
 
 const Shuffled: React.FC = () => {
-  const anyKong = useAnyKong()
-  const inStage = usePlayCaves()
-  const camera = useCamera()
-
+  const thing = useGenericFairy()
   return (
     <>
-      <CavesCheck
-        id={6280}
-        name="Caves Fairy Location #1"
-        canGetLogic={inStage && anyKong && camera}
-      />
-      <CavesCheck
-        id={6281}
-        name="Caves Fairy Location #2"
-        canGetLogic={inStage && anyKong && camera}
-      />
+      <CavesCheck id={6280} name="Caves Fairy Location #1" canGetLogic={thing} />
+      <CavesCheck id={6281} name="Caves Fairy Location #2" canGetLogic={thing} />
     </>
   )
 }

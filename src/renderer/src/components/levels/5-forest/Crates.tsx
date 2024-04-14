@@ -1,67 +1,55 @@
 import CratePool from '@renderer/components/pools/Crates'
-import { useForestNight, useForestOwl, usePlayForest, useSlamForest } from '@renderer/hooks/forest'
-import { usePlayJapes } from '@renderer/hooks/japes'
-import { useAnyKong, useDk, useStrong } from '@renderer/hooks/kongs'
+import {
+  useDkBarnGb,
+  useForestNight,
+  useForestOwl,
+  useGeneralThing
+} from '@renderer/hooks/forest'
+import { useShuffleCrates } from '@renderer/hooks/settings'
 import JapesCheck from '../1-japes/JapesCheck'
 import ForestCheck from './ForestCheck'
-import { useShuffleCrates } from '@renderer/hooks/settings'
 
 const Vanilla: React.FC = () => {
-  const inStage = usePlayForest()
-  const anyKong = useAnyKong()
-  const owlTree = useForestOwl()
   const night = useForestNight()
-  const dk = useDk()
-  const strong = useStrong()
-  const canSlam = useSlamForest()
+  const barn = useDkBarnGb()
   return (
     <>
       <ForestCheck
         id={5060}
         name="Forest Crate Rafters"
         region="Forest Mills"
-        canGetLogic={inStage && anyKong}
+        canGetLogic={useGeneralThing()}
       />
       <ForestCheck
         id={5061}
         name="Forest Crate Owl Tree"
         region="Owl Tree"
-        canGetLogic={owlTree && anyKong}
+        canGetLogic={useForestOwl()}
       />
       <ForestCheck
         id={5062}
         name="Forest Crate Barn Outside"
         region="Forest Mills"
-        canGetLogic={inStage && night.in}
-        canGetBreak={inStage && night.out}
+        canGetLogic={night.in}
+        canGetBreak={night.out}
       />
       <ForestCheck
         id={5063}
         name="Forest Crate Barn Inside"
         region="Forest Mills"
-        canGetLogic={inStage && night.in && dk && canSlam && strong}
-        canGetBreak={inStage && (night.in || night.out) && dk && canSlam}
+        canGetLogic={barn.in}
+        canGetBreak={barn.out}
       />
     </>
   )
 }
 
 const Shuffled: React.FC = () => {
-  const anyKong = useAnyKong()
-  const inStage = usePlayJapes()
-
+  const thing = useGeneralThing()
   return (
     <>
-      <JapesCheck
-        id={1260}
-        name="Japes Crate Location #1 (maybe)"
-        canGetLogic={inStage && anyKong}
-      />
-      <JapesCheck
-        id={1261}
-        name="Japes Crate Location #2 (maybe)"
-        canGetLogic={inStage && anyKong}
-      />
+      <JapesCheck id={1260} name="Japes Crate Location #1 (maybe)" canGetLogic={thing} />
+      <JapesCheck id={1261} name="Japes Crate Location #2 (maybe)" canGetLogic={thing} />
     </>
   )
 }
