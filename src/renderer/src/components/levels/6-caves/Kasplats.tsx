@@ -1,27 +1,32 @@
 import KasplatPool from '@renderer/components/pools/Kasplats'
-import { useCavesMiniFunky, useCavesPillar, useGeneralThing } from '@renderer/hooks/caves'
+import {
+  useCabinKasplat,
+  useFunkyKasplat,
+  useGeneralThing,
+  useIceCastleKasplat,
+  useIglooKasplat,
+  usePillarKasplat
+} from '@renderer/hooks/caves'
 import { useShuffleKasplats } from '@renderer/hooks/settings'
-import { logicBreak } from '@renderer/hooks/world'
 import CavesCheck from './CavesCheck'
 
 const Vanilla: React.FC = () => {
-  const pillar = useCavesPillar()
-  const miniFunky = useCavesMiniFunky()
-  const thing = useGeneralThing()
+  const pillar = usePillarKasplat()
+  const miniFunky = useFunkyKasplat()
   return (
     <>
       <CavesCheck
         id={6050}
         name="Caves Kasplat: Near Ice Castle"
         region="Main Caves Area"
-        canGetLogic={thing}
+        canGetLogic={useIceCastleKasplat()}
       />
       <CavesCheck
         id={6051}
         name="Caves Kasplat: Mini Room by Funky"
         region="Main Caves Area"
         canGetLogic={miniFunky.in}
-        canGetBreak={logicBreak(miniFunky)}
+        canGetBreak={miniFunky.out}
       />
       <CavesCheck
         id={6052}
@@ -34,13 +39,13 @@ const Vanilla: React.FC = () => {
         id={6053}
         name="Caves Kasplat: By the Far Warp 2 (Cabins)"
         region="Cabins Area"
-        canGetLogic={thing}
+        canGetLogic={useCabinKasplat()}
       />
       <CavesCheck
         id={6054}
         name="Caves Kasplat On 5-Door Igloo"
         region="Igloo Area"
-        canGetLogic={thing}
+        canGetLogic={useIglooKasplat()}
       />
     </>
   )

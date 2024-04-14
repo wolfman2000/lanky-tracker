@@ -13,6 +13,13 @@ import {
   useDiddy,
   useDive,
   useDk,
+  useFtaChunkyBlueprint,
+  useFtaDiddyBanana,
+  useFtaDiddyBlueprint,
+  useFtaDkBlueprint,
+  useFtaLankyBanana,
+  useFtaLankyBlueprint,
+  useFtaTinyBlueprint,
   useGrab,
   useGuitar,
   useHighGrab,
@@ -253,7 +260,7 @@ export const useDiddyGoldGb = (): LogicBool => {
   const highGrab = useHighGrab()
   return {
     in: treasure.in && spring,
-    out: logicBreak(treasure) && (spring || highGrab)
+    out: useFtaDiddyBanana() && logicBreak(treasure) && (spring || highGrab)
   }
 }
 
@@ -313,7 +320,7 @@ export const useLankyGoldGb = (): LogicBool => {
   const highGrab = useHighGrab()
   return {
     in: treasure.in && balloon,
-    out: logicBreak(treasure) && (balloon || highGrab)
+    out: useFtaLankyBanana() && logicBreak(treasure) && (balloon || highGrab)
   }
 }
 
@@ -423,17 +430,38 @@ export const useTreasureKasplat = (): LogicBool => {
   const treasure = useGalleonTreasureRoom()
   const spring = useSpring()
   const highGrab = useHighGrab()
+  const dk = useFtaDkBlueprint()
   return {
-    in: treasure.in && spring,
-    out: logicBreak(treasure) && (spring || highGrab)
+    in: dk && treasure.in && spring,
+    out: dk && logicBreak(treasure) && (spring || highGrab)
   }
+}
+
+export const useLighthouseKasplat = (): boolean => {
+  const lighthouse = useGalleonLighthouseArea()
+  return useFtaDiddyBlueprint() && lighthouse
 }
 
 export const useCannonKasplat = (): LogicBool => {
   const highTide = useGalleonHighTide()
   const cannon = useGalleonCannon()
+  const kong = useFtaLankyBlueprint()
   return {
-    in: cannon && highTide,
-    out: cannon
+    in: kong && cannon && highTide,
+    out: kong && cannon
   }
+}
+
+export const useVineKasplat = (): LogicBool => {
+  const kasplat = useGalleonCavernTop()
+  const kong = useFtaTinyBlueprint()
+  return {
+    in: kong && kasplat.in,
+    out: kong && kasplat.out
+  }
+}
+
+export const useCactusKasplat = (): boolean => {
+  const outskirts = useGalleonOutskirts()
+  return useFtaChunkyBlueprint() && outskirts
 }

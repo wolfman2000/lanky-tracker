@@ -1,22 +1,21 @@
 import KasplatPool from '@renderer/components/pools/Kasplats'
 import {
-  useAztecBack,
-  useAztecLlamaLava,
   useChunky5DoorGb,
   useCoconutKasplat,
   useGeneralThing,
-  useOasisKasplat
+  useLlamaLavaKasplat,
+  useOasisKasplat,
+  useTunnelKasplat
 } from '@renderer/hooks/aztec'
 import { useShuffleKasplats } from '@renderer/hooks/settings'
-import { logicBreak } from '@renderer/hooks/world'
 import AztecCheck from './AztecCheck'
 
 const Vanilla: React.FC = () => {
-  const aztecBack = useAztecBack()
-  const lava = useAztecLlamaLava()
+  const lava = useLlamaLavaKasplat()
   const coconut = useCoconutKasplat()
   const chunky = useChunky5DoorGb()
   const oasis = useOasisKasplat()
+  const tunnel = useTunnelKasplat()
   return (
     <>
       <AztecCheck
@@ -38,14 +37,14 @@ const Vanilla: React.FC = () => {
         name="Aztec Kasplat: Llama Temple Lava"
         region="Llama Temple"
         canGetLogic={lava.in}
-        canGetBreak={logicBreak(lava)}
+        canGetBreak={lava.out}
       />
       <AztecCheck
         id={2053}
         name="Aztec Kasplat: Hunky Chunky Barrel"
         region="Various Aztec Tunnels"
-        canGetLogic={aztecBack.in}
-        canGetBreak={aztecBack.out}
+        canGetLogic={tunnel.in}
+        canGetBreak={tunnel.out}
       />
       <AztecCheck
         id={2054}

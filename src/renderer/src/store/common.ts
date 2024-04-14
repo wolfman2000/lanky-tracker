@@ -636,6 +636,12 @@ interface SettingCollection {
    * Note that all keys are still required to fight K. Rool.
    */
   openLobbies: boolean
+  /**
+   * What is the status of the Free Trade Agreement?
+   *
+   * 0: No Free Trade. 1: Free Trade, No Blueprints 2: Free Trade, No Restrictions
+   */
+  freeTrade: BananaportRange
 }
 
 export interface SettingState {

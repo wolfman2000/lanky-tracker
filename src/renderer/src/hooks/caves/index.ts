@@ -14,6 +14,13 @@ import {
   useDiddy,
   useDk,
   useFeather,
+  useFtaChunkyBlueprint,
+  useFtaDiddyBanana,
+  useFtaDiddyBlueprint,
+  useFtaDkBlueprint,
+  useFtaLankyBlueprint,
+  useFtaTinyBanana,
+  useFtaTinyBlueprint,
   useGone,
   useGuitar,
   useHighGrab,
@@ -170,7 +177,7 @@ export const useDiddyWaterfallGb = (): LogicBool => {
   const twirl = useTwirl()
   return {
     in: inStage && rocket,
-    out: inStage && (dk || twirl)
+    out: useFtaDiddyBanana() && inStage && (dk || twirl)
   }
 }
 
@@ -268,7 +275,7 @@ export const useTinyCaveGb = (): boolean => {
   const inStage = usePlayCaves()
   const mini = useMini()
   const warpAll = useBananaportAll()
-  return inStage && (mini || warpAll)
+  return useFtaTinyBanana() && inStage && (mini || warpAll)
 }
 
 export const useTinyPortGb = (): LogicBool => {
@@ -336,4 +343,37 @@ export const useCabinFairy = (): LogicBool => {
     in: thing.in && camera,
     out: thing.out && camera
   }
+}
+
+export const useIceCastleKasplat = (): boolean => {
+  const inStage = usePlayCaves()
+  return useFtaDkBlueprint() && inStage
+}
+
+export const useFunkyKasplat = (): LogicBool => {
+  const miniFunky = useCavesMiniFunky()
+  const kong = useFtaDiddyBlueprint()
+  return {
+    in: kong && miniFunky.in,
+    out: kong && miniFunky.out
+  }
+}
+
+export const usePillarKasplat = (): LogicBool => {
+  const pillar = useCavesPillar()
+  const kong = useFtaLankyBlueprint()
+  return {
+    in: kong && pillar.in,
+    out: kong && pillar.out
+  }
+}
+
+export const useCabinKasplat = (): boolean => {
+  const inStage = usePlayCaves()
+  return useFtaTinyBlueprint() && inStage
+}
+
+export const useIglooKasplat = (): boolean => {
+  const inStage = usePlayCaves()
+  return useFtaChunkyBlueprint() && inStage
 }

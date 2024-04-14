@@ -14,6 +14,13 @@ import {
   useDiddy,
   useDk,
   useFeather,
+  useFtaChunkyBlueprint,
+  useFtaDiddyBanana,
+  useFtaDiddyBlueprint,
+  useFtaDkBlueprint,
+  useFtaLankyBlueprint,
+  useFtaTinyBanana,
+  useFtaTinyBlueprint,
   useGrab,
   useGrape,
   useGuitar,
@@ -225,7 +232,7 @@ export const useDiddyTopGb = (): LogicBool => {
   const stand = useStand()
   return {
     in: inStage && rocket,
-    out: inStage && (diddy || tiny) && (tiny || stand)
+    out: useFtaDiddyBanana() && inStage && (diddy || tiny) && (tiny || stand)
   }
 }
 
@@ -256,7 +263,7 @@ export const useDiddyRaftersGb = (): LogicBool => {
   const highGrab = useHighGrab()
   return {
     in: inStage && night.in && spring && guitar,
-    out: inStage && logicBreak(night) && (spring || highGrab)
+    out: useFtaDiddyBanana() && inStage && logicBreak(night) && (spring || highGrab)
   }
 }
 
@@ -358,16 +365,16 @@ export const useTinyAntGb = (): boolean => {
   return owl && mini && sax
 }
 
-// TODO: Free Trade Agreement will be a pain.
 export const useTinySpiderGb = (): LogicBool => {
   const spider = useForestSpiderBoss()
   const dusk = useForestDusk()
   const feather = useFeather()
   const pineapple = usePineapple()
   const anyGun = useAnyGun()
+  const kong = useFtaTinyBanana()
   return {
-    in: spider.in && ((dusk && (feather || pineapple)) || (!dusk && feather)),
-    out: logicBreak(spider) && anyGun
+    in: kong && spider.in && ((dusk && (feather || pineapple)) || (!dusk && feather)),
+    out: kong && logicBreak(spider) && anyGun
   }
 }
 
@@ -429,20 +436,31 @@ export const useBarnKasplat = (): LogicBool => {
   const inStage = usePlayForest()
   const night = useForestNight()
   const anyGun = useAnyGun()
+  const kong = useFtaDkBlueprint()
   return {
-    in: inStage && night.in && anyGun,
-    out: inStage && (night.in || night.out)
+    in: kong && inStage && night.in && anyGun,
+    out: kong && inStage && (night.in || night.out)
   }
 }
 
 export const useOwlKasplat = (): boolean => {
   const inStage = useForestOwl()
   const anyKong = useAnyKong()
-  return inStage && anyKong
+  return useFtaLankyBlueprint() && inStage && anyKong
 }
 
 export const useNightKasplat = (): boolean => {
   const inStage = useForestMushroomTop()
   const anyKong = useAnyKong()
-  return inStage && anyKong
+  return useFtaChunkyBlueprint() && inStage && anyKong
+}
+
+export const useMushInteriorKasplat = (): boolean => {
+  const inStage = usePlayForest()
+  return useFtaDiddyBlueprint() && inStage
+}
+
+export const useMushExteriorKasplat = (): boolean => {
+  const inStage = usePlayForest()
+  return useFtaTinyBlueprint() && inStage
 }

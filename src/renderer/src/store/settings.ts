@@ -35,7 +35,8 @@ export const initialSettings: SettingState = {
     poolDrops: false,
     shuffleEnemies: true,
     hardShooting: false,
-    openLobbies: false
+    openLobbies: false,
+    freeTrade: 2
   }
 }
 

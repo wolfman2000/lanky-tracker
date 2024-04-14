@@ -1,10 +1,16 @@
 import KasplatPool from '@renderer/components/pools/Kasplats'
-import { useArena, useChunkyUndergroundGb, useGateKasplat } from '@renderer/hooks/japes'
+import {
+  useArena,
+  useChunkyUndergroundGb,
+  useDiddyKasplat,
+  useDkKasplat,
+  useLankyKasplat,
+  useTinyKasplat
+} from '@renderer/hooks/japes'
 import { useShuffleKasplats } from '@renderer/hooks/settings'
 import JapesCheck from './JapesCheck'
 
 const Vanilla: React.FC = () => {
-  const kasplat = useGateKasplat()
   const under = useChunkyUndergroundGb()
   return (
     <>
@@ -12,25 +18,25 @@ const Vanilla: React.FC = () => {
         id={1050}
         name="Japes Kasplat: Hive Tunnel Lower"
         region="Hive Tunnel Area"
-        canGetLogic={kasplat}
+        canGetLogic={useDkKasplat()}
       />
       <JapesCheck
         id={1051}
         name="Japes Kasplat: Near Painting Room"
         region="Stormy Tunnel Area"
-        canGetLogic={kasplat}
+        canGetLogic={useDiddyKasplat()}
       />
       <JapesCheck
         id={1052}
         name="Japes Kasplat: By Lanky Slope Bonus"
         region="Stormy Tunnel Area"
-        canGetLogic={kasplat}
+        canGetLogic={useLankyKasplat()}
       />
       <JapesCheck
         id={1053}
         name="Japes Kasplat: Hive Tunnel Upper"
         region="Hive Tunnel Area"
-        canGetLogic={kasplat}
+        canGetLogic={useTinyKasplat()}
       />
       <JapesCheck
         id={1054}

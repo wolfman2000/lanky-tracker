@@ -26,6 +26,14 @@ import {
   useDive,
   useDk,
   useFeather,
+  useFtaChunkyBlueprint,
+  useFtaDiddyBanana,
+  useFtaDiddyBlueprint,
+  useFtaDkBanana,
+  useFtaDkBlueprint,
+  useFtaLankyBanana,
+  useFtaLankyBlueprint,
+  useFtaTinyBlueprint,
   useGone,
   useGrab,
   useGrape,
@@ -376,7 +384,7 @@ export const useCheckDkCavesLobby = (): LogicBool => {
   const orange = useOrange()
   return {
     in: playCaves && punch && strong,
-    out: playCaves && punch && (twirl || orange)
+    out: useFtaDkBanana() && playCaves && punch && (twirl || orange)
   }
 }
 
@@ -390,7 +398,7 @@ export const useCheckDiddySnide = (): LogicBool => {
   const twirl = useTwirl()
   return {
     in: kremAscent && ((autoBonus && anyKong) || spring),
-    out: kremAscent && ((boulderTech && highGrab) || twirl)
+    out: useFtaDiddyBanana() && kremAscent && ((boulderTech && highGrab) || twirl)
   }
 }
 
@@ -413,7 +421,7 @@ export const useCheckDiddySummit = (): LogicBool => {
   const twirl = useTwirl()
   return {
     in: fungiIsland && islesUpper && boulderTech && target && rocket,
-    out: fungiIsland && twirl
+    out: useFtaDiddyBanana() && fungiIsland && twirl
   }
 }
 
@@ -436,7 +444,7 @@ export const useCheckLankyPrison = (): LogicBool => {
   const dk = useDk()
   return {
     in: sprint,
-    out: dk
+    out: useFtaLankyBanana() && dk
   }
 }
 
@@ -454,7 +462,7 @@ export const useCheckLankyCastle = (): LogicBool => {
   const tiny = useTiny()
   return {
     in: playCastle && boulderTech && balloon,
-    out: playCastle && tiny
+    out: useFtaLankyBanana() && playCastle && tiny
   }
 }
 
@@ -645,30 +653,30 @@ export const useHelmKasplat = (): LogicBool => {
   const twirl = useTwirl()
   return {
     in: playHelm && sniper && coconut,
-    out: playHelm && twirl
+    out: useFtaDkBlueprint() && playHelm && twirl
   }
 }
 
 export const useCastleKasplat = (): boolean => {
   const playCastle = usePlayCastle()
   const coconut = useCoconut()
-  return playCastle && coconut
+  return useFtaDiddyBlueprint() && playCastle && coconut
 }
 
 export const useCavesKasplat = (): boolean => {
   const playCaves = usePlayCaves()
   const punch = usePunch()
-  return playCaves && punch
+  return useFtaLankyBlueprint() && playCaves && punch
 }
 
 export const useFactoryKasplat = (): boolean => {
   const playFactory = usePlayFactory()
   const punch = usePunch()
-  return playFactory && punch
+  return useFtaTinyBlueprint() && playFactory && punch
 }
 
 export const useGalleonKasplat = (): boolean => {
   const playGalleon = usePlayGalleon()
   const anyKong = useAnyKong()
-  return playGalleon && anyKong
+  return useFtaChunkyBlueprint() && playGalleon && anyKong
 }

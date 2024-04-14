@@ -1,10 +1,16 @@
 import KasplatPool from '@renderer/components/pools/Kasplats'
-import { useGeneralThing, useTreeKasplat } from '@renderer/hooks/castle'
+import {
+  useDungeonKasplat,
+  useGeneralThing,
+  useLonelyKasplat,
+  useMausoleumKasplat,
+  usePathKasplat,
+  useTreeKasplat
+} from '@renderer/hooks/castle'
 import { useShuffleKasplats } from '@renderer/hooks/settings'
 import CastleCheck from './CastleCheck'
 
 const Vanilla: React.FC = () => {
-  const kasplat = useGeneralThing()
   return (
     <>
       <CastleCheck
@@ -17,25 +23,25 @@ const Vanilla: React.FC = () => {
         id={7051}
         name="Castle Kasplat: Lower Cave Center"
         region="Castle Underground"
-        canGetLogic={kasplat}
+        canGetLogic={useMausoleumKasplat()}
       />
       <CastleCheck
         id={7052}
         name="Castle Kasplat: Near Upper Warp 2"
         region="Castle Surroundings"
-        canGetLogic={kasplat}
+        canGetLogic={usePathKasplat()}
       />
       <CastleCheck
         id={7053}
         name="Castle Kasplat: On a lone platform"
         region="Castle Surroundings"
-        canGetLogic={kasplat}
+        canGetLogic={useLonelyKasplat()}
       />
       <CastleCheck
         id={7054}
         name="Castle Kasplat: Near Candy's"
         region="Castle Underground"
-        canGetLogic={kasplat}
+        canGetLogic={useDungeonKasplat()}
       />
     </>
   )

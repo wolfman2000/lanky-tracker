@@ -2,6 +2,8 @@ import KasplatPool from '@renderer/components/pools/Kasplats'
 import {
   useBarnKasplat,
   useGeneralThing,
+  useMushExteriorKasplat,
+  useMushInteriorKasplat,
   useNightKasplat,
   useOwlKasplat
 } from '@renderer/hooks/forest'
@@ -23,7 +25,7 @@ const Vanilla: React.FC = () => {
         id={5051}
         name="Forest Kasplat: Inside Giant Mushroom"
         region="Giant Mushroom Insides"
-        canGetLogic={useGeneralThing()}
+        canGetLogic={useMushInteriorKasplat()}
       />
       <ForestCheck
         id={5052}
@@ -35,7 +37,7 @@ const Vanilla: React.FC = () => {
         id={5053}
         name="Forest Kasplat: Low Mushroom Exterior"
         region="Giant Mushroom Exterior"
-        canGetLogic={useGeneralThing()}
+        canGetLogic={useMushExteriorKasplat()}
       />
       <ForestCheck
         id={5054}
