@@ -578,6 +578,94 @@ const s3AllKeysPreset = (state: AllSlice): AllSlice => {
   }
 }
 
+const s3Clo = (state: AllSlice): AllSlice => {
+  const startState = blankPreset(state)
+  return {
+    ...startState,
+    settings: {
+      ...startState.settings,
+      progressiveSlams: true,
+      poolBananaMedals: false,
+      poolFairies: true,
+      poolCrates: true,
+      forestTime: 2,
+      galleonHighTide: true,
+      cbCount: 40,
+      bananaportOpen: 1,
+      helmAccess: 1
+    },
+    moves: {
+      ...startState.moves,
+      slam: 1,
+      vine: true,
+      dive: true
+    },
+    removeBarriers: {
+      ...startState.removeBarriers,
+      japesCoconutGates: true,
+      aztec5DoorTemple: true,
+      aztecBack: true,
+      factoryProduction: true,
+      factoryTesting: true,
+      galleonLighthouse: true,
+      galleonSeasick: true,
+      cavesIgloo: true
+    },
+    fastChecks: {
+      ...startState.fastChecks,
+      factoryArcade: true,
+      galleonMermaid: true
+    },
+    key1: true
+  }
+}
+
+const s3Traditionalist = (state: AllSlice): AllSlice => {
+  const startState = blankPreset(state)
+  return {
+    ...startState,
+    settings: {
+      ...startState.settings,
+      progressiveSlams: true,
+      poolFairies: true,
+      poolCrates: true,
+      poolCompanyCoins: true,
+      forestTime: 0,
+      galleonHighTide: true,
+      cbCount: 40,
+      jetpacCount: 15,
+      fairyCount: 5,
+      bananaportOpen: 1,
+      helmAccess: 1
+    },
+    moves: {
+      ...startState.moves,
+      slam: 1,
+      camera: true,
+      shockwave: true
+    },
+    removeBarriers: {
+      ...startState.removeBarriers,
+      japesCoconutGates: true,
+      aztec5DoorTemple: true,
+      aztecBack: true,
+      factoryProduction: true,
+      factoryTesting: true,
+      galleonLighthouse: true,
+      galleonSeasick: true,
+      cavesIgloo: true
+    },
+    fastChecks: {
+      ...startState.fastChecks,
+      factoryArcade: true,
+      galleonMermaid: true
+    },
+    key1: true,
+    key3: true,
+    key6: true
+  }
+}
+
 const presetSlice: StateCreator<AllSlice, [], [], PresetSlice> = (set) => {
   return {
     setPreset(id): void {
@@ -607,6 +695,10 @@ const presetSlice: StateCreator<AllSlice, [], [], PresetSlice> = (set) => {
             return radicalSloPreset(state)
           case 's3allKeys':
             return s3AllKeysPreset(state)
+          case 's3Clo':
+            return s3Clo(state)
+          case 's3Traditionalist':
+            return s3Traditionalist(state)
           default:
             return state
         }

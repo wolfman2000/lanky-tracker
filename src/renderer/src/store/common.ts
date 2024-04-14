@@ -710,6 +710,8 @@ export type Preset =
   | 'bountyHunter'
   | 'radicalSlo'
   | 's3allKeys'
+  | 's3Clo'
+  | 's3Traditionalist'
 
 export type PresetSlice = {
   setPreset: (id: Preset) => void
