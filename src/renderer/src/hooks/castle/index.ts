@@ -13,6 +13,11 @@ import {
   useDiddy,
   useDk,
   useFeather,
+  useFtaChunkyBlueprint,
+  useFtaDiddyBlueprint,
+  useFtaLankyBlueprint,
+  useFtaTinyBanana,
+  useFtaTinyBlueprint,
   useGone,
   useGrab,
   useGrape,
@@ -239,7 +244,7 @@ export const useTinyMausoleumGb = (): LogicBool => {
   const dk = useDk()
   return {
     in: inStage && feather && canSlam && twirl,
-    out: inStage && (feather || grape) && canSlam && (dk || twirl)
+    out: useFtaTinyBanana() && inStage && (feather || grape) && canSlam && (dk || twirl)
   }
 }
 
@@ -286,4 +291,24 @@ export const useTreeKasplat = (): boolean => {
   const tree = useCastleTree()
   const coconut = useCoconut()
   return tree && coconut
+}
+
+export const useMausoleumKasplat = (): boolean => {
+  const inStage = usePlayCastle()
+  return useFtaDiddyBlueprint() && inStage
+}
+
+export const usePathKasplat = (): boolean => {
+  const inStage = usePlayCastle()
+  return useFtaLankyBlueprint() && inStage
+}
+
+export const useLonelyKasplat = (): boolean => {
+  const inStage = usePlayCastle()
+  return useFtaTinyBlueprint() && inStage
+}
+
+export const useDungeonKasplat = (): boolean => {
+  const inStage = usePlayCastle()
+  return useFtaChunkyBlueprint() && inStage
 }

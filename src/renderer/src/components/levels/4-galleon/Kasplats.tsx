@@ -1,19 +1,17 @@
 import KasplatPool from '@renderer/components/pools/Kasplats'
 import {
+  useCactusKasplat,
   useCannonKasplat,
-  useGalleonCavernTop,
-  useGalleonLighthouseArea,
-  useGalleonOutskirts,
   useGeneralThing,
-  useTreasureKasplat
+  useLighthouseKasplat,
+  useTreasureKasplat,
+  useVineKasplat
 } from '@renderer/hooks/galleon'
 import { useShuffleKasplats } from '@renderer/hooks/settings'
-import { logicBreak } from '@renderer/hooks/world'
 import GalleonCheck from './GalleonCheck'
 
 const Vanilla: React.FC = () => {
-  const galleonTop = useGalleonCavernTop()
-  const outskirts = useGalleonOutskirts()
+  const galleonTop = useVineKasplat()
   const cannon = useCannonKasplat()
   const treasure = useTreasureKasplat()
 
@@ -30,7 +28,7 @@ const Vanilla: React.FC = () => {
         id={4051}
         name="Galleon Kasplat: Lighthouse Alcove"
         region="Lighthouse Area"
-        canGetLogic={useGalleonLighthouseArea()}
+        canGetLogic={useLighthouseKasplat()}
       />
       <GalleonCheck
         id={4052}
@@ -44,13 +42,13 @@ const Vanilla: React.FC = () => {
         name="Galleon Kasplat: Past Vines"
         region="Galleon Caverns"
         canGetLogic={galleonTop.in}
-        canGetBreak={logicBreak(galleonTop)}
+        canGetBreak={galleonTop.out}
       />
       <GalleonCheck
         id={4054}
         name="Galleon Kasplat: Musical Cactus"
         region="Shipyard Outskirts"
-        canGetLogic={outskirts}
+        canGetLogic={useCactusKasplat()}
       />
     </>
   )

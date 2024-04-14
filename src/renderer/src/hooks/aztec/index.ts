@@ -12,6 +12,10 @@ import {
   useCoconut,
   useDive,
   useFeather,
+  useFtaDkBanana,
+  useFtaLankyBlueprint,
+  useFtaTinyBanana,
+  useFtaTinyBlueprint,
   useGrape,
   useGuitar,
   useHunky,
@@ -25,6 +29,7 @@ import {
   useShockwave,
   useStand,
   useStrong,
+  useTiny,
   useTriangle,
   useTrombone,
   useTwirl,
@@ -302,7 +307,7 @@ export const useDkTunnelGb = (): LogicBool => {
   const strong = useStrong()
   return {
     in: tunnel.in && strong,
-    out: logicBreak(tunnel)
+    out: useFtaDkBanana() && logicBreak(tunnel)
   }
 }
 
@@ -431,9 +436,10 @@ export const useTinyBeetleGb = (): LogicBool => {
 export const useTinyLavaGb = (): LogicBool => {
   const lava = useAztecLlamaLava()
   const canSlam = useSlamAztec()
+  const tiny = useTiny()
   return {
-    in: lava.in && canSlam,
-    out: logicBreak(lava)
+    in: lava.in && tiny && canSlam,
+    out: useFtaTinyBanana() && logicBreak(lava)
   }
 }
 
@@ -521,5 +527,23 @@ export const useOasisKasplat = (): LogicBool => {
   return {
     in: rocket && thing.in,
     out: rocket && thing.out
+  }
+}
+
+export const useLlamaLavaKasplat = (): LogicBool => {
+  const lava = useAztecLlamaLava()
+  const kong = useFtaLankyBlueprint()
+  return {
+    in: kong && lava.in,
+    out: kong && lava.out
+  }
+}
+
+export const useTunnelKasplat = (): LogicBool => {
+  const back = useAztecBack()
+  const kong = useFtaTinyBlueprint()
+  return {
+    in: kong && back.in,
+    out: kong && back.out
   }
 }

@@ -13,6 +13,15 @@ import {
   useDiddy,
   useDk,
   useFeather,
+  useFtaChunkyBlueprint,
+  useFtaDiddyBanana,
+  useFtaDiddyBlueprint,
+  useFtaDkBanana,
+  useFtaDkBlueprint,
+  useFtaLankyBanana,
+  useFtaLankyBlueprint,
+  useFtaTinyBanana,
+  useFtaTinyBlueprint,
   useGrab,
   useGuitar,
   useHighGrab,
@@ -130,7 +139,7 @@ export const useDiddyBlockGb = (): LogicBool => {
   const highGrab = useHighGrab()
   return {
     in: testing && spring,
-    out: testing && highGrab
+    out: useFtaDiddyBanana() && testing && highGrab
   }
 }
 
@@ -215,7 +224,7 @@ export const useDkProdGb = (): LogicBool => {
   const diddy = useDiddy()
   return {
     in: production && strong,
-    out: production && (dk || diddy)
+    out: useFtaDkBanana() && production && (dk || diddy)
   }
 }
 
@@ -225,7 +234,7 @@ export const useLankyTestingGb = (): LogicBool => {
   const anyKong = useAnyKong()
   return {
     in: testing && balloon,
-    out: testing && anyKong
+    out: useFtaLankyBanana() && testing && anyKong
   }
 }
 
@@ -272,7 +281,7 @@ export const useLankyProductionGb = (): LogicBool => {
   const tiny = useTiny()
   return {
     in: production && canSlam && stand,
-    out: production && (stand || tiny)
+    out: useFtaLankyBanana() && production && (stand || tiny)
   }
 }
 
@@ -302,7 +311,7 @@ export const useTinyProductionGb = (): LogicBool => {
   const dk = useDk()
   return {
     in: production && canSlam && twirl,
-    out: production && (twirl || dk)
+    out: useFtaTinyBanana() && production && (twirl || dk)
   }
 }
 
@@ -355,7 +364,27 @@ export const useDartFairy = (): boolean => {
   return banana && camera
 }
 
-export const useProductionKasplat = (): boolean => {
+export const useProductionTopKasplat = (): boolean => {
   const production = useFactoryProductionTop()
-  return useAnyKong() && production
+  return useFtaDkBlueprint() && production
+}
+
+export const useProductionBaseKasplat = (): boolean => {
+  const inStage = usePlayFactory()
+  return useFtaDiddyBlueprint() && inStage
+}
+
+export const useResearchKasplat = (): boolean => {
+  const inStage = usePlayFactory()
+  return useFtaLankyBlueprint() && inStage
+}
+
+export const useStorageKasplat = (): boolean => {
+  const inStage = usePlayFactory()
+  return useFtaTinyBlueprint() && inStage
+}
+
+export const useBlockKasplat = (): boolean => {
+  const inStage = usePlayFactory()
+  return useFtaChunkyBlueprint() && inStage
 }

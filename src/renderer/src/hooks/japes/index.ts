@@ -14,6 +14,13 @@ import {
   useDiddy,
   useDk,
   useFeather,
+  useFtaChunkyBanana,
+  useFtaDiddyBanana,
+  useFtaDiddyBlueprint,
+  useFtaDkBlueprint,
+  useFtaLankyBanana,
+  useFtaLankyBlueprint,
+  useFtaTinyBlueprint,
   useGrape,
   useHighGrab,
   useHunky,
@@ -195,7 +202,7 @@ export const useChunkyUndergroundGb = (): LogicBool => {
   const diddy = useDiddy()
   return {
     in: under && pineapple && vine,
-    out: under && (dk || twirl || ((tiny || diddy) && vine))
+    out: useFtaChunkyBanana() && under && (dk || twirl || ((tiny || diddy) && vine))
   }
 }
 
@@ -209,12 +216,12 @@ export const useDiddyCagedGb = (): boolean => {
 export const useDiddyMountainGb = (): boolean => {
   const mine = useJapesMine()
   const canSlam = useSlamJapes()
-  return mine && canSlam
+  return useFtaDiddyBanana() && mine && canSlam
 }
 
 export const useDiddyTunnelGb = (): boolean => {
   const side = useJapesSideArea()
-  return side
+  return useFtaDiddyBanana() && side
 }
 
 export const useDiddyMinecartGb = (): LogicBool => {
@@ -228,6 +235,12 @@ export const useDiddyMinecartGb = (): LogicBool => {
   }
 }
 
+/**
+ * Can we grab the item in front of the Diddy Kong Cage?
+ *
+ * This location is likely not restricted to FTA.
+ * @returns true if this item can be attained.
+ */
 export const useDkFreebieGb = (): boolean => {
   const inStage = usePlayJapes()
   const anyKong = useAnyKong()
@@ -295,7 +308,7 @@ export const useLankySlopeGb = (): LogicBool => {
   const anyKong = useAnyKong()
   return {
     in: tunnel && stand,
-    out: tunnel && anyKong
+    out: useFtaLankyBanana() && tunnel && anyKong
   }
 }
 
@@ -392,4 +405,24 @@ export const useGateKasplat = (): boolean => {
   const kongGates = useJapesKongGates()
   const anyKong = useAnyKong()
   return kongGates && anyKong
+}
+
+export const useDkKasplat = (): boolean => {
+  const gate = useGateKasplat()
+  return useFtaDkBlueprint() && gate
+}
+
+export const useDiddyKasplat = (): boolean => {
+  const gate = useGateKasplat()
+  return useFtaDiddyBlueprint() && gate
+}
+
+export const useLankyKasplat = (): boolean => {
+  const gate = useGateKasplat()
+  return useFtaLankyBlueprint() && gate
+}
+
+export const useTinyKasplat = (): boolean => {
+  const gate = useGateKasplat()
+  return useFtaTinyBlueprint() && gate
 }
