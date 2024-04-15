@@ -589,8 +589,9 @@ const s3Clo = (state: AllSlice): AllSlice => {
       poolFairies: true,
       poolCrates: true,
       forestTime: 2,
-      galleonHighTide: true,
       cbCount: 40,
+      fairyCount: 4,
+      jetpacCount: 15,
       bananaportOpen: 1,
       helmAccess: 1
     },
@@ -598,7 +599,9 @@ const s3Clo = (state: AllSlice): AllSlice => {
       ...startState.moves,
       slam: 1,
       vine: true,
-      dive: true
+      dive: true,
+      camera: true,
+      shockwave: true
     },
     removeBarriers: {
       ...startState.removeBarriers,
@@ -608,6 +611,7 @@ const s3Clo = (state: AllSlice): AllSlice => {
       factoryProduction: true,
       factoryTesting: true,
       galleonLighthouse: true,
+      galleonOutskirts: true,
       galleonSeasick: true,
       cavesIgloo: true
     },
