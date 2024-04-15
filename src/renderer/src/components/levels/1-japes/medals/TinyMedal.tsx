@@ -1,6 +1,6 @@
 import { useTinyMedalInLogic, useTinyMedalOutLogic } from '@renderer/hooks/japes/medals/tiny'
 import { useCbCount } from '@renderer/hooks/settings'
-import JapesCheck from '../JapesCheck'
+import JapesCheck from '../check'
 
 const TinyMedal: React.FC = () => {
   const inLogic = useTinyMedalInLogic()

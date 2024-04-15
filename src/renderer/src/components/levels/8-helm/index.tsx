@@ -1,27 +1,22 @@
-import BossPool from '@renderer/components/pools/Bosses'
 import DropPool from '@renderer/components/pools/Drops'
-import { useHelmDoors } from '@renderer/hooks/helm'
-import ArenaLocations from './Arenas'
-import EnemyLocations from './Enemies'
-import FairyLocations from './Fairies'
-import HelmCheck from './HelmCheck'
-import MedalLocations from './Medals'
+import BlastArena from './arenas/Blast'
+import ShuffledArenas from './arenas/Shuffled'
+import BossCheck from './boss'
+import EnemyLocations from './enemies'
+import EndOfHelmFairies from './fairies/End'
+import ShuffledFairies from './fairies/Shuffled'
+import MedalLocations from './medals'
 
 const HelmChecks: React.FC = () => {
-  const helmDoors = useHelmDoors()
   return (
     <div className="grid">
-      <ArenaLocations />
+      <BlastArena />
+      <ShuffledArenas />
       <MedalLocations />
-      <BossPool>
-        <HelmCheck
-          id={8105}
-          name="The End of Helm"
-          canGetLogic={helmDoors.in}
-          canGetBreak={helmDoors.out}
-        />
-      </BossPool>
-      <FairyLocations />
+      <BossCheck />
+      <EndOfHelmFairies />
+      <ShuffledFairies />
+      <ShuffledArenas />
       <DropPool>
         <EnemyLocations />
       </DropPool>

@@ -82,6 +82,10 @@ main > article:last-child {
   grid-template-columns: repeat(2, 1fr);
   justify-items: center;
 }
+.level-list img:nth-of-type(3n),
+.level-list img:nth-of-type(3n + 2) {
+  cursor: pointer;
+}
 .level-list > section {
   display: grid;
   grid-template-columns: 1fr 14ex 1fr;
@@ -124,7 +128,8 @@ main > article:last-child {
 .count-icon,
 .slam-icon,
 .double-icon,
-.simple-icon {
+.simple-icon,
+.check-icon {
   position: relative;
   cursor: pointer;
 }

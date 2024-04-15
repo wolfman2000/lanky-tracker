@@ -1,6 +1,6 @@
 import { useTinyMedalInLogic, useTinyMedalOutLogic } from '@renderer/hooks/aztec/medals/tiny'
 import { useCbCount } from '@renderer/hooks/settings'
-import AztecCheck from '../AztecCheck'
+import AztecCheck from '../check'
 
 const TinyMedal: React.FC = () => {
   const inLogic = useTinyMedalInLogic()

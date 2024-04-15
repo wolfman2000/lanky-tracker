@@ -1,5 +1,5 @@
 import { useCheckDkCoconutCage } from '@renderer/hooks/isles'
-import IslesCheck from '../../IslesCheck'
+import IslesCheck from '../../check'
 
 const CoconutCage: React.FC = () => {
   const cage = useCheckDkCoconutCage()

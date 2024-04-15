@@ -137,9 +137,10 @@ export const useDiddyBlockGb = (): LogicBool => {
   const testing = useFactoryTesting()
   const spring = useSpring()
   const highGrab = useHighGrab()
+  const twirl = useTwirl()
   return {
     in: testing && spring,
-    out: useFtaDiddyBanana() && testing && highGrab
+    out: useFtaDiddyBanana() && testing && (highGrab || twirl)
   }
 }
 
@@ -169,11 +170,11 @@ export const useDiddyProductionGb = (): LogicBool => {
   const canSlam = useSlamFactory()
   const diddy = useDiddy()
   const spring = useSpring()
-  const twirl = useTwirl()
   const highGrab = useHighGrab()
+  const tinyProd = useTinyProductionGb()
   return {
     in: production && canSlam && diddy && spring,
-    out: production && canSlam && diddy && (twirl || highGrab)
+    out: production && canSlam && diddy && (logicBreak(tinyProd) || highGrab)
   }
 }
 

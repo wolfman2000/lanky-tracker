@@ -33,6 +33,7 @@ import {
   useFtaDkBlueprint,
   useFtaLankyBanana,
   useFtaLankyBlueprint,
+  useFtaTinyBanana,
   useFtaTinyBlueprint,
   useGone,
   useGrab,
@@ -392,13 +393,14 @@ export const useCheckDiddySnide = (): LogicBool => {
   const kremAscent = useIslesKremAscent()
   const spring = useSpring()
   const autoBonus = useAutoBonus()
-  const anyKong = useAnyKong()
   const boulderTech = useBoulderTech()
   const highGrab = useHighGrab()
   const twirl = useTwirl()
+  const diddy = useFtaDiddyBanana()
+  const anyKong = useAnyKong()
   return {
-    in: kremAscent && ((autoBonus && anyKong) || spring),
-    out: useFtaDiddyBanana() && kremAscent && ((boulderTech && highGrab) || twirl)
+    in: kremAscent && anyKong && diddy && (spring || autoBonus),
+    out: kremAscent && anyKong && diddy && ((boulderTech && highGrab) || twirl)
   }
 }
 
@@ -488,10 +490,12 @@ export const useCheckTinyMusicPad = (): boolean => {
  */
 export const useCheckTinyAztecLobby = (): LogicBool => {
   const playAztec = usePlayAztec()
+  const tiny = useFtaTinyBanana()
+  const autoBonus = useAutoBonus()
   const twirl = useTwirl()
   const charge = useCharge()
   return {
-    in: playAztec && charge && twirl,
+    in: playAztec && ((autoBonus && tiny) || (charge && twirl)),
     out: playAztec && charge
   }
 }
@@ -576,6 +580,11 @@ export const useGeneralDirt = (): boolean => {
   return anyKong && shockwave
 }
 
+/**
+ * Can we reach the dirt patch in the banana hoard?
+ * @todo Moonkick possibilities?
+ * @returns true if we can reach the hoard dirt.
+ */
 export const useHoardDirt = (): boolean => {
   const dirt = useGeneralDirt()
   const vine = useVine()

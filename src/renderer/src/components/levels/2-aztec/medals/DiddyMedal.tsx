@@ -1,6 +1,6 @@
 import { useDiddyMedalInLogic, useDiddyMedalOutLogic } from '@renderer/hooks/aztec/medals/diddy'
 import { useCbCount } from '@renderer/hooks/settings'
-import AztecCheck from '../AztecCheck'
+import AztecCheck from '../check'
 
 const DiddyMedal: React.FC = () => {
   const inLogic = useDiddyMedalInLogic()

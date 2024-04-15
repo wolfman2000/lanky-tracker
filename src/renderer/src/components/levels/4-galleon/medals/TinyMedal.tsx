@@ -1,6 +1,6 @@
 import { useTinyMedalInLogic, useTinyMedalOutLogic } from '@renderer/hooks/galleon/medals/tiny'
 import { useCbCount } from '@renderer/hooks/settings'
-import GalleonCheck from '../GalleonCheck'
+import GalleonCheck from '../check'
 
 const TinyMedal: React.FC = () => {
   const inLogic = useTinyMedalInLogic()

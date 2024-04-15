@@ -1,6 +1,6 @@
 import { useDiddyMedalInLogic, useDiddyMedalOutLogic } from '@renderer/hooks/factory/medals/diddy'
 import { useCbCount } from '@renderer/hooks/settings'
-import FactoryCheck from '../FactoryCheck'
+import FactoryCheck from '../check'
 
 const DiddyMedal: React.FC = () => {
   const inLogic = useDiddyMedalInLogic()

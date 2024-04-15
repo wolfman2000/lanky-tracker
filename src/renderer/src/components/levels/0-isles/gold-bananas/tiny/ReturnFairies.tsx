@@ -1,6 +1,6 @@
 import ToughGoldenBanana from '@renderer/components/pools/ToughGoldenBanana'
 import { useCheckBananaFairyIsle } from '@renderer/hooks/isles'
-import IslesCheck from '../../IslesCheck'
+import IslesCheck from '../../check'
 
 export const ReturnFairies: React.FC = () => {
   const checkBfi = useCheckBananaFairyIsle()

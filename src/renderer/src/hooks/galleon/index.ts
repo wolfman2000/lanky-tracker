@@ -200,7 +200,7 @@ export const useGalleonTreasureRoom = (): LogicBool => {
 
 export const useDkLighthouseGb = (): LogicBool => {
   const grab = useGrab()
-  const inside = useGalleonLighthousePlatform()
+  const inside = useGalleonLighthouseInside()
   const seasick = useDonkStore(useShallow((state) => state.removeBarriers.galleonSeasick))
   return {
     in: inside.in && (seasick || grab),

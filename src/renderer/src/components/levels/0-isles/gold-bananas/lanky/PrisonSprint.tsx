@@ -1,5 +1,5 @@
 import { useCheckLankyPrison } from '@renderer/hooks/isles'
-import IslesCheck from '../../IslesCheck'
+import IslesCheck from '../../check'
 
 export const PrisonSprint: React.FC = () => {
   const prison = useCheckLankyPrison()

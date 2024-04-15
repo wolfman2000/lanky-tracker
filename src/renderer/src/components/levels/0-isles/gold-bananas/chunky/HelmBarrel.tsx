@@ -1,5 +1,5 @@
 import { useCheckChunkyHelm } from '@renderer/hooks/isles'
-import IslesCheck from '../../IslesCheck'
+import IslesCheck from '../../check'
 
 const HelmBarrel: React.FC = () => {
   const helm = useCheckChunkyHelm()

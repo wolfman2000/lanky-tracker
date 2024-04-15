@@ -356,7 +356,7 @@ export const useTinyHiveGb = (): LogicBool => {
   }
 }
 
-export const useArena = (): boolean => {
+export const useGeneralThing = (): boolean => {
   const anyKong = useAnyKong()
   return usePlayJapes() && anyKong
 }

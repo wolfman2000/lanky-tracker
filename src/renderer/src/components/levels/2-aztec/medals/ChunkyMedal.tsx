@@ -1,6 +1,6 @@
 import { useChunkyMedalInLogic, useChunkyMedalOutLogic } from '@renderer/hooks/aztec/medals/chunky'
 import { useCbCount } from '@renderer/hooks/settings'
-import AztecCheck from '../AztecCheck'
+import AztecCheck from '../check'
 
 const ChunkyMedal: React.FC = () => {
   const inLogic = useChunkyMedalInLogic()

@@ -1,5 +1,5 @@
 import { useCheckLankyMusicPad } from '@renderer/hooks/isles'
-import IslesCheck from '../../IslesCheck'
+import IslesCheck from '../../check'
 
 const TrombonePad: React.FC = () => {
   const music = useCheckLankyMusicPad()

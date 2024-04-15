@@ -1,6 +1,6 @@
 import { useDiddyMedalInLogic, useDiddyMedalOutLogic } from '@renderer/hooks/japes/medals/diddy'
 import { useCbCount } from '@renderer/hooks/settings'
-import JapesCheck from '../JapesCheck'
+import JapesCheck from '../check'
 
 const DiddyMedal: React.FC = (): JSX.Element => {
   const inLogic = useDiddyMedalInLogic()
