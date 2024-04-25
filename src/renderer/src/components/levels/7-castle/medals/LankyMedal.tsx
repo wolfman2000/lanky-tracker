@@ -1,6 +1,6 @@
 import { useLankyMedalInLogic, useLankyMedalOutLogic } from '@renderer/hooks/castle/medals/lanky'
 import { useCbCount } from '@renderer/hooks/settings'
-import CastleCheck from '../CastleCheck'
+import CastleCheck from '../check'
 
 const LankyMedal: React.FC = () => {
   const inLogic = useLankyMedalInLogic()

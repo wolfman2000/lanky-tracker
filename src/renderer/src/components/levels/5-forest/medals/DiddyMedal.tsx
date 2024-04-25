@@ -1,6 +1,6 @@
 import { useDiddyMedalInLogic, useDiddyMedalOutLogic } from '@renderer/hooks/forest/medals/diddy'
 import { useCbCount } from '@renderer/hooks/settings'
-import ForestCheck from '../ForestCheck'
+import ForestCheck from '../check'
 
 const DiddyMedal: React.FC = () => {
   const inLogic = useDiddyMedalInLogic()

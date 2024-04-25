@@ -1,5 +1,5 @@
 import { useCheckDkJapesRock } from '@renderer/hooks/isles'
-import IslesCheck from '../../IslesCheck'
+import IslesCheck from '../../check'
 
 export const JapesRock: React.FC = () => {
   const japesRock = useCheckDkJapesRock()

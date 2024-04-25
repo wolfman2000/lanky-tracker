@@ -4,6 +4,7 @@ import { useShallow } from 'zustand/react/shallow'
 
 import useDonkStore from '@renderer/store'
 import BananaportSelector from './BananaportSelector'
+import CheckIcon from './CheckIcon'
 import CountSelector from './CountSelector'
 import HelmSelector from './HelmSelector'
 import SimpleIcon from './SimpleIcon'
@@ -15,14 +16,17 @@ import guitarIcon from '../../assets/images/diddy_inst.png'
 import rocketIcon from '../../assets/images/diddybarrel.png'
 import coconutIcon from '../../assets/images/dk_gun.png'
 import grabIcon from '../../assets/images/dk_move.png'
+import dkPadIcon from '../../assets/images/dkpad.png'
 import fairyIcon from '../../assets/images/fairy.png'
 import keyIcon from '../../assets/images/key.png'
 import blueprintIcon from '../../assets/images/lanky_bp.png'
 import grapeIcon from '../../assets/images/lanky_gun.png'
 import companyCoinIcon from '../../assets/images/n64rw_coin.png'
+import pearlIcon from '../../assets/images/pearl.png'
 import rainbowCoinIcon from '../../assets/images/rainbowcoin.png'
 import arenaIcon from '../../assets/images/settings/arena.png'
 import bananaMedalIcon from '../../assets/images/settings/bananamedal.gif'
+import dropIcon from '../../assets/images/settings/beaver.png'
 import bonusIcon from '../../assets/images/settings/bonus.png'
 import bananaIcon from '../../assets/images/settings/bunch.png'
 import dirtIcon from '../../assets/images/settings/dirt_patch.png'
@@ -35,9 +39,6 @@ import slamSwitchIcon from '../../assets/images/settings/slam_switch.png'
 import switchsanityIcon from '../../assets/images/settings/switch.png'
 import slamIcon from '../../assets/images/slam1.png'
 import featherIcon from '../../assets/images/tiny_gun.png'
-import dropIcon from '../../assets/images/settings/beaver.png'
-import dkPadIcon from '../../assets/images/dkpad.png'
-import pearlIcon from '../../assets/images/pearl.png'
 
 const customStyles: Modal.Styles = {
   content: {
@@ -48,8 +49,8 @@ const customStyles: Modal.Styles = {
 
 const GeneratorSettings: React.FC = () => {
   const [isOpen, setOpen] = useState(false)
-  const [setSetting, setBarrier, setFastCheck] = useDonkStore(
-    useShallow((state) => [state.setSetting, state.setBarrier, state.setFastCheck])
+  const [setSetting, setBarrier, setFastCheck, setUi] = useDonkStore(
+    useShallow((state) => [state.setSetting, state.setBarrier, state.setFastCheck, state.setUi])
   )
 
   const openModal = (): void => setOpen(true)
@@ -381,6 +382,11 @@ const GeneratorSettings: React.FC = () => {
                 prefix="fastChecks"
                 updateItem={setFastCheck}
               />
+            </>
+            <h3>UI Settings</h3>
+            <>
+              <p>Group by Regions?</p>
+              <CheckIcon storeKey="groupByRegion" prefix="ui" updateItem={setUi} />
             </>
           </section>
         </section>

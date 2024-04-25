@@ -1,5 +1,5 @@
 import { useCheckChunkyCage } from '@renderer/hooks/isles'
-import IslesCheck from '../../IslesCheck'
+import IslesCheck from '../../check'
 
 const PineappleCage: React.FC = () => {
   const cage = useCheckChunkyCage()

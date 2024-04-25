@@ -1,6 +1,6 @@
 import { useDkMedalInLogic, useDkMedalOutLogic } from '@renderer/hooks/caves/medals/dk'
 import { useCbCount } from '@renderer/hooks/settings'
-import CavesCheck from '../CavesCheck'
+import CavesCheck from '../check'
 
 const DkMedal: React.FC = () => {
   const inLogic = useDkMedalInLogic()

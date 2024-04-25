@@ -1,6 +1,6 @@
 import { useChunkyMedalInLogic, useChunkyMedalOutLogic } from '@renderer/hooks/forest/medals/chunky'
 import { useCbCount } from '@renderer/hooks/settings'
-import ForestCheck from '../ForestCheck'
+import ForestCheck from '../check'
 
 const ChunkyMedal: React.FC = () => {
   const inLogic = useChunkyMedalInLogic()

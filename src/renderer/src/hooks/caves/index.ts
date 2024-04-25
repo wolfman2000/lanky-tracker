@@ -116,7 +116,7 @@ export const useCavesLankyCabin = (): LogicBool => {
   }
 }
 
-export const useCavesDkCabinBee = (): LogicBool => {
+export const useDkCabinGb = (): LogicBool => {
   const inStage = usePlayCaves()
   const bongos = useBongos()
   const coconut = useCoconut()

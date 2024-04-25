@@ -1,6 +1,6 @@
 import { useDkMedalInLogic, useDkMedalOutLogic } from '@renderer/hooks/galleon/medals/dk'
 import { useCbCount } from '@renderer/hooks/settings'
-import GalleonCheck from '../GalleonCheck'
+import GalleonCheck from '../check'
 
 const DkMedal: React.FC = () => {
   const inLogic = useDkMedalInLogic()

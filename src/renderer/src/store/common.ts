@@ -696,6 +696,23 @@ export type EndingSlice = EndingState & EndingActions
 
 //#endregion
 
+//#region UI
+export interface UiCollection {
+  groupByRegion: boolean
+}
+
+export interface UiState {
+  ui: UiCollection
+}
+
+interface UiActions {
+  setUi: (item: keyof UiCollection, val: boolean) => void
+}
+
+export type UiSlice = UiState & UiActions
+
+//#endregion
+
 //#region Presets
 export type Preset =
   | 'beginner'
@@ -828,7 +845,8 @@ export type AllSlice = CheckSlice &
   HintSlice &
   FastCheckSlice &
   PresetSlice &
-  EndingSlice
+  EndingSlice &
+  UiSlice
 
 export const donkResetFns = new Set<() => void>()
 

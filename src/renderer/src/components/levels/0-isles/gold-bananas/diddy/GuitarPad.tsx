@@ -1,5 +1,5 @@
 import { useCheckDiddyCaves } from '@renderer/hooks/isles'
-import IslesCheck from '../../IslesCheck'
+import IslesCheck from '../../check'
 
 const GuitarPad: React.FC = () => {
   const cave = useCheckDiddyCaves()

@@ -1,6 +1,6 @@
 import { useLankyMedalInLogic, useLankyMedalOutLogic } from '@renderer/hooks/forest/medals/lanky'
 import { useCbCount } from '@renderer/hooks/settings'
-import ForestCheck from '../ForestCheck'
+import ForestCheck from '../check'
 
 const LankyMedal: React.FC = () => {
   const inLogic = useLankyMedalInLogic()

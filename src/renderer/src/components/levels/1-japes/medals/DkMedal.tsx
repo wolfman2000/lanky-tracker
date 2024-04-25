@@ -1,6 +1,6 @@
 import { useDkMedalInLogic, useDkMedalOutLogic } from '@renderer/hooks/japes/medals/dk'
 import { useCbCount } from '@renderer/hooks/settings'
-import JapesCheck from '../JapesCheck'
+import JapesCheck from '../check'
 
 /**
  * The logic of DK's Medal in Japes, wrapped neatly in this component.

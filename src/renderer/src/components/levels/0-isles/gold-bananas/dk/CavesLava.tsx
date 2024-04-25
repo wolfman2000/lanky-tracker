@@ -1,5 +1,5 @@
 import { useCheckDkCavesLobby } from '@renderer/hooks/isles'
-import IslesCheck from '../../IslesCheck'
+import IslesCheck from '../../check'
 
 const CavesLava: React.FC = () => {
   const cave = useCheckDkCavesLobby()

@@ -1,6 +1,6 @@
 import { useDiddyMedalInLogic, useDiddyMedalOutLogic } from '@renderer/hooks/caves/medals/diddy'
 import { useCbCount } from '@renderer/hooks/settings'
-import CavesCheck from '../CavesCheck'
+import CavesCheck from '../check'
 
 const DiddyMedal: React.FC = () => {
   const inLogic = useDiddyMedalInLogic()

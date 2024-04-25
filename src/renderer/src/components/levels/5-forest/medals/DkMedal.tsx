@@ -1,6 +1,6 @@
 import { useDkMedalInLogic, useDkMedalOutLogic } from '@renderer/hooks/forest/medals/dk'
 import { useCbCount } from '@renderer/hooks/settings'
-import ForestCheck from '../ForestCheck'
+import ForestCheck from '../check'
 
 const DkMedal: React.FC = () => {
   const inLogic = useDkMedalInLogic()

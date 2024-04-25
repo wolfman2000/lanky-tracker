@@ -1,64 +1,65 @@
 import BananaMedalPool from '@renderer/components/pools/BananaMedals'
-import BossPool from '@renderer/components/pools/Bosses'
 import DropPool from '@renderer/components/pools/Drops'
-import { usePlayCastle } from '@renderer/hooks/castle'
-import { useAnyKong } from '@renderer/hooks/kongs'
-import ArenaLocations from './Arenas'
-import CastleCheck from './CastleCheck'
-import CrateLocations from './Crates'
-import DirtLocations from './Dirt'
-import EnemyLocations from './Enemies'
-import FairyLocations from './Fairies'
-import KasplatLocations from './Kasplats'
-import ChunkyBananas from './gold-bananas/ChunkyBananas'
-import DiddyBananas from './gold-bananas/DiddyBananas'
-import DkBananas from './gold-bananas/DkBananas'
-import LankyBananas from './gold-bananas/LankyBananas'
-import TinyBananas from './gold-bananas/TinyBananas'
+import useDonkStore from '@renderer/store'
+import { useShallow } from 'zustand/react/shallow'
+import GreenhouseArena from './arenas/Greenhouse'
+import ShuffledArenas from './arenas/Shuffled'
+import BossCheck from './boss'
+import MausoleumCrate from './crates/Mausoleum'
+import ShuffledCrates from './crates/Shuffled'
+import ShuffledDirtLocations from './dirt/Shuffled'
+import TopFloorDirt from './dirt/TopFloor'
+import EnemyLocations from './enemies'
+import FairyLocations from './fairies'
+import ShuffledFairies from './fairies/Shuffled'
+import ChunkyBananas from './gold-bananas/chunky'
+import DiddyBananas from './gold-bananas/diddy'
+import DkBananas from './gold-bananas/dk'
+import LankyBananas from './gold-bananas/lanky'
+import TinyBananas from './gold-bananas/tiny'
+import KasplatLocations from './kasplats'
 import ChunkyMedal from './medals/ChunkyMedal'
 import DiddyMedal from './medals/DiddyMedal'
 import DkMedal from './medals/DkMedal'
 import LankyMedal from './medals/LankyMedal'
 import TinyMedal from './medals/TinyMedal'
+import CastleRegionChecks from './regions'
 import CastleShops from './shops'
 
-const CastleChecks: React.FC = () => {
-  const inStage = usePlayCastle()
-  const anyKong = useAnyKong()
+const ClassicChecks: React.FC = () => (
+  <div className="grid">
+    <DkBananas />
+    <DiddyBananas />
+    <LankyBananas />
+    <TinyBananas />
+    <ChunkyBananas />
+    <KasplatLocations />
+    <MausoleumCrate />
+    <ShuffledCrates />
+    <TopFloorDirt />
+    <ShuffledDirtLocations />
+    <FairyLocations />
+    <ShuffledFairies />
+    <GreenhouseArena />
+    <ShuffledArenas />
+    <BananaMedalPool>
+      <DkMedal />
+      <DiddyMedal />
+      <LankyMedal />
+      <TinyMedal />
+      <ChunkyMedal />
+    </BananaMedalPool>
+    <BossCheck />
+    <CastleShops />
+    <DropPool>
+      <EnemyLocations />
+    </DropPool>
+  </div>
+)
 
-  return (
-    <div className="grid">
-      <DkBananas />
-      <DiddyBananas />
-      <LankyBananas />
-      <TinyBananas />
-      <ChunkyBananas />
-      <KasplatLocations />
-      <CrateLocations />
-      <DirtLocations />
-      <FairyLocations />
-      <ArenaLocations />
-      <BananaMedalPool>
-        <DkMedal />
-        <DiddyMedal />
-        <LankyMedal />
-        <TinyMedal />
-        <ChunkyMedal />
-      </BananaMedalPool>
-      <BossPool>
-        <CastleCheck
-          id={7105}
-          name="Castle Boss Defeated"
-          region="Troff 'N' Scoff"
-          canGetLogic={inStage && anyKong}
-        />
-      </BossPool>
-      <CastleShops />
-      <DropPool>
-        <EnemyLocations />
-      </DropPool>
-    </div>
-  )
+const CastleChecks: React.FC = () => {
+  const grp = useDonkStore(useShallow((state) => state.ui.groupByRegion))
+  return grp ? <CastleRegionChecks /> : <ClassicChecks />
 }
 
 export default CastleChecks
