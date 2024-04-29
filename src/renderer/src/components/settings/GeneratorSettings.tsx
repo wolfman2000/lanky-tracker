@@ -219,6 +219,13 @@ const GeneratorSettings: React.FC = () => {
                 prefix="settings"
                 updateItem={setSetting}
               />
+              <p>Open Lobbies?</p>
+              <SimpleIcon
+                imgUrl={keyIcon}
+                storeKey="openLobbies"
+                prefix="settings"
+                updateItem={setSetting}
+              />
             </>
             <h3>Location Shuffle Settings</h3>
             <>
