@@ -129,6 +129,53 @@ const season2Preset = (state: AllSlice): AllSlice => {
   }
 }
 
+const season3Preset = (state: AllSlice): AllSlice => {
+  const startState = blankPreset(state)
+  return {
+    ...startState,
+    settings: {
+      ...startState.settings,
+      poolCrowns: false,
+      poolCrates: true,
+      poolCompanyCoins: true,
+      poolFairies: true,
+      progressiveSlams: true,
+      forestTime: 0,
+      galleonHighTide: true,
+      cbCount: 45,
+      jetpacCount: 9,
+      fairyCount: 4,
+      bananaportOpen: 1,
+      helmAccess: 1,
+      balancedRoolPhases: true
+    },
+    moves: {
+      ...startState.moves,
+      slam: 1,
+      camera: true,
+      shockwave: true
+    },
+    removeBarriers: {
+      ...startState.removeBarriers,
+      japesCoconutGates: true,
+      aztec5DoorTemple: true,
+      aztecBack: true,
+      factoryProduction: true,
+      factoryTesting: true,
+      galleonLighthouse: true,
+      galleonSeasick: true,
+      cavesIgloo: true
+    },
+    fastChecks: {
+      ...startState.fastChecks,
+      factoryArcade: true,
+      galleonMermaid: true
+    },
+    key1: true,
+    key3: true
+  }
+}
+
 const sandboxPreset = (state: AllSlice): AllSlice => {
   const startState = blankPreset(state)
   return {
@@ -679,6 +726,8 @@ const presetSlice: StateCreator<AllSlice, [], [], PresetSlice> = (set) => {
             return beginnerPreset(state)
           case 's2':
             return season2Preset(state)
+          case 's3':
+            return season3Preset(state)
           case 'sandbox':
             return sandboxPreset(state)
           case 'balancedLzr':
