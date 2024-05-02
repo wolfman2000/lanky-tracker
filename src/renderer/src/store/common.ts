@@ -642,6 +642,13 @@ interface SettingCollection {
    * 0: No Free Trade. 1: Free Trade, No Blueprints 2: Free Trade, No Restrictions
    */
   freeTrade: BananaportRange
+  /**
+   * Is the battle against K. Rool more balanced?
+   *
+   * If this is true, then Chunky can use any Slam, but DK needs Blast.
+   * @return true if it is more balanced.
+   */
+  balancedRoolPhases: boolean
 }
 
 export interface SettingState {
@@ -717,6 +724,7 @@ export type UiSlice = UiState & UiActions
 export type Preset =
   | 'beginner'
   | 's2'
+  | 's3'
   | 'sandbox'
   | 'balancedLzr'
   | 'nsak'

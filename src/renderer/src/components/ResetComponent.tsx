@@ -21,6 +21,7 @@ const ResetTracker: React.FC = () => {
       >
         <option value="beginner">Beginner Settings</option>
         <option value="s2">Season 2 Race Settings</option>
+        <option value="s3">Season 3 Race Settings</option>
         <option value="sandbox">Sandbox Mode</option>
         <option value="balancedLzr">Balanced LZR</option>
         <option value="nsak">No Style, All Keys</option>

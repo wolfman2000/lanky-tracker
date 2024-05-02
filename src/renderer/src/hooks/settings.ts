@@ -2,6 +2,9 @@ import useDonkStore from '@renderer/store'
 import { BananaportRange } from '@renderer/store/common'
 import { useShallow } from 'zustand/react/shallow'
 
+export const useBalancedRoolPhase = (): boolean =>
+  useDonkStore(useShallow((state) => state.settings.balancedRoolPhases))
+
 /**
  * What time is it in Fungi Forest?
  * @returns The current time in Forest.

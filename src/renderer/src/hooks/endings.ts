@@ -1,6 +1,7 @@
 import useDonkStore from '@renderer/store'
 import {
   useBarrel,
+  useBlast,
   useBongos,
   useDk,
   useFeather,
@@ -13,12 +14,14 @@ import {
   usePunch,
   useRocket,
   useSax,
+  useSlam,
   useSuperSlam,
   useTriangle,
   useTrombone
 } from './kongs'
 import { useShallow } from 'zustand/react/shallow'
 import { LogicBool } from './world'
+import { useBalancedRoolPhase } from './settings'
 
 export const useSingleHelmCheck = (val: number): boolean => {
   const dk = useBongos()
@@ -63,7 +66,9 @@ export const useSingleHelmNum = (val: number): number => {
 }
 
 export const useSingleRoolCheck = (val: number): LogicBool => {
+  const balancedRool = useBalancedRoolPhase()
   const dk = useDk()
+  const blast = useBlast()
   const peanut = usePeanut()
   const diddy = useRocket() && peanut
   const barrel = useBarrel()
@@ -73,16 +78,17 @@ export const useSingleRoolCheck = (val: number): LogicBool => {
   const feather = useFeather()
   const tiny = feather && mini
   const tinyBreak = orange && mini
+  const slam = useSlam()
   const superSlam = useSuperSlam()
   const gone = useGone()
   const punch = usePunch()
-  const chunky = useHunky() && superSlam && gone && punch
+  const chunky = useHunky() && (balancedRool ? slam : superSlam) && gone && punch
   const check = useDonkStore(useShallow((state) => state['rool' + val]))
 
   switch (check) {
     case 1:
       return {
-        in: dk
+        in: dk && (!balancedRool || blast)
       }
     case 2:
       return {

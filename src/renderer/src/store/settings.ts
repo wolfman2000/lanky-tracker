@@ -36,7 +36,8 @@ export const initialSettings: SettingState = {
     shuffleEnemies: true,
     hardShooting: false,
     openLobbies: false,
-    freeTrade: 2
+    freeTrade: 2,
+    balancedRoolPhases: false
   }
 }
 

@@ -226,6 +226,13 @@ const GeneratorSettings: React.FC = () => {
                 prefix="settings"
                 updateItem={setSetting}
               />
+              <p>Balanced K. Rool Phases?</p>
+              <SimpleIcon
+                imgUrl={slamIcon}
+                storeKey="balancedRoolPhases"
+                prefix="settings"
+                updateItem={setSetting}
+              />
             </>
             <h3>Location Shuffle Settings</h3>
             <>
