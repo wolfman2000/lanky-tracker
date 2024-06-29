@@ -10,7 +10,6 @@ import {
   useBongos,
   useBoulderTech,
   useCamera,
-  useDiddy,
   useDive,
   useDk,
   useFtaChunkyBlueprint,
@@ -310,7 +309,7 @@ export const useDk5DoorShipGb = (): boolean => {
 export const useLankyChestGb = (): boolean => {
   const lighthouse = useGalleonLighthouseArea()
   const lanky = useLanky()
-  const dive = useDiddy()
+  const dive = useDive()
   return lighthouse && lanky && dive
 }
 
