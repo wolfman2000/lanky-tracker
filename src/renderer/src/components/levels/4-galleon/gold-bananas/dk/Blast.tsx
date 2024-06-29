@@ -1,4 +1,4 @@
-import { useDkBlastGb } from '@renderer/hooks/aztec'
+import { useDkBlastGb } from '@renderer/hooks/galleon'
 import GalleonCheck from '../../check'
 
 const FreeSeal: React.FC = () => {
